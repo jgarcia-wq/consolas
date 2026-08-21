@@ -1,0 +1,4 @@
+# nunca subir datos personales de leads
+data.json
+*.env
+.DS_Store
