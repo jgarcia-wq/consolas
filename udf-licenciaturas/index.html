@@ -1,0 +1,174 @@
+<meta name="robots" content="noindex, nofollow">
+<title>Pauta UDF en Vuelo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{--paper:#E7EAE5;--sheet:#FBFCFA;--sheet-2:#F1F4EF;--ink:#17242B;--ink-2:#42545D;--ink-3:#6E7F87;
+--rule:#C6CFC8;--rule-2:#DDE3DC;--form:#3C5A73;--form-soft:#DDE6EE;--alert:#A02F26;--alert-soft:#F2DEDA;
+--ok:#2C6A4E;--ok-soft:#DCEADF;--warn:#9A6100;--warn-soft:#F3E6CB;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0E1418;--sheet:#161F24;--sheet-2:#1C272D;
+--ink:#E4EAE6;--ink-2:#A9B7B9;--ink-3:#7C8B8E;--rule:#31414A;--rule-2:#26333A;--form:#8FB2CB;--form-soft:#22333F;
+--alert:#E58072;--alert-soft:#3A2320;--ok:#6FBB92;--ok-soft:#1D2F26;--warn:#D7A147;--warn-soft:#33280F;}}
+:root[data-theme="dark"]{--paper:#0E1418;--sheet:#161F24;--sheet-2:#1C272D;--ink:#E4EAE6;--ink-2:#A9B7B9;--ink-3:#7C8B8E;
+--rule:#31414A;--rule-2:#26333A;--form:#8FB2CB;--form-soft:#22333F;--alert:#E58072;--alert-soft:#3A2320;
+--ok:#6FBB92;--ok-soft:#1D2F26;--warn:#D7A147;--warn-soft:#33280F;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 90px}
+h1,h2,h3{font-family:Archivo,ui-sans-serif,system-ui,sans-serif;text-wrap:balance;margin:0}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.masthead{border-bottom:2px solid var(--ink);padding:34px 0 14px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between}
+.masthead h1{font-size:clamp(28px,4.6vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.04}
+.masthead .sub{color:var(--ink-2);font-size:15px;margin-top:8px;max-width:58ch}
+.stamp{border:1.5px solid var(--ok);color:var(--ok);background:var(--ok-soft);padding:8px 12px;border-radius:2px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-align:center;line-height:1.5}
+nav.toc{display:flex;flex-wrap:wrap;gap:0 20px;padding:12px 0;border-bottom:1px solid var(--rule-2);font-family:"IBM Plex Mono",monospace;font-size:11.5px}
+nav.toc a{color:var(--ink-3);text-decoration:none;border-bottom:1px solid transparent}
+nav.toc a:hover{color:var(--form);border-color:var(--form)}
+section{margin-top:48px;scroll-margin-top:14px}
+.sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:22px;flex-wrap:wrap}
+.sec-head h2{font-size:21px;font-weight:600;letter-spacing:-.01em}
+.sec-head .tag{margin-left:auto}
+.lead{font-size:14.5px;color:var(--ink-2);max-width:78ch;margin:0 0 18px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--rule-2);border:1px solid var(--rule-2);border-radius:3px;overflow:hidden}
+.spec div{background:var(--sheet);padding:13px 15px}
+.spec .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.spec .v{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:19px;font-weight:600;margin-top:5px;line-height:1.2;letter-spacing:-.02em}
+.spec .v small{display:block;font-weight:400;font-size:11.5px;color:var(--ink-3);font-family:"IBM Plex Sans",sans-serif;margin-top:3px;letter-spacing:0}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule-2);border-radius:3px;background:var(--sheet)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--rule-2);vertical-align:top}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);background:var(--sheet-2);border-bottom:1px solid var(--rule);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.name{font-weight:600}
+td.name small{display:block;font-weight:400;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:11px}
+tr.hl td{background:var(--alert-soft)}
+.etq{display:inline-block;background:var(--form-soft);color:var(--form);border-radius:2px;padding:2px 7px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600}
+.mal{color:var(--alert);font-weight:600}
+.pend{color:var(--ink-3);font-style:italic}
+.vacio{background:var(--sheet);border:1px dashed var(--rule);border-radius:3px;padding:20px;color:var(--ink-3);font-size:14px;max-width:80ch}
+.goal{background:var(--sheet);border:1px solid var(--rule-2);border-radius:3px;padding:20px;margin-bottom:20px}
+.goal-hd{display:flex;align-items:flex-end;gap:20px;justify-content:space-between;flex-wrap:wrap}
+.goal .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.goal .big{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:42px;font-weight:600;line-height:1.05;letter-spacing:-.03em;color:var(--ok)}
+.goal .big span{font-size:22px;color:var(--ink-3);font-weight:400}
+.goal-pct{font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:600;color:var(--ink-2);text-align:right}
+.goal-pct small{display:block;font-size:11px;color:var(--ink-3);font-weight:400;font-family:"IBM Plex Sans",sans-serif}
+.goal-bar{height:9px;background:var(--sheet-2);border:1px solid var(--rule-2);border-radius:2px;overflow:hidden;margin:16px 0 12px}
+.goal-bar i{display:block;height:100%;background:var(--ok)}
+.goal-note{font-size:13.5px;color:var(--ink-2);margin:0;max-width:82ch}
+.funnel{display:flex;flex-direction:column;gap:2px}
+.step{display:grid;grid-template-columns:210px minmax(0,1fr) 70px;align-items:center;gap:16px;background:var(--sheet);border:1px solid var(--rule-2);border-radius:3px;padding:12px 15px}
+.step .label{font-size:13px;font-weight:600}
+.step .label small{display:block;font-weight:400;color:var(--ink-3);font-size:11px;font-family:"IBM Plex Mono",monospace}
+.step .bar{height:20px;background:var(--sheet-2);border-radius:2px;overflow:hidden}
+.step .bar i{display:block;height:100%;background:var(--form)}
+.step .bar.is-ok i{background:var(--ok)}
+.step .bar.is-leak i{background:var(--alert)}
+.step .val{text-align:right;font-size:19px;font-weight:600}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--sheet);border:1px solid var(--rule-2);border-radius:3px;padding:16px 18px}
+.card h3{font-size:14px;font-weight:600;margin-bottom:9px}
+.kv{display:flex;justify-content:space-between;gap:12px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;padding:5px 0;border-bottom:1px dashed var(--rule-2);color:var(--ink-3)}
+.kv:last-child{border-bottom:0}
+.kv b{color:var(--ink);font-weight:600}
+.ins{background:var(--sheet);border:1px solid var(--rule-2);border-left:4px solid var(--form);border-radius:3px;padding:16px 18px;margin-bottom:12px}
+.ins-n{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:1px solid;border-radius:2px;padding:2px 7px;margin-bottom:8px}
+.ins h3{font-size:16px;font-weight:600;margin-bottom:6px;letter-spacing:-.01em}
+.ins p{margin:0;color:var(--ink-2);font-size:14.5px;max-width:84ch}
+.ads{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.ad{background:var(--sheet);border:1px solid var(--rule-2);border-radius:3px;overflow:hidden}
+.ad-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--sheet-2);border-bottom:1px solid var(--rule-2)}
+.ad-hd .num{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;color:var(--form);border:1.5px solid var(--form);background:var(--form-soft);border-radius:2px;padding:2px 6px}
+.ad-id b{font-family:Archivo,sans-serif;font-size:11.5px;font-weight:600;display:block;line-height:1.2}
+.ad-id small{color:var(--ink-3);font-size:10px}
+.chip{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.1em;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:2px 5px}
+.chip.vid{color:var(--warn);border-color:var(--warn);background:var(--warn-soft)}
+.ad-img{line-height:0;background:var(--sheet-2)}
+.ad-img img{width:100%;height:auto;display:block}
+footer{margin-top:58px;border-top:2px solid var(--ink);padding-top:16px;font-size:12.5px;color:var(--ink-3)}
+footer p{margin:0 0 6px;max-width:86ch}
+@media (max-width:640px){.step{grid-template-columns:1fr;gap:7px}.step .val{text-align:left}}
+
+.st{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+letter-spacing:.05em;border-radius:2px;padding:3px 8px;border:1px solid;white-space:nowrap}
+.st-ok{color:var(--ok);background:var(--ok-soft);border-color:var(--ok)}
+.st-warn{color:var(--warn);background:var(--warn-soft);border-color:var(--warn)}
+.st-alert{color:var(--alert);background:var(--alert-soft);border-color:var(--alert)}
+.st-mute{color:var(--ink-3);background:var(--sheet-2);border-color:var(--rule)}
+h3{font-family:Archivo,sans-serif;font-weight:600;font-size:15px;margin:0 0 6px}
+</style>
+<div class="wrap">
+ <div class="masthead">
+  <div><div class="eyebrow">UDF Santa María · Meta Ads · Septiembre 2026</div>
+   <h1>Pauta en vuelo</h1>
+   <p class="sub">Todas las campañas vivas: ocho licenciaturas con campaña propia y los posgrados.
+   La columna que decide es el CPA de los últimos 7 días contra el CPA base que cada campaña vino a batir.
+   Corte del 2026-08-27 12:15.</p></div>
+  <div class="stamp">$7,700 / día</div>
+ </div>
+
+ <section id="resumen">
+  <div class="sec-head"><h2>Run-rate</h2></div>
+  <div class="spec">
+   <div><div class="k">Licenciaturas</div><div class="v">$6,000<small>8 campañas independientes</small></div></div>
+   <div><div class="k">Posgrados</div><div class="v">$1,700<small>pool de 3 clusters + valuación</small></div></div>
+   <div><div class="k">Total configurado</div><div class="v">$7,700<small>por día</small></div></div>
+   <div><div class="k">Gasto de hoy</div><div class="v">$3,539<small>cuenta completa</small></div></div>
+   <div><div class="k">Tope de la cuenta</div><div class="v">$200,000<small>gastado $166,616</small></div></div>
+   <div><div class="k">Remarketing sin asignar</div><div class="v">$15,254<small>tras el alza de posgrado</small></div></div>
+  </div>
+ </section>
+
+ <section id="lic">
+  <div class="sec-head"><h2>Licenciaturas</h2><span class="tag etq">8 campañas · sin pool</span></div>
+  <div class="tablewrap"><table><thead><tr><th>Programa</th><th>Estado</th><th class="n">$/día</th>
+   <th class="n">Anuncios</th><th class="n">Gasto hoy</th><th class="n">Conex.</th>
+   <th class="n">CPA 7d</th><th class="n">CPA base</th><th>Veredicto</th></tr></thead>
+   <tbody><tr><td class="name">Psicología<small>120251174866790541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$1,100</td><td class="n">8/8</td><td class="n">$334</td><td class="n">1</td><td class="n">$79.78</td><td class="n">$37</td><td><span class="st st-alert">2.16× base</span></td></tr><tr><td class="name">Derecho<small>120251175822880541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$1,150</td><td class="n">8/16</td><td class="n">$467</td><td class="n">5</td><td class="n">$80.20</td><td class="n">$54</td><td><span class="st st-warn">1.49× base</span></td></tr><tr><td class="name">Administración<small>120251175539820541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$1,200</td><td class="n">8/16</td><td class="n">$343</td><td class="n">6</td><td class="n">$102.32</td><td class="n">$52</td><td><span class="st st-alert">1.97× base</span></td></tr><tr><td class="name">Ing. Sistemas<small>120251208170320541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$350</td><td class="n">4/4</td><td class="n">$143</td><td class="n">1</td><td class="n">$94.69</td><td class="n">$54</td><td><span class="st st-alert">1.75× base</span></td></tr><tr><td class="name">Contaduría<small>120251176513410541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$1,150</td><td class="n">8/12</td><td class="n">$533</td><td class="n">4</td><td class="n">$94.58</td><td class="n">$58</td><td><span class="st st-alert">1.63× base</span></td></tr><tr><td class="name">Comunicación<small>120251207687400541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$400</td><td class="n">4/4</td><td class="n">$152</td><td class="n">2</td><td class="n">$96.69</td><td class="n">$59</td><td><span class="st st-alert">1.64× base</span></td></tr><tr><td class="name">Mercadotecnia<small>120251208503530541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$300</td><td class="n">4/4</td><td class="n">$126</td><td class="n">2</td><td class="n">$96.34</td><td class="n">$54</td><td><span class="st st-alert">1.78× base</span></td></tr><tr><td class="name">Comercio Int.<small>120251208505590541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$350</td><td class="n">4/4</td><td class="n">$138</td><td class="n">3</td><td class="n">$104.50</td><td class="n">$85</td><td><span class="st st-warn">1.23× base</span></td></tr></tbody></table></div>
+ </section>
+
+ <section id="pos">
+  <div class="sec-head"><h2>Posgrados</h2><span class="tag etq">pool + especialidades en línea</span></div>
+  <div class="tablewrap"><table><thead><tr><th>Programa</th><th>Estado</th><th class="n">$/día</th>
+   <th class="n">Anuncios</th><th class="n">Gasto hoy</th><th class="n">Conex.</th>
+   <th class="n">CPA 7d</th><th class="n">CPA base</th><th>Veredicto</th></tr></thead>
+   <tbody><tr><td class="name">Mtría. Psicología<small>120251210798150541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$100</td><td class="n">3/4</td><td class="n">$32</td><td class="n">1</td><td class="n">$44.41</td><td class="n">$47</td><td><span class="st st-ok">0.94× base</span></td></tr><tr><td class="name">Mtría. Educación<small>120251209874060541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$80</td><td class="n">2/4</td><td class="n">$28</td><td class="n">—</td><td class="n">$88.20</td><td class="n">$56</td><td><span class="st st-warn">1.57× base</span></td></tr><tr><td class="name">Mtría. Admón. de Negocios<small>120251210017100541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$90</td><td class="n">2/4</td><td class="n">$36</td><td class="n">—</td><td class="n">$106.77</td><td class="n">$51</td><td><span class="st st-alert">2.09× base</span></td></tr><tr><td class="name">Mtría. Derecho Penal<small>120251210203860541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$80</td><td class="n">2/4</td><td class="n">$45</td><td class="n">—</td><td class="n">$104.41</td><td class="n">$59</td><td><span class="st st-alert">1.77× base</span></td></tr><tr><td class="name">Mtría. Fiscal<small>120251210389490541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$100</td><td class="n">2/4</td><td class="n">$43</td><td class="n">1</td><td class="n">$38.22</td><td class="n">$53</td><td><span class="st st-ok">0.72× base</span></td></tr><tr><td class="name">Mtría. Amparo<small>120251210594820541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$90</td><td class="n">2/4</td><td class="n">$37</td><td class="n">—</td><td class="n">$78.67</td><td class="n">$45</td><td><span class="st st-alert">1.75× base</span></td></tr><tr><td class="name">Mtría. Derecho Civil<small>120251210632010541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$110</td><td class="n">2/4</td><td class="n">$45</td><td class="n">—</td><td class="n">$57.10</td><td class="n">$70</td><td><span class="st st-ok">0.82× base</span></td></tr><tr><td class="name">Mtría. Com. Organizacional<small>120251210681190541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$110</td><td class="n">2/4</td><td class="n">$46</td><td class="n">—</td><td class="n">$52.74</td><td class="n">$51</td><td><span class="st st-ok">1.03× base</span></td></tr><tr><td class="name">Dr. Ciencias Jurídicas<small>120251210508780541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$110</td><td class="n">2/4</td><td class="n">$49</td><td class="n">—</td><td class="n">$82.44</td><td class="n">$72</td><td><span class="st st-warn">1.15× base</span></td></tr><tr><td class="name">Dr. Organizaciones<small>120251210561960541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$80</td><td class="n">2/4</td><td class="n">$43</td><td class="n">1</td><td class="n">$99.88</td><td class="n">$47</td><td><span class="st st-alert">2.13× base</span></td></tr><tr><td class="name">Dr. Educación<small>120251210578630541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$80</td><td class="n">2/4</td><td class="n">$39</td><td class="n">2</td><td class="n">$93.32</td><td class="n">$62</td><td><span class="st st-warn">1.51× base</span></td></tr><tr><td class="name">Esp. Sistemas de Información<small>120251210700420541 · CBO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$110</td><td class="n">2/4</td><td class="n">$45</td><td class="n">—</td><td class="n">$79.62</td><td class="n">$51</td><td><span class="st st-warn">1.56× base</span></td></tr><tr><td class="name">Especialidades valuación (ABO)<small>120251207378350541 · ABO</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$560</td><td class="n">8/12</td><td class="n">$173</td><td class="n">3</td><td class="n">$40.75</td><td class="n">$50</td><td><span class="st st-ok">0.81× base</span></td></tr></tbody></table></div>
+  <p class="lead" style="margin-top:14px">El pool de posgrado sigue en $650/día con sus tres clusters
+  temáticos y diez programas. Subirlo a $1,400 y meterle piso a Administración de Negocios sigue pendiente.
+  Los doce programas de posgrado tienen campaña propia y presupuesto garantizado desde el 23 de agosto.
+  El pool quedó sin anuncios propios y su presupuesto bajó a $60 para no concentrarlo en los dos
+  que esperan el relevo.</p>
+ </section>
+
+ <section id="retiro">
+  <div class="sec-head"><h2>En retiro</h2><span class="tag etq">se apagan en cuanto valuación entregue</span></div>
+  <div class="tablewrap"><table><thead><tr><th>Objeto</th><th>Estado</th><th class="n">$/día</th>
+   <th class="n">Anuncios</th><th class="n">Gasto hoy</th><th class="n">Conex.</th>
+   <th class="n">CPA 7d</th><th class="n">CPA base</th><th>Veredicto</th></tr></thead>
+   <tbody><tr><td class="name">Val. Inmobiliaria (viejo)<small>120249435112480541 · —</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$0</td><td class="n">0/3</td><td class="n">$0</td><td class="n">—</td><td class="n">$40.99</td><td class="n">$50</td><td><span class="st st-ok">0.82× base</span></td></tr><tr><td class="name">Pool posgrado V2 (en retiro)<small>120249435112590541 · CBO</small></td><td><span class="st st-mute">Pausada</span></td><td class="n">$0</td><td class="n">0/14</td><td class="n">$0</td><td class="n">—</td><td class="n">$47.60</td><td class="n">$51</td><td><span class="st st-ok">0.93× base</span></td></tr><tr><td class="name">Campaña vieja licenciaturas<small>120249435112370541 · —</small></td><td><span class="st st-ok">Activa</span></td><td class="n">$0</td><td class="n">0/19</td><td class="n">$0</td><td class="n">—</td><td class="n">$46.06</td><td class="n">$57</td><td><span class="st st-ok">0.81× base</span></td></tr></tbody></table></div>
+  <p class="lead" style="margin-top:14px">El ad set viejo de Valuación Inmobiliaria a $733 diarios sigue
+  siendo el mejor activo de la cuenta a CPA $50, así que no se apaga por calendario sino cuando la campaña
+  ABO nueva demuestre que entrega. La tarea de las 10:00 exige $150 gastados y los tres conjuntos con
+  gasto antes de tocarlo.</p>
+ </section>
+
+ <section id="alertas">
+  <div class="sec-head"><h2>Qué requiere decisión</h2></div>
+  <div class="ins" style="border-left-color:var(--alert)"><span class="ins-n" style="color:var(--alert);border-color:var(--alert)">Decisión</span><h3>10 programas corriendo a más de 1.6× su CPA base</h3><p><b>Psicología</b> $80 vs $37, <b>Administración</b> $102 vs $52, <b>Ing. Sistemas</b> $95 vs $54, <b>Contaduría</b> $95 vs $58, <b>Comunicación</b> $97 vs $59, <b>Mercadotecnia</b> $96 vs $54, <b>Mtría. Admón. de Negocios</b> $107 vs $51, <b>Mtría. Derecho Penal</b> $104 vs $59, <b>Mtría. Amparo</b> $79 vs $45, <b>Dr. Organizaciones</b> $100 vs $47. Son campañas nuevas y parte del sobrecosto es fase de aprendizaje, pero es lo primero a revisar cuando UDF entregue los inscritos.</p></div>
+ </section>
+
+ <section id="cuenta">
+  <div class="sec-head"><h2>Gasto de hoy en la cuenta</h2></div>
+  <div class="tablewrap"><table><thead><tr><th>Campaña</th><th class="n">Gasto</th><th class="n">Conexiones</th></tr></thead>
+   <tbody><tr><td class="name">UDF_SEP26_LIC_CONTADURIA_CTWA_V3</td><td class="n">$533</td><td class="n">4</td></tr><tr><td class="name">UDF_SEP26_LIC_DERECHO_CTWA_V3</td><td class="n">$467</td><td class="n">5</td></tr><tr><td class="name">UDF_EXACER_SEP2026_LEADS</td><td class="n">$426</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3</td><td class="n">$343</td><td class="n">6</td></tr><tr><td class="name">UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3</td><td class="n">$334</td><td class="n">1</td></tr><tr><td class="name">UDF_NTQ_AGO2026_META_CTWA_LEADS</td><td class="n">$218</td><td class="n">1</td></tr><tr><td class="name">UDF_SEP26_ESP_VALUACION_CTWA_V3</td><td class="n">$173</td><td class="n">3</td></tr><tr><td class="name">UDF_SEP26_LIC_COMUNICACION_CTWA_V3</td><td class="n">$152</td><td class="n">2</td></tr><tr><td class="name">UDF_SEP26_LIC_SISTEMAS_CTWA_V3</td><td class="n">$143</td><td class="n">1</td></tr><tr><td class="name">UDF_SEP26_LIC_COMERCIO_CTWA_V3</td><td class="n">$138</td><td class="n">3</td></tr><tr><td class="name">UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3</td><td class="n">$126</td><td class="n">2</td></tr><tr><td class="name">UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3</td><td class="n">$49</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-COMORG_CTWA_V3</td><td class="n">$46</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3</td><td class="n">$45</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3</td><td class="n">$45</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3</td><td class="n">$45</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-FISCAL_CTWA_V3</td><td class="n">$43</td><td class="n">1</td></tr><tr><td class="name">UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3</td><td class="n">$43</td><td class="n">1</td></tr><tr><td class="name">UDF_SEP26_POS_DR-EDUCACION_CTWA_V3</td><td class="n">$39</td><td class="n">2</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-AMPARO_CTWA_V3</td><td class="n">$37</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3</td><td class="n">$36</td><td class="n">—</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3</td><td class="n">$32</td><td class="n">1</td></tr><tr><td class="name">UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3</td><td class="n">$28</td><td class="n">—</td></tr></tbody></table></div>
+ </section>
+
+ <footer>
+  <p><b>Cómo leer el veredicto.</b> Cada campaña nueva vino a batir un CPA concreto: el del objeto que
+  reemplazó. Debajo de 1.05× está cumpliendo; entre 1.05 y 1.6× está en el rango del sobreprecio de
+  aprendizaje; arriba de 1.6× hay que decidir. Las campañas montadas hoy todavía no tienen datos de 7 días.</p>
+  <p>Black &amp; Orange · Graph API de Meta v25.0 · cuenta act_838230470286008</p>
+ </footer>
+</div>
