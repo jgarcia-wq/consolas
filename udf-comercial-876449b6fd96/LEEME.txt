@@ -1,0 +1,5 @@
+Consola de seguimiento comercial de UDF Santa Maria - version publica.
+Los apellidos de los prospectos estan abreviados a la inicial.
+No listada en el indice y con ruta aleatoria: el repositorio es publico,
+asi que cualquiera con la liga completa puede abrirla.
+El detalle con nombres completos vive solo en el artifact privado.
