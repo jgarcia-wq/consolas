@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Auditoría Meta Ads UDF 2026 · Black &amp; Orange</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#f7f7f5; --sheet:#ffffff; --sheet-2:#f1f2f0;
+  --ink:#14161a; --ink-2:#4d5158; --ink-3:#7c8189;
+  --rule:#dfe1de; --rule-2:#eceeeb;
+  --accent:#2a78d6; --accent-soft:#e8f0fc;
+  --series-2:#eb6834;
+  --good:#0f7a56; --warn:#a06a00; --crit:#c23332;
+  --good-bg:#e4f4ee; --warn-bg:#fbf0d8; --crit-bg:#fbe6e6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --ground:#111214; --sheet:#191b1e; --sheet-2:#212429;
+    --ink:#f2f3f4; --ink-2:#b3b8c0; --ink-3:#868c95;
+    --rule:#2e3238; --rule-2:#24272c;
+    --accent:#5598e7; --accent-soft:#1b2c42;
+    --series-2:#e07b4d;
+    --good:#4fc39b; --warn:#e0ae4a; --crit:#ef7a79;
+    --good-bg:#16302a; --warn-bg:#332a15; --crit-bg:#35201f;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#111214; --sheet:#191b1e; --sheet-2:#212429;
+  --ink:#f2f3f4; --ink-2:#b3b8c0; --ink-3:#868c95;
+  --rule:#2e3238; --rule-2:#24272c;
+  --accent:#5598e7; --accent-soft:#1b2c42;
+  --series-2:#e07b4d;
+  --good:#4fc39b; --warn:#e0ae4a; --crit:#ef7a79;
+  --good-bg:#16302a; --warn-bg:#332a15; --crit-bg:#35201f;
+}
+*{box-sizing:border-box}
+body{background:var(--ground); color:var(--ink); font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+.wrap{max-width:1200px; margin:0 auto; padding:0 24px 96px;}
+h1,h2,h3,.eyebrow{font-family:Archivo,"Helvetica Neue",Arial,sans-serif; text-wrap:balance;}
+h1{font-size:clamp(30px,4.4vw,46px); font-weight:700; letter-spacing:-.022em; line-height:1.06; margin:0 0 14px;}
+h2{font-size:23px; font-weight:600; letter-spacing:-.012em; margin:0 0 4px;}
+h3{font-size:16px; font-weight:600; letter-spacing:-.005em; margin:0 0 10px;}
+p{margin:0 0 12px; max-width:66ch; color:var(--ink-2);}
+.eyebrow{font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);}
+a{color:var(--accent)}
+/* header */
+header.top{padding:52px 0 30px; border-bottom:1px solid var(--rule);}
+.lede{font-size:17px; color:var(--ink-2); max-width:64ch;}
+.meta-row{display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:22px; font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12.5px; color:var(--ink-3);}
+.meta-row b{color:var(--ink-2); font-weight:500;}
+/* nav */
+nav.months{position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); margin-bottom:36px;}
+nav.months .inner{max-width:1200px; margin:0 auto; padding:9px 24px; display:flex; gap:6px; flex-wrap:wrap; align-items:center;}
+nav.months a{display:inline-block; padding:5px 11px; border-radius:5px; font-size:13px; text-decoration:none; color:var(--ink-2); border:1px solid transparent;}
+nav.months a:hover{background:var(--sheet-2); color:var(--ink); border-color:var(--rule);}
+nav.months a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+nav.months .sep{width:1px; height:18px; background:var(--rule); margin:0 6px;}
+section{padding-top:44px; scroll-margin-top:56px;}
+.sec-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; border-bottom:2px solid var(--ink); padding-bottom:8px; margin-bottom:20px;}
+.sec-head .note{font-size:13px; color:var(--ink-3); font-family:"IBM Plex Mono",monospace;}
+/* KPI strip */
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin:26px 0 0;}
+.kpi{background:var(--sheet); padding:14px 16px;}
+.kpi .k{font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3); font-weight:600;}
+.kpi .v{font-family:"IBM Plex Mono",monospace; font-size:21px; font-weight:500; letter-spacing:-.02em; margin-top:4px; font-variant-numeric:tabular-nums;}
+.kpi .s{font-size:12px; color:var(--ink-3); margin-top:1px;}
+/* tables */
+.tscroll{overflow-x:auto; border:1px solid var(--rule); background:var(--sheet);}
+table{border-collapse:collapse; width:100%; font-size:13.5px;}
+th,td{padding:8px 12px; text-align:left; white-space:nowrap; border-bottom:1px solid var(--rule-2);}
+thead th{position:sticky; top:0; background:var(--sheet-2); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); font-weight:600; border-bottom:1px solid var(--rule); z-index:2;}
+td.n,th.n{text-align:right; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;}
+tbody tr:hover td{background:var(--sheet-2);}
+tr.tot td{background:var(--sheet-2); font-weight:600; border-top:1px solid var(--ink); border-bottom:none;}
+tr.tot td.n{font-family:"IBM Plex Mono",monospace;}
+td.name{white-space:normal; min-width:230px; max-width:340px; font-weight:500;}
+td.dim{color:var(--ink-3);}
+.chip{display:inline-block; padding:1px 7px; border-radius:3px; font-size:11px; font-weight:600; letter-spacing:.02em;}
+.chip.good{background:var(--good-bg); color:var(--good);}
+.chip.warn{background:var(--warn-bg); color:var(--warn);}
+.chip.crit{background:var(--crit-bg); color:var(--crit);}
+.chip.flat{background:var(--sheet-2); color:var(--ink-3);}
+.obj{font-size:11px; font-family:"IBM Plex Mono",monospace; color:var(--ink-3);}
+/* charts */
+.charts{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule);}
+.chart{background:var(--sheet); padding:16px 18px 12px;}
+.chart h3{margin-bottom:2px;}
+.chart .cap{font-size:12px; color:var(--ink-3); margin-bottom:10px;}
+svg{display:block; width:100%; height:auto; overflow:visible;}
+.tip{position:fixed; pointer-events:none; opacity:0; transition:opacity .12s; background:var(--ink); color:var(--ground); font-size:12px; font-family:"IBM Plex Mono",monospace; padding:5px 8px; border-radius:4px; z-index:50; white-space:pre;}
+/* callout */
+.callout{border:1px solid var(--rule); border-left:3px solid var(--crit); background:var(--sheet); padding:16px 18px; margin:0 0 20px;}
+.callout.info{border-left-color:var(--accent);}
+.callout p:last-child{margin-bottom:0;}
+.callout .hd{font-family:Archivo,sans-serif; font-weight:600; font-size:15px; margin-bottom:6px; color:var(--ink);}
+ul{margin:0 0 12px; padding-left:20px; color:var(--ink-2); max-width:66ch;}
+li{margin-bottom:5px;}
+.defs{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px 34px; margin-top:8px;}
+.def dt{font-weight:600; font-size:13.5px; color:var(--ink);}
+.def dd{margin:2px 0 0; font-size:13px; color:var(--ink-2);}
+.mono{font-family:"IBM Plex Mono",monospace; font-size:12.5px;}
+footer{margin-top:56px; padding-top:18px; border-top:1px solid var(--rule); font-size:12.5px; color:var(--ink-3); font-family:"IBM Plex Mono",monospace;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important;}}
+</style>
+<style>
+.part{margin-top:64px; padding:22px 0 0; border-top:3px solid var(--ink);}
+.part .lbl{font-family:Archivo,sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent);}
+.part h2{font-size:29px; margin:6px 0 6px;}
+.part .sub{font-size:14.5px; color:var(--ink-2); max-width:70ch; margin:0;}
+.part .strip{display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:14px; font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-3);}
+.part .strip b{color:var(--ink); font-weight:500;}
+.part.c2 .lbl{color:var(--series-2);}
+.legend{display:flex; gap:16px; align-items:center; font-size:12px; color:var(--ink-2); margin:0 0 12px;}
+.legend span{display:inline-flex; align-items:center; gap:6px;}
+.legend i{width:10px; height:10px; border-radius:2px; display:inline-block;}
+.two{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule);}
+.two > div{background:var(--sheet); padding:16px 18px;}
+.two h3{margin-bottom:6px;}
+.two p{font-size:13px; margin:0;}
+h2.plain{border-bottom:none;}
+</style>
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Auditoría de pauta · Meta Ads · act_838230470286008 · UDF Santa María</div>
+    <h1>Dos ciclos, 251 días de pauta</h1>
+    <p class="lede">Del 1 de enero al 8 de septiembre de 2026, campaña por campaña y mes por mes: inversión ejercida, entrega, clics, leads, costo por lead y parámetros UTM. Son dos auditorías con dos modelos de compra distintos —formulario instantáneo hasta junio, WhatsApp de junio en adelante— presentadas en un mismo documento para poder compararlas. Datos de la Graph API v25.0, MXN, zona América/Ciudad_de_México; el total por campaña cuadra al peso con el gasto de la cuenta en las dos ventanas.</p>
+    <div class="meta-row">
+      <span>Extraído <b>9 sep 2026</b></span>
+      <span>Ciclo 1 <b>2026-01-01 → 2026-06-21</b></span>
+      <span>Ciclo 2 <b>2026-06-22 → 2026-09-08</b></span>
+      <span>Nivel <b>campaña · time_increment mensual</b></span>
+      <span>Atribución <b>7d clic / 1d vista</b></span>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </div>
+</header>
+
+<nav class="months">
+  <div class="inner">
+    <a href="#panorama">Panorama</a>
+    <a href="#comparativo">Comparativo</a>
+    <div class="sep"></div>
+    <a href="#ciclo1">Ciclo 1 · ene–21 jun</a>
+    <a href="#c1-camp">campañas</a>
+    <a href="#c1-meses">meses</a>
+    <div class="sep"></div>
+    <a href="#ciclo2">Ciclo 2 · 22 jun–8 sep</a>
+    <a href="#c2-camp">campañas</a>
+    <a href="#c2-meses">periodos</a>
+    <a href="#v2v3">V2 vs V3</a>
+    <div class="sep"></div>
+    <a href="#utm">UTM</a>
+    <a href="#hallazgos">Hallazgos</a>
+    <a href="#metodo">Método</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section id="panorama">
+  <div class="sec-head"><h2>Panorama de los 251 días</h2><span class="note">10 cortes · $1,015,943 ejercidos</span></div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>Ciclo 1 · formulario instantáneo</span><span><i style="background:var(--series-2)"></i>Ciclo 2 · WhatsApp</span></div>
+  <div class="charts" id="charts"></div>
+  <div class="tscroll" style="margin-top:22px"><table id="t-todo"></table></div>
+  <p style="margin-top:14px; font-size:13px; color:var(--ink-3)">Junio aparece partido en dos porque ahí cambia el ciclo: del 1 al 21 corría la estructura vieja y del 22 arrancó la de septiembre. Los cortes no miden lo mismo —9, 8 y 21 días contra meses completos—, por eso la primera gráfica va en inversión por día.</p>
+</section>
+
+<section id="comparativo">
+  <div class="sec-head"><h2>Los dos ciclos, lado a lado</h2><span class="note">misma definición de lead en ambos</span></div>
+  <p>Lo que cambió no fue el presupuesto, fue el modelo de compra: se dejó de comprar clic barato de video y formulario instantáneo, y se concentró todo en conversación de WhatsApp. El CPC enlace se duplicó y aun así el CPL bajó.</p>
+  <div class="tscroll"><table id="t-cmp"></table></div>
+  <div class="two" style="margin-top:22px">
+    <div><h3>Lo que mejoró</h3><p>CPL de $69.91 a $61.51 (−12%) y leads por día de 49.6 a 86.3 (+74%), con un ritmo de gasto 53% mayor. El CTWA con mensaje pre-llenado por programa entrega conversación, no formulario tibio.</p></div>
+    <div><h3>Lo que empeoró</h3><p>El CPL se deterioró dentro del ciclo 2: de $44.96 al arranque a $74.16 en el corte. La reestructura de 3 pools a 21 campañas por programa explica la mayor parte, y el público de CDMX se saturó.</p></div>
+  </div>
+</section>
+
+<div class="part" id="ciclo1">
+  <div class="lbl">Ciclo 1 · Auditoría A</div>
+  <h2 class="plain">1 de enero al 21 de junio de 2026</h2>
+  <p class="sub">21 campañas en 172 días, con el modelo anterior: formularios instantáneos para leads, campañas de video para tráfico al sitio y remarketing sobre base de datos. Cero parámetros UTM en toda la ventana.</p>
+  <div class="strip" id="s1"></div>
+</div>
+
+<section id="c1-res">
+  <div class="sec-head"><h2>Resumen mensual</h2><span class="note">junio parcial · 1 al 21</span></div>
+  <div class="tscroll"><table id="t-c1mes"></table></div>
+  <p style="margin-top:14px; font-size:13px; color:var(--ink-3)">El salto del CPC en mayo (de $2.36 a $4.34) no viene de la subasta: viene de la mezcla. Las campañas de <em>Awareness + Videos</em>, que aportaban decenas de miles de clics a $0.23, se apagaron a fin de mayo y el gasto quedó concentrado en leads con CPC de $4 a $7.</p>
+</section>
+
+<section id="c1-camp">
+  <div class="sec-head"><h2>Campañas del ciclo 1</h2><span class="note">21 campañas · ordenadas por inversión</span></div>
+  <p>El semáforo del CPL compara contra el promedio del ciclo ($69.91): <span class="chip good">bajo</span> menos de $50, <span class="chip flat">medio</span> $50–$100, <span class="chip crit">alto</span> más de $100.</p>
+  <div class="tscroll"><table id="t-c1camp"></table></div>
+</section>
+
+<div id="c1-meses"></div>
+
+<div class="part c2" id="ciclo2">
+  <div class="lbl">Ciclo 2 · Auditoría B</div>
+  <h2 class="plain">22 de junio al 8 de septiembre de 2026</h2>
+  <p class="sub">40 campañas en 79 días: el ciclo septiembre, 79% del gasto en CTWA a WhatsApp con mensaje pre-llenado por programa. Aparecen los primeros UTM de la cuenta y la suspensión de la línea de WhatsApp del 31 de agosto.</p>
+  <div class="strip" id="s2"></div>
+</div>
+
+<div class="callout" style="margin-top:26px">
+  <div class="hd">Antes de leer los números de septiembre</div>
+  <p>La línea de WhatsApp de UDF fue suspendida por Meta el <strong>31 de agosto a las 21:06 CDMX</strong> y las campañas CTWA se dejaron corriendo a propósito. Los <strong>$65,109</strong> del 1 al 8 de septiembre compraron <strong>793 conexiones</strong> que Meta cuenta como lead y que sí entraron a Patagon, pero que el agente no pudo contestar: se quedaron en 1★ y la automatización a Pipedrive nunca disparó. Es inversión real con lead entregado y sin atención — no es pauta sin resultado, pero tampoco es comparable contra julio o agosto.</p>
+</div>
+
+<section id="c2-res">
+  <div class="sec-head"><h2>Resumen por periodo</h2><span class="note">79 días · junio y septiembre son cortes parciales</span></div>
+  <div class="tscroll"><table id="t-c2mes"></table></div>
+</section>
+
+<section id="c2-camp">
+  <div class="sec-head"><h2>Campañas del ciclo 2</h2><span class="note">40 campañas · ordenadas por inversión</span></div>
+  <p>El semáforo compara contra el promedio del ciclo ($61.51). Las cinco campañas de tráfico mandan a formularios externos, donde Meta no ve la conversión: llevan <span class="chip flat">sin leads</span> y se miden por vistas de página.</p>
+  <div class="tscroll"><table id="t-c2camp"></table></div>
+</section>
+
+<div id="c2-meses"></div>
+
+<section id="v2v3">
+  <div class="sec-head"><h2>La reestructura V2 → V3</h2><span class="note">el hallazgo con más dinero encima</span></div>
+  <p>A partir de agosto, los tres pools amplios (<span class="mono">CTWA_V2</span>) se sustituyeron por 21 campañas de un programa cada una (<span class="mono">CTWA_V3</span>). Las dos estructuras corrieron traslapadas, así que se comparan directo:</p>
+  <div class="tscroll"><table id="t-v23"></table></div>
+  <p style="margin-top:14px">Misma oferta, mismo destino, mismo número de WhatsApp: el CPL de la estructura por programa es <strong>62% más alto</strong>. Con presupuestos de $1,500–$2,700 por campaña, la mayoría de las V3 nunca sale de la fase de aprendizaje, y el algoritmo pierde el pool grande donde repartía la entrega hacia el programa más barato de cada momento.</p>
+</section>
+
+<section id="utm">
+  <div class="sec-head"><h2>Parámetros UTM en los dos ciclos</h2><span class="note">793 anuncios revisados</span></div>
+  <div class="two" style="margin-bottom:22px">
+    <div style="border-left:3px solid var(--crit)"><h3>Ciclo 1 · ninguno</h3><p>De los 397 anuncios, <strong>cero</strong> tienen <span class="mono">url_tags</span> y ninguna URL de destino lleva query string. La única con parámetro en toda la ventana es <span class="mono">udf.edu.mx/especialidades/?fbclid=fbclid</span>, un placeholder mal pegado. Los <strong>$31,737</strong> que mandaron 110,981 clics a udf.edu.mx llegaron sin etiquetar: en Analytics ese tráfico solo se distingue como <span class="mono">facebook / referral</span>.</p></div>
+    <div style="border-left:3px solid var(--warn)"><h3>Ciclo 2 · tres campañas, una útil</h3><p><strong>27 de 396 anuncios</strong> llevan etiquetado, y son exactamente los que van a una URL: la intención fue correcta. Pero Google Forms y Microsoft Forms <strong>descartan los parámetros de la URL</strong>, así que el UTM de <span class="mono">SI8AGO</span> y de <span class="mono">CB_20260718</span> viaja y no aterriza. Solo <span class="mono">UDF_EXACER_SEP2026_TRAFICO_FRIO</span>, que va a udf.edu.mx, deja el dato legible.</p></div>
+  </div>
+  <p>Las campañas CTWA —la mayoría del gasto del ciclo 2— no necesitan UTM: el destino es <span class="mono">api.whatsapp.com/send</span> con mensaje pre-llenado por programa, y la trazabilidad va por ese texto y por el <span class="mono">ctwa_clid</span> que Meta pasa a Patagon, no por query string.</p>
+  <div class="tscroll"><table id="t-utm"></table></div>
+  <div id="tagdetail" style="margin-top:22px"></div>
+  <p style="margin-top:18px">Para cualquier campaña futura que mande tráfico a un destino propio, el <span class="mono">url_tags</span> a nivel anuncio con macros dinámicas resuelve el etiquetado sin tocar creativos:</p>
+  <p class="mono" style="background:var(--sheet); border:1px solid var(--rule); padding:10px 12px; overflow-x:auto; max-width:none; color:var(--ink)">utm_source=meta&amp;utm_medium=paid_social&amp;utm_campaign={{campaign.name}}&amp;utm_content={{ad.name}}&amp;utm_term={{adset.name}}&amp;utm_id={{campaign.id}}</p>
+</section>
+
+<section id="hallazgos">
+  <div class="sec-head"><h2>Hallazgos</h2></div>
+  <h3 style="margin-top:6px">Del ciclo 1 · enero a 21 de junio</h3>
+  <ul id="hl1"></ul>
+  <h3 style="margin-top:26px">Del ciclo 2 · 22 de junio a 8 de septiembre</h3>
+  <ul id="hl2"></ul>
+  <h3 style="margin-top:26px">De los dos juntos</h3>
+  <ul id="hl3"></ul>
+</section>
+
+<section id="metodo">
+  <div class="sec-head"><h2>Método y definiciones</h2></div>
+  <div class="callout info">
+    <div class="hd">Una sola definición de lead para las dos ventanas</div>
+    <p>En campañas CTWA, Meta reporta el mismo evento con varios nombres y el evento <span class="mono">lead</span> queda <em>dentro</em> del embudo de mensajería: en el ciclo 2, <span class="mono">lead</span> = <span class="mono">onsite_conversion.lead</span> en las 35 campañas de WhatsApp. Sumar los dos contaría el mismo lead dos veces, así que en los dos ciclos se usa:</p>
+    <p class="mono" style="background:var(--sheet-2); padding:8px 12px; border-radius:3px; color:var(--ink)">leads = total_messaging_connection + (lead − onsite_conversion.lead)</p>
+    <p>Con esta fórmula el ciclo 1 queda en 8,535 leads y CPL $69.91. Si se suman los eventos en crudo salen 8,567 y $69.65: la diferencia son 32 leads, 0.4%.</p>
+  </div>
+  <div class="defs">
+    <dl class="def"><dt>Conexiones WA</dt><dd><span class="mono">onsite_conversion.total_messaging_connection</span>: conversación de WhatsApp establecida, no el clic al botón. Es la definición que empata con Patagon.</dd></dl>
+    <dl class="def"><dt>Leads formulario</dt><dd><span class="mono">lead − onsite_conversion.lead</span>: envíos de formulario instantáneo que no vienen del embudo de WhatsApp.</dd></dl>
+    <dl class="def"><dt>Clics (todos) vs. clics enlace</dt><dd><span class="mono">clicks</span> incluye clics en la publicación y en el perfil; <span class="mono">inline_link_clicks</span> son solo los que van al destino. La brecha es enorme en las campañas de video del ciclo 1 y en el CTWA del ciclo 2.</dd></dl>
+    <dl class="def"><dt>Campañas de tráfico</dt><dd>Objetivo <span class="mono">LINK_CLICKS</span>. Meta no registra su conversión: el lead vive en el formulario externo y en Pipedrive, así que aquí solo se puede medir clic y vista de página.</dd></dl>
+    <dl class="def"><dt>Inversión</dt><dd><span class="mono">spend</span> en MXN sin IVA. Ciclo 1: $596,721.60. Ciclo 2: $419,221.44. Las dos sumas cuadran exacto con el <span class="mono">spend</span> a nivel cuenta de su rango.</dd></dl>
+    <dl class="def"><dt>Cortes parciales</dt><dd>1–21 jun (21 días), 22–30 jun (9 días) y 1–8 sep (8 días). Septiembre además cae completo dentro de la suspensión de WhatsApp.</dd></dl>
+    <dl class="def"><dt>Campañas repetidas</dt><dd>21 + 40 = 61 filas de campaña, pero son 57 campañas distintas: cuatro del ciclo 1 siguieron entregando hasta el 30 de junio y aparecen en los dos.</dd></dl>
+  </div>
+</section>
+
+<footer>Fuente: Graph API v25.0 · act_838230470286008 · insights nivel campaña, time_increment mensual · rangos 2026-01-01 a 2026-06-21 y 2026-06-22 a 2026-09-08 · creativos de 793 anuncios para el diagnóstico de UTM · Black &amp; Orange</footer>
+</div>
+<div class="tip" id="tip"></div>
+<script>
+const RAW=[["2026-01", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 21063.74, 448231, 4914, 1948, 126, 76, 15], ["2026-01", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 17343.52, 362822, 3194, 1246, 133, 96, 9], ["2026-01", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 31757.64, 714118, 4683, 2330, 149, 93, 22], ["2026-01", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 3448.54, 210956, 17550, 16014, 0, 0, 1268], ["2026-01", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2058.17, 110322, 9223, 8228, 0, 0, 1226], ["2026-01", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 12183.11, 223524, 3454, 1354, 136, 201, 16], ["2026-01", 1, "120235072018050541", "[LIC] Sesión 1:1-META - WP", "SALES", 1591.8, 27372, 180, 134, 0, 9, 0], ["2026-01", 1, "120235076510560541", "[LIC] Descuento Noviembre-META -WP", "SALES", 0.0, 0, 0, 0, 0, 1, 0], ["2026-01", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", 3736.7, 36795, 894, 107, 0, 51, 0], ["2026-01", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", 3245.27, 36103, 694, 97, 0, 45, 1], ["2026-01", 1, "120238964899210541", "Leads EXACER | UDF | Enero 2026", "LEADS", 2500.38, 124772, 1023, 479, 147, 100, 0], ["2026-02", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 16033.39, 354647, 4426, 1653, 84, 59, 11], ["2026-02", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 13182.57, 211502, 2297, 869, 93, 72, 6], ["2026-02", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 26454.26, 533186, 3765, 1934, 148, 60, 3], ["2026-02", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 2421.65, 130880, 10877, 9361, 0, 0, 947], ["2026-02", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2419.46, 140043, 11031, 9231, 0, 1, 1522], ["2026-02", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 11261.91, 236451, 2937, 1253, 107, 138, 17], ["2026-02", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", 3104.93, 24291, 577, 70, 0, 29, 0], ["2026-02", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", 3334.45, 34209, 661, 92, 0, 39, 1], ["2026-02", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 1754.37, 160728, 5241, 4473, 0, 0, 1039], ["2026-02", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 5824.87, 65652, 1980, 713, 152, 98, 4], ["2026-02", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", 3302.94, 114634, 1126, 548, 161, 113, 1], ["2026-03", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 13164.33, 299438, 2975, 1233, 64, 46, 4], ["2026-03", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 16269.15, 267994, 2581, 1055, 117, 91, 7], ["2026-03", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 37900.0, 737937, 5675, 3107, 222, 84, 17], ["2026-03", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 2615.4, 99174, 10400, 8888, 0, 0, 1066], ["2026-03", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2631.09, 91562, 11468, 10338, 0, 0, 2592], ["2026-03", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 12760.85, 232618, 3648, 1603, 150, 201, 22], ["2026-03", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", 304.19, 2668, 79, 8, 0, 4, 0], ["2026-03", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", 658.36, 7516, 141, 12, 0, 5, 0], ["2026-03", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 2626.2, 90796, 7046, 6388, 0, 0, 1509], ["2026-03", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 8796.73, 93865, 2575, 1078, 166, 117, 11], ["2026-03", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", 4833.36, 156695, 1637, 814, 247, 177, 2], ["2026-03", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", 3635.37, 68616, 753, 298, 33, 16, 1], ["2026-03", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", 1822.66, 81795, 1793, 804, 129, 57, 10], ["2026-04", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 6527.45, 133810, 1680, 673, 46, 24, 0], ["2026-04", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 17279.48, 182814, 2039, 870, 107, 46, 5], ["2026-04", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 43356.92, 806906, 5582, 3173, 273, 84, 8], ["2026-04", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 2865.6, 96635, 10540, 8995, 0, 0, 1088], ["2026-04", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2855.19, 74945, 10426, 9680, 0, 0, 2758], ["2026-04", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 16583.04, 336763, 4371, 1907, 176, 207, 21], ["2026-04", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 2830.79, 181006, 7287, 6043, 0, 0, 1064], ["2026-04", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 11807.62, 134508, 2856, 1252, 168, 112, 3], ["2026-04", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", 42.54, 1415, 21, 14, 4, 4, 0], ["2026-04", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", 5851.53, 100398, 1014, 580, 33, 11, 2], ["2026-04", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", 3037.23, 200530, 2727, 1323, 255, 84, 21], ["2026-04", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", 1875.87, 20820, 227, 107, 8, 0, 0], ["2026-05", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 6883.48, 135716, 2076, 878, 36, 2, 0], ["2026-05", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 22786.77, 251871, 3003, 1308, 102, 59, 8], ["2026-05", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 45974.05, 688400, 6635, 3591, 303, 127, 8], ["2026-05", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 414.11, 22225, 2071, 1737, 0, 0, 201], ["2026-05", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 364.73, 16621, 1530, 1446, 0, 0, 312], ["2026-05", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 17467.76, 324364, 3906, 1975, 143, 166, 21], ["2026-05", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 396.1, 57241, 1192, 1072, 0, 0, 90], ["2026-05", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 11208.65, 87937, 1943, 857, 123, 74, 1], ["2026-05", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", 3135.12, 148708, 1951, 1082, 124, 12, 11], ["2026-05", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", 9645.16, 166806, 2939, 1446, 89, 18, 6], ["2026-06a", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 257.82, 3873, 63, 25, 2, 0, 0], ["2026-06a", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 704.97, 8168, 116, 46, 7, 6, 1], ["2026-06a", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 2015.53, 24033, 251, 132, 13, 11, 1], ["2026-06a", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", 2780.33, 44164, 684, 312, 22, 14, 1], ["2026-06a", 1, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", 29753.68, 347715, 3980, 1800, 236, 182, 6], ["2026-06a", 1, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", 19097.0, 324366, 4139, 1769, 136, 97, 13], ["2026-06a", 1, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", 2036.06, 99202, 10171, 9087, 0, 0, 1454], ["2026-06a", 1, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", 10845.66, 233306, 2629, 1227, 87, 59, 8], ["2026-06b", 2, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", 5052.31, 68567, 896, 397, 42, 31, 4], ["2026-06b", 2, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", 3301.2, 55708, 839, 352, 13, 12, 1], ["2026-06b", 2, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", 377.76, 16204, 1732, 1595, 0, 0, 229], ["2026-06b", 2, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", 2239.78, 39709, 490, 226, 20, 17, 2], ["2026-06b", 2, "120249304954110541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA", "LEADS", 82.42, 792, 17, 5, 0, 3, 0], ["2026-06b", 2, "120249304961960541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA", "LEADS", 200.21, 2103, 65, 21, 0, 15, 0], ["2026-06b", 2, "120249304962170541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA", "LEADS", 77.18, 621, 19, 8, 0, 6, 0], ["2026-06b", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", 8815.67, 131738, 2122, 690, 0, 220, 8], ["2026-06b", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", 2244.13, 28938, 596, 203, 0, 59, 1], ["2026-06b", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", 3776.85, 48071, 1099, 334, 0, 144, 11], ["2026-07", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", 59221.2, 877456, 13283, 4750, 0, 1339, 58], ["2026-07", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", 14806.8, 151985, 2955, 1114, 0, 321, 23], ["2026-07", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", 24679.36, 266244, 5127, 1742, 0, 563, 63], ["2026-07", 2, "120250050149230541", "UDF_SEP26_META_PROS_POS_COMORG_CTWA", "LEADS", 2745.22, 42945, 628, 202, 0, 37, 2], ["2026-07", 2, "120250115347960541", "META_TRAFFIC_UDF_CB_20260718_PROSPECTING", "LINK_CLICKS", 2779.83, 247323, 5420, 3888, 0, 0, 1946], ["2026-07", 2, "120250164203470541", "META_LEADS_UDF_CB_20260718_INSTANTFORM", "LEADS", 12237.29, 197798, 2720, 1075, 57, 3, 13], ["2026-07", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", 1284.02, 24485, 323, 138, 8, 1, 2], ["2026-07", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", 429.8, 5436, 87, 63, 0, 0, 46], ["2026-07", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", 1128.94, 64115, 1272, 928, 0, 0, 638], ["2026-08", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", 44492.42, 624527, 8791, 3450, 0, 845, 34], ["2026-08", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", 13733.77, 141198, 2551, 1125, 0, 266, 14], ["2026-08", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", 16655.81, 141300, 2710, 1014, 0, 312, 26], ["2026-08", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", 13715.98, 357693, 3539, 1797, 76, 4, 28], ["2026-08", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", 2065.69, 20580, 350, 278, 0, 0, 187], ["2026-08", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", 4371.06, 210695, 5819, 4950, 0, 1, 3629], ["2026-08", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", 19517.98, 122090, 2387, 1169, 0, 302, 9], ["2026-08", 2, "120250954540520541", "UDF_EXACER_SEP2026_TRAFICO_FRIO", "LINK_CLICKS", 5329.26, 177347, 7549, 6492, 0, 1, 4723], ["2026-08", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", 6897.8, 126923, 1767, 741, 121, 0, 0], ["2026-08", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", 13087.65, 130244, 1878, 841, 0, 142, 5], ["2026-08", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", 10921.04, 186983, 2222, 1321, 0, 115, 2], ["2026-08", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", 10945.17, 132428, 1793, 1071, 0, 118, 4], ["2026-08", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", 9616.62, 137257, 1806, 916, 0, 94, 1], ["2026-08", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", 8448.76, 71310, 1672, 799, 0, 220, 6], ["2026-08", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", 4102.53, 74312, 885, 577, 0, 42, 0], ["2026-08", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", 4410.16, 55956, 906, 358, 0, 59, 3], ["2026-08", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", 3206.74, 54088, 641, 443, 0, 39, 3], ["2026-08", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", 3511.83, 93435, 1047, 696, 0, 50, 1], ["2026-08", 2, "120251209874060541", "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "LEADS", 985.77, 10225, 182, 89, 0, 11, 2], ["2026-08", 2, "120251210017100541", "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "LEADS", 1053.47, 14241, 209, 126, 0, 14, 2], ["2026-08", 2, "120251210203860541", "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "LEADS", 997.07, 8737, 176, 81, 0, 14, 1], ["2026-08", 2, "120251210389490541", "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "LEADS", 1086.11, 11508, 209, 104, 0, 21, 6], ["2026-08", 2, "120251210508780541", "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "LEADS", 1159.81, 9262, 162, 65, 0, 11, 1], ["2026-08", 2, "120251210561960541", "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "LEADS", 956.93, 8668, 154, 58, 0, 11, 0], ["2026-08", 2, "120251210578630541", "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "LEADS", 934.76, 8251, 184, 78, 0, 15, 1], ["2026-08", 2, "120251210594820541", "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "LEADS", 1039.77, 9396, 181, 90, 0, 17, 2], ["2026-08", 2, "120251210632010541", "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "LEADS", 1146.27, 10328, 194, 91, 0, 22, 2], ["2026-08", 2, "120251210681190541", "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "LEADS", 1129.54, 16441, 247, 104, 0, 19, 4], ["2026-08", 2, "120251210700420541", "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "LEADS", 1121.34, 15241, 255, 89, 0, 16, 1], ["2026-08", 2, "120251210798150541", "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "LEADS", 1990.94, 18167, 447, 138, 0, 48, 7], ["2026-09", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", 0.0, 0, 0, 0, 0, 4, 0], ["2026-09", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", 5298.19, 86597, 1135, 447, 85, 1, 1], ["2026-09", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", 8519.59, 68934, 1056, 541, 0, 92, 4], ["2026-09", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", 9553.5, 148566, 1717, 1109, 0, 117, 4], ["2026-09", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", 8936.1, 86380, 1374, 798, 0, 87, 1], ["2026-09", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", 8892.92, 140184, 1804, 1099, 0, 113, 1], ["2026-09", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", 4282.76, 44249, 941, 492, 0, 112, 3], ["2026-09", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", 3033.51, 33151, 455, 311, 0, 45, 0], ["2026-09", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", 2747.83, 31301, 550, 207, 0, 24, 1], ["2026-09", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", 2325.86, 26019, 338, 216, 0, 26, 0], ["2026-09", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", 2770.58, 71608, 807, 455, 0, 34, 1], ["2026-09", 2, "120251209874060541", "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "LEADS", 606.37, 6384, 112, 60, 0, 5, 0], ["2026-09", 2, "120251210017100541", "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "LEADS", 712.39, 14653, 185, 119, 0, 12, 0], ["2026-09", 2, "120251210203860541", "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "LEADS", 585.71, 6220, 102, 52, 0, 10, 0], ["2026-09", 2, "120251210389490541", "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "LEADS", 814.06, 8360, 123, 62, 0, 14, 0], ["2026-09", 2, "120251210508780541", "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "LEADS", 846.27, 7045, 134, 72, 0, 14, 1], ["2026-09", 2, "120251210561960541", "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "LEADS", 609.28, 6260, 86, 43, 0, 8, 1], ["2026-09", 2, "120251210578630541", "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "LEADS", 601.31, 5643, 118, 62, 0, 5, 0], ["2026-09", 2, "120251210594820541", "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "LEADS", 691.32, 6321, 95, 52, 0, 18, 2], ["2026-09", 2, "120251210632010541", "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "LEADS", 823.04, 8630, 127, 60, 0, 12, 0], ["2026-09", 2, "120251210681190541", "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "LEADS", 851.55, 12335, 197, 117, 0, 15, 1], ["2026-09", 2, "120251210700420541", "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "LEADS", 850.15, 11143, 189, 88, 0, 9, 0], ["2026-09", 2, "120251210798150541", "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "LEADS", 757.13, 7345, 182, 54, 0, 16, 0]];
+const DEST={"120219319857140541": {"name": "[ESP] Consideración +  Leads", "ads": 37, "dest": {"Formulario instantáneo": 37}, "urls": {}, "forms": ["1236761214973963", "1507660553898764"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120219322364120541": {"name": "[MST] Decisión + Leads", "ads": 72, "dest": {"Formulario instantáneo": 72}, "urls": {}, "forms": ["1144901000632364", "1194480692641959", "2027611708106799", "25050313311278294", "26430386536657784", "987647613763135"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120219860898420541": {"name": "[LIC] Decisión VID + IMG | Programas separados", "ads": 96, "dest": {"Formulario instantáneo": 96}, "urls": {}, "forms": ["1470346364093102", "1833928567462976", "1954753588457036", "825208433641114", "949243694695024"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120227573287810541": {"name": "[LIC] Awareness + Videos", "ads": 10, "dest": {"Sitio web": 10}, "urls": {"https://udf.edu.mx/licenciaturas/": 20}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120227574191240541": {"name": "[ESP] Awareness + Videos", "ads": 11, "dest": {"Sitio web": 11}, "urls": {"https://udf.edu.mx/especialidades/especialidad-en-valuacion-inmobiliaria/": 8, "https://udf.edu.mx/especialidades/especialidad-en-valuacion-de-maquinaria-y-equipo/": 4, "https://udf.edu.mx/especialidades/": 10}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120227574976930541": {"name": "C-1-27 Decisión + Rmkt + BBDD", "ads": 22, "dest": {"Formulario instantáneo": 22}, "urls": {}, "forms": ["1439280864639316", "1954753588457036", "825208433641114", "949243694695024"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120235072018050541": {"name": "[LIC] Sesión 1:1-META - WP", "ads": 1, "dest": {"WhatsApp (CTWA)": 1}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120235076510560541": {"name": "[LIC] Descuento Noviembre-META -WP", "ads": 5, "dest": {"WhatsApp (CTWA)": 5}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120237227164150541": {"name": "[LIC] Consideración | FORM WA", "ads": 6, "dest": {"WhatsApp (CTWA)": 6}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120237229341450541": {"name": "[ESP] Consideración | FORM WA", "ads": 2, "dest": {"WhatsApp (CTWA)": 2}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120238964899210541": {"name": "Leads EXACER | UDF | Enero 2026", "ads": 6, "dest": {"Formulario instantáneo": 6}, "urls": {}, "forms": ["1918845775693250"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120241679946080541": {"name": "[POS] Awareness + Videos", "ads": 7, "dest": {"Sitio web": 7}, "urls": {"https://udf.edu.mx/doctorados/doctorado-en-educacion/": 4, "https://udf.edu.mx/maestrias/maestria-en-educacion/": 4, "https://udf.edu.mx/maestrias/maestria-en-psicologia/": 4, "https://udf.edu.mx/maestrias/maestria-en-derecho-civil/": 2}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120241685071520541": {"name": "[POS] Decisión + Rmkt + BBDD", "ads": 15, "dest": {"Formulario instantáneo": 15}, "urls": {}, "forms": ["1194480692641959", "1236761214973963", "1507660553898764", "2027611708106799", "26430386536657784", "987647613763135"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120241685794500541": {"name": "Leads EXACER | UDF | Febrero - Abril 2026", "ads": 3, "dest": {"Formulario instantáneo": 3}, "urls": {}, "forms": ["1918845775693250"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120243167420690541": {"name": "[ESP - LIC] Sesiones informativas", "ads": 4, "dest": {"Formulario instantáneo": 4}, "urls": {}, "forms": ["1456592572688633", "3356675527841979"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120243220647290541": {"name": "[LIC] Colegio de Bachilleres | Descuento Egresados", "ads": 5, "dest": {"Formulario instantáneo": 5}, "urls": {}, "forms": ["1289339672733087"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120245260711080541": {"name": "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "ads": 7, "dest": {"Formulario instantáneo": 7}, "urls": {}, "forms": ["848076707571127"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120247939328850541": {"name": "[LIC] C-1-27 - Decisión", "ads": 23, "dest": {"Formulario instantáneo": 23}, "urls": {}, "forms": ["1439280864639316"], "tags": {}, "ntags": 0, "inline": {}}, "120248000751910541": {"name": "[POS] C-1-27 - Decisión", "ads": 34, "dest": {"Formulario instantáneo": 34}, "urls": {}, "forms": ["1309851000669479", "1544522164130840", "1546101650192041"], "tags": {}, "ntags": 0, "inline": {}}, "120248005851070541": {"name": "[GRAL] Awareness + Videos", "ads": 17, "dest": {"Sitio web / form externo": 17}, "urls": {"https://udf.edu.mx/maestrias/maestria-en-derecho-civil/": 1, "https://udf.edu.mx/maestrias/maestria-en-psicologia/": 2, "https://udf.edu.mx/doctorados/doctorado-en-educacion/": 2, "https://udf.edu.mx/maestrias/maestria-en-educacion/": 2, "https://udf.edu.mx/licenciaturas/": 10}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120248166475360541": {"name": "C-1-27 Decisión + RMKT + BBDD", "ads": 4, "dest": {"Formulario instantáneo": 4}, "urls": {}, "forms": ["1439280864639316"], "tags": {}, "ntags": 0, "inline": {}}, "120249304954110541": {"name": "UDF_SEP26_META_PROS_POS_GRAL_CTWA", "ads": 14, "dest": {"WhatsApp (CTWA)": 14}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249304961960541": {"name": "UDF_SEP26_META_PROS_LIC_ALL_CTWA", "ads": 19, "dest": {"WhatsApp (CTWA)": 19}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249304962170541": {"name": "UDF_SEP26_META_PROS_POS_VALINM_CTWA", "ads": 3, "dest": {"WhatsApp (CTWA)": 3}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249435112370541": {"name": "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "ads": 19, "dest": {"WhatsApp (CTWA)": 19}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249435112480541": {"name": "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "ads": 3, "dest": {"WhatsApp (CTWA)": 3}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249435112590541": {"name": "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "ads": 14, "dest": {"WhatsApp (CTWA)": 14}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120250050149230541": {"name": "UDF_SEP26_META_PROS_POS_COMORG_CTWA", "ads": 6, "dest": {"WhatsApp (CTWA)": 6}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120250115347960541": {"name": "META_TRAFFIC_UDF_CB_20260718_PROSPECTING", "ads": 21, "dest": {"Sitio web / form externo": 21}, "urls": {"https://forms.office.com/r/cWDEyqQcGr": 21}, "forms": [], "tags": {"utm_source=meta&utm_medium=paid_social&utm_campaign=udf_coffee_break_20260718&utm_content={{ad.name}}&utm_id={{campaign.id}}": 21}, "ntags": 21, "inline": {}}, "120250164203470541": {"name": "META_LEADS_UDF_CB_20260718_INSTANTFORM", "ads": 21, "dest": {"Formulario instantáneo": 21}, "urls": {}, "forms": ["1675138320209441"], "tags": {}, "ntags": 0, "inline": {}}, "120250594085600541": {"name": "UDF_SI15AGO2026_LEADS_FRIO", "ads": 7, "dest": {"Formulario instantáneo": 7}, "urls": {}, "forms": ["1706769790541499"], "tags": {}, "ntags": 0, "inline": {}}, "120250598508750541": {"name": "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "ads": 6, "dest": {"Sitio web / form externo": 6}, "urls": {"https://docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform": 6}, "forms": [], "tags": {}, "ntags": 0, "inline": {"docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform?utm_source=meta&utm_medium=p": 6}}, "120250598509300541": {"name": "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "ads": 6, "dest": {"Sitio web / form externo": 6}, "urls": {"https://docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform": 6}, "forms": [], "tags": {}, "ntags": 0, "inline": {"docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform?utm_source=meta&utm_medium=p": 6}}, "120250832064230541": {"name": "UDF_NTQ_AGO2026_META_CTWA_LEADS", "ads": 38, "dest": {"WhatsApp (CTWA)": 38}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120250954540520541": {"name": "UDF_EXACER_SEP2026_TRAFICO_FRIO", "ads": 6, "dest": {"Sitio web / form externo": 6}, "urls": {"https://udf.edu.mx/curso-exacer/": 6}, "forms": [], "tags": {"utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}": 6}, "ntags": 6, "inline": {}}, "120251169460500541": {"name": "UDF_EXACER_SEP2026_LEADS", "ads": 7, "dest": {"Formulario instantáneo": 7}, "urls": {}, "forms": ["2184704459110617"], "tags": {}, "ntags": 0, "inline": {}}, "120251174866790541": {"name": "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "ads": 8, "dest": {"WhatsApp (CTWA)": 8}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251175539820541": {"name": "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "ads": 16, "dest": {"WhatsApp (CTWA)": 16}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251175822880541": {"name": "UDF_SEP26_LIC_DERECHO_CTWA_V3", "ads": 16, "dest": {"WhatsApp (CTWA)": 16}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251176513410541": {"name": "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "ads": 12, "dest": {"WhatsApp (CTWA)": 12}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251207378350541": {"name": "UDF_SEP26_ESP_VALUACION_CTWA_V3", "ads": 12, "dest": {"WhatsApp (CTWA)": 12}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251207687400541": {"name": "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251208170320541": {"name": "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251208503530541": {"name": "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251208505590541": {"name": "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251209874060541": {"name": "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210017100541": {"name": "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210203860541": {"name": "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210389490541": {"name": "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210508780541": {"name": "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210561960541": {"name": "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210578630541": {"name": "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210594820541": {"name": "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210632010541": {"name": "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210681190541": {"name": "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210700420541": {"name": "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210798150541": {"name": "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}};
+const PER={
+ '2026-01':{lbl:'Enero',short:'Ene',dias:31,c:1},
+ '2026-02':{lbl:'Febrero',short:'Feb',dias:28,c:1},
+ '2026-03':{lbl:'Marzo',short:'Mar',dias:31,c:1},
+ '2026-04':{lbl:'Abril',short:'Abr',dias:30,c:1},
+ '2026-05':{lbl:'Mayo',short:'May',dias:31,c:1},
+ '2026-06a':{lbl:'1–21 jun',short:'1–21 jun',dias:21,c:1},
+ '2026-06b':{lbl:'22–30 jun',short:'22–30 jun',dias:9,c:2},
+ '2026-07':{lbl:'Julio',short:'Jul',dias:31,c:2},
+ '2026-08':{lbl:'Agosto',short:'Ago',dias:31,c:2},
+ '2026-09':{lbl:'1–8 sep',short:'1–8 sep',dias:8,c:2}};
+const KEYS=['per','ciclo','cid','name','obj','spend','imp','clicks','lc','form','wa','lpv'];
+const rows=RAW.map(r=>Object.fromEntries(KEYS.map((k,i)=>[k,r[i]])));
+rows.forEach(r=>{r.leads=r.form+r.wa; r.traf=r.obj==='LINK_CLICKS';});
+const nf=(n,d=0)=>n.toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d});
+const mny=n=>'$'+nf(n,0);
+const m2=n=>(n==null||!isFinite(n))?'—':'$'+nf(n,2);
+const div=(a,b)=>b?a/b:null;
+const F=['spend','imp','clicks','lc','form','wa','leads','lpv'];
+const agg=a=>{const o={};F.forEach(k=>o[k]=a.reduce((s,r)=>s+r[k],0));return o;};
+const pers=Object.keys(PER);
+const C1=rows.filter(r=>r.ciclo===1), C2=rows.filter(r=>r.ciclo===2);
+const A1={...agg(C1),dias:172,camp:21}, A2={...agg(C2),dias:79,camp:40};
+const G={...agg(rows),dias:251};
+
+document.getElementById('kpis').innerHTML=[
+ ['Inversión total',mny(G.spend),'MXN · 1 ene – 8 sep'],
+ ['Gasto por día',mny(G.spend/G.dias),'251 días de pauta'],
+ ['Impresiones',nf(G.imp),''],
+ ['Clics enlace',nf(G.lc),'de '+nf(G.clicks)+' clics totales'],
+ ['CPC enlace',m2(div(G.spend,G.lc)),'todos los clics: '+m2(div(G.spend,G.clicks))],
+ ['Leads',nf(G.leads),nf(G.wa)+' WA · '+nf(G.form)+' form'],
+ ['CPL promedio',m2(div(G.spend,G.leads)),'ciclo 1 $69.91 · ciclo 2 $61.51'],
+ ['Campañas',57,'793 anuncios · 27 con UTM'],
+].map(([k,v,s])=>`<div class="kpi"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s||'&nbsp;'}</div></div>`).join('');
+
+function tbl(el,head,body,foot){
+ const t=document.getElementById(el); if(!t) return;
+ t.innerHTML='<thead><tr>'+head.map(h=>`<th class="${h[1]||''}">${h[0]}</th>`).join('')+'</tr></thead><tbody>'+body+'</tbody>'+(foot?'<tfoot>'+foot+'</tfoot>':'');
+}
+/* ---- panorama: 10 cortes ---- */
+const pAgg=pers.map(p=>({per:p,dias:PER[p].dias,c:PER[p].c,...agg(rows.filter(r=>r.per===p))}));
+tbl('t-todo',
+ [['Corte'],['Ciclo'],['Días','n'],['Inversión','n'],['$/día','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n']],
+ pAgg.map(a=>`<tr><td class="name">${PER[a.per].lbl}</td><td><span class="chip flat">${a.c===1?'1':'2'}</span></td><td class="n dim">${a.dias}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${mny(a.spend/a.dias)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.clicks)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.clicks))}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="n">${m2(div(a.spend,a.leads))}</td></tr>`).join(''),
+ `<tr class="tot"><td>Total 1 ene – 8 sep</td><td></td><td class="n">251</td><td class="n">${mny(G.spend)}</td><td class="n">${mny(G.spend/251)}</td><td class="n">${nf(G.imp)}</td><td class="n">${nf(G.clicks)}</td><td class="n">${nf(G.lc)}</td><td class="n">${m2(div(G.spend,G.clicks))}</td><td class="n">${m2(div(G.spend,G.lc))}</td><td class="n">${nf(G.wa)}</td><td class="n">${nf(G.form)}</td><td class="n">${nf(G.leads)}</td><td class="n">${m2(div(G.spend,G.leads))}</td></tr>`);
+
+/* ---- charts ---- */
+const tip=document.getElementById('tip');
+const showTip=(e,t)=>{tip.textContent=t;tip.style.opacity=1;tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY-34)+'px';};
+const hideTip=()=>{tip.style.opacity=0;};
+function barChart(title,cap,vals,fmt){
+ const W=460,H=200,padL=56,padR=12,padT=10,padB=40;
+ const max=Math.max(...vals.map(v=>v.v));
+ const step=(W-padL-padR)/vals.length, bw=Math.min(30,step-8);
+ const y=v=>padT+(H-padT-padB)*(1-v/(max*1.08));
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">`;
+ [0,max/2,max].forEach(t=>{const yy=y(t);
+  s+=`<line x1="${padL}" x2="${W-padR}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="var(--rule-2)" stroke-width="1"/>`;
+  s+=`<text x="${padL-8}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="10" font-family="IBM Plex Mono,monospace" fill="var(--ink-3)">${fmt(t,true)}</text>`;});
+ vals.forEach((v,i)=>{const x=padL+step*i+(step-bw)/2, yy=y(v.v), h=Math.max(2,y(0)-yy);
+  if(v.c===2&&vals[i-1]&&vals[i-1].c===1){const xd=padL+step*i;
+   s+=`<line x1="${xd.toFixed(1)}" x2="${xd.toFixed(1)}" y1="${padT}" y2="${y(0).toFixed(1)}" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="3 3"/>`;}
+  s+=`<rect class="bar" data-tip="${v.label}: ${fmt(v.v)}" x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" rx="3" fill="${v.c===1?'var(--accent)':'var(--series-2)'}"/>`;
+  s+=`<text x="${(x+bw/2).toFixed(1)}" y="${H-16}" text-anchor="${v.short.length>4?'end':'middle'}" transform="${v.short.length>4?`rotate(-40 ${(x+bw/2).toFixed(1)} ${H-16})`:''}" font-size="9.5" font-family="IBM Plex Sans,sans-serif" fill="var(--ink-3)">${v.short}</text>`;});
+ s+=`<line x1="${padL}" x2="${W-padR}" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}" stroke="var(--rule)" stroke-width="1"/></svg>`;
+ return `<div class="chart"><h3>${title}</h3><div class="cap">${cap}</div>${s}</div>`;
+}
+const mk=f=>pAgg.map(a=>({label:PER[a.per].lbl,short:PER[a.per].short,c:a.c,v:f(a)}));
+document.getElementById('charts').innerHTML=
+ barChart('Inversión por día','MXN · normaliza los cortes parciales',mk(a=>a.spend/a.dias),(n,ax)=>ax?'$'+nf(Math.round(n/1000))+'k':mny(n))+
+ barChart('Leads por día','conexiones de WhatsApp + formulario',mk(a=>a.leads/a.dias),(n,ax)=>nf(n,ax?0:1))+
+ barChart('Costo por lead','MXN por lead',mk(a=>div(a.spend,a.leads)||0),n=>'$'+nf(n,0));
+document.querySelectorAll('rect.bar').forEach(r=>{r.addEventListener('mousemove',e=>showTip(e,r.dataset.tip));r.addEventListener('mouseleave',hideTip);});
+
+/* ---- comparativo ---- */
+const pct=v=>`<span class="chip flat">${(v>=0?'+':'')+nf(v*100,0)}%</span>`;
+const cmp=[
+ ['Inversión ejercida',mny(A1.spend),mny(A2.spend),A2.spend/A1.spend-1],
+ ['Días de pauta','172','79',79/172-1],
+ ['Gasto por día',mny(A1.spend/172),mny(A2.spend/79),(A2.spend/79)/(A1.spend/172)-1],
+ ['Campañas','21','40',40/21-1],
+ ['Impresiones',nf(A1.imp),nf(A2.imp),A2.imp/A1.imp-1],
+ ['Clics enlace',nf(A1.lc),nf(A2.lc),A2.lc/A1.lc-1],
+ ['CPC enlace',m2(A1.spend/A1.lc),m2(A2.spend/A2.lc),(A2.spend/A2.lc)/(A1.spend/A1.lc)-1],
+ ['Conexiones WA',nf(A1.wa),nf(A2.wa),A2.wa/A1.wa-1],
+ ['Leads formulario',nf(A1.form),nf(A2.form),A2.form/A1.form-1],
+ ['Leads total',nf(A1.leads),nf(A2.leads),A2.leads/A1.leads-1],
+ ['Leads por día',nf(A1.leads/172,1),nf(A2.leads/79,1),(A2.leads/79)/(A1.leads/172)-1],
+ ['CPL',m2(A1.spend/A1.leads),m2(A2.spend/A2.leads),(A2.spend/A2.leads)/(A1.spend/A1.leads)-1],
+];
+tbl('t-cmp',[['Métrica'],['Ciclo 1 · ene–21 jun','n'],['Ciclo 2 · 22 jun–8 sep','n'],['Cambio','n']],
+ cmp.map(([k,a,b,v])=>`<tr><td class="name">${k}</td><td class="n">${a}</td><td class="n">${b}</td><td class="n">${pct(v)}</td></tr>`).join(''));
+
+/* ---- strips de cada ciclo ---- */
+const strip=(el,A,d,extra)=>{document.getElementById(el).innerHTML=
+ [`Inversión <b>${mny(A.spend)}</b>`,`<b>${mny(A.spend/d)}</b>/día`,`Impresiones <b>${nf(A.imp)}</b>`,`Clics enlace <b>${nf(A.lc)}</b>`,`CPC enlace <b>${m2(div(A.spend,A.lc))}</b>`,`Leads <b>${nf(A.leads)}</b>`,`CPL <b>${m2(div(A.spend,A.leads))}</b>`,extra].map(s=>`<span>${s}</span>`).join('');};
+strip('s1',A1,172,'UTM <b>0 de 397 anuncios</b>');
+strip('s2',A2,79,'UTM <b>27 de 396 anuncios</b>');
+
+/* ---- tablas por ciclo ---- */
+function resumen(el,ciclo,keys){
+ const as=keys.map(p=>({per:p,dias:PER[p].dias,...agg(rows.filter(r=>r.per===p))}));
+ const T=agg(rows.filter(r=>r.ciclo===ciclo)); const D=keys.reduce((s,p)=>s+PER[p].dias,0);
+ tbl(el,[['Periodo'],['Días','n'],['Inversión','n'],['$/día','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n']],
+  as.map(a=>`<tr><td class="name">${PER[a.per].lbl}</td><td class="n dim">${a.dias}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${mny(a.spend/a.dias)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.clicks)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.clicks))}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="n">${m2(div(a.spend,a.leads))}</td></tr>`).join(''),
+  `<tr class="tot"><td>Total ciclo ${ciclo}</td><td class="n">${D}</td><td class="n">${mny(T.spend)}</td><td class="n">${mny(T.spend/D)}</td><td class="n">${nf(T.imp)}</td><td class="n">${nf(T.clicks)}</td><td class="n">${nf(T.lc)}</td><td class="n">${m2(div(T.spend,T.clicks))}</td><td class="n">${m2(div(T.spend,T.lc))}</td><td class="n">${nf(T.wa)}</td><td class="n">${nf(T.form)}</td><td class="n">${nf(T.leads)}</td><td class="n">${m2(div(T.spend,T.leads))}</td></tr>`);
+}
+resumen('t-c1mes',1,pers.filter(p=>PER[p].c===1));
+resumen('t-c2mes',2,pers.filter(p=>PER[p].c===2));
+
+function campTable(el,ciclo,umbral){
+ const rs=rows.filter(r=>r.ciclo===ciclo);
+ const byC={};
+ rs.forEach(r=>{(byC[r.cid]=byC[r.cid]||{name:r.name,obj:r.obj,cid:r.cid,traf:r.traf,pers:[],rows:[]});byC[r.cid].pers.push(r.per);byC[r.cid].rows.push(r);});
+ const cs=Object.values(byC).map(c=>({...c,...agg(c.rows)})).sort((a,b)=>b.spend-a.spend);
+ const T=agg(rs);
+ const chip=(c,cpl)=>(c.traf||!c.leads)?'<span class="chip flat">sin leads</span>':cpl<50?'<span class="chip good">bajo</span>':cpl>100?'<span class="chip crit">alto</span>':'<span class="chip flat">medio</span>';
+ const rango=ps=>[...new Set(ps)].sort().map(p=>PER[p].short).join(', ');
+ tbl(el,[['Campaña'],['Objetivo'],['Periodos'],['Inversión','n'],['% inv.','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n'],['']],
+  cs.map(c=>{const cpl=(c.traf||!c.leads)?null:div(c.spend,c.leads);
+   return `<tr><td class="name">${c.name}<div class="mono" style="color:var(--ink-3);font-size:11px">${c.cid}</div></td><td class="obj">${c.obj}</td><td class="dim" style="font-size:12px">${rango(c.pers)}</td><td class="n">${mny(c.spend)}</td><td class="n dim">${nf(c.spend/T.spend*100,1)}%</td><td class="n">${nf(c.imp)}</td><td class="n">${nf(c.clicks)}</td><td class="n">${nf(c.lc)}</td><td class="n">${m2(div(c.spend,c.clicks))}</td><td class="n">${c.traf?'—':nf(c.wa)}</td><td class="n">${c.traf?'—':nf(c.form)}</td><td class="n">${c.traf?`<span class="dim">${nf(c.lpv)} vistas</span>`:nf(c.leads)}</td><td class="n">${m2(cpl)}</td><td>${chip(c,cpl)}</td></tr>`}).join(''),
+  `<tr class="tot"><td>Total ${cs.length} campañas</td><td></td><td></td><td class="n">${mny(T.spend)}</td><td class="n">100%</td><td class="n">${nf(T.imp)}</td><td class="n">${nf(T.clicks)}</td><td class="n">${nf(T.lc)}</td><td class="n">${m2(div(T.spend,T.clicks))}</td><td class="n">${nf(T.wa)}</td><td class="n">${nf(T.form)}</td><td class="n">${nf(T.leads)}</td><td class="n">${m2(div(T.spend,T.leads))}</td><td></td></tr>`);
+}
+campTable('t-c1camp',1); campTable('t-c2camp',2);
+
+function detalle(el,ciclo){
+ const keys=pers.filter(p=>PER[p].c===ciclo);
+ document.getElementById(el).innerHTML=keys.map(p=>{
+  const rs=rows.filter(r=>r.per===p).sort((a,b)=>b.spend-a.spend); const A=agg(rs); const d=PER[p].dias;
+  const head=[['Campaña'],['Objetivo'],['Inversión','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n']];
+  const body=rs.map(r=>{const cpl=(r.traf||!r.leads)?null:div(r.spend,r.leads);
+   return `<tr><td class="name">${r.name}</td><td class="obj">${r.obj}</td><td class="n">${mny(r.spend)}</td><td class="n">${nf(r.imp)}</td><td class="n">${nf(r.clicks)}</td><td class="n">${nf(r.lc)}</td><td class="n">${m2(div(r.spend,r.clicks))}</td><td class="n">${m2(div(r.spend,r.lc))}</td><td class="n">${r.traf?'—':nf(r.wa)}</td><td class="n">${r.traf?'—':nf(r.form)}</td><td class="n">${r.traf?`<span class="dim">${nf(r.lpv)} vistas</span>`:nf(r.leads)}</td><td class="n">${m2(cpl)}</td></tr>`}).join('');
+  const foot=`<tr class="tot"><td>Total ${PER[p].lbl}</td><td></td><td class="n">${mny(A.spend)}</td><td class="n">${nf(A.imp)}</td><td class="n">${nf(A.clicks)}</td><td class="n">${nf(A.lc)}</td><td class="n">${m2(div(A.spend,A.clicks))}</td><td class="n">${m2(div(A.spend,A.lc))}</td><td class="n">${nf(A.wa)}</td><td class="n">${nf(A.form)}</td><td class="n">${nf(A.leads)}</td><td class="n">${m2(div(A.spend,A.leads))}</td></tr>`;
+  return `<section id="d-${p}"><div class="sec-head"><h2>${PER[p].lbl} 2026</h2><span class="note">${rs.length} campañas · ${d} días · ${mny(A.spend/d)}/día · CPL ${m2(div(A.spend,A.leads))}</span></div><div class="tscroll"><table><thead><tr>${head.map(h=>`<th class="${h[1]||''}">${h[0]}</th>`).join('')}</tr></thead><tbody>${body}</tbody><tfoot>${foot}</tfoot></table></div></section>`;
+ }).join('');
+}
+detalle('c1-meses',1); detalle('c2-meses',2);
+
+/* ---- V2 vs V3 ---- */
+const grp=f=>{const rs=C2.filter(r=>f(r.name));const a=agg(rs);a.n=new Set(rs.map(r=>r.cid)).size;return a;};
+const V2=grp(n=>n.includes('CTWA_V2')), V3=grp(n=>n.includes('CTWA_V3'));
+tbl('t-v23',[['Estructura'],['Campañas','n'],['Inversión','n'],['Impresiones','n'],['Clics enlace','n'],['CPC enlace','n'],['Conexiones WA','n'],['CPL','n'],['$/campaña','n']],
+ [['V2 · 3 pools amplios (LIC ALL, POS GRAL, POS VALINM)',V2],['V3 · 21 campañas, una por programa',V3]].map(([lbl,a])=>
+  `<tr><td class="name">${lbl}</td><td class="n">${a.n}</td><td class="n">${mny(a.spend)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n"><strong>${m2(div(a.spend,a.leads))}</strong></td><td class="n dim">${mny(a.spend/a.n)}</td></tr>`).join(''),
+ `<tr class="tot"><td>Diferencia de CPL</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n">${nf((div(V3.spend,V3.leads)/div(V2.spend,V2.leads)-1)*100,0)}% más caro</td><td></td></tr>`);
+
+/* ---- UTM ---- */
+const byAll={};
+rows.forEach(r=>{const o=byAll[r.cid]=byAll[r.cid]||{name:r.name,cid:r.cid,traf:r.traf,ciclos:new Set(),rows:[]};o.ciclos.add(r.ciclo);o.rows.push(r);});
+const allC=Object.values(byAll).map(c=>({...c,...agg(c.rows)})).sort((a,b)=>b.spend-a.spend);
+tbl('t-utm',[['Campaña'],['Ciclo'],['Inversión','n'],['Anuncios','n'],['Destino'],['URL de destino (sin query)'],['Etiquetado']],
+ allC.map(c=>{const d=DEST[c.cid]||{dest:{},urls:{},ads:0,ntags:0,tags:{},inline:{}};
+  const tipos=Object.entries(d.dest).map(([k,v])=>`${k} (${v})`).join(', ')||'—';
+  const esWA=Object.keys(d.dest)[0]==='WhatsApp (CTWA)';
+  const urls=Object.keys(d.urls).length?Object.keys(d.urls).map(u=>u.replace('https://','')).join('<br>'):(esWA?'api.whatsapp.com/send':'—');
+  const inline=Object.keys(d.inline||{}).length>0;
+  const st=d.ntags?`<span class="chip good">${d.ntags} con url_tags</span>`:inline?'<span class="chip warn">UTM en la URL</span>':(Object.keys(d.urls).length?'<span class="chip crit">sin UTM</span>':'<span class="chip flat">n/a · no va a URL</span>');
+  return `<tr><td class="name">${c.name}</td><td><span class="chip flat">${[...c.ciclos].join(' y ')}</span></td><td class="n">${mny(c.spend)}</td><td class="n dim">${d.ads}</td><td style="font-size:12.5px">${tipos}</td><td class="name dim mono" style="font-size:11.5px">${urls}</td><td>${st}</td></tr>`}).join(''),
+ `<tr class="tot"><td>Total 57 campañas</td><td></td><td class="n">${mny(G.spend)}</td><td class="n">793</td><td></td><td></td><td><span class="chip good">27 con UTM</span> <span class="chip crit">766 sin</span></td></tr>`);
+
+const tagged=allC.filter(c=>{const d=DEST[c.cid]||{};return (d.ntags||0)>0||Object.keys(d.inline||{}).length>0;});
+document.getElementById('tagdetail').innerHTML='<h3>Cadenas de etiquetado, tal como están montadas</h3>'+tagged.map(c=>{
+ const d=DEST[c.cid];
+ const strs=[...Object.keys(d.tags||{}),...Object.keys(d.inline||{}).map(u=>'(en la URL) '+(u.split('?')[1]||''))];
+ const ok=c.name.includes('EXACER');
+ const nota=ok?'<span class="chip good">se puede leer</span> destino propio, udf.edu.mx'
+  :c.name.includes('CB_')?'<span class="chip warn">no aterriza</span> Microsoft Forms descarta los parámetros'
+  :'<span class="chip warn">no aterriza</span> Google Forms descarta los parámetros';
+ return `<div style="border:1px solid var(--rule); border-left:3px solid ${ok?'var(--good)':'var(--warn)'}; background:var(--sheet); padding:12px 14px; margin-bottom:10px"><div style="font-weight:600; font-size:13.5px">${c.name}</div><div style="margin:4px 0 6px">${nota}</div>${strs.map(s=>`<div class="mono" style="font-size:11.5px; color:var(--ink-2); overflow-x:auto; white-space:nowrap">${s}</div>`).join('')}</div>`;
+}).join('');
+
+/* ---- hallazgos ---- */
+const H1=[
+ `<strong>La inversión creció 20% de enero a mayo y el CPL empeoró 18%.</strong> Enero cerró en $98,929 con CPL de $72.58; mayo en $118,276 con CPL de $85.83. El mejor mes fue marzo: $108,018 y CPL de $56.08 con 1,926 leads, el pico de volumen del ciclo.`,
+ `<strong>Tres campañas concentran el 57% del gasto y tienen los CPL más altos.</strong> [LIC] Decisión VID + IMG ($187,458 · CPL $119.63), [MST] Decisión + Leads ($87,566 · CPL $94.26) y [ESP] Consideración + Leads ($63,930 · CPL $113.15) suman $338,955 y entregan 3,061 leads. Con el CPL promedio del ciclo, ese mismo dinero habría dado unos 4,848.`,
+ `<strong>El remarketing y la base de datos fueron lo más eficiente y lo más chico.</strong> C-1-27 Decisión + Rmkt + BBDD: $70,257 y 1,625 leads a $43.23. [POS] Decisión + Rmkt + BBDD: $37,638 y 1,010 a $37.27. Juntas, 18% del gasto y 31% de los leads.`,
+ `<strong>EXACER y Colegio de Bachilleres, las anomalías buenas.</strong> EXACER (enero y feb–abr) gastó $10,679 y trajo 953 leads a $11.21; Colegio de Bachilleres | Descuento Egresados, $7,995 y 661 leads a $12.10. Públicos acotados con oferta concreta, y nunca se escalaron.`,
+ `<strong>$31,737 en tráfico al sitio sin medición.</strong> Las cuatro campañas de Awareness + Videos compraron 110,981 clics a enlace a $0.29 y produjeron 18,136 vistas de página, sin UTM y sin evento de conversión propio: no hay forma de saber qué pasó después del clic.`,
+ `<strong>Dos campañas de enero quedaron colgadas.</strong> [LIC] Sesión 1:1-META - WP gastó $1,592 para 9 conexiones ($176.87 cada una) y [LIC] Descuento Noviembre-META -WP registra 1 conexión con $0 de gasto: cola de atribución de una campaña de 2025 que siguió abierta.`,
+];
+const H2=[
+ `<strong>El ciclo se pautó a un ritmo 53% más alto y con mejor CPL.</strong> $419,221 en 79 días ($5,307/día contra $3,470/día del ciclo 1) para 6,815 leads a $61.51. El grueso —$333,195, el 79% del gasto— son las 28 campañas <span class="mono">UDF_SEP26_*</span> de WhatsApp, con 6,016 conexiones a $55.38.`,
+ `<strong>La reestructura por programa costó caro.</strong> Los 3 pools V2 entregaron 4,069 leads a $46.31; las 21 campañas V3, 1,886 a $75.11 con presupuestos de $1,500 a $2,700 cada una. Es la palanca más grande que queda: consolidar de vuelta a pools por nivel devolvería el CPL a la banda de $46–$50.`,
+ `<strong>El CPL se deterioró corte a corte: $44.96 → $51.23 → $68.95 → $74.16.</strong> Subió 65% del arranque al 8 de septiembre mientras el gasto diario crecía de $2,908 a $8,139. Coincide con el paso de V2 a V3 en agosto y con el agotamiento del público de CDMX.`,
+ `<strong>Los formularios instantáneos de sesión informativa son lo peor del ciclo.</strong> <span class="mono">UDF_SI15AGO2026_LEADS_FRIO</span>: $15,000 para 89 leads a $168.54. <span class="mono">META_LEADS_UDF_CB_20260718_INSTANTFORM</span>: $12,237 para 60 a $203.95. Entre las dos, $27,237 y 149 leads; el mismo dinero en CTWA V2 habría dado unos 588.`,
+ `<strong>EXACER volvió a ser lo más eficiente, pero ya no a precio de ganga.</strong> <span class="mono">UDF_EXACER_SEP2026_LEADS</span>: $12,196 y 207 leads a $58.92, contra los $11–$12 por lead del ciclo 1. El público acotado ya se saturó.`,
+ `<strong>$16,482 fueron a formularios externos que Meta no puede medir.</strong> Cinco campañas de tráfico compraron 18,194 clics a enlace y 11,398 vistas de página. Las dos de <span class="mono">SI8AGO</span> y la de <span class="mono">CB</span> mandan a Google Forms y Microsoft Forms, que descartan los UTM: de ese gasto no queda rastro ni en Meta ni en analítica, solo el registro dentro del formulario.`,
+ `<strong>Septiembre está contaminado por la suspensión de WhatsApp.</strong> Del 1 al 8 se ejercieron $65,109 por 793 conexiones a $74.16 que nadie pudo contestar. Fue una decisión tomada a propósito con el cliente, pero para CPL efectivo ese tramo se lee aparte: el lead entró, la conversación no ocurrió.`,
+ `<strong>Cuatro campañas del ciclo 1 siguieron corriendo hasta el 30 de junio.</strong> [LIC] y [POS] C-1-27, C-1-27 Decisión + RMKT + BBDD y [GRAL] Awareness + Videos gastaron $10,971 en esos nueve días, con 135 leads. El traslape es normal en el cambio de ciclo, pero [GRAL] Awareness ($378, 1,595 clics, sin UTM y sin conversión) no aportaba nada medible.`,
+];
+const H3=[
+ `<strong>$1,015,943 y 15,350 leads en 251 días, a $66.19 de CPL promedio.</strong> El ciclo 2 hizo 41% del gasto total en 31% del tiempo: el ritmo se aceleró de $3,470 a $5,307 por día.`,
+ `<strong>El cambio de modelo funcionó, la fragmentación no.</strong> Pasar de formulario instantáneo a WhatsApp bajó el CPL 12% y subió los leads por día 74%. Pero dentro del ciclo 2, partir los pools en 21 campañas por programa subió el CPL 62% respecto de la estructura amplia. La lección se repite en los dos ciclos: los públicos grandes con presupuesto concentrado ganan, y las campañas de $1,500–$2,700 no salen de aprendizaje.`,
+ `<strong>El etiquetado pasó de cero a tres campañas, y aún así solo una sirve.</strong> Del ciclo 1 no queda ni un parámetro; en el ciclo 2 hay 27 anuncios etiquetados, pero dos de las tres campañas apuntan a formularios de Google y Microsoft, que tiran los UTM. Todo el gasto a destino propio que sí se puede leer son los $5,329 de EXACER Tráfico Frío.`,
+ `<strong>Lo pequeño y acotado siempre ganó, y nunca se escaló.</strong> EXACER, Colegio de Bachilleres y el remarketing sobre base de datos dieron CPL de $11 a $59 en los dos ciclos, con presupuestos marginales. Las campañas grandes de prospección fría de licenciatura sostuvieron CPL de $90 a $120 llevándose la mitad del dinero.`,
+];
+document.getElementById('hl1').innerHTML=H1.map(h=>`<li>${h}</li>`).join('');
+document.getElementById('hl2').innerHTML=H2.map(h=>`<li>${h}</li>`).join('');
+document.getElementById('hl3').innerHTML=H3.map(h=>`<li>${h}</li>`).join('');
+
+</script>
+</body>
+</html>
