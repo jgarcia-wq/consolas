@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Auditoría Meta Ads UDF 2026 · Black &amp; Orange</title>
+<title>Auditoría Meta UDF 2026</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
@@ -126,6 +126,27 @@ footer{margin-top:56px; padding-top:18px; border-top:1px solid var(--rule); font
 .two p{font-size:13px; margin:0;}
 h2.plain{border-bottom:none;}
 </style>
+<style>
+/* barra de filtros */
+.filters{position:sticky; top:39px; z-index:19; background:var(--ground); border-bottom:1px solid var(--rule); padding:12px 0 10px; margin-bottom:8px;}
+.filters .inner{max-width:1200px; margin:0 auto; padding:0 24px; display:flex; flex-direction:column; gap:9px;}
+.frow{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.frow > .flbl{font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); min-width:78px;}
+button.f{font:inherit; font-size:12.5px; padding:3px 10px; border:1px solid var(--rule); background:var(--sheet); color:var(--ink-2); border-radius:3px; cursor:pointer;}
+button.f:hover{border-color:var(--accent); color:var(--ink);}
+button.f[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--ground); font-weight:600;}
+button.f:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+button.f.ghost{border-style:dashed; color:var(--ink-3);}
+select.f{font:inherit; font-size:12.5px; padding:3px 8px; border:1px solid var(--rule); background:var(--sheet); color:var(--ink); border-radius:3px; max-width:min(560px,68vw);}
+.fstatus{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3); display:flex; gap:18px; flex-wrap:wrap; padding-top:2px; border-top:1px dashed var(--rule-2); margin-top:1px;}
+.fstatus b{color:var(--ink); font-weight:500;}
+.fstatus .on{color:var(--accent); font-weight:600;}
+.empty{border:1px dashed var(--rule); background:var(--sheet); padding:18px; text-align:center; color:var(--ink-3); font-size:13.5px;}
+.pill{display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:6px; vertical-align:baseline;}
+td.split{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap; font-size:12.5px;}
+td.vacio{text-align:center; color:var(--ink-3); padding:20px 14px; font-size:13.5px; white-space:normal;}
+.bar-mini{display:inline-block; height:7px; border-radius:1px; vertical-align:middle;}
+</style>
 <style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -133,12 +154,12 @@ h2.plain{border-bottom:none;}
   <div class="wrap">
     <div class="eyebrow">Auditoría de pauta · Meta Ads · act_838230470286008 · UDF Santa María</div>
     <h1>Dos ciclos, 251 días de pauta</h1>
-    <p class="lede">Del 1 de enero al 8 de septiembre de 2026, campaña por campaña y mes por mes: inversión ejercida, entrega, clics, leads, costo por lead y parámetros UTM. Son dos auditorías con dos modelos de compra distintos —formulario instantáneo hasta junio, WhatsApp de junio en adelante— presentadas en un mismo documento para poder compararlas. Datos de la Graph API v25.0, MXN, zona América/Ciudad_de_México; el total por campaña cuadra al peso con el gasto de la cuenta en las dos ventanas.</p>
+    <p class="lede">Del 1 de enero al 8 de septiembre de 2026, campaña por campaña y mes por mes: inversión ejercida, entrega, clics, leads, costo por lead, desglose de Facebook contra Instagram y parámetros UTM. Son dos auditorías con dos modelos de compra distintos —formulario instantáneo hasta junio, WhatsApp de junio en adelante— en un mismo documento para poder compararlas. Todo lo que sigue responde a los filtros de arriba.</p>
     <div class="meta-row">
       <span>Extraído <b>9 sep 2026</b></span>
       <span>Ciclo 1 <b>2026-01-01 → 2026-06-21</b></span>
       <span>Ciclo 2 <b>2026-06-22 → 2026-09-08</b></span>
-      <span>Nivel <b>campaña · time_increment mensual</b></span>
+      <span>Nivel <b>campaña × mes × plataforma</b></span>
       <span>Atribución <b>7d clic / 1d vista</b></span>
     </div>
     <div class="kpis" id="kpis"></div>
@@ -148,15 +169,15 @@ h2.plain{border-bottom:none;}
 <nav class="months">
   <div class="inner">
     <a href="#panorama">Panorama</a>
+    <a href="#nivel">Nivel</a>
+    <a href="#plataforma">Facebook vs Instagram</a>
     <a href="#comparativo">Comparativo</a>
     <div class="sep"></div>
     <a href="#ciclo1">Ciclo 1 · ene–21 jun</a>
     <a href="#c1-camp">campañas</a>
-    <a href="#c1-meses">meses</a>
     <div class="sep"></div>
     <a href="#ciclo2">Ciclo 2 · 22 jun–8 sep</a>
     <a href="#c2-camp">campañas</a>
-    <a href="#c2-meses">periodos</a>
     <a href="#v2v3">V2 vs V3</a>
     <div class="sep"></div>
     <a href="#utm">UTM</a>
@@ -165,14 +186,45 @@ h2.plain{border-bottom:none;}
   </div>
 </nav>
 
+<div class="filters">
+  <div class="inner">
+    <div class="frow"><span class="flbl">Mes / corte</span><span id="f-cortes" class="frow" style="gap:5px"></span></div>
+    <div class="frow"><span class="flbl">Nivel</span><span id="f-niv" class="frow" style="gap:5px"></span>
+      <span class="flbl" style="margin-left:14px">Plataforma</span><span id="f-plat" class="frow" style="gap:5px"></span></div>
+    <div class="frow"><span class="flbl">Campaña</span><select class="f" id="f-camp"></select>
+      <button class="f ghost" type="button" id="f-clear" hidden>Limpiar filtros</button></div>
+    <div class="fstatus" id="f-status"></div>
+  </div>
+</div>
+
 <div class="wrap">
 
 <section id="panorama">
-  <div class="sec-head"><h2>Panorama de los 251 días</h2><span class="note">10 cortes · $1,015,943 ejercidos</span></div>
+  <div class="sec-head"><h2>Panorama por corte</h2><span class="note">junio va partido: ahí cambia el ciclo</span></div>
   <div class="legend"><span><i style="background:var(--accent)"></i>Ciclo 1 · formulario instantáneo</span><span><i style="background:var(--series-2)"></i>Ciclo 2 · WhatsApp</span></div>
   <div class="charts" id="charts"></div>
   <div class="tscroll" style="margin-top:22px"><table id="t-todo"></table></div>
-  <p style="margin-top:14px; font-size:13px; color:var(--ink-3)">Junio aparece partido en dos porque ahí cambia el ciclo: del 1 al 21 corría la estructura vieja y del 22 arrancó la de septiembre. Los cortes no miden lo mismo —9, 8 y 21 días contra meses completos—, por eso la primera gráfica va en inversión por día.</p>
+  <p style="margin-top:14px; font-size:13px; color:var(--ink-3)">Los cortes no miden lo mismo —9, 8 y 21 días contra meses completos—, por eso la primera gráfica va en inversión por día y la tabla incluye la columna de gasto diario. Un corte sin datos bajo los filtros activos desaparece de la tabla en lugar de aparecer en ceros.</p>
+</section>
+
+<section id="nivel">
+  <div class="sec-head"><h2>Licenciatura, posgrado y el resto</h2><span class="note">el nivel se deriva del nombre de la campaña</span></div>
+  <p>Meta no tiene un campo de nivel académico, así que se deriva del nombre: los prefijos <span class="mono">[LIC]</span>, <span class="mono">[MST]</span>, <span class="mono">[ESP]</span>, <span class="mono">[POS]</span> y los segmentos <span class="mono">_LIC_</span> / <span class="mono">_POS_</span> mandan, incluso cuando la campaña es de remarketing. <strong>Otros</strong> junta lo que no es ni una ni otra: los pools de base de datos sin nivel (<span class="mono">C-1-27 Rmkt + BBDD</span>), el awareness general, las sesiones informativas marcadas <span class="mono">[ESP - LIC]</span> y EXACER, que es curso de preparación, no programa. Las campañas sin prefijo cuyo público sí es de licenciatura —<span class="mono">NTQ</span>, <span class="mono">SI15AGO</span> y el Coffee Break, todas dirigidas a rechazados de universidad pública— se cuentan como licenciatura.</p>
+  <div class="tscroll"><table id="t-nivel"></table></div>
+  <p style="margin-top:14px; font-size:13px; color:var(--ink-3)">Ojo con leer el CPL de posgrado como si fuera bueno: en <span class="mono">ESTADO_CICLO_SEP26.md</span> el costo por <em>inscrito</em> de posgrado es $5,076 contra $1,637 de licenciatura. El lead de posgrado es más barato de conseguir y mucho más difícil de cerrar.</p>
+</section>
+
+<section id="plataforma">
+  <div class="sec-head"><h2>Facebook contra Instagram</h2><span class="note">breakdown publisher_platform · incluye conexiones de WA</span></div>
+  <p>Esta es la parte que faltaba: dónde se generó cada conversación de WhatsApp y cada lead de formulario, no solo dónde se gastó. Aparece también <strong>WhatsApp como ubicación propia</strong> (los anuncios en Estados de WhatsApp), que Meta reporta aparte de Facebook e Instagram.</p>
+  <div class="tscroll"><table id="t-plat"></table></div>
+  <div class="charts" id="charts-plat" style="margin-top:22px"></div>
+  <h3 style="margin-top:30px">Plataforma corte por corte</h3>
+  <p>Un CPL vacío significa que esa plataforma no dejó leads en ese corte, no que sean cero pesos.</p>
+  <div class="tscroll"><table id="t-platcorte"></table></div>
+  <h3 style="margin-top:30px">Dónde más pesa la diferencia</h3>
+  <p>Solo campañas con al menos 10 leads en cada plataforma, para que la comparación no sea ruido. Ordenadas por qué tan caro sale Instagram contra Facebook dentro de la misma campaña.</p>
+  <div class="tscroll"><table id="t-platcamp"></table></div>
 </section>
 
 <section id="comparativo">
@@ -180,27 +232,27 @@ h2.plain{border-bottom:none;}
   <p>Lo que cambió no fue el presupuesto, fue el modelo de compra: se dejó de comprar clic barato de video y formulario instantáneo, y se concentró todo en conversación de WhatsApp. El CPC enlace se duplicó y aun así el CPL bajó.</p>
   <div class="tscroll"><table id="t-cmp"></table></div>
   <div class="two" style="margin-top:22px">
-    <div><h3>Lo que mejoró</h3><p>CPL de $69.91 a $61.51 (−12%) y leads por día de 49.6 a 86.3 (+74%), con un ritmo de gasto 53% mayor. El CTWA con mensaje pre-llenado por programa entrega conversación, no formulario tibio.</p></div>
-    <div><h3>Lo que empeoró</h3><p>El CPL se deterioró dentro del ciclo 2: de $44.96 al arranque a $74.16 en el corte. La reestructura de 3 pools a 21 campañas por programa explica la mayor parte, y el público de CDMX se saturó.</p></div>
+    <div><h3>Lo que mejoró</h3><p>CPL de $69.91 a $61.51 (−12%) y leads por día de 49.6 a 86.3 (+74%), con un ritmo de gasto 53% mayor. El CTWA con mensaje pre-llenado por programa entrega conversación, no formulario tibio. Y la mezcla se corrigió sola hacia Facebook, que es donde el lead sale más barato.</p></div>
+    <div><h3>Lo que empeoró</h3><p>El CPL se deterioró dentro del ciclo 2: de $44.96 al arranque a $74.16 en el corte. La reestructura de 3 pools a 21 campañas por programa explica la mayor parte, y el público de CDMX se saturó. Instagram pasó de ser 21% más caro a 48% más caro.</p></div>
   </div>
 </section>
 
 <div class="part" id="ciclo1">
   <div class="lbl">Ciclo 1 · Auditoría A</div>
   <h2 class="plain">1 de enero al 21 de junio de 2026</h2>
-  <p class="sub">21 campañas en 172 días, con el modelo anterior: formularios instantáneos para leads, campañas de video para tráfico al sitio y remarketing sobre base de datos. Cero parámetros UTM en toda la ventana.</p>
+  <p class="sub">21 campañas en 172 días con el modelo anterior: formularios instantáneos para leads, campañas de video para tráfico al sitio y remarketing sobre base de datos. Cero parámetros UTM en toda la ventana.</p>
   <div class="strip" id="s1"></div>
 </div>
 
 <section id="c1-res">
-  <div class="sec-head"><h2>Resumen mensual</h2><span class="note">junio parcial · 1 al 21</span></div>
+  <div class="sec-head"><h2>Resumen por mes</h2><span class="note">junio parcial · 1 al 21</span></div>
   <div class="tscroll"><table id="t-c1mes"></table></div>
-  <p style="margin-top:14px; font-size:13px; color:var(--ink-3)">El salto del CPC en mayo (de $2.36 a $4.34) no viene de la subasta: viene de la mezcla. Las campañas de <em>Awareness + Videos</em>, que aportaban decenas de miles de clics a $0.23, se apagaron a fin de mayo y el gasto quedó concentrado en leads con CPC de $4 a $7.</p>
+  <p style="margin-top:14px; font-size:13px; color:var(--ink-3)">El salto del CPC en mayo no viene de la subasta: viene de la mezcla. Las campañas de <em>Awareness + Videos</em>, que aportaban decenas de miles de clics a $0.23, se apagaron a fin de mayo y el gasto quedó concentrado en leads con CPC de $4 a $7.</p>
 </section>
 
 <section id="c1-camp">
-  <div class="sec-head"><h2>Campañas del ciclo 1</h2><span class="note">21 campañas · ordenadas por inversión</span></div>
-  <p>El semáforo del CPL compara contra el promedio del ciclo ($69.91): <span class="chip good">bajo</span> menos de $50, <span class="chip flat">medio</span> $50–$100, <span class="chip crit">alto</span> más de $100.</p>
+  <div class="sec-head"><h2>Campañas del ciclo 1</h2><span class="note">ordenadas por inversión</span></div>
+  <p>El semáforo del CPL compara contra el promedio de la selección: <span class="chip good">bajo</span> por debajo del 72%, <span class="chip flat">medio</span> alrededor, <span class="chip crit">alto</span> más de 45% arriba.</p>
   <div class="tscroll"><table id="t-c1camp"></table></div>
 </section>
 
@@ -224,8 +276,8 @@ h2.plain{border-bottom:none;}
 </section>
 
 <section id="c2-camp">
-  <div class="sec-head"><h2>Campañas del ciclo 2</h2><span class="note">40 campañas · ordenadas por inversión</span></div>
-  <p>El semáforo compara contra el promedio del ciclo ($61.51). Las cinco campañas de tráfico mandan a formularios externos, donde Meta no ve la conversión: llevan <span class="chip flat">sin leads</span> y se miden por vistas de página.</p>
+  <div class="sec-head"><h2>Campañas del ciclo 2</h2><span class="note">ordenadas por inversión</span></div>
+  <p>Las campañas de tráfico mandan a formularios externos, donde Meta no ve la conversión: llevan <span class="chip flat">sin leads</span> y se miden por vistas de página.</p>
   <div class="tscroll"><table id="t-c2camp"></table></div>
 </section>
 
@@ -239,12 +291,12 @@ h2.plain{border-bottom:none;}
 </section>
 
 <section id="utm">
-  <div class="sec-head"><h2>Parámetros UTM en los dos ciclos</h2><span class="note">793 anuncios revisados</span></div>
+  <div class="sec-head"><h2>Parámetros UTM</h2><span class="note">793 anuncios revisados · dato por campaña, no por mes</span></div>
   <div class="two" style="margin-bottom:22px">
     <div style="border-left:3px solid var(--crit)"><h3>Ciclo 1 · ninguno</h3><p>De los 397 anuncios, <strong>cero</strong> tienen <span class="mono">url_tags</span> y ninguna URL de destino lleva query string. La única con parámetro en toda la ventana es <span class="mono">udf.edu.mx/especialidades/?fbclid=fbclid</span>, un placeholder mal pegado. Los <strong>$31,737</strong> que mandaron 110,981 clics a udf.edu.mx llegaron sin etiquetar: en Analytics ese tráfico solo se distingue como <span class="mono">facebook / referral</span>.</p></div>
     <div style="border-left:3px solid var(--warn)"><h3>Ciclo 2 · tres campañas, una útil</h3><p><strong>27 de 396 anuncios</strong> llevan etiquetado, y son exactamente los que van a una URL: la intención fue correcta. Pero Google Forms y Microsoft Forms <strong>descartan los parámetros de la URL</strong>, así que el UTM de <span class="mono">SI8AGO</span> y de <span class="mono">CB_20260718</span> viaja y no aterriza. Solo <span class="mono">UDF_EXACER_SEP2026_TRAFICO_FRIO</span>, que va a udf.edu.mx, deja el dato legible.</p></div>
   </div>
-  <p>Las campañas CTWA —la mayoría del gasto del ciclo 2— no necesitan UTM: el destino es <span class="mono">api.whatsapp.com/send</span> con mensaje pre-llenado por programa, y la trazabilidad va por ese texto y por el <span class="mono">ctwa_clid</span> que Meta pasa a Patagon, no por query string.</p>
+  <p>Las campañas CTWA —la mayoría del gasto del ciclo 2— no necesitan UTM: el destino es <span class="mono">api.whatsapp.com/send</span> con mensaje pre-llenado por programa, y la trazabilidad va por ese texto y por el <span class="mono">ctwa_clid</span> que Meta pasa a Patagon. El etiquetado es una propiedad del creativo, no del mes ni de la plataforma: esta tabla responde a los filtros de nivel y campaña, no a los de corte ni plataforma.</p>
   <div class="tscroll"><table id="t-utm"></table></div>
   <div id="tagdetail" style="margin-top:22px"></div>
   <p style="margin-top:18px">Para cualquier campaña futura que mande tráfico a un destino propio, el <span class="mono">url_tags</span> a nivel anuncio con macros dinámicas resuelve el etiquetado sin tocar creativos:</p>
@@ -252,8 +304,10 @@ h2.plain{border-bottom:none;}
 </section>
 
 <section id="hallazgos">
-  <div class="sec-head"><h2>Hallazgos</h2></div>
-  <h3 style="margin-top:6px">Del ciclo 1 · enero a 21 de junio</h3>
+  <div class="sec-head"><h2>Hallazgos</h2><span class="note">calculados sobre el total · no cambian con los filtros</span></div>
+  <h3 style="margin-top:6px">Facebook contra Instagram</h3>
+  <ul id="hlp"></ul>
+  <h3 style="margin-top:26px">Del ciclo 1 · enero a 21 de junio</h3>
   <ul id="hl1"></ul>
   <h3 style="margin-top:26px">Del ciclo 2 · 22 de junio a 8 de septiembre</h3>
   <ul id="hl2"></ul>
@@ -272,20 +326,23 @@ h2.plain{border-bottom:none;}
   <div class="defs">
     <dl class="def"><dt>Conexiones WA</dt><dd><span class="mono">onsite_conversion.total_messaging_connection</span>: conversación de WhatsApp establecida, no el clic al botón. Es la definición que empata con Patagon.</dd></dl>
     <dl class="def"><dt>Leads formulario</dt><dd><span class="mono">lead − onsite_conversion.lead</span>: envíos de formulario instantáneo que no vienen del embudo de WhatsApp.</dd></dl>
-    <dl class="def"><dt>Clics (todos) vs. clics enlace</dt><dd><span class="mono">clicks</span> incluye clics en la publicación y en el perfil; <span class="mono">inline_link_clicks</span> son solo los que van al destino. La brecha es enorme en las campañas de video del ciclo 1 y en el CTWA del ciclo 2.</dd></dl>
-    <dl class="def"><dt>Campañas de tráfico</dt><dd>Objetivo <span class="mono">LINK_CLICKS</span>. Meta no registra su conversión: el lead vive en el formulario externo y en Pipedrive, así que aquí solo se puede medir clic y vista de página.</dd></dl>
-    <dl class="def"><dt>Inversión</dt><dd><span class="mono">spend</span> en MXN sin IVA. Ciclo 1: $596,721.60. Ciclo 2: $419,221.44. Las dos sumas cuadran exacto con el <span class="mono">spend</span> a nivel cuenta de su rango.</dd></dl>
+    <dl class="def"><dt>Plataforma</dt><dd>Breakdown <span class="mono">publisher_platform</span> de la API. <strong>Facebook</strong> e <strong>Instagram</strong> son las dos grandes; <strong>WhatsApp</strong> es la ubicación de Estados; <strong>Otros</strong> junta Threads, Messenger y Audience Network, que entre los dos ciclos suman $149.</dd></dl>
+    <dl class="def"><dt>El desglose suma $117.71 más</dt><dd>Con <span class="mono">publisher_platform</span>, el gasto del ciclo 2 suma $419,339.13 contra los $419,221.44 del total de cuenta: 0.03% de diferencia por el redondeo del propio desglose de Meta. El ciclo 1 cuadra exacto. Todas las cifras de esta consola vienen del desglose, para que los filtros de plataforma sean consistentes con los totales.</dd></dl>
+    <dl class="def"><dt>Nivel</dt><dd>Derivado del nombre de la campaña, no es un campo de Meta. Ver la explicación completa en la sección de nivel.</dd></dl>
+    <dl class="def"><dt>Clics (todos) vs. clics enlace</dt><dd><span class="mono">clicks</span> incluye clics en la publicación y en el perfil; <span class="mono">inline_link_clicks</span> son solo los que van al destino.</dd></dl>
+    <dl class="def"><dt>Campañas de tráfico</dt><dd>Objetivo <span class="mono">LINK_CLICKS</span>. Meta no registra su conversión: el lead vive en el formulario externo y en Pipedrive, así que aquí solo se mide clic y vista de página.</dd></dl>
     <dl class="def"><dt>Cortes parciales</dt><dd>1–21 jun (21 días), 22–30 jun (9 días) y 1–8 sep (8 días). Septiembre además cae completo dentro de la suspensión de WhatsApp.</dd></dl>
     <dl class="def"><dt>Campañas repetidas</dt><dd>21 + 40 = 61 filas de campaña, pero son 57 campañas distintas: cuatro del ciclo 1 siguieron entregando hasta el 30 de junio y aparecen en los dos.</dd></dl>
   </div>
 </section>
 
-<footer>Fuente: Graph API v25.0 · act_838230470286008 · insights nivel campaña, time_increment mensual · rangos 2026-01-01 a 2026-06-21 y 2026-06-22 a 2026-09-08 · creativos de 793 anuncios para el diagnóstico de UTM · Black &amp; Orange</footer>
+<footer>Fuente: Graph API v25.0 · act_838230470286008 · insights nivel campaña con time_increment mensual y breakdown publisher_platform · rangos 2026-01-01 a 2026-06-21 y 2026-06-22 a 2026-09-08 · creativos de 793 anuncios para el diagnóstico de UTM · Black &amp; Orange</footer>
 </div>
 <div class="tip" id="tip"></div>
 <script>
-const RAW=[["2026-01", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 21063.74, 448231, 4914, 1948, 126, 76, 15], ["2026-01", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 17343.52, 362822, 3194, 1246, 133, 96, 9], ["2026-01", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 31757.64, 714118, 4683, 2330, 149, 93, 22], ["2026-01", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 3448.54, 210956, 17550, 16014, 0, 0, 1268], ["2026-01", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2058.17, 110322, 9223, 8228, 0, 0, 1226], ["2026-01", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 12183.11, 223524, 3454, 1354, 136, 201, 16], ["2026-01", 1, "120235072018050541", "[LIC] Sesión 1:1-META - WP", "SALES", 1591.8, 27372, 180, 134, 0, 9, 0], ["2026-01", 1, "120235076510560541", "[LIC] Descuento Noviembre-META -WP", "SALES", 0.0, 0, 0, 0, 0, 1, 0], ["2026-01", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", 3736.7, 36795, 894, 107, 0, 51, 0], ["2026-01", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", 3245.27, 36103, 694, 97, 0, 45, 1], ["2026-01", 1, "120238964899210541", "Leads EXACER | UDF | Enero 2026", "LEADS", 2500.38, 124772, 1023, 479, 147, 100, 0], ["2026-02", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 16033.39, 354647, 4426, 1653, 84, 59, 11], ["2026-02", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 13182.57, 211502, 2297, 869, 93, 72, 6], ["2026-02", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 26454.26, 533186, 3765, 1934, 148, 60, 3], ["2026-02", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 2421.65, 130880, 10877, 9361, 0, 0, 947], ["2026-02", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2419.46, 140043, 11031, 9231, 0, 1, 1522], ["2026-02", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 11261.91, 236451, 2937, 1253, 107, 138, 17], ["2026-02", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", 3104.93, 24291, 577, 70, 0, 29, 0], ["2026-02", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", 3334.45, 34209, 661, 92, 0, 39, 1], ["2026-02", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 1754.37, 160728, 5241, 4473, 0, 0, 1039], ["2026-02", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 5824.87, 65652, 1980, 713, 152, 98, 4], ["2026-02", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", 3302.94, 114634, 1126, 548, 161, 113, 1], ["2026-03", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 13164.33, 299438, 2975, 1233, 64, 46, 4], ["2026-03", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 16269.15, 267994, 2581, 1055, 117, 91, 7], ["2026-03", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 37900.0, 737937, 5675, 3107, 222, 84, 17], ["2026-03", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 2615.4, 99174, 10400, 8888, 0, 0, 1066], ["2026-03", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2631.09, 91562, 11468, 10338, 0, 0, 2592], ["2026-03", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 12760.85, 232618, 3648, 1603, 150, 201, 22], ["2026-03", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", 304.19, 2668, 79, 8, 0, 4, 0], ["2026-03", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", 658.36, 7516, 141, 12, 0, 5, 0], ["2026-03", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 2626.2, 90796, 7046, 6388, 0, 0, 1509], ["2026-03", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 8796.73, 93865, 2575, 1078, 166, 117, 11], ["2026-03", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", 4833.36, 156695, 1637, 814, 247, 177, 2], ["2026-03", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", 3635.37, 68616, 753, 298, 33, 16, 1], ["2026-03", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", 1822.66, 81795, 1793, 804, 129, 57, 10], ["2026-04", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 6527.45, 133810, 1680, 673, 46, 24, 0], ["2026-04", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 17279.48, 182814, 2039, 870, 107, 46, 5], ["2026-04", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 43356.92, 806906, 5582, 3173, 273, 84, 8], ["2026-04", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 2865.6, 96635, 10540, 8995, 0, 0, 1088], ["2026-04", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 2855.19, 74945, 10426, 9680, 0, 0, 2758], ["2026-04", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 16583.04, 336763, 4371, 1907, 176, 207, 21], ["2026-04", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 2830.79, 181006, 7287, 6043, 0, 0, 1064], ["2026-04", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 11807.62, 134508, 2856, 1252, 168, 112, 3], ["2026-04", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", 42.54, 1415, 21, 14, 4, 4, 0], ["2026-04", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", 5851.53, 100398, 1014, 580, 33, 11, 2], ["2026-04", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", 3037.23, 200530, 2727, 1323, 255, 84, 21], ["2026-04", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", 1875.87, 20820, 227, 107, 8, 0, 0], ["2026-05", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 6883.48, 135716, 2076, 878, 36, 2, 0], ["2026-05", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 22786.77, 251871, 3003, 1308, 102, 59, 8], ["2026-05", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 45974.05, 688400, 6635, 3591, 303, 127, 8], ["2026-05", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", 414.11, 22225, 2071, 1737, 0, 0, 201], ["2026-05", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", 364.73, 16621, 1530, 1446, 0, 0, 312], ["2026-05", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", 17467.76, 324364, 3906, 1975, 143, 166, 21], ["2026-05", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", 396.1, 57241, 1192, 1072, 0, 0, 90], ["2026-05", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", 11208.65, 87937, 1943, 857, 123, 74, 1], ["2026-05", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", 3135.12, 148708, 1951, 1082, 124, 12, 11], ["2026-05", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", 9645.16, 166806, 2939, 1446, 89, 18, 6], ["2026-06a", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", 257.82, 3873, 63, 25, 2, 0, 0], ["2026-06a", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", 704.97, 8168, 116, 46, 7, 6, 1], ["2026-06a", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", 2015.53, 24033, 251, 132, 13, 11, 1], ["2026-06a", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", 2780.33, 44164, 684, 312, 22, 14, 1], ["2026-06a", 1, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", 29753.68, 347715, 3980, 1800, 236, 182, 6], ["2026-06a", 1, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", 19097.0, 324366, 4139, 1769, 136, 97, 13], ["2026-06a", 1, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", 2036.06, 99202, 10171, 9087, 0, 0, 1454], ["2026-06a", 1, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", 10845.66, 233306, 2629, 1227, 87, 59, 8], ["2026-06b", 2, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", 5052.31, 68567, 896, 397, 42, 31, 4], ["2026-06b", 2, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", 3301.2, 55708, 839, 352, 13, 12, 1], ["2026-06b", 2, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", 377.76, 16204, 1732, 1595, 0, 0, 229], ["2026-06b", 2, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", 2239.78, 39709, 490, 226, 20, 17, 2], ["2026-06b", 2, "120249304954110541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA", "LEADS", 82.42, 792, 17, 5, 0, 3, 0], ["2026-06b", 2, "120249304961960541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA", "LEADS", 200.21, 2103, 65, 21, 0, 15, 0], ["2026-06b", 2, "120249304962170541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA", "LEADS", 77.18, 621, 19, 8, 0, 6, 0], ["2026-06b", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", 8815.67, 131738, 2122, 690, 0, 220, 8], ["2026-06b", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", 2244.13, 28938, 596, 203, 0, 59, 1], ["2026-06b", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", 3776.85, 48071, 1099, 334, 0, 144, 11], ["2026-07", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", 59221.2, 877456, 13283, 4750, 0, 1339, 58], ["2026-07", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", 14806.8, 151985, 2955, 1114, 0, 321, 23], ["2026-07", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", 24679.36, 266244, 5127, 1742, 0, 563, 63], ["2026-07", 2, "120250050149230541", "UDF_SEP26_META_PROS_POS_COMORG_CTWA", "LEADS", 2745.22, 42945, 628, 202, 0, 37, 2], ["2026-07", 2, "120250115347960541", "META_TRAFFIC_UDF_CB_20260718_PROSPECTING", "LINK_CLICKS", 2779.83, 247323, 5420, 3888, 0, 0, 1946], ["2026-07", 2, "120250164203470541", "META_LEADS_UDF_CB_20260718_INSTANTFORM", "LEADS", 12237.29, 197798, 2720, 1075, 57, 3, 13], ["2026-07", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", 1284.02, 24485, 323, 138, 8, 1, 2], ["2026-07", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", 429.8, 5436, 87, 63, 0, 0, 46], ["2026-07", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", 1128.94, 64115, 1272, 928, 0, 0, 638], ["2026-08", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", 44492.42, 624527, 8791, 3450, 0, 845, 34], ["2026-08", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", 13733.77, 141198, 2551, 1125, 0, 266, 14], ["2026-08", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", 16655.81, 141300, 2710, 1014, 0, 312, 26], ["2026-08", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", 13715.98, 357693, 3539, 1797, 76, 4, 28], ["2026-08", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", 2065.69, 20580, 350, 278, 0, 0, 187], ["2026-08", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", 4371.06, 210695, 5819, 4950, 0, 1, 3629], ["2026-08", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", 19517.98, 122090, 2387, 1169, 0, 302, 9], ["2026-08", 2, "120250954540520541", "UDF_EXACER_SEP2026_TRAFICO_FRIO", "LINK_CLICKS", 5329.26, 177347, 7549, 6492, 0, 1, 4723], ["2026-08", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", 6897.8, 126923, 1767, 741, 121, 0, 0], ["2026-08", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", 13087.65, 130244, 1878, 841, 0, 142, 5], ["2026-08", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", 10921.04, 186983, 2222, 1321, 0, 115, 2], ["2026-08", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", 10945.17, 132428, 1793, 1071, 0, 118, 4], ["2026-08", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", 9616.62, 137257, 1806, 916, 0, 94, 1], ["2026-08", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", 8448.76, 71310, 1672, 799, 0, 220, 6], ["2026-08", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", 4102.53, 74312, 885, 577, 0, 42, 0], ["2026-08", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", 4410.16, 55956, 906, 358, 0, 59, 3], ["2026-08", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", 3206.74, 54088, 641, 443, 0, 39, 3], ["2026-08", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", 3511.83, 93435, 1047, 696, 0, 50, 1], ["2026-08", 2, "120251209874060541", "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "LEADS", 985.77, 10225, 182, 89, 0, 11, 2], ["2026-08", 2, "120251210017100541", "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "LEADS", 1053.47, 14241, 209, 126, 0, 14, 2], ["2026-08", 2, "120251210203860541", "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "LEADS", 997.07, 8737, 176, 81, 0, 14, 1], ["2026-08", 2, "120251210389490541", "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "LEADS", 1086.11, 11508, 209, 104, 0, 21, 6], ["2026-08", 2, "120251210508780541", "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "LEADS", 1159.81, 9262, 162, 65, 0, 11, 1], ["2026-08", 2, "120251210561960541", "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "LEADS", 956.93, 8668, 154, 58, 0, 11, 0], ["2026-08", 2, "120251210578630541", "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "LEADS", 934.76, 8251, 184, 78, 0, 15, 1], ["2026-08", 2, "120251210594820541", "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "LEADS", 1039.77, 9396, 181, 90, 0, 17, 2], ["2026-08", 2, "120251210632010541", "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "LEADS", 1146.27, 10328, 194, 91, 0, 22, 2], ["2026-08", 2, "120251210681190541", "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "LEADS", 1129.54, 16441, 247, 104, 0, 19, 4], ["2026-08", 2, "120251210700420541", "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "LEADS", 1121.34, 15241, 255, 89, 0, 16, 1], ["2026-08", 2, "120251210798150541", "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "LEADS", 1990.94, 18167, 447, 138, 0, 48, 7], ["2026-09", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", 0.0, 0, 0, 0, 0, 4, 0], ["2026-09", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", 5298.19, 86597, 1135, 447, 85, 1, 1], ["2026-09", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", 8519.59, 68934, 1056, 541, 0, 92, 4], ["2026-09", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", 9553.5, 148566, 1717, 1109, 0, 117, 4], ["2026-09", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", 8936.1, 86380, 1374, 798, 0, 87, 1], ["2026-09", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", 8892.92, 140184, 1804, 1099, 0, 113, 1], ["2026-09", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", 4282.76, 44249, 941, 492, 0, 112, 3], ["2026-09", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", 3033.51, 33151, 455, 311, 0, 45, 0], ["2026-09", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", 2747.83, 31301, 550, 207, 0, 24, 1], ["2026-09", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", 2325.86, 26019, 338, 216, 0, 26, 0], ["2026-09", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", 2770.58, 71608, 807, 455, 0, 34, 1], ["2026-09", 2, "120251209874060541", "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "LEADS", 606.37, 6384, 112, 60, 0, 5, 0], ["2026-09", 2, "120251210017100541", "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "LEADS", 712.39, 14653, 185, 119, 0, 12, 0], ["2026-09", 2, "120251210203860541", "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "LEADS", 585.71, 6220, 102, 52, 0, 10, 0], ["2026-09", 2, "120251210389490541", "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "LEADS", 814.06, 8360, 123, 62, 0, 14, 0], ["2026-09", 2, "120251210508780541", "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "LEADS", 846.27, 7045, 134, 72, 0, 14, 1], ["2026-09", 2, "120251210561960541", "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "LEADS", 609.28, 6260, 86, 43, 0, 8, 1], ["2026-09", 2, "120251210578630541", "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "LEADS", 601.31, 5643, 118, 62, 0, 5, 0], ["2026-09", 2, "120251210594820541", "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "LEADS", 691.32, 6321, 95, 52, 0, 18, 2], ["2026-09", 2, "120251210632010541", "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "LEADS", 823.04, 8630, 127, 60, 0, 12, 0], ["2026-09", 2, "120251210681190541", "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "LEADS", 851.55, 12335, 197, 117, 0, 15, 1], ["2026-09", 2, "120251210700420541", "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "LEADS", 850.15, 11143, 189, 88, 0, 9, 0], ["2026-09", 2, "120251210798150541", "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "LEADS", 757.13, 7345, 182, 54, 0, 16, 0]];
+const RAW=[["2026-01", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Instagram", 17243.19, 407099, 1794, 1012, 67, 35, 16], ["2026-01", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Facebook", 14514.45, 307019, 2889, 1318, 82, 58, 6], ["2026-01", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Facebook", 14387.94, 326814, 4327, 1631, 82, 60, 12], ["2026-01", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Facebook", 13445.26, 291494, 2913, 1110, 110, 87, 6], ["2026-01", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Facebook", 8732.53, 166015, 2892, 1084, 88, 157, 14], ["2026-01", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Instagram", 6675.8, 121417, 587, 317, 44, 16, 3], ["2026-01", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Instagram", 3898.26, 71328, 281, 136, 23, 9, 3], ["2026-01", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Instagram", 3450.58, 57509, 562, 270, 48, 44, 2], ["2026-01", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Facebook", 3448.17, 210899, 17544, 16009, 0, 0, 1267], ["2026-01", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", "Licenciatura", "Facebook", 2811.1, 24495, 783, 82, 0, 40, 0], ["2026-01", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", "Posgrado", "Facebook", 2685.08, 29329, 635, 75, 0, 35, 1], ["2026-01", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 2058.02, 110281, 9223, 8228, 0, 0, 1226], ["2026-01", 1, "120238964899210541", "Leads EXACER | UDF | Enero 2026", "LEADS", "Otros", "Facebook", 1403.76, 64643, 732, 333, 84, 64, 0], ["2026-01", 1, "120238964899210541", "Leads EXACER | UDF | Enero 2026", "LEADS", "Otros", "Instagram", 1096.62, 60129, 291, 146, 63, 36, 0], ["2026-01", 1, "120235072018050541", "[LIC] Sesión 1:1-META - WP", "SALES", "Licenciatura", "Facebook", 938.0, 18017, 138, 106, 0, 6, 0], ["2026-01", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", "Licenciatura", "Instagram", 925.6, 12300, 111, 25, 0, 11, 0], ["2026-01", 1, "120235072018050541", "[LIC] Sesión 1:1-META - WP", "SALES", "Licenciatura", "Instagram", 653.8, 9355, 42, 28, 0, 3, 0], ["2026-01", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", "Posgrado", "Instagram", 560.19, 6774, 59, 22, 0, 10, 0], ["2026-01", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Instagram", 0.37, 42, 5, 4, 0, 0, 1], ["2026-01", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 0.14, 12, 0, 0, 0, 0, 0], ["2026-01", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 0.01, 29, 0, 0, 0, 0, 0], ["2026-01", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Otros", 0.0, 15, 1, 1, 0, 0, 0], ["2026-01", 1, "120235076510560541", "[LIC] Descuento Noviembre-META -WP", "SALES", "Licenciatura", "Instagram", 0.0, 0, 0, 0, 0, 1, 0], ["2026-02", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Instagram", 14934.61, 327259, 1652, 1049, 82, 24, 2], ["2026-02", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Facebook", 11615.91, 258143, 4013, 1418, 56, 44, 9], ["2026-02", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Facebook", 11519.65, 205927, 2113, 885, 66, 36, 1], ["2026-02", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Facebook", 11015.39, 185823, 2167, 793, 85, 68, 3], ["2026-02", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Facebook", 6933.11, 146883, 2218, 869, 61, 92, 11], ["2026-02", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Facebook", 5032.72, 59241, 1875, 662, 128, 90, 2], ["2026-02", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Instagram", 4417.48, 96504, 413, 235, 28, 15, 2], ["2026-02", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Instagram", 4328.8, 89568, 719, 384, 46, 46, 6], ["2026-02", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", "Posgrado", "Facebook", 2591.64, 25652, 580, 66, 0, 32, 1], ["2026-02", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Facebook", 2421.03, 130833, 10873, 9361, 0, 0, 947], ["2026-02", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 2418.57, 139966, 11018, 9225, 0, 1, 1518], ["2026-02", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", "Licenciatura", "Facebook", 2344.0, 15460, 501, 40, 0, 25, 0], ["2026-02", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Instagram", 2167.18, 25679, 130, 76, 8, 4, 3], ["2026-02", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", "Otros", "Facebook", 1956.54, 59943, 810, 391, 90, 68, 1], ["2026-02", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 1750.3, 160512, 5224, 4463, 0, 0, 1033], ["2026-02", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", "Otros", "Instagram", 1346.4, 54691, 316, 157, 71, 45, 0], ["2026-02", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Instagram", 792.15, 6411, 105, 51, 24, 8, 2], ["2026-02", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", "Licenciatura", "Instagram", 760.93, 8831, 76, 30, 0, 4, 0], ["2026-02", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", "Posgrado", "Instagram", 742.81, 8557, 81, 26, 0, 7, 0], ["2026-02", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 3.46, 128, 16, 10, 0, 0, 6], ["2026-02", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 0.85, 40, 13, 6, 0, 0, 4], ["2026-02", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 0.61, 88, 1, 0, 0, 0, 0], ["2026-02", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Instagram", 0.6, 37, 4, 0, 0, 0, 0], ["2026-02", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 0.04, 37, 0, 0, 0, 0, 0], ["2026-02", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Otros", 0.02, 10, 0, 0, 0, 0, 0], ["2026-03", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Instagram", 22223.47, 437630, 2447, 1639, 108, 22, 13], ["2026-03", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Facebook", 15676.51, 300306, 3228, 1468, 114, 62, 4], ["2026-03", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Facebook", 13365.33, 231529, 2403, 949, 102, 81, 4], ["2026-03", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Facebook", 9707.65, 227419, 2700, 1088, 47, 33, 4], ["2026-03", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Facebook", 8870.58, 159801, 3067, 1312, 107, 164, 14], ["2026-03", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Facebook", 7723.8, 85678, 2464, 1024, 146, 111, 9], ["2026-03", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Instagram", 3890.27, 72817, 581, 291, 43, 37, 8], ["2026-03", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Instagram", 3456.68, 72019, 275, 145, 17, 13, 0], ["2026-03", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", "Otros", "Facebook", 3301.59, 99232, 1268, 625, 155, 116, 2], ["2026-03", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Instagram", 2903.82, 36465, 178, 106, 15, 10, 3], ["2026-03", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", "Otros", "Facebook", 2687.5, 52515, 647, 231, 23, 15, 1], ["2026-03", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 2629.78, 91448, 11463, 10336, 0, 0, 2588], ["2026-03", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 2618.45, 90440, 7017, 6370, 0, 0, 1494], ["2026-03", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Facebook", 2614.3, 99113, 10397, 8887, 0, 0, 1066], ["2026-03", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", "Otros", "Instagram", 1531.77, 57462, 369, 189, 92, 61, 0], ["2026-03", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Instagram", 1072.93, 8187, 111, 54, 20, 6, 2], ["2026-03", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", "Licenciatura", "Facebook", 1038.19, 46929, 1372, 566, 76, 40, 8], ["2026-03", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", "Otros", "Instagram", 947.87, 16101, 106, 67, 10, 1, 0], ["2026-03", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", "Licenciatura", "Instagram", 784.47, 34866, 421, 238, 53, 17, 2], ["2026-03", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", "Posgrado", "Facebook", 523.87, 6114, 127, 9, 0, 3, 0], ["2026-03", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", "Licenciatura", "Facebook", 235.47, 1940, 73, 6, 0, 4, 0], ["2026-03", 1, "120237229341450541", "[ESP] Consideración | FORM WA", "LEADS", "Posgrado", "Instagram", 134.49, 1402, 14, 3, 0, 2, 0], ["2026-03", 1, "120237227164150541", "[LIC] Consideración | FORM WA", "LEADS", "Licenciatura", "Instagram", 68.72, 728, 6, 2, 0, 0, 0], ["2026-03", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 5.53, 240, 24, 14, 0, 0, 13], ["2026-03", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 2.22, 116, 5, 4, 0, 0, 2], ["2026-03", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 1.06, 59, 5, 2, 0, 0, 4], ["2026-03", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Instagram", 1.03, 48, 3, 1, 0, 0, 0], ["2026-03", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 0.25, 55, 0, 0, 0, 0, 0], ["2026-03", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Otros", 0.07, 13, 0, 0, 0, 0, 0], ["2026-03", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Otros", 0.02, 1, 0, 0, 0, 0, 0], ["2026-03", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", "Otros", "Otros", 0.0, 1, 0, 0, 0, 0, 0], ["2026-04", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Instagram", 30875.37, 533165, 3021, 2079, 183, 33, 6], ["2026-04", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Facebook", 12481.5, 273740, 2561, 1094, 90, 51, 2], ["2026-04", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Facebook", 10114.73, 121465, 2709, 1177, 148, 100, 3], ["2026-04", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Facebook", 9830.39, 139671, 1731, 669, 49, 37, 5], ["2026-04", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Facebook", 9535.02, 200801, 3442, 1421, 99, 154, 19], ["2026-04", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Instagram", 7449.09, 43143, 308, 201, 58, 9, 0], ["2026-04", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Instagram", 7048.02, 135962, 929, 486, 77, 53, 2], ["2026-04", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Facebook", 3655.43, 92780, 1516, 573, 34, 22, 0], ["2026-04", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", "Otros", "Facebook", 3468.04, 59407, 609, 256, 18, 10, 2], ["2026-04", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Instagram", 2872.02, 41030, 164, 100, 12, 2, 0], ["2026-04", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Facebook", 2862.46, 96474, 10529, 8992, 0, 0, 1085], ["2026-04", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 2848.1, 74679, 10400, 9661, 0, 0, 2751], ["2026-04", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 2615.36, 171810, 6741, 5534, 0, 0, 948], ["2026-04", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", "Licenciatura", "Instagram", 2570.18, 167048, 1856, 974, 218, 63, 14], ["2026-04", 1, "120243167420690541", "[ESP - LIC] Sesiones informativas", "LEADS", "Otros", "Instagram", 2383.49, 40991, 405, 324, 15, 1, 0], ["2026-04", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Instagram", 1692.89, 13043, 147, 75, 20, 12, 0], ["2026-04", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", "Licenciatura", "Facebook", 1045.23, 12878, 173, 77, 4, 0, 0], ["2026-04", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", "Licenciatura", "Instagram", 830.64, 7942, 54, 30, 4, 0, 0], ["2026-04", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", "Licenciatura", "Facebook", 467.05, 33482, 871, 349, 37, 21, 7], ["2026-04", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 183.12, 7416, 445, 410, 0, 0, 69], ["2026-04", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", "Otros", "Facebook", 32.43, 984, 15, 9, 3, 3, 0], ["2026-04", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 32.31, 1780, 101, 99, 0, 0, 47], ["2026-04", 1, "120241685794500541", "Leads EXACER | UDF | Febrero - Abril 2026", "LEADS", "Otros", "Instagram", 10.11, 431, 6, 5, 1, 1, 0], ["2026-04", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 4.24, 154, 20, 13, 0, 0, 5], ["2026-04", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 2.85, 112, 6, 6, 0, 0, 2], ["2026-04", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Instagram", 2.68, 126, 10, 2, 0, 0, 2], ["2026-04", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Otros", 0.45999999999999996, 35, 1, 1, 0, 0, 1], ["2026-04", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Otros", 0.05, 1, 0, 0, 0, 0, 0], ["2026-05", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Instagram", 24064.88, 346118, 1968, 1341, 136, 37, 2], ["2026-05", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Facebook", 21909.17, 342282, 4667, 2250, 167, 90, 6], ["2026-05", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Facebook", 13407.16, 190542, 2601, 1038, 62, 47, 5], ["2026-05", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Instagram", 11006.65, 202802, 1416, 828, 104, 85, 16], ["2026-05", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Instagram", 9379.61, 61329, 402, 270, 40, 12, 3], ["2026-05", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Facebook", 8750.37, 74318, 1816, 803, 105, 61, 1], ["2026-05", 1, "120227574976930541", "C-1-27 Decisión + Rmkt + BBDD", "LEADS", "Otros", "Facebook", 6461.11, 121562, 2490, 1147, 39, 81, 5], ["2026-05", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", "Licenciatura", "Facebook", 5472.08, 97956, 2514, 1225, 56, 15, 6], ["2026-05", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Facebook", 5129.54, 110757, 1962, 802, 33, 2, 0], ["2026-05", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", "Licenciatura", "Instagram", 4173.08, 68850, 425, 221, 33, 3, 0], ["2026-05", 1, "120241685071520541", "[POS] Decisión + Rmkt + BBDD", "LEADS", "Posgrado", "Instagram", 2458.28, 13619, 127, 54, 18, 13, 0], ["2026-05", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", "Licenciatura", "Instagram", 2345.72, 113060, 1035, 638, 93, 10, 8], ["2026-05", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Instagram", 1753.94, 24959, 114, 76, 3, 0, 0], ["2026-05", 1, "120243220647290541", "[LIC] Colegio de Bachilleres | Descuento Egresados", "LEADS", "Licenciatura", "Facebook", 789.4, 35648, 916, 444, 31, 2, 3], ["2026-05", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Facebook", 414.08, 22221, 2070, 1736, 0, 0, 201], ["2026-05", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 367.07, 55683, 1115, 997, 0, 0, 65], ["2026-05", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Facebook", 364.54, 16607, 1528, 1445, 0, 0, 311], ["2026-05", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 25.82, 1371, 67, 65, 0, 0, 18], ["2026-05", 1, "120241679946080541", "[POS] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 3.21, 187, 10, 10, 0, 0, 7], ["2026-05", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Instagram", 0.17, 9, 2, 1, 0, 0, 1], ["2026-05", 1, "120227573287810541", "[LIC] Awareness + Videos", "LINK_CLICKS", "Licenciatura", "Instagram", 0.03, 4, 1, 1, 0, 0, 0], ["2026-05", 1, "120227574191240541", "[ESP] Awareness + Videos", "LINK_CLICKS", "Posgrado", "Otros", 0.02, 5, 0, 0, 0, 0, 0], ["2026-06a", 1, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", "Licenciatura", "Facebook", 18735.35, 222673, 3180, 1376, 143, 114, 4], ["2026-06a", 1, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", "Posgrado", "Facebook", 12677.57, 230897, 3590, 1505, 100, 70, 9], ["2026-06a", 1, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", "Licenciatura", "Instagram", 11018.33, 125042, 800, 424, 93, 68, 2], ["2026-06a", 1, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", "Otros", "Facebook", 7008.36, 145736, 2080, 955, 61, 44, 1], ["2026-06a", 1, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", "Posgrado", "Instagram", 6419.4, 93468, 549, 264, 36, 27, 4], ["2026-06a", 1, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", "Otros", "Instagram", 3837.3, 87570, 549, 272, 26, 15, 7], ["2026-06a", 1, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", "Otros", "Facebook", 2035.12, 99074, 10168, 9085, 0, 0, 1452], ["2026-06a", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", "Licenciatura", "Facebook", 1704.48, 24645, 580, 264, 9, 6, 1], ["2026-06a", 1, "120245260711080541", "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "LEADS", "Licenciatura", "Instagram", 1075.85, 19519, 104, 48, 13, 8, 0], ["2026-06a", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Facebook", 1054.43, 12155, 193, 93, 7, 8, 0], ["2026-06a", 1, "120219860898420541", "[LIC] Decisión VID + IMG | Programas separados", "LEADS", "Licenciatura", "Instagram", 961.1, 11878, 58, 39, 6, 3, 1], ["2026-06a", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Facebook", 502.98, 6648, 103, 41, 4, 3, 1], ["2026-06a", 1, "120219322364120541", "[MST] Decisión + Leads", "LEADS", "Posgrado", "Instagram", 201.99, 1520, 13, 5, 3, 3, 0], ["2026-06a", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Facebook", 190.45, 3095, 59, 23, 2, 0, 0], ["2026-06a", 1, "120219319857140541", "[ESP] Consideración +  Leads", "LEADS", "Posgrado", "Instagram", 67.37, 778, 4, 2, 0, 0, 0], ["2026-06a", 1, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", "Otros", "Instagram", 0.49, 26, 3, 2, 0, 0, 2], ["2026-06a", 1, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", "Otros", "Otros", 0.45, 102, 0, 0, 0, 0, 0], ["2026-06a", 1, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", "Posgrado", "Otros", 0.03, 1, 0, 0, 0, 0, 0], ["2026-06b", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "Facebook", 7346.56, 106548, 1959, 585, 0, 186, 7], ["2026-06b", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "Facebook", 3398.26, 44163, 1059, 316, 0, 136, 10], ["2026-06b", 2, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", "Licenciatura", "Facebook", 3307.43, 45725, 763, 336, 31, 27, 2], ["2026-06b", 2, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", "Posgrado", "Facebook", 2342.39, 41533, 755, 310, 11, 10, 1], ["2026-06b", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "Facebook", 2008.44, 26089, 575, 185, 0, 55, 1], ["2026-06b", 2, "120247939328850541", "[LIC] C-1-27 - Decisión", "LEADS", "Licenciatura", "Instagram", 1744.88, 22842, 133, 61, 11, 4, 2], ["2026-06b", 2, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", "Otros", "Facebook", 1426.85, 24652, 368, 167, 11, 10, 0], ["2026-06b", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "Instagram", 1008.46, 10679, 120, 75, 0, 26, 1], ["2026-06b", 2, "120248000751910541", "[POS] C-1-27 - Decisión", "LEADS", "Posgrado", "Instagram", 958.81, 14175, 84, 42, 2, 2, 0], ["2026-06b", 2, "120248166475360541", "C-1-27 Decisión + RMKT + BBDD", "LEADS", "Otros", "Instagram", 812.93, 15057, 122, 59, 9, 7, 2], ["2026-06b", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "WhatsApp", 460.66, 14511, 43, 30, 0, 8, 0], ["2026-06b", 2, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", "Otros", "Facebook", 377.72, 16201, 1732, 1595, 0, 0, 229], ["2026-06b", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "Instagram", 339.83, 2943, 38, 18, 0, 8, 1], ["2026-06b", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "Instagram", 190.55, 1310, 17, 14, 0, 3, 0], ["2026-06b", 2, "120249304961960541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA", "LEADS", "Licenciatura", "Facebook", 174.23, 1770, 62, 19, 0, 11, 0], ["2026-06b", 2, "120249304954110541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA", "LEADS", "Posgrado", "Facebook", 67.48, 702, 16, 5, 0, 3, 0], ["2026-06b", 2, "120249304962170541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA", "LEADS", "Posgrado", "Facebook", 60.35, 520, 18, 8, 0, 6, 0], ["2026-06b", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "WhatsApp", 45.14, 1539, 4, 4, 0, 1, 0], ["2026-06b", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "WhatsApp", 38.76, 965, 2, 0, 0, 0, 0], ["2026-06b", 2, "120249304961960541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA", "LEADS", "Licenciatura", "Instagram", 25.98, 333, 3, 2, 0, 4, 0], ["2026-06b", 2, "120249304962170541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA", "LEADS", "Posgrado", "Instagram", 16.83, 101, 1, 0, 0, 0, 0], ["2026-06b", 2, "120249304954110541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA", "LEADS", "Posgrado", "Instagram", 14.94, 90, 1, 0, 0, 0, 0], ["2026-06b", 2, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", "Otros", "Instagram", 0.02, 1, 0, 0, 0, 0, 0], ["2026-06b", 2, "120248005851070541", "[GRAL] Awareness + Videos", "LINK_CLICKS", "Otros", "Otros", 0.02, 2, 0, 0, 0, 0, 0], ["2026-07", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "Facebook", 48634.55, 708450, 12192, 3974, 0, 1107, 51], ["2026-07", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "Facebook", 21572.7, 227805, 4864, 1556, 0, 508, 58], ["2026-07", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "Facebook", 12959.08, 131353, 2804, 995, 0, 282, 21], ["2026-07", 2, "120250164203470541", "META_LEADS_UDF_CB_20260718_INSTANTFORM", "LEADS", "Licenciatura", "Facebook", 6527.21, 99194, 2087, 674, 27, 3, 7], ["2026-07", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "Instagram", 6514.74, 60271, 590, 356, 0, 128, 5], ["2026-07", 2, "120250164203470541", "META_LEADS_UDF_CB_20260718_INSTANTFORM", "LEADS", "Licenciatura", "Instagram", 5710.08, 98604, 633, 401, 30, 0, 6], ["2026-07", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "WhatsApp", 4071.91, 108735, 501, 420, 0, 104, 2], ["2026-07", 2, "120250115347960541", "META_TRAFFIC_UDF_CB_20260718_PROSPECTING", "LINK_CLICKS", "Licenciatura", "Facebook", 2609.22, 237718, 5104, 3549, 0, 0, 1866], ["2026-07", 2, "120250050149230541", "UDF_SEP26_META_PROS_POS_COMORG_CTWA", "LEADS", "Posgrado", "Facebook", 2229.01, 37517, 585, 175, 0, 29, 2], ["2026-07", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "Instagram", 1906.14, 10572, 124, 74, 0, 33, 5], ["2026-07", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "WhatsApp", 1200.53, 27867, 139, 112, 0, 22, 0], ["2026-07", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "Instagram", 1074.97, 6090, 84, 66, 0, 20, 1], ["2026-07", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Facebook", 956.91, 58532, 1119, 802, 0, 0, 536], ["2026-07", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "WhatsApp", 772.75, 14542, 67, 53, 0, 19, 1], ["2026-07", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", "Licenciatura", "Instagram", 711.44, 15420, 123, 63, 6, 0, 1], ["2026-07", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", "Licenciatura", "Facebook", 572.58, 9065, 200, 75, 2, 1, 1], ["2026-07", 2, "120250050149230541", "UDF_SEP26_META_PROS_POS_COMORG_CTWA", "LEADS", "Posgrado", "Instagram", 429.87, 3999, 41, 25, 0, 8, 0], ["2026-07", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Facebook", 229.03, 3374, 58, 38, 0, 0, 27], ["2026-07", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Instagram", 200.77, 2062, 29, 25, 0, 0, 19], ["2026-07", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Instagram", 172.03, 5583, 153, 126, 0, 0, 102], ["2026-07", 2, "120250115347960541", "META_TRAFFIC_UDF_CB_20260718_PROSPECTING", "LINK_CLICKS", "Licenciatura", "Otros", 105.88000000000001, 7032, 235, 261, 0, 0, 44], ["2026-07", 2, "120250050149230541", "UDF_SEP26_META_PROS_POS_COMORG_CTWA", "LEADS", "Posgrado", "WhatsApp", 86.35, 1429, 2, 2, 0, 0, 0], ["2026-07", 2, "120250115347960541", "META_TRAFFIC_UDF_CB_20260718_PROSPECTING", "LINK_CLICKS", "Licenciatura", "Instagram", 64.72, 2573, 81, 78, 0, 0, 36], ["2026-07", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "Otros", 0.0, 0, 0, 0, 0, 0, 0], ["2026-08", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "Facebook", 37775.94, 534476, 8177, 2990, 0, 738, 27], ["2026-08", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", "Licenciatura", "Facebook", 16215.45, 99189, 2175, 1032, 0, 267, 7], ["2026-08", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "Facebook", 15113.98, 129133, 2602, 932, 0, 285, 25], ["2026-08", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "Facebook", 12488.06, 129928, 2443, 1039, 0, 244, 12], ["2026-08", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 11026.88, 109097, 1738, 736, 0, 121, 3], ["2026-08", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 9633.81, 119525, 1709, 1008, 0, 110, 4], ["2026-08", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 9170.41, 164700, 2043, 1184, 0, 100, 2], ["2026-08", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 8784.86, 127146, 1736, 853, 0, 85, 1], ["2026-08", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", "Posgrado", "Facebook", 8044.59, 69730, 1647, 775, 0, 214, 5], ["2026-08", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", "Licenciatura", "Instagram", 7137.64, 227894, 1507, 1013, 35, 0, 11], ["2026-08", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", "Licenciatura", "Facebook", 6578.34, 129799, 2032, 784, 41, 4, 17], ["2026-08", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", "Otros", "Facebook", 5124.54, 103816, 1581, 618, 87, 0, 0], ["2026-08", 2, "120250954540520541", "UDF_EXACER_SEP2026_TRAFICO_FRIO", "LINK_CLICKS", "Otros", "Facebook", 5054.13, 166075, 7314, 6335, 0, 1, 4609], ["2026-08", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "Instagram", 4911.03, 48331, 400, 279, 0, 71, 7], ["2026-08", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Facebook", 4050.75, 198267, 5447, 4648, 0, 1, 3378], ["2026-08", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 3980.27, 50469, 884, 338, 0, 54, 3], ["2026-08", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 3242.36, 64132, 813, 531, 0, 37, 0], ["2026-08", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 3057.61, 85015, 985, 647, 0, 47, 1], ["2026-08", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", "Licenciatura", "Instagram", 2497.14, 11965, 151, 86, 0, 28, 2], ["2026-08", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 2414.68, 47586, 592, 409, 0, 27, 2], ["2026-08", 2, "120251210798150541", "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1990.94, 18167, 447, 138, 0, 48, 7], ["2026-08", 2, "120249435112370541", "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "LEADS", "Licenciatura", "WhatsApp", 1805.46, 41720, 214, 181, 0, 36, 0], ["2026-08", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", "Otros", "Instagram", 1773.26, 23107, 186, 123, 34, 0, 0], ["2026-08", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 1677.51, 20704, 170, 131, 0, 15, 0], ["2026-08", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 1448.77, 8365, 87, 56, 0, 13, 2], ["2026-08", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Facebook", 1356.25, 15240, 283, 218, 0, 0, 143], ["2026-08", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 1160.8, 8575, 64, 46, 0, 7, 0], ["2026-08", 2, "120251210508780541", "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1159.81, 9262, 162, 65, 0, 11, 1], ["2026-08", 2, "120251210632010541", "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1146.27, 10328, 194, 91, 0, 22, 2], ["2026-08", 2, "120251210681190541", "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1129.54, 16441, 247, 104, 0, 19, 4], ["2026-08", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "Instagram", 1122.87, 5415, 60, 44, 0, 20, 1], ["2026-08", 2, "120251210700420541", "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1121.34, 15241, 255, 89, 0, 16, 1], ["2026-08", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "Instagram", 1117.16, 9761, 93, 75, 0, 20, 1], ["2026-08", 2, "120251210389490541", "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1086.11, 11508, 209, 104, 0, 21, 6], ["2026-08", 2, "120251210017100541", "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1053.47, 14241, 209, 126, 0, 14, 2], ["2026-08", 2, "120251210594820541", "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "LEADS", "Posgrado", "Facebook", 1039.77, 9396, 181, 90, 0, 17, 2], ["2026-08", 2, "120251210203860541", "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "LEADS", "Posgrado", "Facebook", 997.07, 8737, 176, 81, 0, 14, 1], ["2026-08", 2, "120251209874060541", "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "LEADS", "Posgrado", "Facebook", 985.77, 10225, 182, 89, 0, 11, 2], ["2026-08", 2, "120251210561960541", "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "LEADS", "Posgrado", "Facebook", 956.93, 8668, 154, 58, 0, 11, 0], ["2026-08", 2, "120251210578630541", "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "LEADS", "Posgrado", "Facebook", 934.76, 8251, 184, 78, 0, 15, 1], ["2026-08", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", "Licenciatura", "WhatsApp", 805.39, 10936, 61, 51, 0, 7, 0], ["2026-08", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 724.75, 6874, 58, 34, 0, 5, 0], ["2026-08", 2, "120250598508750541", "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Instagram", 709.44, 5340, 67, 60, 0, 0, 44], ["2026-08", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 687.25, 4129, 37, 24, 0, 10, 1], ["2026-08", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 612.0, 12782, 53, 49, 0, 8, 0], ["2026-08", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 581.58, 5595, 53, 48, 0, 4, 0], ["2026-08", 2, "120249435112590541", "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "LEADS", "Posgrado", "WhatsApp", 418.96, 6752, 48, 38, 0, 7, 0], ["2026-08", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", "Posgrado", "Instagram", 404.17, 1580, 25, 24, 0, 6, 1], ["2026-08", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 349.27, 4928, 17, 15, 0, 4, 0], ["2026-08", 2, "120250598509300541", "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "LINK_CLICKS", "Posgrado", "Instagram", 320.31, 12428, 372, 302, 0, 0, 251], ["2026-08", 2, "120250954540520541", "UDF_EXACER_SEP2026_TRAFICO_FRIO", "LINK_CLICKS", "Otros", "Instagram", 275.12, 11263, 234, 156, 0, 0, 114], ["2026-08", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 250.18, 4516, 17, 15, 0, 5, 0], ["2026-08", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 249.37, 2797, 32, 23, 0, 3, 0], ["2026-08", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 204.84, 5623, 30, 26, 0, 0, 0], ["2026-08", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 150.55, 4328, 20, 17, 0, 1, 0], ["2026-08", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 135.43, 3306, 14, 12, 0, 0, 0], ["2026-08", 2, "120249435112480541", "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "LEADS", "Posgrado", "WhatsApp", 128.55, 1509, 15, 11, 0, 2, 1], ["2026-08", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 104.81, 2373, 12, 10, 0, 2, 0], ["2026-08", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 80.62, 559, 5, 5, 0, 1, 0], ["2026-08", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", "Licenciatura", "WhatsApp", 73.12, 1579, 9, 6, 0, 0, 0], ["2026-08", 2, "120250954540520541", "UDF_EXACER_SEP2026_TRAFICO_FRIO", "LINK_CLICKS", "Otros", "Otros", 0.01, 9, 1, 1, 0, 0, 0], ["2026-08", 2, "120250594085600541", "UDF_SI15AGO2026_LEADS_FRIO", "LEADS", "Licenciatura", "Otros", 0.0, 0, 0, 0, 0, 0, 0], ["2026-09", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 7854.14, 77730, 1287, 747, 0, 82, 1], ["2026-09", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 7590.62, 115727, 1610, 937, 0, 98, 1], ["2026-09", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 7455.43, 114923, 1435, 887, 0, 96, 2], ["2026-09", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 7305.33, 62662, 991, 496, 0, 80, 3], ["2026-09", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", "Posgrado", "Facebook", 4206.03, 43621, 932, 486, 0, 110, 3], ["2026-09", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", "Otros", "Facebook", 3623.33, 66289, 985, 349, 59, 1, 1], ["2026-09", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 2730.24, 31080, 549, 206, 0, 24, 1], ["2026-09", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 2533.43, 68905, 785, 436, 0, 32, 1], ["2026-09", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 2473.76, 28980, 421, 292, 0, 43, 0], ["2026-09", 2, "120251175539820541", "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 2122.11, 33783, 285, 222, 0, 21, 2], ["2026-09", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", "Licenciatura", "Facebook", 1713.35, 19123, 273, 170, 0, 22, 0], ["2026-09", 2, "120251169460500541", "UDF_EXACER_SEP2026_LEADS", "LEADS", "Otros", "Instagram", 1675.45, 20321, 150, 98, 26, 0, 0], ["2026-09", 2, "120251176513410541", "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 1310.96, 24594, 195, 162, 0, 15, 0], ["2026-09", 2, "120251174866790541", "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 1221.96, 6304, 65, 45, 0, 12, 1], ["2026-09", 2, "120251175822880541", "UDF_SEP26_LIC_DERECHO_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 1095.63, 8722, 88, 52, 0, 5, 0], ["2026-09", 2, "120251210681190541", "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "LEADS", "Posgrado", "Facebook", 853.63, 12346, 198, 118, 0, 15, 1], ["2026-09", 2, "120251210700420541", "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "LEADS", "Posgrado", "Facebook", 850.75, 11148, 189, 88, 0, 9, 0], ["2026-09", 2, "120251210508780541", "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "LEADS", "Posgrado", "Facebook", 846.27, 7045, 134, 72, 0, 14, 1], ["2026-09", 2, "120251210632010541", "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "LEADS", "Posgrado", "Facebook", 823.65, 8632, 127, 60, 0, 12, 0], ["2026-09", 2, "120251210389490541", "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "LEADS", "Posgrado", "Facebook", 816.31, 8372, 123, 62, 0, 14, 0], ["2026-09", 2, "120251210798150541", "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "LEADS", "Posgrado", "Facebook", 757.16, 7346, 182, 54, 0, 16, 0], ["2026-09", 2, "120251210017100541", "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "LEADS", "Posgrado", "Facebook", 718.05, 14690, 185, 119, 0, 12, 0], ["2026-09", 2, "120251210594820541", "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "LEADS", "Posgrado", "Facebook", 693.69, 6326, 95, 52, 0, 18, 2], ["2026-09", 2, "120251208503530541", "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 616.97, 6926, 66, 47, 0, 4, 0], ["2026-09", 2, "120251210561960541", "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "LEADS", "Posgrado", "Facebook", 609.97, 6263, 86, 43, 0, 8, 1], ["2026-09", 2, "120251209874060541", "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "LEADS", "Posgrado", "Facebook", 606.78, 6387, 112, 60, 0, 5, 0], ["2026-09", 2, "120251210578630541", "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "LEADS", "Posgrado", "Facebook", 602.92, 5646, 118, 62, 0, 5, 0], ["2026-09", 2, "120251210203860541", "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "LEADS", "Posgrado", "Facebook", 585.74, 6221, 102, 52, 0, 10, 0], ["2026-09", 2, "120251207687400541", "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 564.0, 4204, 35, 20, 0, 2, 0], ["2026-09", 2, "120251208505590541", "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 251.25, 2819, 24, 20, 0, 2, 0], ["2026-09", 2, "120251207378350541", "UDF_SEP26_ESP_VALUACION_CTWA_V3", "LEADS", "Posgrado", "Instagram", 90.38, 694, 9, 6, 0, 2, 0], ["2026-09", 2, "120251208170320541", "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "LEADS", "Licenciatura", "Instagram", 27.82, 249, 1, 1, 0, 0, 0], ["2026-09", 2, "120250832064230541", "UDF_NTQ_AGO2026_META_CTWA_LEADS", "LEADS", "Licenciatura", "Facebook", 0.0, 0, 0, 0, 0, 4, 0]];
 const DEST={"120219319857140541": {"name": "[ESP] Consideración +  Leads", "ads": 37, "dest": {"Formulario instantáneo": 37}, "urls": {}, "forms": ["1236761214973963", "1507660553898764"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120219322364120541": {"name": "[MST] Decisión + Leads", "ads": 72, "dest": {"Formulario instantáneo": 72}, "urls": {}, "forms": ["1144901000632364", "1194480692641959", "2027611708106799", "25050313311278294", "26430386536657784", "987647613763135"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120219860898420541": {"name": "[LIC] Decisión VID + IMG | Programas separados", "ads": 96, "dest": {"Formulario instantáneo": 96}, "urls": {}, "forms": ["1470346364093102", "1833928567462976", "1954753588457036", "825208433641114", "949243694695024"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120227573287810541": {"name": "[LIC] Awareness + Videos", "ads": 10, "dest": {"Sitio web": 10}, "urls": {"https://udf.edu.mx/licenciaturas/": 20}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120227574191240541": {"name": "[ESP] Awareness + Videos", "ads": 11, "dest": {"Sitio web": 11}, "urls": {"https://udf.edu.mx/especialidades/especialidad-en-valuacion-inmobiliaria/": 8, "https://udf.edu.mx/especialidades/especialidad-en-valuacion-de-maquinaria-y-equipo/": 4, "https://udf.edu.mx/especialidades/": 10}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120227574976930541": {"name": "C-1-27 Decisión + Rmkt + BBDD", "ads": 22, "dest": {"Formulario instantáneo": 22}, "urls": {}, "forms": ["1439280864639316", "1954753588457036", "825208433641114", "949243694695024"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120235072018050541": {"name": "[LIC] Sesión 1:1-META - WP", "ads": 1, "dest": {"WhatsApp (CTWA)": 1}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120235076510560541": {"name": "[LIC] Descuento Noviembre-META -WP", "ads": 5, "dest": {"WhatsApp (CTWA)": 5}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120237227164150541": {"name": "[LIC] Consideración | FORM WA", "ads": 6, "dest": {"WhatsApp (CTWA)": 6}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120237229341450541": {"name": "[ESP] Consideración | FORM WA", "ads": 2, "dest": {"WhatsApp (CTWA)": 2}, "urls": {}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120238964899210541": {"name": "Leads EXACER | UDF | Enero 2026", "ads": 6, "dest": {"Formulario instantáneo": 6}, "urls": {}, "forms": ["1918845775693250"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120241679946080541": {"name": "[POS] Awareness + Videos", "ads": 7, "dest": {"Sitio web": 7}, "urls": {"https://udf.edu.mx/doctorados/doctorado-en-educacion/": 4, "https://udf.edu.mx/maestrias/maestria-en-educacion/": 4, "https://udf.edu.mx/maestrias/maestria-en-psicologia/": 4, "https://udf.edu.mx/maestrias/maestria-en-derecho-civil/": 2}, "forms": [], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120241685071520541": {"name": "[POS] Decisión + Rmkt + BBDD", "ads": 15, "dest": {"Formulario instantáneo": 15}, "urls": {}, "forms": ["1194480692641959", "1236761214973963", "1507660553898764", "2027611708106799", "26430386536657784", "987647613763135"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120241685794500541": {"name": "Leads EXACER | UDF | Febrero - Abril 2026", "ads": 3, "dest": {"Formulario instantáneo": 3}, "urls": {}, "forms": ["1918845775693250"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120243167420690541": {"name": "[ESP - LIC] Sesiones informativas", "ads": 4, "dest": {"Formulario instantáneo": 4}, "urls": {}, "forms": ["1456592572688633", "3356675527841979"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120243220647290541": {"name": "[LIC] Colegio de Bachilleres | Descuento Egresados", "ads": 5, "dest": {"Formulario instantáneo": 5}, "urls": {}, "forms": ["1289339672733087"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120245260711080541": {"name": "[LIC] Rezagados UNAM, UAM, UAEMEX, IPN", "ads": 7, "dest": {"Formulario instantáneo": 7}, "urls": {}, "forms": ["848076707571127"], "url_tags": 0, "tags": {}, "ntags": 0, "inline": {}}, "120247939328850541": {"name": "[LIC] C-1-27 - Decisión", "ads": 23, "dest": {"Formulario instantáneo": 23}, "urls": {}, "forms": ["1439280864639316"], "tags": {}, "ntags": 0, "inline": {}}, "120248000751910541": {"name": "[POS] C-1-27 - Decisión", "ads": 34, "dest": {"Formulario instantáneo": 34}, "urls": {}, "forms": ["1309851000669479", "1544522164130840", "1546101650192041"], "tags": {}, "ntags": 0, "inline": {}}, "120248005851070541": {"name": "[GRAL] Awareness + Videos", "ads": 17, "dest": {"Sitio web / form externo": 17}, "urls": {"https://udf.edu.mx/maestrias/maestria-en-derecho-civil/": 1, "https://udf.edu.mx/maestrias/maestria-en-psicologia/": 2, "https://udf.edu.mx/doctorados/doctorado-en-educacion/": 2, "https://udf.edu.mx/maestrias/maestria-en-educacion/": 2, "https://udf.edu.mx/licenciaturas/": 10}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120248166475360541": {"name": "C-1-27 Decisión + RMKT + BBDD", "ads": 4, "dest": {"Formulario instantáneo": 4}, "urls": {}, "forms": ["1439280864639316"], "tags": {}, "ntags": 0, "inline": {}}, "120249304954110541": {"name": "UDF_SEP26_META_PROS_POS_GRAL_CTWA", "ads": 14, "dest": {"WhatsApp (CTWA)": 14}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249304961960541": {"name": "UDF_SEP26_META_PROS_LIC_ALL_CTWA", "ads": 19, "dest": {"WhatsApp (CTWA)": 19}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249304962170541": {"name": "UDF_SEP26_META_PROS_POS_VALINM_CTWA", "ads": 3, "dest": {"WhatsApp (CTWA)": 3}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249435112370541": {"name": "UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2", "ads": 19, "dest": {"WhatsApp (CTWA)": 19}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249435112480541": {"name": "UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2", "ads": 3, "dest": {"WhatsApp (CTWA)": 3}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120249435112590541": {"name": "UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2", "ads": 14, "dest": {"WhatsApp (CTWA)": 14}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120250050149230541": {"name": "UDF_SEP26_META_PROS_POS_COMORG_CTWA", "ads": 6, "dest": {"WhatsApp (CTWA)": 6}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120250115347960541": {"name": "META_TRAFFIC_UDF_CB_20260718_PROSPECTING", "ads": 21, "dest": {"Sitio web / form externo": 21}, "urls": {"https://forms.office.com/r/cWDEyqQcGr": 21}, "forms": [], "tags": {"utm_source=meta&utm_medium=paid_social&utm_campaign=udf_coffee_break_20260718&utm_content={{ad.name}}&utm_id={{campaign.id}}": 21}, "ntags": 21, "inline": {}}, "120250164203470541": {"name": "META_LEADS_UDF_CB_20260718_INSTANTFORM", "ads": 21, "dest": {"Formulario instantáneo": 21}, "urls": {}, "forms": ["1675138320209441"], "tags": {}, "ntags": 0, "inline": {}}, "120250594085600541": {"name": "UDF_SI15AGO2026_LEADS_FRIO", "ads": 7, "dest": {"Formulario instantáneo": 7}, "urls": {}, "forms": ["1706769790541499"], "tags": {}, "ntags": 0, "inline": {}}, "120250598508750541": {"name": "UDF_POS_SI8AGO2026_META_DB_TRAFFIC_GFORM", "ads": 6, "dest": {"Sitio web / form externo": 6}, "urls": {"https://docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform": 6}, "forms": [], "tags": {}, "ntags": 0, "inline": {"docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform?utm_source=meta&utm_medium=p": 6}}, "120250598509300541": {"name": "UDF_POS_SI8AGO2026_META_COLD_TRAFFIC_GFORM", "ads": 6, "dest": {"Sitio web / form externo": 6}, "urls": {"https://docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform": 6}, "forms": [], "tags": {}, "ntags": 0, "inline": {"docs.google.com/forms/d/e/1FAIpQLSfab8gVWXt52zVlc5FhF6rPjkeSLCBpRy_9Eh9kwl-4jde6Pw/viewform?utm_source=meta&utm_medium=p": 6}}, "120250832064230541": {"name": "UDF_NTQ_AGO2026_META_CTWA_LEADS", "ads": 38, "dest": {"WhatsApp (CTWA)": 38}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120250954540520541": {"name": "UDF_EXACER_SEP2026_TRAFICO_FRIO", "ads": 6, "dest": {"Sitio web / form externo": 6}, "urls": {"https://udf.edu.mx/curso-exacer/": 6}, "forms": [], "tags": {"utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}": 6}, "ntags": 6, "inline": {}}, "120251169460500541": {"name": "UDF_EXACER_SEP2026_LEADS", "ads": 7, "dest": {"Formulario instantáneo": 7}, "urls": {}, "forms": ["2184704459110617"], "tags": {}, "ntags": 0, "inline": {}}, "120251174866790541": {"name": "UDF_SEP26_LIC_PSICOLOGIA_CTWA_V3", "ads": 8, "dest": {"WhatsApp (CTWA)": 8}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251175539820541": {"name": "UDF_SEP26_LIC_ADMINISTRACION_CTWA_V3", "ads": 16, "dest": {"WhatsApp (CTWA)": 16}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251175822880541": {"name": "UDF_SEP26_LIC_DERECHO_CTWA_V3", "ads": 16, "dest": {"WhatsApp (CTWA)": 16}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251176513410541": {"name": "UDF_SEP26_LIC_CONTADURIA_CTWA_V3", "ads": 12, "dest": {"WhatsApp (CTWA)": 12}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251207378350541": {"name": "UDF_SEP26_ESP_VALUACION_CTWA_V3", "ads": 12, "dest": {"WhatsApp (CTWA)": 12}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251207687400541": {"name": "UDF_SEP26_LIC_COMUNICACION_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251208170320541": {"name": "UDF_SEP26_LIC_SISTEMAS_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251208503530541": {"name": "UDF_SEP26_LIC_MERCADOTECNIA_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251208505590541": {"name": "UDF_SEP26_LIC_COMERCIO_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251209874060541": {"name": "UDF_SEP26_POS_MTR-EDUCACION_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210017100541": {"name": "UDF_SEP26_POS_MTR-ADMNEGOCIOS_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210203860541": {"name": "UDF_SEP26_POS_MTR-DERPENAL_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210389490541": {"name": "UDF_SEP26_POS_MTR-FISCAL_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210508780541": {"name": "UDF_SEP26_POS_DR-CIENCIASJUR_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210561960541": {"name": "UDF_SEP26_POS_DR-ORGANIZACIONES_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210578630541": {"name": "UDF_SEP26_POS_DR-EDUCACION_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210594820541": {"name": "UDF_SEP26_POS_MTR-AMPARO_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210632010541": {"name": "UDF_SEP26_POS_MTR-DERCIVIL_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210681190541": {"name": "UDF_SEP26_POS_MTR-COMORG_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210700420541": {"name": "UDF_SEP26_POS_ESP-SISTEMASINFO_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}, "120251210798150541": {"name": "UDF_SEP26_POS_MTR-PSICOLOGIA_CTWA_V3", "ads": 4, "dest": {"WhatsApp (CTWA)": 4}, "urls": {}, "forms": [], "tags": {}, "ntags": 0, "inline": {}}};
+/* ===== datos y utilidades ===== */
 const PER={
  '2026-01':{lbl:'Enero',short:'Ene',dias:31,c:1},
  '2026-02':{lbl:'Febrero',short:'Feb',dias:28,c:1},
@@ -297,168 +354,357 @@ const PER={
  '2026-07':{lbl:'Julio',short:'Jul',dias:31,c:2},
  '2026-08':{lbl:'Agosto',short:'Ago',dias:31,c:2},
  '2026-09':{lbl:'1–8 sep',short:'1–8 sep',dias:8,c:2}};
-const KEYS=['per','ciclo','cid','name','obj','spend','imp','clicks','lc','form','wa','lpv'];
-const rows=RAW.map(r=>Object.fromEntries(KEYS.map((k,i)=>[k,r[i]])));
-rows.forEach(r=>{r.leads=r.form+r.wa; r.traf=r.obj==='LINK_CLICKS';});
+const PERS=Object.keys(PER);
+const NIV=['Licenciatura','Posgrado','Otros'];
+const PLATS=['Facebook','Instagram','WhatsApp','Otros'];
+const PCOL={Facebook:'var(--accent)',Instagram:'var(--series-2)',WhatsApp:'var(--good)',Otros:'var(--ink-3)'};
+const K=['per','ciclo','cid','name','obj','nivel','plat','spend','imp','clicks','lc','form','wa','lpv'];
+const ALL=RAW.map(r=>Object.fromEntries(K.map((k,i)=>[k,r[i]])));
+ALL.forEach(r=>{r.leads=r.form+r.wa; r.traf=r.obj==='LINK_CLICKS';});
+const CAMPS=(()=>{const m=new Map();
+ ALL.forEach(r=>{if(!m.has(r.cid))m.set(r.cid,{cid:r.cid,name:r.name,nivel:r.nivel,ciclos:new Set(),spend:0});
+  const c=m.get(r.cid); c.ciclos.add(r.ciclo); c.spend+=r.spend;});
+ return [...m.values()].sort((a,b)=>b.spend-a.spend);})();
+
 const nf=(n,d=0)=>n.toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d});
 const mny=n=>'$'+nf(n,0);
 const m2=n=>(n==null||!isFinite(n))?'—':'$'+nf(n,2);
 const div=(a,b)=>b?a/b:null;
 const F=['spend','imp','clicks','lc','form','wa','leads','lpv'];
-const agg=a=>{const o={};F.forEach(k=>o[k]=a.reduce((s,r)=>s+r[k],0));return o;};
-const pers=Object.keys(PER);
-const C1=rows.filter(r=>r.ciclo===1), C2=rows.filter(r=>r.ciclo===2);
-const A1={...agg(C1),dias:172,camp:21}, A2={...agg(C2),dias:79,camp:40};
-const G={...agg(rows),dias:251};
+const agg=a=>{const o={n:a.length};F.forEach(k=>o[k]=a.reduce((s,r)=>s+r[k],0));return o;};
+const nCamp=a=>new Set(a.map(r=>r.cid)).size;
+const diasDe=a=>[...new Set(a.map(r=>r.per))].reduce((s,p)=>s+PER[p].dias,0);
+const GTOT=agg(ALL);
 
-document.getElementById('kpis').innerHTML=[
- ['Inversión total',mny(G.spend),'MXN · 1 ene – 8 sep'],
- ['Gasto por día',mny(G.spend/G.dias),'251 días de pauta'],
- ['Impresiones',nf(G.imp),''],
- ['Clics enlace',nf(G.lc),'de '+nf(G.clicks)+' clics totales'],
- ['CPC enlace',m2(div(G.spend,G.lc)),'todos los clics: '+m2(div(G.spend,G.clicks))],
- ['Leads',nf(G.leads),nf(G.wa)+' WA · '+nf(G.form)+' form'],
- ['CPL promedio',m2(div(G.spend,G.leads)),'ciclo 1 $69.91 · ciclo 2 $61.51'],
- ['Campañas',57,'793 anuncios · 27 con UTM'],
-].map(([k,v,s])=>`<div class="kpi"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s||'&nbsp;'}</div></div>`).join('');
-
-function tbl(el,head,body,foot){
- const t=document.getElementById(el); if(!t) return;
- t.innerHTML='<thead><tr>'+head.map(h=>`<th class="${h[1]||''}">${h[0]}</th>`).join('')+'</tr></thead><tbody>'+body+'</tbody>'+(foot?'<tfoot>'+foot+'</tfoot>':'');
+/* ===== estado de filtros ===== */
+const S={cortes:new Set(),niveles:new Set(),plats:new Set(),camp:''};
+const activo=()=>S.cortes.size||S.niveles.size||S.plats.size||S.camp;
+function filtrar(){
+ return ALL.filter(r=>
+  (!S.cortes.size||S.cortes.has(r.per)) &&
+  (!S.niveles.size||S.niveles.has(r.nivel)) &&
+  (!S.plats.size||S.plats.has(r.plat)) &&
+  (!S.camp||r.cid===S.camp));
 }
-/* ---- panorama: 10 cortes ---- */
-const pAgg=pers.map(p=>({per:p,dias:PER[p].dias,c:PER[p].c,...agg(rows.filter(r=>r.per===p))}));
-tbl('t-todo',
- [['Corte'],['Ciclo'],['Días','n'],['Inversión','n'],['$/día','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n']],
- pAgg.map(a=>`<tr><td class="name">${PER[a.per].lbl}</td><td><span class="chip flat">${a.c===1?'1':'2'}</span></td><td class="n dim">${a.dias}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${mny(a.spend/a.dias)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.clicks)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.clicks))}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="n">${m2(div(a.spend,a.leads))}</td></tr>`).join(''),
- `<tr class="tot"><td>Total 1 ene – 8 sep</td><td></td><td class="n">251</td><td class="n">${mny(G.spend)}</td><td class="n">${mny(G.spend/251)}</td><td class="n">${nf(G.imp)}</td><td class="n">${nf(G.clicks)}</td><td class="n">${nf(G.lc)}</td><td class="n">${m2(div(G.spend,G.clicks))}</td><td class="n">${m2(div(G.spend,G.lc))}</td><td class="n">${nf(G.wa)}</td><td class="n">${nf(G.form)}</td><td class="n">${nf(G.leads)}</td><td class="n">${m2(div(G.spend,G.leads))}</td></tr>`);
+let D=ALL;
 
-/* ---- charts ---- */
+/* ===== barra de filtros ===== */
+function chips(cont,items,set,render){
+ cont.innerHTML=items.map(([v,l])=>`<button class="f" type="button" data-v="${v}" aria-pressed="${set.has(v)}">${l}</button>`).join('');
+ cont.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+  const v=b.dataset.v; set.has(v)?set.delete(v):set.add(v); render();}));
+}
+function pintarFiltros(){
+ chips(document.getElementById('f-cortes'),PERS.map(p=>[p,PER[p].lbl]),S.cortes,aplicar);
+ chips(document.getElementById('f-niv'),NIV.map(n=>[n,n]),S.niveles,aplicar);
+ chips(document.getElementById('f-plat'),PLATS.map(p=>[p,`<span class="pill" style="background:${PCOL[p]}"></span>${p}`]),S.plats,aplicar);
+ const sel=document.getElementById('f-camp');
+ if(!sel.options.length){
+  const g=c=>CAMPS.filter(x=>x.ciclos.has(c)&&(c===1||!x.ciclos.has(1))).map(x=>`<option value="${x.cid}">${x.name} · ${mny(x.spend)}</option>`).join('');
+  sel.innerHTML=`<option value="">Todas las campañas (${CAMPS.length})</option>`+
+   `<optgroup label="Ciclo 1 · 1 ene – 21 jun">${g(1)}</optgroup>`+
+   `<optgroup label="Ciclo 2 · 22 jun – 8 sep">${g(2)}</optgroup>`;
+  sel.addEventListener('change',()=>{S.camp=sel.value;aplicar();});
+ }
+ sel.value=S.camp;
+ document.getElementById('f-clear').onclick=()=>{S.cortes.clear();S.niveles.clear();S.plats.clear();S.camp='';aplicar();};
+}
+function estado(){
+ const t=agg(D), nc=nCamp(D);
+ const dsc=[];
+ if(S.cortes.size) dsc.push(`${S.cortes.size} corte${S.cortes.size>1?'s':''}`);
+ if(S.niveles.size) dsc.push([...S.niveles].join(' + '));
+ if(S.plats.size) dsc.push([...S.plats].join(' + '));
+ if(S.camp) dsc.push('1 campaña');
+ document.getElementById('f-status').innerHTML=
+  `<span>${activo()?'<span class="on">Filtrado:</span> '+dsc.join(' · '):'Sin filtros · vista completa'}</span>`+
+  `<span>Campañas <b>${nc}</b> de ${CAMPS.length}</span>`+
+  `<span>Inversión <b>${mny(t.spend)}</b> de ${mny(GTOT.spend)} (${nf(t.spend/GTOT.spend*100,1)}%)</span>`+
+  `<span>Leads <b>${nf(t.leads)}</b> de ${nf(GTOT.leads)}</span>`+
+  `<span>CPL <b>${m2(div(t.spend,t.leads))}</b></span>`;
+ document.getElementById('f-clear').hidden=!activo();
+}
+
+/* ===== helpers de tabla ===== */
+function tabla(el,head,body,foot,vacio){
+ const t=document.getElementById(el); if(!t) return;
+ const th=head?'<thead><tr>'+head.map(h=>`<th class="${h[1]||''}">${h[0]}</th>`).join('')+'</tr></thead>':'';
+ if(!body){
+  // nunca se borra el <table>: el mensaje va como fila, para que el filtro se pueda deshacer
+  t.innerHTML=th+`<tbody><tr><td class="vacio" colspan="${(head&&head.length)||99}">${vacio||'Sin datos con los filtros actuales.'}</td></tr></tbody>`;
+  return;}
+ t.innerHTML=th+'<tbody>'+body+'</tbody>'+(foot?'<tfoot>'+foot+'</tfoot>':'');
+}
+const chipCPL=(cpl,leads,traf,ref)=>traf||!leads?'<span class="chip flat">sin leads</span>'
+ :cpl<ref*0.72?'<span class="chip good">bajo</span>':cpl>ref*1.45?'<span class="chip crit">alto</span>':'<span class="chip flat">medio</span>';
+const splitFI=rs=>{const f=rs.filter(r=>r.plat==='Facebook'),i=rs.filter(r=>r.plat==='Instagram');
+ return {fl:f.reduce((s,r)=>s+r.leads,0),il:i.reduce((s,r)=>s+r.leads,0),fs:f.reduce((s,r)=>s+r.spend,0),is:i.reduce((s,r)=>s+r.spend,0)};};
+/* ===== KPIs ===== */
+function kpis(){
+ const t=agg(D), d=diasDe(D)||1, fi=splitFI(D);
+ const cards=[
+  ['Inversión',mny(t.spend),activo()?nf(t.spend/GTOT.spend*100,1)+'% del total':'MXN · 1 ene – 8 sep'],
+  ['Gasto por día',mny(t.spend/d),d+' días en la selección'],
+  ['Impresiones',nf(t.imp),''],
+  ['Clics enlace',nf(t.lc),'de '+nf(t.clicks)+' clics totales'],
+  ['CPC enlace',m2(div(t.spend,t.lc)),'todos los clics: '+m2(div(t.spend,t.clicks))],
+  ['Leads',nf(t.leads),nf(t.wa)+' WA · '+nf(t.form)+' form'],
+  ['CPL',m2(div(t.spend,t.leads)),'leads/día: '+nf(t.leads/d,1)],
+  ['Leads FB / IG',nf(fi.fl)+' / '+nf(fi.il),fi.fl+fi.il?nf(fi.fl/(fi.fl+fi.il)*100,0)+'% Facebook':'sin leads'],
+ ];
+ document.getElementById('kpis').innerHTML=cards.map(([k,v,s])=>
+  `<div class="kpi"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s||'&nbsp;'}</div></div>`).join('');
+}
+
+/* ===== panorama por corte ===== */
+function panorama(){
+ const as=PERS.map(p=>{const rs=D.filter(r=>r.per===p);return {per:p,rs,...agg(rs)};}).filter(a=>a.spend>0||a.leads>0);
+ if(!as.length) return tabla('t-todo',null,null);
+ const T=agg(D);
+ tabla('t-todo',
+  [['Corte'],['Ciclo'],['Días','n'],['Inversión','n'],['$/día','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads','n'],['Leads FB / IG','n'],['CPL','n']],
+  as.map(a=>{const fi=splitFI(a.rs);return `<tr><td class="name">${PER[a.per].lbl}</td><td><span class="chip flat">${PER[a.per].c}</span></td><td class="n dim">${PER[a.per].dias}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${mny(a.spend/PER[a.per].dias)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.clicks)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="split">${nf(fi.fl)} / ${nf(fi.il)}</td><td class="n">${m2(div(a.spend,a.leads))}</td></tr>`}).join(''),
+  (()=>{const fi=splitFI(D);return `<tr class="tot"><td>Total de la selección</td><td></td><td class="n">${diasDe(D)}</td><td class="n">${mny(T.spend)}</td><td class="n">${mny(T.spend/(diasDe(D)||1))}</td><td class="n">${nf(T.imp)}</td><td class="n">${nf(T.clicks)}</td><td class="n">${nf(T.lc)}</td><td class="n">${m2(div(T.spend,T.lc))}</td><td class="n">${nf(T.wa)}</td><td class="n">${nf(T.form)}</td><td class="n">${nf(T.leads)}</td><td class="split">${nf(fi.fl)} / ${nf(fi.il)}</td><td class="n">${m2(div(T.spend,T.leads))}</td></tr>`})());
+}
+
+/* ===== gráficas ===== */
 const tip=document.getElementById('tip');
 const showTip=(e,t)=>{tip.textContent=t;tip.style.opacity=1;tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY-34)+'px';};
 const hideTip=()=>{tip.style.opacity=0;};
+function bindTips(){document.querySelectorAll('rect.bar').forEach(r=>{
+ r.addEventListener('mousemove',e=>showTip(e,r.dataset.tip));r.addEventListener('mouseleave',hideTip);});}
 function barChart(title,cap,vals,fmt){
- const W=460,H=200,padL=56,padR=12,padT=10,padB=40;
- const max=Math.max(...vals.map(v=>v.v));
- const step=(W-padL-padR)/vals.length, bw=Math.min(30,step-8);
+ if(!vals.length) return `<div class="chart"><h3>${title}</h3><div class="cap">${cap}</div><div class="empty">Sin datos.</div></div>`;
+ const W=460,H=200,padL=58,padR=12,padT=10,padB=42;
+ const max=Math.max(...vals.map(v=>v.v))||1;
+ const step=(W-padL-padR)/vals.length, bw=Math.min(32,step-8);
  const y=v=>padT+(H-padT-padB)*(1-v/(max*1.08));
  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">`;
  [0,max/2,max].forEach(t=>{const yy=y(t);
-  s+=`<line x1="${padL}" x2="${W-padR}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="var(--rule-2)" stroke-width="1"/>`;
-  s+=`<text x="${padL-8}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="10" font-family="IBM Plex Mono,monospace" fill="var(--ink-3)">${fmt(t,true)}</text>`;});
+  s+=`<line x1="${padL}" x2="${W-padR}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="var(--rule-2)" stroke-width="1"/>`+
+     `<text x="${padL-8}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="10" font-family="IBM Plex Mono,monospace" fill="var(--ink-3)">${fmt(t,true)}</text>`;});
  vals.forEach((v,i)=>{const x=padL+step*i+(step-bw)/2, yy=y(v.v), h=Math.max(2,y(0)-yy);
   if(v.c===2&&vals[i-1]&&vals[i-1].c===1){const xd=padL+step*i;
    s+=`<line x1="${xd.toFixed(1)}" x2="${xd.toFixed(1)}" y1="${padT}" y2="${y(0).toFixed(1)}" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="3 3"/>`;}
-  s+=`<rect class="bar" data-tip="${v.label}: ${fmt(v.v)}" x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" rx="3" fill="${v.c===1?'var(--accent)':'var(--series-2)'}"/>`;
-  s+=`<text x="${(x+bw/2).toFixed(1)}" y="${H-16}" text-anchor="${v.short.length>4?'end':'middle'}" transform="${v.short.length>4?`rotate(-40 ${(x+bw/2).toFixed(1)} ${H-16})`:''}" font-size="9.5" font-family="IBM Plex Sans,sans-serif" fill="var(--ink-3)">${v.short}</text>`;});
+  s+=`<rect class="bar" data-tip="${v.label}: ${fmt(v.v)}" x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" rx="3" fill="${v.col||(v.c===1?'var(--accent)':'var(--series-2)')}"/>`+
+     `<text x="${(x+bw/2).toFixed(1)}" y="${H-18}" text-anchor="${v.short.length>4?'end':'middle'}" transform="${v.short.length>4?`rotate(-40 ${(x+bw/2).toFixed(1)} ${H-18})`:''}" font-size="9.5" font-family="IBM Plex Sans,sans-serif" fill="var(--ink-3)">${v.short}</text>`;});
  s+=`<line x1="${padL}" x2="${W-padR}" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}" stroke="var(--rule)" stroke-width="1"/></svg>`;
  return `<div class="chart"><h3>${title}</h3><div class="cap">${cap}</div>${s}</div>`;
 }
-const mk=f=>pAgg.map(a=>({label:PER[a.per].lbl,short:PER[a.per].short,c:a.c,v:f(a)}));
-document.getElementById('charts').innerHTML=
- barChart('Inversión por día','MXN · normaliza los cortes parciales',mk(a=>a.spend/a.dias),(n,ax)=>ax?'$'+nf(Math.round(n/1000))+'k':mny(n))+
- barChart('Leads por día','conexiones de WhatsApp + formulario',mk(a=>a.leads/a.dias),(n,ax)=>nf(n,ax?0:1))+
- barChart('Costo por lead','MXN por lead',mk(a=>div(a.spend,a.leads)||0),n=>'$'+nf(n,0));
-document.querySelectorAll('rect.bar').forEach(r=>{r.addEventListener('mousemove',e=>showTip(e,r.dataset.tip));r.addEventListener('mouseleave',hideTip);});
-
-/* ---- comparativo ---- */
-const pct=v=>`<span class="chip flat">${(v>=0?'+':'')+nf(v*100,0)}%</span>`;
-const cmp=[
- ['Inversión ejercida',mny(A1.spend),mny(A2.spend),A2.spend/A1.spend-1],
- ['Días de pauta','172','79',79/172-1],
- ['Gasto por día',mny(A1.spend/172),mny(A2.spend/79),(A2.spend/79)/(A1.spend/172)-1],
- ['Campañas','21','40',40/21-1],
- ['Impresiones',nf(A1.imp),nf(A2.imp),A2.imp/A1.imp-1],
- ['Clics enlace',nf(A1.lc),nf(A2.lc),A2.lc/A1.lc-1],
- ['CPC enlace',m2(A1.spend/A1.lc),m2(A2.spend/A2.lc),(A2.spend/A2.lc)/(A1.spend/A1.lc)-1],
- ['Conexiones WA',nf(A1.wa),nf(A2.wa),A2.wa/A1.wa-1],
- ['Leads formulario',nf(A1.form),nf(A2.form),A2.form/A1.form-1],
- ['Leads total',nf(A1.leads),nf(A2.leads),A2.leads/A1.leads-1],
- ['Leads por día',nf(A1.leads/172,1),nf(A2.leads/79,1),(A2.leads/79)/(A1.leads/172)-1],
- ['CPL',m2(A1.spend/A1.leads),m2(A2.spend/A2.leads),(A2.spend/A2.leads)/(A1.spend/A1.leads)-1],
-];
-tbl('t-cmp',[['Métrica'],['Ciclo 1 · ene–21 jun','n'],['Ciclo 2 · 22 jun–8 sep','n'],['Cambio','n']],
- cmp.map(([k,a,b,v])=>`<tr><td class="name">${k}</td><td class="n">${a}</td><td class="n">${b}</td><td class="n">${pct(v)}</td></tr>`).join(''));
-
-/* ---- strips de cada ciclo ---- */
-const strip=(el,A,d,extra)=>{document.getElementById(el).innerHTML=
- [`Inversión <b>${mny(A.spend)}</b>`,`<b>${mny(A.spend/d)}</b>/día`,`Impresiones <b>${nf(A.imp)}</b>`,`Clics enlace <b>${nf(A.lc)}</b>`,`CPC enlace <b>${m2(div(A.spend,A.lc))}</b>`,`Leads <b>${nf(A.leads)}</b>`,`CPL <b>${m2(div(A.spend,A.leads))}</b>`,extra].map(s=>`<span>${s}</span>`).join('');};
-strip('s1',A1,172,'UTM <b>0 de 397 anuncios</b>');
-strip('s2',A2,79,'UTM <b>27 de 396 anuncios</b>');
-
-/* ---- tablas por ciclo ---- */
-function resumen(el,ciclo,keys){
- const as=keys.map(p=>({per:p,dias:PER[p].dias,...agg(rows.filter(r=>r.per===p))}));
- const T=agg(rows.filter(r=>r.ciclo===ciclo)); const D=keys.reduce((s,p)=>s+PER[p].dias,0);
- tbl(el,[['Periodo'],['Días','n'],['Inversión','n'],['$/día','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n']],
-  as.map(a=>`<tr><td class="name">${PER[a.per].lbl}</td><td class="n dim">${a.dias}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${mny(a.spend/a.dias)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.clicks)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.clicks))}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="n">${m2(div(a.spend,a.leads))}</td></tr>`).join(''),
-  `<tr class="tot"><td>Total ciclo ${ciclo}</td><td class="n">${D}</td><td class="n">${mny(T.spend)}</td><td class="n">${mny(T.spend/D)}</td><td class="n">${nf(T.imp)}</td><td class="n">${nf(T.clicks)}</td><td class="n">${nf(T.lc)}</td><td class="n">${m2(div(T.spend,T.clicks))}</td><td class="n">${m2(div(T.spend,T.lc))}</td><td class="n">${nf(T.wa)}</td><td class="n">${nf(T.form)}</td><td class="n">${nf(T.leads)}</td><td class="n">${m2(div(T.spend,T.leads))}</td></tr>`);
+function groupChart(title,cap,cats,series,fmt){
+ const vivos=series.filter(s=>cats.some(c=>s.vals[c.k]>0));
+ if(!cats.length||!vivos.length) return `<div class="chart"><h3>${title}</h3><div class="cap">${cap}</div><div class="empty">Sin datos.</div></div>`;
+ const W=460,H=210,padL=58,padR=12,padT=10,padB=52;
+ const max=Math.max(...cats.flatMap(c=>vivos.map(s=>s.vals[c.k]||0)))||1;
+ const step=(W-padL-padR)/cats.length, bw=Math.min(11,(step-10)/vivos.length);
+ const y=v=>padT+(H-padT-padB)*(1-v/(max*1.08));
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">`;
+ [0,max/2,max].forEach(t=>{const yy=y(t);
+  s+=`<line x1="${padL}" x2="${W-padR}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="var(--rule-2)" stroke-width="1"/>`+
+     `<text x="${padL-8}" y="${(yy+4).toFixed(1)}" text-anchor="end" font-size="10" font-family="IBM Plex Mono,monospace" fill="var(--ink-3)">${fmt(t,true)}</text>`;});
+ cats.forEach((c,i)=>{const gw=bw*vivos.length+2*(vivos.length-1); let x=padL+step*i+(step-gw)/2;
+  vivos.forEach(se=>{const v=se.vals[c.k]||0, yy=y(v), h=Math.max(v>0?2:0,y(0)-yy);
+   if(v>0) s+=`<rect class="bar" data-tip="${c.lbl} · ${se.name}: ${fmt(v)}" x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${se.col}"/>`;
+   x+=bw+2;});
+  s+=`<text x="${(padL+step*i+step/2).toFixed(1)}" y="${H-28}" text-anchor="${c.lbl.length>4?'end':'middle'}" transform="${c.lbl.length>4?`rotate(-40 ${(padL+step*i+step/2).toFixed(1)} ${H-28})`:''}" font-size="9.5" font-family="IBM Plex Sans,sans-serif" fill="var(--ink-3)">${c.lbl}</text>`;});
+ s+=`<line x1="${padL}" x2="${W-padR}" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}" stroke="var(--rule)" stroke-width="1"/></svg>`;
+ const leg=vivos.map(se=>`<span><i style="background:${se.col}"></i>${se.name}</span>`).join('');
+ return `<div class="chart"><h3>${title}</h3><div class="cap">${cap}</div>${s}<div class="legend" style="margin:8px 0 0">${leg}</div></div>`;
 }
-resumen('t-c1mes',1,pers.filter(p=>PER[p].c===1));
-resumen('t-c2mes',2,pers.filter(p=>PER[p].c===2));
-
-function campTable(el,ciclo,umbral){
- const rs=rows.filter(r=>r.ciclo===ciclo);
- const byC={};
- rs.forEach(r=>{(byC[r.cid]=byC[r.cid]||{name:r.name,obj:r.obj,cid:r.cid,traf:r.traf,pers:[],rows:[]});byC[r.cid].pers.push(r.per);byC[r.cid].rows.push(r);});
- const cs=Object.values(byC).map(c=>({...c,...agg(c.rows)})).sort((a,b)=>b.spend-a.spend);
- const T=agg(rs);
- const chip=(c,cpl)=>(c.traf||!c.leads)?'<span class="chip flat">sin leads</span>':cpl<50?'<span class="chip good">bajo</span>':cpl>100?'<span class="chip crit">alto</span>':'<span class="chip flat">medio</span>';
- const rango=ps=>[...new Set(ps)].sort().map(p=>PER[p].short).join(', ');
- tbl(el,[['Campaña'],['Objetivo'],['Periodos'],['Inversión','n'],['% inv.','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n'],['']],
-  cs.map(c=>{const cpl=(c.traf||!c.leads)?null:div(c.spend,c.leads);
-   return `<tr><td class="name">${c.name}<div class="mono" style="color:var(--ink-3);font-size:11px">${c.cid}</div></td><td class="obj">${c.obj}</td><td class="dim" style="font-size:12px">${rango(c.pers)}</td><td class="n">${mny(c.spend)}</td><td class="n dim">${nf(c.spend/T.spend*100,1)}%</td><td class="n">${nf(c.imp)}</td><td class="n">${nf(c.clicks)}</td><td class="n">${nf(c.lc)}</td><td class="n">${m2(div(c.spend,c.clicks))}</td><td class="n">${c.traf?'—':nf(c.wa)}</td><td class="n">${c.traf?'—':nf(c.form)}</td><td class="n">${c.traf?`<span class="dim">${nf(c.lpv)} vistas</span>`:nf(c.leads)}</td><td class="n">${m2(cpl)}</td><td>${chip(c,cpl)}</td></tr>`}).join(''),
-  `<tr class="tot"><td>Total ${cs.length} campañas</td><td></td><td></td><td class="n">${mny(T.spend)}</td><td class="n">100%</td><td class="n">${nf(T.imp)}</td><td class="n">${nf(T.clicks)}</td><td class="n">${nf(T.lc)}</td><td class="n">${m2(div(T.spend,T.clicks))}</td><td class="n">${nf(T.wa)}</td><td class="n">${nf(T.form)}</td><td class="n">${nf(T.leads)}</td><td class="n">${m2(div(T.spend,T.leads))}</td><td></td></tr>`);
+function graficas(){
+ const as=PERS.map(p=>({per:p,c:PER[p].c,...agg(D.filter(r=>r.per===p))})).filter(a=>a.spend>0||a.leads>0);
+ const mk=f=>as.map(a=>({label:PER[a.per].lbl,short:PER[a.per].short,c:a.c,v:f(a)}));
+ document.getElementById('charts').innerHTML=
+  barChart('Inversión por día','MXN · normaliza los cortes parciales',mk(a=>a.spend/PER[a.per].dias),(n,ax)=>ax?'$'+nf(Math.round(n/1000))+'k':mny(n))+
+  barChart('Leads por día','conexiones de WhatsApp + formulario',mk(a=>a.leads/PER[a.per].dias),(n,ax)=>nf(n,ax?0:1))+
+  barChart('Costo por lead','MXN por lead',mk(a=>div(a.spend,a.leads)||0),n=>'$'+nf(n,0));
 }
-campTable('t-c1camp',1); campTable('t-c2camp',2);
 
-function detalle(el,ciclo){
- const keys=pers.filter(p=>PER[p].c===ciclo);
- document.getElementById(el).innerHTML=keys.map(p=>{
-  const rs=rows.filter(r=>r.per===p).sort((a,b)=>b.spend-a.spend); const A=agg(rs); const d=PER[p].dias;
-  const head=[['Campaña'],['Objetivo'],['Inversión','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads total','n'],['CPL','n']];
-  const body=rs.map(r=>{const cpl=(r.traf||!r.leads)?null:div(r.spend,r.leads);
-   return `<tr><td class="name">${r.name}</td><td class="obj">${r.obj}</td><td class="n">${mny(r.spend)}</td><td class="n">${nf(r.imp)}</td><td class="n">${nf(r.clicks)}</td><td class="n">${nf(r.lc)}</td><td class="n">${m2(div(r.spend,r.clicks))}</td><td class="n">${m2(div(r.spend,r.lc))}</td><td class="n">${r.traf?'—':nf(r.wa)}</td><td class="n">${r.traf?'—':nf(r.form)}</td><td class="n">${r.traf?`<span class="dim">${nf(r.lpv)} vistas</span>`:nf(r.leads)}</td><td class="n">${m2(cpl)}</td></tr>`}).join('');
-  const foot=`<tr class="tot"><td>Total ${PER[p].lbl}</td><td></td><td class="n">${mny(A.spend)}</td><td class="n">${nf(A.imp)}</td><td class="n">${nf(A.clicks)}</td><td class="n">${nf(A.lc)}</td><td class="n">${m2(div(A.spend,A.clicks))}</td><td class="n">${m2(div(A.spend,A.lc))}</td><td class="n">${nf(A.wa)}</td><td class="n">${nf(A.form)}</td><td class="n">${nf(A.leads)}</td><td class="n">${m2(div(A.spend,A.leads))}</td></tr>`;
-  return `<section id="d-${p}"><div class="sec-head"><h2>${PER[p].lbl} 2026</h2><span class="note">${rs.length} campañas · ${d} días · ${mny(A.spend/d)}/día · CPL ${m2(div(A.spend,A.leads))}</span></div><div class="tscroll"><table><thead><tr>${head.map(h=>`<th class="${h[1]||''}">${h[0]}</th>`).join('')}</tr></thead><tbody>${body}</tbody><tfoot>${foot}</tfoot></table></div></section>`;
+/* ===== comparativo de ciclos ===== */
+function comparativo(){
+ const r1=D.filter(r=>r.ciclo===1), r2=D.filter(r=>r.ciclo===2);
+ if(!r1.length||!r2.length){
+  tabla('t-cmp',null,null,null,'El comparativo necesita datos en los dos ciclos. Con los filtros actuales solo hay '+(r1.length?'ciclo 1':r2.length?'ciclo 2':'ninguno')+'.');
+  return;}
+ const a=agg(r1), b=agg(r2), d1=diasDe(r1), d2=diasDe(r2);
+ const f1=splitFI(r1), f2=splitFI(r2);
+ const pct=v=>isFinite(v)?`<span class="chip flat">${(v>=0?'+':'')+nf(v*100,0)}%</span>`:'<span class="chip flat">—</span>';
+ const filas=[
+  ['Inversión ejercida',mny(a.spend),mny(b.spend),b.spend/a.spend-1],
+  ['Días de pauta',nf(d1),nf(d2),d2/d1-1],
+  ['Gasto por día',mny(a.spend/d1),mny(b.spend/d2),(b.spend/d2)/(a.spend/d1)-1],
+  ['Campañas',nf(nCamp(r1)),nf(nCamp(r2)),nCamp(r2)/nCamp(r1)-1],
+  ['Impresiones',nf(a.imp),nf(b.imp),b.imp/a.imp-1],
+  ['Clics enlace',nf(a.lc),nf(b.lc),b.lc/a.lc-1],
+  ['CPC enlace',m2(a.spend/a.lc),m2(b.spend/b.lc),(b.spend/b.lc)/(a.spend/a.lc)-1],
+  ['Conexiones WA',nf(a.wa),nf(b.wa),b.wa/a.wa-1],
+  ['Leads formulario',nf(a.form),nf(b.form),b.form/a.form-1],
+  ['Leads total',nf(a.leads),nf(b.leads),b.leads/a.leads-1],
+  ['Leads por día',nf(a.leads/d1,1),nf(b.leads/d2,1),(b.leads/d2)/(a.leads/d1)-1],
+  ['% de leads en Facebook',nf(f1.fl/(f1.fl+f1.il)*100,0)+'%',nf(f2.fl/(f2.fl+f2.il)*100,0)+'%',null],
+  ['CPL',m2(a.spend/a.leads),m2(b.spend/b.leads),(b.spend/b.leads)/(a.spend/a.leads)-1],
+ ];
+ tabla('t-cmp',[['Métrica'],['Ciclo 1 · ene–21 jun','n'],['Ciclo 2 · 22 jun–8 sep','n'],['Cambio','n']],
+  filas.map(([k,x,y,v])=>`<tr><td class="name">${k}</td><td class="n">${x}</td><td class="n">${y}</td><td class="n">${v==null?'<span class="dim">—</span>':pct(v)}</td></tr>`).join(''));
+}
+
+/* ===== secciones de ciclo ===== */
+function cicloBloque(ciclo){
+ const rs=D.filter(r=>r.ciclo===ciclo);
+ const t=agg(rs), d=diasDe(rs)||1, fi=splitFI(rs);
+ document.getElementById('s'+ciclo).innerHTML=!rs.length?'<span>Sin datos con los filtros actuales.</span>':
+  [`Inversión <b>${mny(t.spend)}</b>`,`<b>${mny(t.spend/d)}</b>/día`,`Campañas <b>${nCamp(rs)}</b>`,
+   `Clics enlace <b>${nf(t.lc)}</b>`,`CPC enlace <b>${m2(div(t.spend,t.lc))}</b>`,
+   `Leads <b>${nf(t.leads)}</b>`,`CPL <b>${m2(div(t.spend,t.leads))}</b>`,
+   `FB/IG <b>${nf(fi.fl)} / ${nf(fi.il)}</b>`].map(s=>`<span>${s}</span>`).join('');
+ // resumen por corte
+ const keys=PERS.filter(p=>PER[p].c===ciclo);
+ const as=keys.map(p=>({per:p,rs:rs.filter(r=>r.per===p),...agg(rs.filter(r=>r.per===p))})).filter(a=>a.spend>0||a.leads>0);
+ tabla('t-c'+ciclo+'mes',
+  [['Periodo'],['Días','n'],['Inversión','n'],['$/día','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads','n'],['Leads FB / IG','n'],['CPL','n']],
+  as.length?as.map(a=>{const f=splitFI(a.rs);return `<tr><td class="name">${PER[a.per].lbl}</td><td class="n dim">${PER[a.per].dias}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${mny(a.spend/PER[a.per].dias)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.clicks)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="split">${nf(f.fl)} / ${nf(f.il)}</td><td class="n">${m2(div(a.spend,a.leads))}</td></tr>`}).join(''):null,
+  as.length?`<tr class="tot"><td>Total ciclo ${ciclo}</td><td class="n">${d}</td><td class="n">${mny(t.spend)}</td><td class="n">${mny(t.spend/d)}</td><td class="n">${nf(t.imp)}</td><td class="n">${nf(t.clicks)}</td><td class="n">${nf(t.lc)}</td><td class="n">${m2(div(t.spend,t.lc))}</td><td class="n">${nf(t.wa)}</td><td class="n">${nf(t.form)}</td><td class="n">${nf(t.leads)}</td><td class="split">${nf(fi.fl)} / ${nf(fi.il)}</td><td class="n">${m2(div(t.spend,t.leads))}</td></tr>`:null);
+ // campañas
+ const ref=div(t.spend,t.leads)||70;
+ const m=new Map();
+ rs.forEach(r=>{if(!m.has(r.cid))m.set(r.cid,{name:r.name,cid:r.cid,nivel:r.nivel,obj:r.obj,traf:r.traf,pers:new Set(),rs:[]});
+  const c=m.get(r.cid);c.pers.add(r.per);c.rs.push(r);});
+ const cs=[...m.values()].map(c=>({...c,...agg(c.rs)})).sort((a,b)=>b.spend-a.spend);
+ tabla('t-c'+ciclo+'camp',
+  [['Campaña'],['Nivel'],['Objetivo'],['Periodos'],['Inversión','n'],['% inv.','n'],['Impresiones','n'],['Clics enlace','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads','n'],['Leads FB / IG','n'],['CPL','n'],['']],
+  cs.length?cs.map(c=>{const cpl=(c.traf||!c.leads)?null:div(c.spend,c.leads); const f=splitFI(c.rs);
+   return `<tr><td class="name">${c.name}<div class="mono" style="color:var(--ink-3);font-size:11px">${c.cid}</div></td><td><span class="chip flat">${c.nivel==='Licenciatura'?'LIC':c.nivel==='Posgrado'?'POS':'Otros'}</span></td><td class="obj">${c.obj}</td><td class="dim" style="font-size:12px">${[...c.pers].sort().map(p=>PER[p].short).join(', ')}</td><td class="n">${mny(c.spend)}</td><td class="n dim">${nf(c.spend/t.spend*100,1)}%</td><td class="n">${nf(c.imp)}</td><td class="n">${nf(c.lc)}</td><td class="n">${m2(div(c.spend,c.lc))}</td><td class="n">${c.traf?'—':nf(c.wa)}</td><td class="n">${c.traf?'—':nf(c.form)}</td><td class="n">${c.traf?`<span class="dim">${nf(c.lpv)} vistas</span>`:nf(c.leads)}</td><td class="split">${c.traf?'—':nf(f.fl)+' / '+nf(f.il)}</td><td class="n">${m2(cpl)}</td><td>${chipCPL(cpl,c.leads,c.traf,ref)}</td></tr>`}).join(''):null,
+  cs.length?`<tr class="tot"><td>Total ${cs.length} campañas</td><td></td><td></td><td></td><td class="n">${mny(t.spend)}</td><td class="n">100%</td><td class="n">${nf(t.imp)}</td><td class="n">${nf(t.lc)}</td><td class="n">${m2(div(t.spend,t.lc))}</td><td class="n">${nf(t.wa)}</td><td class="n">${nf(t.form)}</td><td class="n">${nf(t.leads)}</td><td class="split">${nf(fi.fl)} / ${nf(fi.il)}</td><td class="n">${m2(div(t.spend,t.leads))}</td><td></td></tr>`:null);
+ // detalle por corte
+ document.getElementById('c'+ciclo+'-meses').innerHTML=as.map(a=>{
+  const rr=a.rs.reduce((m,r)=>{const o=m.get(r.cid)||{name:r.name,obj:r.obj,traf:r.traf,rs:[]};o.rs.push(r);m.set(r.cid,o);return m;},new Map());
+  const lst=[...rr.values()].map(c=>({...c,...agg(c.rs)})).sort((x,y)=>y.spend-x.spend);
+  const head=[['Campaña'],['Objetivo'],['Inversión','n'],['Impresiones','n'],['Clics','n'],['Clics enlace','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads','n'],['Leads FB / IG','n'],['CPL','n']];
+  const body=lst.map(c=>{const cpl=(c.traf||!c.leads)?null:div(c.spend,c.leads); const f=splitFI(c.rs);
+   return `<tr><td class="name">${c.name}</td><td class="obj">${c.obj}</td><td class="n">${mny(c.spend)}</td><td class="n">${nf(c.imp)}</td><td class="n">${nf(c.clicks)}</td><td class="n">${nf(c.lc)}</td><td class="n">${m2(div(c.spend,c.lc))}</td><td class="n">${c.traf?'—':nf(c.wa)}</td><td class="n">${c.traf?'—':nf(c.form)}</td><td class="n">${c.traf?`<span class="dim">${nf(c.lpv)} vistas</span>`:nf(c.leads)}</td><td class="split">${c.traf?'—':nf(f.fl)+' / '+nf(f.il)}</td><td class="n">${m2(cpl)}</td></tr>`}).join('');
+  const fa=splitFI(a.rs);
+  const foot=`<tr class="tot"><td>Total ${PER[a.per].lbl}</td><td></td><td class="n">${mny(a.spend)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.clicks)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="split">${nf(fa.fl)} / ${nf(fa.il)}</td><td class="n">${m2(div(a.spend,a.leads))}</td></tr>`;
+  return `<section id="d-${a.per}"><div class="sec-head"><h2>${PER[a.per].lbl} 2026</h2><span class="note">${lst.length} campañas · ${PER[a.per].dias} días · ${mny(a.spend/PER[a.per].dias)}/día · CPL ${m2(div(a.spend,a.leads))}</span></div><div class="tscroll"><table><thead><tr>${head.map(h=>`<th class="${h[1]||''}">${h[0]}</th>`).join('')}</tr></thead><tbody>${body}</tbody><tfoot>${foot}</tfoot></table></div></section>`;
+ }).join('')||'<div class="empty">Sin cortes con datos en este ciclo con los filtros actuales.</div>';
+}
+/* ===== nivel ===== */
+function nivelBloque(){
+ const T=agg(D);
+ const as=NIV.map(n=>{const rs=D.filter(r=>r.nivel===n);return {n,rs,...agg(rs)};}).filter(a=>a.spend>0||a.leads>0);
+ tabla('t-nivel',
+  [['Nivel'],['Campañas','n'],['Inversión','n'],['% inv.','n'],['Impresiones','n'],['Clics enlace','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads','n'],['% leads','n'],['Leads FB / IG','n'],['CPL','n']],
+  as.length?as.map(a=>{const f=splitFI(a.rs);
+   return `<tr><td class="name">${a.n}</td><td class="n dim">${nCamp(a.rs)}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${nf(a.spend/T.spend*100,1)}%</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="n dim">${nf(a.leads/T.leads*100,1)}%</td><td class="split">${nf(f.fl)} / ${nf(f.il)}</td><td class="n"><strong>${m2(div(a.spend,a.leads))}</strong></td></tr>`}).join(''):null,
+  as.length?(()=>{const f=splitFI(D);return `<tr class="tot"><td>Total</td><td class="n">${nCamp(D)}</td><td class="n">${mny(T.spend)}</td><td class="n">100%</td><td class="n">${nf(T.imp)}</td><td class="n">${nf(T.lc)}</td><td class="n">${m2(div(T.spend,T.lc))}</td><td class="n">${nf(T.wa)}</td><td class="n">${nf(T.form)}</td><td class="n">${nf(T.leads)}</td><td class="n">100%</td><td class="split">${nf(f.fl)} / ${nf(f.il)}</td><td class="n">${m2(div(T.spend,T.leads))}</td></tr>`})():null);
+}
+
+/* ===== plataforma ===== */
+function platBloque(){
+ const T=agg(D);
+ const as=PLATS.map(p=>{const rs=D.filter(r=>r.plat===p);return {p,rs,...agg(rs)};}).filter(a=>a.spend>0||a.leads>0);
+ tabla('t-plat',
+  [['Plataforma'],['Inversión','n'],['% inv.','n'],['Impresiones','n'],['Clics enlace','n'],['CPC enlace','n'],['Conex. WA','n'],['Leads form','n'],['Leads','n'],['% leads','n'],['CPL','n'],['Índice CPL','n']],
+  as.length?as.map(a=>{const cpl=div(a.spend,a.leads), base=div(T.spend,T.leads);
+   const idx=cpl&&base?cpl/base:null;
+   const et=idx==null?'<span class="chip flat">sin leads</span>':idx<0.9?`<span class="chip good">${nf((1-idx)*100,0)}% más barato</span>`:idx>1.1?`<span class="chip crit">${nf((idx-1)*100,0)}% más caro</span>`:'<span class="chip flat">en la media</span>';
+   return `<tr><td class="name"><span class="pill" style="background:${PCOL[a.p]}"></span>${a.p}</td><td class="n">${mny(a.spend)}</td><td class="n dim">${nf(a.spend/T.spend*100,1)}%</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n">${nf(a.form)}</td><td class="n">${nf(a.leads)}</td><td class="n dim">${T.leads?nf(a.leads/T.leads*100,1)+'%':'—'}</td><td class="n"><strong>${m2(cpl)}</strong></td><td>${et}</td></tr>`}).join(''):null,
+  as.length?`<tr class="tot"><td>Total de la selección</td><td class="n">${mny(T.spend)}</td><td class="n">100%</td><td class="n">${nf(T.imp)}</td><td class="n">${nf(T.lc)}</td><td class="n">${m2(div(T.spend,T.lc))}</td><td class="n">${nf(T.wa)}</td><td class="n">${nf(T.form)}</td><td class="n">${nf(T.leads)}</td><td class="n">100%</td><td class="n">${m2(div(T.spend,T.leads))}</td><td></td></tr>`:null);
+
+ // plataforma x corte
+ const cortes=PERS.filter(p=>D.some(r=>r.per===p&&(r.spend>0||r.leads>0)));
+ const vivas=as.map(a=>a.p);
+ tabla('t-platcorte',
+  [['Corte'],...vivas.flatMap(p=>[[p+' · leads','n'],[p+' · CPL','n']]),['% leads FB','n']],
+  cortes.length?cortes.map(p=>{const rs=D.filter(r=>r.per===p);
+   const cel=vivas.flatMap(pl=>{const x=agg(rs.filter(r=>r.plat===pl));
+    return [`<td class="n">${x.leads?nf(x.leads):'<span class="dim">0</span>'}</td>`,`<td class="n">${m2(div(x.spend,x.leads))}</td>`];}).join('');
+   const f=splitFI(rs);
+   return `<tr><td class="name">${PER[p].lbl}</td>${cel}<td class="n">${f.fl+f.il?nf(f.fl/(f.fl+f.il)*100,0)+'%':'—'}</td></tr>`}).join(''):null,
+  cortes.length?(()=>{const cel=vivas.flatMap(pl=>{const x=agg(D.filter(r=>r.plat===pl));
+    return [`<td class="n">${nf(x.leads)}</td>`,`<td class="n">${m2(div(x.spend,x.leads))}</td>`];}).join('');
+   const f=splitFI(D);
+   return `<tr class="tot"><td>Total</td>${cel}<td class="n">${f.fl+f.il?nf(f.fl/(f.fl+f.il)*100,0)+'%':'—'}</td></tr>`})():null);
+
+ // grafica agrupada
+ const cats=cortes.map(p=>({k:p,lbl:PER[p].short}));
+ const serCPL=['Facebook','Instagram','WhatsApp'].map(pl=>({name:pl,col:PCOL[pl],
+   vals:Object.fromEntries(cortes.map(p=>[p,div(agg(D.filter(r=>r.per===p&&r.plat===pl)).spend,agg(D.filter(r=>r.per===p&&r.plat===pl)).leads)||0]))}));
+ const serLeads=['Facebook','Instagram','WhatsApp'].map(pl=>({name:pl,col:PCOL[pl],
+   vals:Object.fromEntries(cortes.map(p=>[p,agg(D.filter(r=>r.per===p&&r.plat===pl)).leads]))}));
+ document.getElementById('charts-plat').innerHTML=
+  groupChart('Leads por plataforma y corte','conexiones de WhatsApp + formulario',cats,serLeads,(n,ax)=>nf(Math.round(n)))+
+  groupChart('CPL por plataforma y corte','MXN por lead · barra ausente = sin leads ese corte',cats,serCPL,n=>'$'+nf(n,0));
+
+ // campañas con mayor brecha FB vs IG
+ const m=new Map();
+ D.forEach(r=>{if(!m.has(r.cid))m.set(r.cid,{name:r.name,nivel:r.nivel,rs:[]});m.get(r.cid).rs.push(r);});
+ const cs=[...m.values()].map(c=>{const f=agg(c.rs.filter(r=>r.plat==='Facebook')),i=agg(c.rs.filter(r=>r.plat==='Instagram'));
+   return {...c,f,i,tot:agg(c.rs),cf:div(f.spend,f.leads),ci:div(i.spend,i.leads)};})
+  .filter(c=>c.f.leads>=10&&c.i.leads>=10)
+  .sort((a,b)=>(b.ci/b.cf)-(a.ci/a.cf));
+ tabla('t-platcamp',
+  [['Campaña'],['Nivel'],['Inv. FB','n'],['Leads FB','n'],['CPL FB','n'],['Inv. IG','n'],['Leads IG','n'],['CPL IG','n'],['Brecha','n']],
+  cs.length?cs.map(c=>{const g=c.ci/c.cf;
+   return `<tr><td class="name">${c.name}</td><td><span class="chip flat">${c.nivel==='Licenciatura'?'LIC':c.nivel==='Posgrado'?'POS':'Otros'}</span></td><td class="n">${mny(c.f.spend)}</td><td class="n">${nf(c.f.leads)}</td><td class="n">${m2(c.cf)}</td><td class="n">${mny(c.i.spend)}</td><td class="n">${nf(c.i.leads)}</td><td class="n">${m2(c.ci)}</td><td>${g>1.15?`<span class="chip crit">IG ${nf((g-1)*100,0)}% más caro</span>`:g<0.87?`<span class="chip good">IG ${nf((1-g)*100,0)}% más barato</span>`:'<span class="chip flat">parejo</span>'}</td></tr>`}).join(''):null,
+  null,'Ninguna campaña de la selección tiene al menos 10 leads en cada plataforma, que es el mínimo para comparar sin ruido.');
+}
+
+/* ===== V2 vs V3 ===== */
+function v23(){
+ const g=f=>{const rs=D.filter(r=>r.ciclo===2&&f(r.name));const a=agg(rs);a.n=nCamp(rs);a.rs=rs;return a;};
+ const V2=g(n=>n.includes('CTWA_V2')), V3=g(n=>n.includes('CTWA_V3'));
+ if(!V2.n||!V3.n){tabla('t-v23',null,null,null,'La comparación necesita campañas V2 y V3 en la selección. Con los filtros actuales hay '+(V2.n?'solo V2':V3.n?'solo V3':'ninguna')+'.');return;}
+ const fila=(lbl,a)=>{const f=splitFI(a.rs);
+  return `<tr><td class="name">${lbl}</td><td class="n">${a.n}</td><td class="n">${mny(a.spend)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="split">${nf(f.fl)} / ${nf(f.il)}</td><td class="n"><strong>${m2(div(a.spend,a.leads))}</strong></td><td class="n dim">${mny(a.spend/a.n)}</td></tr>`;};
+ tabla('t-v23',[['Estructura'],['Campañas','n'],['Inversión','n'],['Impresiones','n'],['Clics enlace','n'],['CPC enlace','n'],['Conexiones WA','n'],['Leads FB / IG','n'],['CPL','n'],['$/campaña','n']],
+  fila('V2 · pools amplios (LIC ALL, POS GRAL, POS VALINM)',V2)+fila('V3 · una campaña por programa',V3),
+  `<tr class="tot"><td>Diferencia de CPL</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n">${nf((div(V3.spend,V3.leads)/div(V2.spend,V2.leads)-1)*100,0)}% más caro</td><td></td></tr>`);
+}
+
+/* ===== UTM ===== */
+function utmBloque(){
+ const cids=[...new Set(D.map(r=>r.cid))];
+ const m=new Map();
+ D.forEach(r=>{if(!m.has(r.cid))m.set(r.cid,{name:r.name,cid:r.cid,nivel:r.nivel,ciclos:new Set(),rs:[]});
+  const c=m.get(r.cid);c.ciclos.add(r.ciclo);c.rs.push(r);});
+ const cs=[...m.values()].map(c=>({...c,...agg(c.rs)})).sort((a,b)=>b.spend-a.spend);
+ tabla('t-utm',[['Campaña'],['Nivel'],['Ciclo'],['Inversión','n'],['Anuncios','n'],['Destino'],['URL de destino (sin query)'],['Etiquetado']],
+  cs.length?cs.map(c=>{const d=DEST[c.cid]||{dest:{},urls:{},ads:0,ntags:0,tags:{},inline:{}};
+   const tipos=Object.entries(d.dest).map(([k,v])=>`${k} (${v})`).join(', ')||'—';
+   const esWA=Object.keys(d.dest)[0]==='WhatsApp (CTWA)';
+   const urls=Object.keys(d.urls).length?Object.keys(d.urls).map(u=>u.replace('https://','')).join('<br>'):(esWA?'api.whatsapp.com/send':'—');
+   const inl=Object.keys(d.inline||{}).length>0;
+   const st=d.ntags?`<span class="chip good">${d.ntags} con url_tags</span>`:inl?'<span class="chip warn">UTM en la URL</span>':(Object.keys(d.urls).length?'<span class="chip crit">sin UTM</span>':'<span class="chip flat">n/a · no va a URL</span>');
+   return `<tr><td class="name">${c.name}</td><td><span class="chip flat">${c.nivel==='Licenciatura'?'LIC':c.nivel==='Posgrado'?'POS':'Otros'}</span></td><td><span class="chip flat">${[...c.ciclos].sort().join(' y ')}</span></td><td class="n">${mny(c.spend)}</td><td class="n dim">${d.ads}</td><td style="font-size:12.5px">${tipos}</td><td class="name dim mono" style="font-size:11.5px">${urls}</td><td>${st}</td></tr>`}).join(''):null,
+  null);
+ const tagged=cs.filter(c=>{const d=DEST[c.cid]||{};return (d.ntags||0)>0||Object.keys(d.inline||{}).length>0;});
+ document.getElementById('tagdetail').innerHTML=!tagged.length?'':'<h3>Cadenas de etiquetado, tal como están montadas</h3>'+tagged.map(c=>{
+  const d=DEST[c.cid];
+  const strs=[...Object.keys(d.tags||{}),...Object.keys(d.inline||{}).map(u=>'(en la URL) '+(u.split('?')[1]||''))];
+  const ok=c.name.includes('EXACER');
+  const nota=ok?'<span class="chip good">se puede leer</span> destino propio, udf.edu.mx'
+   :c.name.includes('CB_')?'<span class="chip warn">no aterriza</span> Microsoft Forms descarta los parámetros'
+   :'<span class="chip warn">no aterriza</span> Google Forms descarta los parámetros';
+  return `<div style="border:1px solid var(--rule); border-left:3px solid ${ok?'var(--good)':'var(--warn)'}; background:var(--sheet); padding:12px 14px; margin-bottom:10px"><div style="font-weight:600; font-size:13.5px">${c.name}</div><div style="margin:4px 0 6px">${nota}</div>${strs.map(s=>`<div class="mono" style="font-size:11.5px; color:var(--ink-2); overflow-x:auto; white-space:nowrap">${s}</div>`).join('')}</div>`;
  }).join('');
 }
-detalle('c1-meses',1); detalle('c2-meses',2);
 
-/* ---- V2 vs V3 ---- */
-const grp=f=>{const rs=C2.filter(r=>f(r.name));const a=agg(rs);a.n=new Set(rs.map(r=>r.cid)).size;return a;};
-const V2=grp(n=>n.includes('CTWA_V2')), V3=grp(n=>n.includes('CTWA_V3'));
-tbl('t-v23',[['Estructura'],['Campañas','n'],['Inversión','n'],['Impresiones','n'],['Clics enlace','n'],['CPC enlace','n'],['Conexiones WA','n'],['CPL','n'],['$/campaña','n']],
- [['V2 · 3 pools amplios (LIC ALL, POS GRAL, POS VALINM)',V2],['V3 · 21 campañas, una por programa',V3]].map(([lbl,a])=>
-  `<tr><td class="name">${lbl}</td><td class="n">${a.n}</td><td class="n">${mny(a.spend)}</td><td class="n">${nf(a.imp)}</td><td class="n">${nf(a.lc)}</td><td class="n">${m2(div(a.spend,a.lc))}</td><td class="n">${nf(a.wa)}</td><td class="n"><strong>${m2(div(a.spend,a.leads))}</strong></td><td class="n dim">${mny(a.spend/a.n)}</td></tr>`).join(''),
- `<tr class="tot"><td>Diferencia de CPL</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n">${nf((div(V3.spend,V3.leads)/div(V2.spend,V2.leads)-1)*100,0)}% más caro</td><td></td></tr>`);
-
-/* ---- UTM ---- */
-const byAll={};
-rows.forEach(r=>{const o=byAll[r.cid]=byAll[r.cid]||{name:r.name,cid:r.cid,traf:r.traf,ciclos:new Set(),rows:[]};o.ciclos.add(r.ciclo);o.rows.push(r);});
-const allC=Object.values(byAll).map(c=>({...c,...agg(c.rows)})).sort((a,b)=>b.spend-a.spend);
-tbl('t-utm',[['Campaña'],['Ciclo'],['Inversión','n'],['Anuncios','n'],['Destino'],['URL de destino (sin query)'],['Etiquetado']],
- allC.map(c=>{const d=DEST[c.cid]||{dest:{},urls:{},ads:0,ntags:0,tags:{},inline:{}};
-  const tipos=Object.entries(d.dest).map(([k,v])=>`${k} (${v})`).join(', ')||'—';
-  const esWA=Object.keys(d.dest)[0]==='WhatsApp (CTWA)';
-  const urls=Object.keys(d.urls).length?Object.keys(d.urls).map(u=>u.replace('https://','')).join('<br>'):(esWA?'api.whatsapp.com/send':'—');
-  const inline=Object.keys(d.inline||{}).length>0;
-  const st=d.ntags?`<span class="chip good">${d.ntags} con url_tags</span>`:inline?'<span class="chip warn">UTM en la URL</span>':(Object.keys(d.urls).length?'<span class="chip crit">sin UTM</span>':'<span class="chip flat">n/a · no va a URL</span>');
-  return `<tr><td class="name">${c.name}</td><td><span class="chip flat">${[...c.ciclos].join(' y ')}</span></td><td class="n">${mny(c.spend)}</td><td class="n dim">${d.ads}</td><td style="font-size:12.5px">${tipos}</td><td class="name dim mono" style="font-size:11.5px">${urls}</td><td>${st}</td></tr>`}).join(''),
- `<tr class="tot"><td>Total 57 campañas</td><td></td><td class="n">${mny(G.spend)}</td><td class="n">793</td><td></td><td></td><td><span class="chip good">27 con UTM</span> <span class="chip crit">766 sin</span></td></tr>`);
-
-const tagged=allC.filter(c=>{const d=DEST[c.cid]||{};return (d.ntags||0)>0||Object.keys(d.inline||{}).length>0;});
-document.getElementById('tagdetail').innerHTML='<h3>Cadenas de etiquetado, tal como están montadas</h3>'+tagged.map(c=>{
- const d=DEST[c.cid];
- const strs=[...Object.keys(d.tags||{}),...Object.keys(d.inline||{}).map(u=>'(en la URL) '+(u.split('?')[1]||''))];
- const ok=c.name.includes('EXACER');
- const nota=ok?'<span class="chip good">se puede leer</span> destino propio, udf.edu.mx'
-  :c.name.includes('CB_')?'<span class="chip warn">no aterriza</span> Microsoft Forms descarta los parámetros'
-  :'<span class="chip warn">no aterriza</span> Google Forms descarta los parámetros';
- return `<div style="border:1px solid var(--rule); border-left:3px solid ${ok?'var(--good)':'var(--warn)'}; background:var(--sheet); padding:12px 14px; margin-bottom:10px"><div style="font-weight:600; font-size:13.5px">${c.name}</div><div style="margin:4px 0 6px">${nota}</div>${strs.map(s=>`<div class="mono" style="font-size:11.5px; color:var(--ink-2); overflow-x:auto; white-space:nowrap">${s}</div>`).join('')}</div>`;
-}).join('');
-
-/* ---- hallazgos ---- */
+/* ===== orquestador ===== */
+function aplicar(){
+ D=filtrar();
+ pintarFiltros(); estado(); kpis(); panorama(); graficas(); comparativo();
+ nivelBloque(); platBloque(); cicloBloque(1); cicloBloque(2); v23(); utmBloque();
+ bindTips();
+}
+aplicar();
+/* ===== hallazgos (fijos, sobre el total) ===== */
+const HP=[
+ `<strong>Facebook trae tres de cada cuatro leads y los trae más baratos.</strong> $710,710 de inversión (69.9%) y <strong>11,463 leads a $62.00</strong>, contra $293,487 en Instagram (28.9%) y <strong>3,661 leads a $80.17</strong>. Instagram sale <strong>29% más caro</strong> por lead en el agregado de los dos ciclos, y se lleva una tajada de gasto mayor a la de leads que devuelve: 28.9% del dinero por 23.9% de los leads.`,
+ `<strong>La brecha se abrió con el cambio a WhatsApp.</strong> En el ciclo 1 Instagram era 21% más caro que Facebook ($78.60 vs $65.20) y cargaba 39.5% del gasto. En el ciclo 2 es <strong>48% más caro</strong> ($87.24 vs $59.01) y ya solo carga 14.2%. La mezcla se corrigió sola —el algoritmo de CTWA encontró que Facebook convierte mejor— pero sigue habiendo $57,753 puestos en el placement caro.`,
+ `<strong>Instagram es peor justo donde más importa: posgrado.</strong> El lead de posgrado cuesta $63.45 en Facebook y <strong>$101.95 en Instagram, 61% más</strong>. En licenciatura la brecha es de 37% ($69.50 vs $94.91). El único lugar donde las dos plataformas empatan es en el grupo Otros —remarketing sobre base de datos y EXACER— con $39.71 contra $41.40: cuando el público ya conoce a UDF, la plataforma deja de importar.`,
+ `<strong>La ubicación más barata de todo el periodo casi no se usó.</strong> Los anuncios en <strong>Estados de WhatsApp</strong> gastaron $11,715 —1.2% del total— y trajeron 226 leads a <strong>$51.83</strong>, el CPL más bajo de cualquier plataforma. Solo corrió en el ciclo 2 y vale la pena probarla con presupuesto propio antes de asumir que escala.`,
+ `<strong>Instagram compra clic carísimo y no lo compensa.</strong> El CPC a enlace es de $3.67 en Facebook y <strong>$14.20 en Instagram</strong>. La diferencia de CPL es mucho menor que la de CPC, así que el clic de Instagram sí convierte mejor una vez que ocurre; el problema es cuántos clics compra con el mismo dinero.`,
+];
 const H1=[
  `<strong>La inversión creció 20% de enero a mayo y el CPL empeoró 18%.</strong> Enero cerró en $98,929 con CPL de $72.58; mayo en $118,276 con CPL de $85.83. El mejor mes fue marzo: $108,018 y CPL de $56.08 con 1,926 leads, el pico de volumen del ciclo.`,
  `<strong>Tres campañas concentran el 57% del gasto y tienen los CPL más altos.</strong> [LIC] Decisión VID + IMG ($187,458 · CPL $119.63), [MST] Decisión + Leads ($87,566 · CPL $94.26) y [ESP] Consideración + Leads ($63,930 · CPL $113.15) suman $338,955 y entregan 3,061 leads. Con el CPL promedio del ciclo, ese mismo dinero habría dado unos 4,848.`,
@@ -478,14 +724,14 @@ const H2=[
  `<strong>Cuatro campañas del ciclo 1 siguieron corriendo hasta el 30 de junio.</strong> [LIC] y [POS] C-1-27, C-1-27 Decisión + RMKT + BBDD y [GRAL] Awareness + Videos gastaron $10,971 en esos nueve días, con 135 leads. El traslape es normal en el cambio de ciclo, pero [GRAL] Awareness ($378, 1,595 clics, sin UTM y sin conversión) no aportaba nada medible.`,
 ];
 const H3=[
- `<strong>$1,015,943 y 15,350 leads en 251 días, a $66.19 de CPL promedio.</strong> El ciclo 2 hizo 41% del gasto total en 31% del tiempo: el ritmo se aceleró de $3,470 a $5,307 por día.`,
+ `<strong>$1,016,061 y 15,350 leads en 251 días, a $66.19 de CPL promedio.</strong> El ciclo 2 hizo 41% del gasto total en 31% del tiempo: el ritmo se aceleró de $3,470 a $5,307 por día.`,
+ `<strong>Por nivel: licenciatura se lleva la mitad del dinero y paga el lead más caro.</strong> Licenciatura $533,997 y 7,035 leads a $75.91; posgrado $358,616 y 5,253 a $68.27; el resto —base de datos, awareness general y EXACER— $123,448 y 3,062 leads a $40.32. Cuidado con el CPL de posgrado: su costo por inscrito es $5,076 contra $1,637 de licenciatura, o sea el lead es barato y el cierre es el problema.`,
  `<strong>El cambio de modelo funcionó, la fragmentación no.</strong> Pasar de formulario instantáneo a WhatsApp bajó el CPL 12% y subió los leads por día 74%. Pero dentro del ciclo 2, partir los pools en 21 campañas por programa subió el CPL 62% respecto de la estructura amplia. La lección se repite en los dos ciclos: los públicos grandes con presupuesto concentrado ganan, y las campañas de $1,500–$2,700 no salen de aprendizaje.`,
  `<strong>El etiquetado pasó de cero a tres campañas, y aún así solo una sirve.</strong> Del ciclo 1 no queda ni un parámetro; en el ciclo 2 hay 27 anuncios etiquetados, pero dos de las tres campañas apuntan a formularios de Google y Microsoft, que tiran los UTM. Todo el gasto a destino propio que sí se puede leer son los $5,329 de EXACER Tráfico Frío.`,
  `<strong>Lo pequeño y acotado siempre ganó, y nunca se escaló.</strong> EXACER, Colegio de Bachilleres y el remarketing sobre base de datos dieron CPL de $11 a $59 en los dos ciclos, con presupuestos marginales. Las campañas grandes de prospección fría de licenciatura sostuvieron CPL de $90 a $120 llevándose la mitad del dinero.`,
 ];
-document.getElementById('hl1').innerHTML=H1.map(h=>`<li>${h}</li>`).join('');
-document.getElementById('hl2').innerHTML=H2.map(h=>`<li>${h}</li>`).join('');
-document.getElementById('hl3').innerHTML=H3.map(h=>`<li>${h}</li>`).join('');
+[['hlp',HP],['hl1',H1],['hl2',H2],['hl3',H3]].forEach(([id,arr])=>{
+ const el=document.getElementById(id); if(el) el.innerHTML=arr.map(h=>`<li>${h}</li>`).join('');});
 
 </script>
 </body>
