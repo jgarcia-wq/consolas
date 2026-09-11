@@ -1,0 +1,33 @@
+Desempeño de Google Ads · UDF Santa María
+Enero a junio de 2026 · MXN
+Corte: 2026-09-11
+
+QUÉ CUBRE
+  Histórico mensual de las campañas de Google Ads, hoy pausadas: inversión, impresiones,
+  clics, CPC, leads, CPL y CVR. Filtros por mes y por campaña, más el detalle fila por fila
+  de las 10 campañas (7 BOFU por programa, Display, Demand Gen y PMax).
+
+DE DÓNDE SALEN LOS DATOS
+  Export de Google Ads entregado por Paola (Black & Orange). Leads = conversiones primarias
+  atribuidas por Google Ads; algunas vienen fraccionadas (p. ej. 53.0 en Universidad Santa
+  María) porque Google reparte conversiones entre campañas. CPC = inversión / clics,
+  CPL = inversión / leads, CVR = leads / clics.
+  Fuera de alcance: Meta Ads, Patagon y Pipedrive. Esta página NO reconcilia contra
+  inscritos reales; para eso está la consola de funnel del ciclo.
+
+QUÉ OBSERVAR
+  Junio conserva campañas con costo e impresiones en cero más el gasto residual del corte.
+  Display UDF gastó $3,626 en enero-febrero con 962 clics y cero leads, lo que suele indicar
+  tracking no configurado más que mal desempeño.
+  Sólo PMax trae UTMs a nivel campaña; el resto aparece como "No configurado".
+
+DATOS PERSONALES
+  Ninguno: la página sólo contiene métricas agregadas por campaña y mes.
+  Aun así no está listada en el índice y lleva noindex/nofollow. El repositorio es público:
+  cualquiera con la liga completa puede abrirla.
+
+CIFRAS DEL PERIODO
+  Inversión $163,710.79 · 562,992 impresiones · 15,606 clics
+  498 leads · CPC $10.49 · CPL $328.74 · CVR 3.19%
+
+Black & Orange
