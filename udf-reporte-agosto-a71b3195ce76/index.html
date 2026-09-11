@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Reporte Agosto UDF</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #ffffff;
+    --surface:    #f1f4f7;
+    --surface-2:  #e6ebf0;
+    --ink:        #14181d;
+    --ink-soft:   #55616e;
+    --ink-faint:  #7d8894;
+    --rule:       #d7dde4;
+    --accent:     #b23c07;
+    --accent-soft:#f5e7de;
+
+    --f-display: "Newsreader", Georgia, "Times New Roman", serif;
+    --f-body:    "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --f-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0f1317;
+      --surface:    #171d23;
+      --surface-2:  #1f272f;
+      --ink:        #e6ebf0;
+      --ink-soft:   #9aa6b2;
+      --ink-faint:  #79848f;
+      --rule:       #28313a;
+      --accent:     #f79055;
+      --accent-soft:#2b1d14;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0f1317;
+    --surface:    #171d23;
+    --surface-2:  #1f272f;
+    --ink:        #e6ebf0;
+    --ink-soft:   #9aa6b2;
+    --ink-faint:  #79848f;
+    --rule:       #28313a;
+    --accent:     #f79055;
+    --accent-soft:#2b1d14;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5.2vw, 3.1rem);
+    line-height: 1.08;
+    letter-spacing: -.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--f-display);
+    font-size: 1.16rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .meta-line {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 20px; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+  }
+  .sec-head .tag {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: -.01em;
+    margin: 0;
+    flex: 1;
+  }
+
+  h3 {
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: 68ch; }
+  p + p { margin-top: .8em; }
+  .lede { color: var(--ink-soft); }
+
+  a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  code {
+    font-family: var(--f-mono);
+    font-size: .86em;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 3px;
+    word-break: break-all;
+  }
+
+  /* ---------- stat strip ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .stat { background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 3px; }
+  .stat .n {
+    font-family: var(--f-display);
+    font-size: 1.72rem;
+    font-weight: 600;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .k {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; border: 1px solid var(--rule); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  thead th {
+    background: var(--surface-2);
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 9px 12px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--rule);
+  }
+  tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: var(--surface); }
+  td.date { font-family: var(--f-mono); font-size: 12.5px; white-space: nowrap; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  td.num  { font-family: var(--f-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.wide { min-width: 260px; }
+  caption {
+    caption-side: bottom;
+    text-align: left;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    padding: 9px 2px 0;
+  }
+
+  .note-nueva {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  footer .f-title {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 36px 18px 72px; gap: 42px; }
+  }
+</style>
+<style>
+  html { background: var(--paper); }
+  img { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">UDF Santa María · Black n Orange</div>
+    <h1>Reporte Agosto&nbsp;2026</h1>
+    <p class="standfirst">Agosto fue el mes de aceleración y de reestructura. La inversión creció 75%, se abrieron cuatro frentes nuevos de captación y, en la recta final, toda la estructura de prospecting se desagregó programa por programa. También fue el mes en que quedó a la vista dónde se está perdiendo el volumen: entre la conversación y el trato gestionado.</p>
+    <div class="meta-line">
+      <span>Periodo: 1 – 31 de agosto de 2026</span>
+      <span>Cuenta Meta: act_838230470286008</span>
+    </div>
+  </header>
+
+  <!-- ============ 1. RESULTADOS ============ -->
+  <section>
+    <div class="sec-head"><span class="tag">01</span><h2>Resultados del mes</h2></div>
+    <p class="lede">La inversión pasó de $119,312 a $208,632 MXN y las conversaciones atendidas subieron de 2,239 a 2,642. Pero los leads calificados de 4 y 5 estrellas bajaron de 313 a 225, y el costo por conversación subió de $46 a $65. La mezcla lo explica en parte: agosto incorporó campañas de rescate, de evento y de EXACER, que traen públicos más amplios y más fríos que el prospecting de licenciatura puro.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="n">$208,632</span><span class="k">Inversión Meta MXN</span></div>
+      <div class="stat"><span class="n">3.00 M</span><span class="k">Impresiones</span></div>
+      <div class="stat"><span class="n">50,913</span><span class="k">Clics</span></div>
+      <div class="stat"><span class="n">2,642</span><span class="k">Conversaciones Patagon</span></div>
+      <div class="stat"><span class="n">225</span><span class="k">Leads calificados 4–5★</span></div>
+      <div class="stat"><span class="n">$65</span><span class="k">Costo por conversación</span></div>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Frente</th><th>Inversión MXN</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th>Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="wide">Licenciaturas · 8 campañas por programa <span class="note-nueva">desde 21-ago</span></td><td class="num">59,802</td><td class="num">864,703</td><td class="num">11,178</td><td class="num">1.29%</td><td class="num">632 conversaciones</td></tr>
+          <tr><td class="wide">Licenciaturas · pool consolidado, apagado entre el 21 y el 23-ago</td><td class="num">44,492</td><td class="num">624,527</td><td class="num">8,791</td><td class="num">1.41%</td><td class="num">821 conversaciones</td></tr>
+          <tr><td class="wide">¿No te quedaste? · campaña de rescate <span class="note-nueva">nueva</span></td><td class="num">19,518</td><td class="num">122,090</td><td class="num">2,387</td><td class="num">1.96%</td><td class="num">284 conversaciones</td></tr>
+          <tr><td class="wide">Posgrados · pool general, pausado el 23-ago</td><td class="num">16,656</td><td class="num">141,300</td><td class="num">2,710</td><td class="num">1.92%</td><td class="num">301 conversaciones</td></tr>
+          <tr><td class="wide">Valuación Inmobiliaria · pool</td><td class="num">13,734</td><td class="num">141,198</td><td class="num">2,551</td><td class="num">1.81%</td><td class="num">240 conversaciones</td></tr>
+          <tr><td class="wide">Sesión informativa 15-ago</td><td class="num">13,716</td><td class="num">357,693</td><td class="num">3,539</td><td class="num">0.99%</td><td class="num">76 registros</td></tr>
+          <tr><td class="wide">Posgrados · 12 campañas por programa <span class="note-nueva">desde 23-ago</span></td><td class="num">13,602</td><td class="num">140,465</td><td class="num">2,600</td><td class="num">1.85%</td><td class="num">214 conversaciones</td></tr>
+          <tr><td class="wide">Especialidades de Valuación · 3 conjuntos <span class="note-nueva">desde 23-ago</span></td><td class="num">8,449</td><td class="num">71,310</td><td class="num">1,672</td><td class="num">2.34%</td><td class="num">201 conversaciones</td></tr>
+          <tr><td class="wide">EXACER · formulario instantáneo <span class="note-nueva">desde 21-ago</span></td><td class="num">6,898</td><td class="num">126,923</td><td class="num">1,767</td><td class="num">1.39%</td><td class="num">121 registros</td></tr>
+          <tr><td class="wide">EXACER · tráfico a landing, pausada el 21-ago</td><td class="num">5,329</td><td class="num">177,347</td><td class="num">7,549</td><td class="num">4.26%</td><td class="num">4,723 vistas</td></tr>
+          <tr><td class="wide">Sesión posgrados 8-ago · frío</td><td class="num">4,371</td><td class="num">210,695</td><td class="num">5,819</td><td class="num">2.76%</td><td class="num">3,629 vistas</td></tr>
+          <tr><td class="wide">Sesión posgrados 8-ago · base de datos</td><td class="num">2,066</td><td class="num">20,580</td><td class="num">350</td><td class="num">1.70%</td><td class="num">187 vistas</td></tr>
+        </tbody>
+        <caption>Meta Ads, 1 – 31 de agosto de 2026, agrupado por frente: 30 campañas en total, 20 de ellas creadas entre el 21 y el 23 de agosto. Las 25 campañas de Click-to-WhatsApp ejercieron $176,252 MXN y generaron 2,693 conversaciones, a $65.45 cada una.</caption>
+      </table>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Licenciatura · campaña propia desde el 22 de agosto</th><th>Inversión MXN</th><th>Clics</th><th>CTR</th><th>Conversaciones</th><th>Costo por conversación</th></tr></thead>
+        <tbody>
+          <tr><td>Psicología</td><td class="num">13,088</td><td class="num">1,878</td><td class="num">1.44%</td><td class="num">140</td><td class="num">$93</td></tr>
+          <tr><td>Derecho</td><td class="num">10,945</td><td class="num">1,793</td><td class="num">1.35%</td><td class="num">112</td><td class="num">$98</td></tr>
+          <tr><td>Administración</td><td class="num">10,921</td><td class="num">2,222</td><td class="num">1.19%</td><td class="num">103</td><td class="num">$106</td></tr>
+          <tr><td>Contaduría</td><td class="num">9,617</td><td class="num">1,806</td><td class="num">1.32%</td><td class="num">90</td><td class="num">$107</td></tr>
+          <tr><td>Sistemas Computacionales</td><td class="num">4,410</td><td class="num">906</td><td class="num">1.62%</td><td class="num">58</td><td class="num">$76</td></tr>
+          <tr><td>Comunicación</td><td class="num">4,103</td><td class="num">885</td><td class="num">1.19%</td><td class="num">42</td><td class="num">$98</td></tr>
+          <tr><td>Comercio Internacional</td><td class="num">3,512</td><td class="num">1,047</td><td class="num">1.12%</td><td class="num">49</td><td class="num">$72</td></tr>
+          <tr><td>Mercadotecnia</td><td class="num">3,207</td><td class="num">641</td><td class="num">1.19%</td><td class="num">38</td><td class="num">$84</td></tr>
+        </tbody>
+        <caption>Cifras desde la desagregación, no del mes completo: las cuatro primeras corren desde el 21 de agosto y las cuatro últimas desde el 23. Comercio Internacional y Sistemas entregan la conversación más barata; Administración y Contaduría, la más cara. Esta lectura por programa no existía cuando todo corría en un solo pool.</caption>
+      </table>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Calidad de conversaciones · Patagon</th><th>1★</th><th>2★</th><th>3★</th><th>4★</th><th>5★</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Agosto</td><td class="num">1,124</td><td class="num">85</td><td class="num">1,208</td><td class="num">174</td><td class="num">51</td><td class="num">2,642</td></tr>
+          <tr><td>Julio</td><td class="num">808</td><td class="num">74</td><td class="num">1,044</td><td class="num">213</td><td class="num">100</td><td class="num">2,239</td></tr>
+        </tbody>
+        <caption>1,575 conversaciones con engagement (60%), 225 calificadas en 4 y 5 estrellas, 51 conversiones registradas. Calidad promedio 2.2 estrellas contra 2.4 en julio. Las conversiones de agosto siguen madurando: el histórico de la cuenta muestra una mediana de 27 días entre el alta del trato y la inscripción formal.</caption>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 2. ACCIONES ============ -->
+  <section>
+    <div class="sec-head"><span class="tag">02</span><h2>Acciones ejecutadas</h2></div>
+    <p class="lede">Lo trabajado durante el mes, agrupado por frente, con la evidencia que respalda cada entrega.</p>
+
+    <h3>A · Pauta Meta</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="date">7-ago</td>
+            <td class="wide">Montaje y activación de <strong>“¿No te quedaste?”</strong>, campaña de rescate para quien no obtuvo lugar en la pública: 19 anuncios, 18 estáticos y un video manifiesto, radio de 20 km y presupuesto de $800 MXN diarios. Se excluyeron Audience Network y Messenger tras comprobar que no entregaban.</td>
+            <td class="wide">Campaña activa en Meta · galería de los 19 anuncios</td>
+          </tr>
+          <tr>
+            <td class="date">7-ago</td>
+            <td class="wide"><strong>Validación de la decisión de concentrar la pauta en Meta.</strong> Se analizaron 409 inscritos históricos del CRM por origen: orgánico y web 51%, Meta 29%, Google 7%. En la cohorte 2026 la diferencia se abre a 42.6% contra 10.2%.</td>
+            <td class="wide">Análisis por persona con los campos de origen, fuente y campaña</td>
+          </tr>
+          <tr>
+            <td class="date">11 y 13-ago</td>
+            <td class="wide"><strong>Escalamiento de presupuestos en dos fases</strong>, con saltos de máximo 20% cada 72 horas para no reiniciar el aprendizaje de las campañas. Psicología pasó de $457 a $657 diarios, Valuación Inmobiliaria de $509 a $733, y el conjunto llegó a un ritmo de unos $3,650 MXN diarios más la campaña de rescate.</td>
+            <td class="wide">Matriz programa por programa acordada en la sesión del 11 de agosto</td>
+          </tr>
+          <tr>
+            <td class="date">11-ago</td>
+            <td class="wide"><strong>Apertura nacional de las tres especialidades de Valuación.</strong> Se detectó que siendo programas 100% en línea estaban segmentados a 15 km del campus, lo que limitaba artificialmente su alcance.</td>
+            <td class="wide">Sesión de seguimiento del 11 de agosto</td>
+          </tr>
+          <tr>
+            <td class="date">12-ago</td>
+            <td class="wide">Montaje y activación de la <strong>campaña de EXACER</strong> con 6 anuncios y $625 MXN diarios, dirigida a la landing del curso.</td>
+            <td class="wide">Campaña activa en Meta · previsualizaciones de los 6 anuncios</td>
+          </tr>
+          <tr>
+            <td class="date">13 y 14-ago</td>
+            <td class="wide">Retiro inmediato del <strong>arte de Licenciatura en Pedagogía</strong>, programa que no forma parte de la oferta vigente, al ser detectado por UDF. Se acordó un proceso de revisión y autorización de materiales que cubra oferta académica, horarios, RVOE, modalidad y fechas de inicio antes de publicar.</td>
+            <td class="wide">Correspondencia del 13 y 14 de agosto</td>
+          </tr>
+          <tr>
+            <td class="date">21-ago</td>
+            <td class="wide"><strong>Reemplazo de la campaña de EXACER por una de formulario instantáneo.</strong> La versión de tráfico gastó $5,285 MXN en diez días y produjo un solo registro. El diagnóstico encontró tres fugas simultáneas: la compra optimizaba al clic más barato y mandó el 68.6% del gasto a mayores de 55 y el 75% a Stories y Reels; la landing nunca tuvo píxel, así que las 4,673 vistas no formaron ningún público; y el formulario estaba al 78% de profundidad de la página con 11 campos obligatorios. La campaña nueva corrige las tres: formulario dentro de Meta, sólo feeds, y rango de edad de 18 a 45 forzado.</td>
+            <td class="wide">Diagnóstico por edad y ubicación · campaña nueva con 121 registros en sus primeros 10 días</td>
+          </tr>
+          <tr>
+            <td class="date">21 y 23-ago</td>
+            <td class="wide"><strong>Desagregación de licenciaturas.</strong> El pool consolidado se apagó por partes y las ocho licenciaturas pasaron a tener campaña propia con presupuesto a nivel campaña. El 21 de agosto salieron las cuatro carreras ancla —Psicología, Administración, Derecho y Contaduría—, cada una encendida al mismo tiempo que se pausaba su conjunto dentro del pool; el 23 salieron Comunicación, Sistemas, Mercadotecnia y Comercio Internacional, y se apagó el conjunto de programas secundarios. El bloque arrancó en $5,250 MXN diarios y cerró el mes en $6,000. El cambio aprovechó el reinicio de aprendizaje que ya implicaba el refresh completo de artes, y a cambio da control de presupuesto y lectura de costo por programa.</td>
+            <td class="wide">Estructura visible en el Administrador de Anuncios · documento de traspaso con identificadores, pisos y reglas de operación</td>
+          </tr>
+          <tr>
+            <td class="date">23-ago</td>
+            <td class="wide"><strong>Desagregación de posgrados.</strong> La misma lógica se aplicó al pool de posgrado: se pausó la campaña consolidada y los <strong>12 programas</strong> —maestrías, especialidad y doctorados— quedaron con campaña propia y presupuesto individual, de $80 a $110 MXN diarios según su meta de inscritos. Ese mismo bloque activó la campaña de <strong>especialidades de Valuación</strong> con sus tres conjuntos, ya con alcance nacional.</td>
+            <td class="wide">12 campañas activas en Meta · presupuesto por programa alineado a la matriz de metas de posgrado</td>
+          </tr>
+          <tr>
+            <td class="date">14-ago</td>
+            <td class="wide">Definición de la <strong>nomenclatura y el pipeline de producción de artes</strong> por programa, perfil y sexo, para poder leer qué combinación creativa gana sin ambigüedad.</td>
+            <td class="wide">Nomenclatura vigente y plantilla de exportación</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>B · Patagon — trazabilidad y recuperación de leads</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">3-ago</td><td class="wide"><strong>Diagnóstico del seguimiento de leads de 4 y 5 estrellas</strong> cruzando Patagon con el CRM: 91 leads atorados sin primer toque, 50 de ellos con más de 7 días; 150 tratos en etapa de Perdido sin cerrar; y una mediana de primer toque cercana a las 133 horas contra un SLA de 1 a 4 horas.</td><td class="wide">Consolas de seguimiento publicadas el 4 de agosto</td></tr>
+          <tr><td class="date">4-ago</td><td class="wide">Sesión de revisión de resultados y performance con el equipo de Patagon.</td><td class="wide">Sesión del 4 de agosto</td></tr>
+          <tr><td class="date">14–17-ago</td><td class="wide">Atención a la solicitud de UDF sobre <strong>visibilidad y trazabilidad de leads sin primer contacto</strong>, con análisis y cruce de información y sesión de trabajo para validar la hipótesis.</td><td class="wide">Correspondencia del 14 y 17 de agosto</td></tr>
+          <tr>
+            <td class="date">20-ago</td>
+            <td class="wide"><strong>Cruce completo de los 536 leads de 4 y 5 estrellas históricos.</strong> 427 tienen trato (79.7%), 63 tienen persona pero no trato y 46 nunca llegaron al CRM: una brecha de 109 registros, el 20.3%. Se identificó la causa: el trato se dispara con la calificación inicial, de modo que una conversación que sube de 3 a 4 o 5 estrellas después ya no lo genera. De los 63 con persona sin trato, 44 estaban en el usuario genérico sin asignar a ningún asesor.</td>
+            <td class="wide">Cruce completo con el detalle registro por registro</td>
+          </tr>
+          <tr><td class="date">20 y 21-ago</td><td class="wide"><strong>Solicitud e implementación con Patagon de la integración por calificación.</strong> La persona ahora se crea desde 3 estrellas con nombre, programa de interés, WhatsApp y calificación, y se actualiza al subir a 4 o 5. Confirmado por el equipo de Patagon el 21 de agosto.</td><td class="wide">Especificación enviada y confirmación de ajustes del 21 de agosto</td></tr>
+          <tr><td class="date">25-ago</td><td class="wide">Configuración del <strong>nuevo pipeline P. Refresh</strong> para los leads de 3 estrellas, que antes no llegaban al CRM. En el periodo del 1 de junio al 20 de agosto se habían quedado fuera 1,857 registros de ese nivel.</td><td class="wide">Pipeline configurado · recap enviado el 27 de agosto</td></tr>
+          <tr><td class="date">19-ago</td><td class="wide">Autorización de UDF para incorporar los leads de 3 estrellas al flujo comercial.</td><td class="wide">Correspondencia del 19 de agosto</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>C · CRM Pipedrive y habilitación comercial</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">4-ago</td><td class="wide">Publicación de las <strong>consolas de seguimiento</strong> del equipo comercial: embudo y scorecard de 4 y 5 estrellas, atención a nivel mensaje y revisión de la pila de perdidos.</td><td class="wide">Tres consolas publicadas y compartidas</td></tr>
+          <tr><td class="date">10-ago</td><td class="wide">Creación de los <strong>6 campos de calificación de EXACER</strong> en el CRM y actualización del formulario web del programa con las 8 preguntas del brief.</td><td class="wide">Campos creados vía API · formulario web publicado</td></tr>
+          <tr><td class="date">10 y 12-ago</td><td class="wide">Armado y prueba de la <strong>automatización de calificación de EXACER</strong>: seis condiciones que filtran por edad, secundaria, preparatoria, modalidad presencial y horario, y crean el trato sólo si el prospecto califica. Probada de punta a punta, el trato se creó en 3 segundos.</td><td class="wide">Automatización activa · prueba documentada del 12 de agosto</td></tr>
+          <tr><td class="date">11-ago</td><td class="wide">Sesión de trabajo con dirección y los tres asesores: matriz de prioridades programa por programa, acuerdos de primer toque dentro de la ventana de 24 horas, barrido diario y compromiso de coaching de llamadas.</td><td class="wide">Minuta de la sesión del 11 de agosto</td></tr>
+          <tr><td class="date">14-ago</td><td class="wide">Entrega de la <strong>consola de avance contra meta</strong> revisada en la sesión del 11 de agosto.</td><td class="wide">Consola enviada el 14 de agosto</td></tr>
+          <tr><td class="date">20 y 21-ago</td><td class="wide">Construcción y prueba punta a punta de la <strong>cadena de captura de EXACER</strong>: del formulario de Meta a Zapier, de ahí a la creación de la persona en el CRM, la automatización que crea el trato y la asignación rotativa al equipo. Tres pruebas, incluyendo la rama que descarta.</td><td class="wide">Las tres pruebas documentadas con sus identificadores</td></tr>
+          <tr><td class="date">22-ago</td><td class="wide"><strong>Auditoría de seguimiento del equipo de ventas</strong> sobre el periodo del 24 de junio al 22 de agosto, con la lectura del embudo por asesor y por etapa.</td><td class="wide">Documento de auditoría</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>D · Eventos y nuevos programas</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">3-ago</td><td class="wide">Cierre de las <strong>fichas de información de los dos programas nuevos</strong>, Especialidad en Innovación Educativa y Curso de Preparación EXACER, con las respuestas de UDF sobre nombre institucional, requisitos y modalidad.</td><td class="wide">Cuestionario respondido el 3 de agosto</td></tr>
+          <tr><td class="date">6 y 8-ago</td><td class="wide">Entrega de los formularios y de la base de registros de la <strong>sesión informativa de Posgrados del 8 de agosto</strong>, realizada en línea.</td><td class="wide">Formularios y base de datos compartidos</td></tr>
+          <tr><td class="date">7 y 12-ago</td><td class="wide">Entregas sucesivas de la <strong>base de registros de la sesión informativa del 15 de agosto</strong> conforme llegaban los formularios.</td><td class="wide">Bases compartidas el 7 y el 12 de agosto</td></tr>
+          <tr><td class="date">7-ago</td><td class="wide">Solicitud de UDF para reactivar la <strong>Maestría en Comunicación Organizacional</strong> con fecha de inicio en octubre.</td><td class="wide">Solicitud del 7 de agosto</td></tr>
+          <tr><td class="date">25–28-ago</td><td class="wide">Seguimiento puntual al comportamiento de los resultados de agosto en la última semana del mes, con intercambio de cortes y métricas actualizadas para calibrar el cierre.</td><td class="wide">Correspondencia del 25 al 28 de agosto</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <footer>
+    <span class="f-title">Reporte mensual · Agosto 2026</span>
+    <span>Universidad UDF Santa María · Black n Orange. Datos de pauta tomados de Meta Ads a nivel campaña para el periodo del 1 al 31 de agosto de 2026, y de la plataforma de Patagon para el agente de admisiones de licenciaturas. Las cifras de agosto de Patagon siguen madurando: el histórico de la cuenta muestra una mediana de 27 días entre el alta del trato y la inscripción formal.</span>
+  </footer>
+
+</div>
+</body>
+</html>

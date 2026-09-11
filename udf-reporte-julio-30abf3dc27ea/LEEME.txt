@@ -1,0 +1,11 @@
+Reporte mensual de Julio 2026 para UDF Santa Maria - version publica.
+Periodo cubierto: 1 al 31 de julio de 2026.
+
+Fuentes de los datos: Meta Ads (cuenta act_838230470286008, nivel campana)
+y la plataforma de Patagon (agente de admisiones de licenciaturas).
+
+No contiene datos personales de prospectos: solo agregados de campana,
+volumen de conversaciones y acciones ejecutadas en el mes.
+
+No listada en el indice y con ruta aleatoria: el repositorio es publico,
+asi que cualquiera con la liga completa puede abrirla.

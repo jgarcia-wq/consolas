@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Reporte Junio UDF</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #ffffff;
+    --surface:    #f1f4f7;
+    --surface-2:  #e6ebf0;
+    --ink:        #14181d;
+    --ink-soft:   #55616e;
+    --ink-faint:  #7d8894;
+    --rule:       #d7dde4;
+    --accent:     #b23c07;
+    --accent-soft:#f5e7de;
+
+    --f-display: "Newsreader", Georgia, "Times New Roman", serif;
+    --f-body:    "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --f-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0f1317;
+      --surface:    #171d23;
+      --surface-2:  #1f272f;
+      --ink:        #e6ebf0;
+      --ink-soft:   #9aa6b2;
+      --ink-faint:  #79848f;
+      --rule:       #28313a;
+      --accent:     #f79055;
+      --accent-soft:#2b1d14;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0f1317;
+    --surface:    #171d23;
+    --surface-2:  #1f272f;
+    --ink:        #e6ebf0;
+    --ink-soft:   #9aa6b2;
+    --ink-faint:  #79848f;
+    --rule:       #28313a;
+    --accent:     #f79055;
+    --accent-soft:#2b1d14;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5.2vw, 3.1rem);
+    line-height: 1.08;
+    letter-spacing: -.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--f-display);
+    font-size: 1.16rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .meta-line {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 20px; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+  }
+  .sec-head .tag {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: -.01em;
+    margin: 0;
+    flex: 1;
+  }
+
+  h3 {
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: 68ch; }
+  p + p { margin-top: .8em; }
+  .lede { color: var(--ink-soft); }
+
+  a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  code {
+    font-family: var(--f-mono);
+    font-size: .86em;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 3px;
+    word-break: break-all;
+  }
+
+  /* ---------- stat strip ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .stat { background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 3px; }
+  .stat .n {
+    font-family: var(--f-display);
+    font-size: 1.72rem;
+    font-weight: 600;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .k {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; border: 1px solid var(--rule); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  thead th {
+    background: var(--surface-2);
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 9px 12px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--rule);
+  }
+  tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: var(--surface); }
+  td.date { font-family: var(--f-mono); font-size: 12.5px; white-space: nowrap; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  td.num  { font-family: var(--f-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.wide { min-width: 260px; }
+  caption {
+    caption-side: bottom;
+    text-align: left;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    padding: 9px 2px 0;
+  }
+
+  .note-nueva {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  footer .f-title {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 36px 18px 72px; gap: 42px; }
+  }
+</style>
+<style>
+  html { background: var(--paper); }
+  img { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">UDF Santa María · Black n Orange</div>
+    <h1>Reporte Junio&nbsp;2026</h1>
+    <p class="standfirst">Junio fue el mes de construcción del ciclo Septiembre 2026: se montó y activó una estructura de pauta completamente nueva en Meta, entró en operación el agente de Patagon, y se depuró la estructura del ciclo anterior. Este documento reúne lo ejecutado, los resultados y la evidencia de cada acción.</p>
+    <div class="meta-line">
+      <span>Periodo: 1 – 30 de junio de 2026</span>
+      <span>Cuenta Meta: act_838230470286008</span>
+    </div>
+  </header>
+
+  <!-- ============ 1. RESULTADOS ============ -->
+  <section>
+    <div class="sec-head"><span class="tag">01</span><h2>Resultados del mes</h2></div>
+    <p class="lede">Inversión y entrega en Meta Ads sobre la cuenta completa, más el desempeño del agente de Patagon desde su entrada en operación.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="n">$93,659</span><span class="k">Inversión Meta MXN</span></div>
+      <div class="stat"><span class="n">1.48 M</span><span class="k">Impresiones</span></div>
+      <div class="stat"><span class="n">29,908</span><span class="k">Clics</span></div>
+      <div class="stat"><span class="n">443</span><span class="k">Conversaciones Patagon</span></div>
+      <div class="stat"><span class="n">93</span><span class="k">Leads calificados 4–5★</span></div>
+      <div class="stat"><span class="n">2.7★</span><span class="k">Calidad promedio</span></div>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Campaña</th><th>Inversión MXN</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th>Leads</th><th>Conv. WA</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="wide">[LIC] C-1-27 — Decisión</td><td class="num">34,806</td><td class="num">416,282</td><td class="num">4,876</td><td class="num">1.17%</td><td class="num">280</td><td class="num">204</td></tr>
+          <tr><td class="wide">[POS] C-1-27 — Decisión</td><td class="num">22,398</td><td class="num">380,074</td><td class="num">4,978</td><td class="num">1.31%</td><td class="num">151</td><td class="num">103</td></tr>
+          <tr><td class="wide">C-1-27 Decisión + RMKT + BBDD</td><td class="num">13,085</td><td class="num">273,015</td><td class="num">3,119</td><td class="num">1.14%</td><td class="num">108</td><td class="num">72</td></tr>
+          <tr><td class="wide">UDF_SEP26_META_PROS_LIC_ALL_CTWA_V2 <span class="note-nueva">nueva</span></td><td class="num">8,816</td><td class="num">131,738</td><td class="num">2,122</td><td class="num">1.61%</td><td class="num">—</td><td class="num">214</td></tr>
+          <tr><td class="wide">UDF_SEP26_META_PROS_POS_GRAL_CTWA_V2 <span class="note-nueva">nueva</span></td><td class="num">3,777</td><td class="num">48,071</td><td class="num">1,099</td><td class="num">2.29%</td><td class="num">—</td><td class="num">141</td></tr>
+          <tr><td class="wide">[LIC] Rezagados UNAM, UAM, UAEMEX, IPN</td><td class="num">2,780</td><td class="num">44,164</td><td class="num">684</td><td class="num">1.55%</td><td class="num">23</td><td class="num">12</td></tr>
+          <tr><td class="wide">[GRAL] Awareness + Videos</td><td class="num">2,414</td><td class="num">115,406</td><td class="num">11,903</td><td class="num">10.31%</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td class="wide">UDF_SEP26_META_PROS_POS_VALINM_CTWA_V2 <span class="note-nueva">nueva</span></td><td class="num">2,244</td><td class="num">28,938</td><td class="num">596</td><td class="num">2.06%</td><td class="num">—</td><td class="num">55</td></tr>
+          <tr><td class="wide">[LIC] Decisión VID + IMG · Programas separados</td><td class="num">2,016</td><td class="num">24,033</td><td class="num">251</td><td class="num">1.04%</td><td class="num">15</td><td class="num">10</td></tr>
+          <tr><td class="wide">[MST] Decisión + Leads</td><td class="num">705</td><td class="num">8,168</td><td class="num">116</td><td class="num">1.42%</td><td class="num">7</td><td class="num">6</td></tr>
+          <tr><td class="wide">[ESP] Consideración + Leads</td><td class="num">258</td><td class="num">3,873</td><td class="num">63</td><td class="num">1.63%</td><td class="num">2</td><td class="num">—</td></tr>
+          <tr><td class="wide">3 campañas UDF_SEP26 CTWA, primera versión</td><td class="num">359</td><td class="num">3,516</td><td class="num">101</td><td class="num">—</td><td class="num">1</td><td class="num">24</td></tr>
+        </tbody>
+        <caption>Meta Ads, nivel campaña, 1 – 30 de junio de 2026. Las seis campañas <code>UDF_SEP26</code> nuevas ejercieron $15,196 MXN y produjeron 434 conversaciones de WhatsApp en su primera semana de operación.</caption>
+      </table>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Calidad de conversaciones · Patagon</th><th>1★</th><th>2★</th><th>3★</th><th>4★</th><th>5★</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Conversaciones</td><td class="num">129</td><td class="num">12</td><td class="num">209</td><td class="num">61</td><td class="num">32</td><td class="num">443</td></tr>
+        </tbody>
+        <caption>Agente “Asesor de Admisiones de Licenciaturas”. 330 conversaciones con engagement, 93 calificadas en 4 y 5 estrellas, 32 conversiones.</caption>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 2. ACCIONES ============ -->
+  <section>
+    <div class="sec-head"><span class="tag">02</span><h2>Acciones ejecutadas</h2></div>
+    <p class="lede">Lo trabajado durante el mes, agrupado por frente, con la evidencia que respalda cada entrega.</p>
+
+    <h3>A · Pauta Meta — montaje del ciclo Septiembre 2026</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="date">16-jun</td>
+            <td class="wide">Alineación de estrategia para el ciclo Septiembre: meta de <strong>336 inscritos</strong>, tasa de conversión objetivo de 7.35%, nomenclatura estándar de campañas para lectura de reportes y segmentación geográfica estricta.</td>
+            <td class="wide">Minuta y notas de la sesión de alineación del 16 de junio</td>
+          </tr>
+          <tr>
+            <td class="date">22-jun</td>
+            <td class="wide">Generación del informe de pauta del periodo con la plantilla de reporte de la cuenta.</td>
+            <td class="wide">Deck de informe de pauta</td>
+          </tr>
+          <tr>
+            <td class="date">23-jun</td>
+            <td class="wide">Producción de <strong>38 artes estáticos 1:1</strong> y redacción de los 36 copys, cada uno con titular, llamado a la acción y mensaje de WhatsApp prellenado por programa, perfil y ruta de comunicación.</td>
+            <td class="wide">Carpeta de artes del ciclo · matriz de montaje con los 36 anuncios</td>
+          </tr>
+          <tr>
+            <td class="date">23-jun</td>
+            <td class="wide">Montaje en Meta de la estructura nueva: <strong>3 campañas Click-to-WhatsApp, 9 ad sets y 36 anuncios.</strong> Licenciatura y posgrado separados por radios y rangos de edad distintos; posgrados consolidados salvo Valuación Inmobiliaria, aislada por su meta dura de 40 inscritos.</td>
+            <td class="wide">Estructura visible en el Administrador de Anuncios</td>
+          </tr>
+          <tr>
+            <td class="date">23–24-jun</td>
+            <td class="wide">Control de calidad del montaje previo a la activación: objetivo de generación de leads, audiencia Advantage+ amplia sin intereses, presupuesto por ad set en licenciatura y Valuación y por campaña en posgrados, destino WhatsApp y presupuesto de ciclo de <strong>$290,385 MXN</strong>.</td>
+            <td class="wide">Documento de control de calidad del montaje</td>
+          </tr>
+          <tr>
+            <td class="date">25-jun</td>
+            <td class="wide"><strong>Activación</strong> de las 3 campañas, 9 ad sets y 36 anuncios.</td>
+            <td class="wide">Registro de activación en Meta</td>
+          </tr>
+          <tr>
+            <td class="date">25-jun</td>
+            <td class="wide">Depuración de estructura obsoleta: pausa de <strong>5 campañas del ciclo anterior</strong> para concentrar inversión y liquidez de datos en la estructura nueva. Se mantuvo activa la campaña de rezagados de UNAM, UAM, UAEMEX e IPN.</td>
+            <td class="wide">Registro de estados con marca de tiempo del 25 de junio</td>
+          </tr>
+          <tr>
+            <td class="date">25-jun</td>
+            <td class="wide">Decisión de <strong>concentrar el 100% de la inversión en Meta</strong> para el ciclo. Google Ads queda fuera de la operación a partir de esta fecha y no se retoma durante el periodo.</td>
+            <td class="wide">Notas de la revisión quincenal de pauta del 25 de junio</td>
+          </tr>
+          <tr>
+            <td class="date">22-jun</td>
+            <td class="wide">Solicitud de activación de post para Maestría en Comunicación Organizacional en turno matutino. Quedó en espera: los artes no tenían la fecha actualizada y la información del programa aún no estaba cargada en Patagon.</td>
+            <td class="wide">Correspondencia del 22 de junio</td>
+          </tr>
+          <tr>
+            <td class="date">17-jun</td>
+            <td class="wide">Autorización de un monto extraordinario de <strong>$25,000 MXN</strong> para la campaña de resultados de examen de admisión de UNAM, UAM e IPN.</td>
+            <td class="wide">Correo de autorización y calendario anual de actividades</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>B · Patagon — activación del agente y del flujo Click-to-WhatsApp</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">5 y 8-jun</td><td class="wide">Iteración del flujo conversacional y del criterio de calificación de leads, a partir de las pruebas realizadas por UDF. Queda fijado el umbral de 4 y 5 estrellas como lead calificado.</td><td class="wide">Correspondencia sobre optimización de calificación y flujo conversacional</td></tr>
+          <tr><td class="date">9-jun</td><td class="wide">Recepción del contrato firmado y del comprobante de pago, y traslado al equipo de Patagon para liberar la implementación.</td><td class="wide">Contrato firmado y comprobante de pago</td></tr>
+          <tr><td class="date">18-jun</td><td class="wide">Configuraciones del agente <strong>terminadas y confirmadas</strong> con el equipo de Patagon, e inicio de pruebas. Se comunicó a UDF la línea del tiempo de arranque.</td><td class="wide">Cronograma de activación compartido el 18 de junio</td></tr>
+          <tr><td class="date">24-jun</td><td class="wide">Arranque de la operación del agente con tráfico de las campañas Click-to-WhatsApp. La ventana corre de forma continua hasta el cierre del ciclo el 30 de septiembre.</td><td class="wide">Tablero de Patagon: 443 conversaciones, 93 calificadas, 32 conversiones</td></tr>
+          <tr><td class="date">29-jun</td><td class="wide">Solicitud de UDF para reforzar las respuestas del agente y requerimiento de información de inversión digital.</td><td class="wide">Correspondencia del 29 de junio</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>C · CRM Pipedrive y habilitación comercial</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">11-jun</td><td class="wide">Sesión de trabajo sobre el detalle de Pipedrive para la campaña de septiembre.</td><td class="wide">Sesión del 11 de junio</td></tr>
+          <tr><td class="date">12-jun</td><td class="wide"><strong>Capacitación de ventas</strong> con el equipo comercial de UDF, de 9:00 a 14:30, con tres módulos entregados: Estrategia UDF Septiembre 2026, Venta Consultiva y Taller Experiencia UDF — Responsabilidad Compartida.</td><td class="wide">Las tres presentaciones, entregadas el 19 de junio</td></tr>
+          <tr><td class="date">25-jun</td><td class="wide">Definición de la <strong>regla de derivación comercial</strong>: los prospectos de 1 a 3 estrellas pasan a nutrición automatizada y sólo los de 4 y 5 estrellas reciben gestión comercial activa. Se estandarizaron los guiones de atención.</td><td class="wide">Notas de la revisión quincenal del 25 de junio</td></tr>
+          <tr><td class="date">22 y 29-jun</td><td class="wide">Informes semanales de tratos correspondientes a las semanas 25 y 26.</td><td class="wide">Informes semanales</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>D · Sitio y administración</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">25-jun</td><td class="wide">Solicitud de refresh del banner de inscripciones abiertas, con ajuste de la fecha de inicio a septiembre 2026.</td><td class="wide">Solicitud del 25 de junio</td></tr>
+          <tr><td class="date">5-jun</td><td class="wide">Definición de la nueva iguala mensual, vigente a partir de junio, y presentación del proyecto de rediseño y optimización del sitio web.</td><td class="wide">Propuesta de rediseño del sitio web</td></tr>
+          <tr><td class="date">8-jun</td><td class="wide">Recepción de la distribución de metas de licenciatura y posgrado para canal digital de septiembre 2026.</td><td class="wide">Distribución de metas</td></tr>
+          <tr><td class="date">9-jun</td><td class="wide">Recepción de los históricos de inscripción de licenciatura de septiembre 2025, enero 2026 y mayo 2026, insumo para el modelo de proyección del ciclo.</td><td class="wide">Archivo de históricos de licenciatura</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+
+  <footer>
+    <span class="f-title">Reporte mensual · Junio 2026</span>
+    <span>Universidad UDF Santa María · Black n Orange. Datos de pauta tomados de Meta Ads a nivel campaña para el periodo del 1 al 30 de junio de 2026, y de la plataforma de Patagon para el agente de admisiones de licenciaturas.</span>
+  </footer>
+
+</div>
+</body>
+</html>

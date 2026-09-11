@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Reporte Julio UDF</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #ffffff;
+    --surface:    #f1f4f7;
+    --surface-2:  #e6ebf0;
+    --ink:        #14181d;
+    --ink-soft:   #55616e;
+    --ink-faint:  #7d8894;
+    --rule:       #d7dde4;
+    --accent:     #b23c07;
+    --accent-soft:#f5e7de;
+
+    --f-display: "Newsreader", Georgia, "Times New Roman", serif;
+    --f-body:    "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --f-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0f1317;
+      --surface:    #171d23;
+      --surface-2:  #1f272f;
+      --ink:        #e6ebf0;
+      --ink-soft:   #9aa6b2;
+      --ink-faint:  #79848f;
+      --rule:       #28313a;
+      --accent:     #f79055;
+      --accent-soft:#2b1d14;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0f1317;
+    --surface:    #171d23;
+    --surface-2:  #1f272f;
+    --ink:        #e6ebf0;
+    --ink-soft:   #9aa6b2;
+    --ink-faint:  #79848f;
+    --rule:       #28313a;
+    --accent:     #f79055;
+    --accent-soft:#2b1d14;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5.2vw, 3.1rem);
+    line-height: 1.08;
+    letter-spacing: -.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--f-display);
+    font-size: 1.16rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .meta-line {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 20px; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+  }
+  .sec-head .tag {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: -.01em;
+    margin: 0;
+    flex: 1;
+  }
+
+  h3 {
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: 68ch; }
+  p + p { margin-top: .8em; }
+  .lede { color: var(--ink-soft); }
+
+  a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  code {
+    font-family: var(--f-mono);
+    font-size: .86em;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 3px;
+    word-break: break-all;
+  }
+
+  /* ---------- stat strip ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .stat { background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 3px; }
+  .stat .n {
+    font-family: var(--f-display);
+    font-size: 1.72rem;
+    font-weight: 600;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .k {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; border: 1px solid var(--rule); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  thead th {
+    background: var(--surface-2);
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 9px 12px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--rule);
+  }
+  tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:nth-child(even) td { background: var(--surface); }
+  td.date { font-family: var(--f-mono); font-size: 12.5px; white-space: nowrap; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  td.num  { font-family: var(--f-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.wide { min-width: 260px; }
+  caption {
+    caption-side: bottom;
+    text-align: left;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    padding: 9px 2px 0;
+  }
+
+  .note-nueva {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  footer .f-title {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 36px 18px 72px; gap: 42px; }
+  }
+</style>
+<style>
+  html { background: var(--paper); }
+  img { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">UDF Santa María · Black n Orange</div>
+    <h1>Reporte Julio&nbsp;2026</h1>
+    <p class="standfirst">Julio fue el primer mes completo de operación del ciclo Septiembre 2026. La estructura montada en junio alcanzó su ritmo, se ejecutó el Coffee Break del 18 de julio, se saneó por completo el CRM y se dejaron montadas las campañas de las sesiones informativas de agosto.</p>
+    <div class="meta-line">
+      <span>Periodo: 1 – 31 de julio de 2026</span>
+      <span>Cuenta Meta: act_838230470286008</span>
+    </div>
+  </header>
+
+  <!-- ============ 1. RESULTADOS ============ -->
+  <section>
+    <div class="sec-head"><span class="tag">01</span><h2>Resultados del mes</h2></div>
+    <p class="lede">Contra junio, la inversión subió 27% y las conversaciones atendidas por el agente se multiplicaron por cinco: de 443 a 2,239. Los leads calificados de 4 y 5 estrellas pasaron de 93 a 313.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="n">$119,312</span><span class="k">Inversión Meta MXN</span></div>
+      <div class="stat"><span class="n">1.88 M</span><span class="k">Impresiones</span></div>
+      <div class="stat"><span class="n">31,815</span><span class="k">Clics</span></div>
+      <div class="stat"><span class="n">2,239</span><span class="k">Conversaciones Patagon</span></div>
+      <div class="stat"><span class="n">313</span><span class="k">Leads calificados 4–5★</span></div>
+      <div class="stat"><span class="n">$46</span><span class="k">Costo por conversación</span></div>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Campaña</th><th>Inversión MXN</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th>Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="wide">Licenciaturas · Click-to-WhatsApp</td><td class="num">59,221</td><td class="num">877,456</td><td class="num">13,283</td><td class="num">1.51%</td><td class="num">1,301 conversaciones</td></tr>
+          <tr><td class="wide">Posgrados general · Click-to-WhatsApp</td><td class="num">24,679</td><td class="num">266,244</td><td class="num">5,127</td><td class="num">1.93%</td><td class="num">543 conversaciones</td></tr>
+          <tr><td class="wide">Valuación Inmobiliaria · Click-to-WhatsApp</td><td class="num">14,807</td><td class="num">151,985</td><td class="num">2,955</td><td class="num">1.94%</td><td class="num">302 conversaciones</td></tr>
+          <tr><td class="wide">Coffee Break 18-jul · formulario instantáneo <span class="note-nueva">nueva</span></td><td class="num">12,237</td><td class="num">197,798</td><td class="num">2,720</td><td class="num">1.38%</td><td class="num">58 registros</td></tr>
+          <tr><td class="wide">Coffee Break 18-jul · tráfico a formulario web</td><td class="num">2,780</td><td class="num">247,323</td><td class="num">5,420</td><td class="num">2.19%</td><td class="num">1,946 vistas</td></tr>
+          <tr><td class="wide">Maestría en Comunicación Organizacional · CTWA <span class="note-nueva">nueva</span></td><td class="num">2,745</td><td class="num">42,945</td><td class="num">628</td><td class="num">1.46%</td><td class="num">37 conversaciones</td></tr>
+          <tr><td class="wide">Sesión informativa 15-ago · leads <span class="note-nueva">nueva</span></td><td class="num">1,284</td><td class="num">24,485</td><td class="num">323</td><td class="num">1.32%</td><td class="num">8 registros</td></tr>
+          <tr><td class="wide">Sesión posgrados 8-ago · frío <span class="note-nueva">nueva</span></td><td class="num">1,129</td><td class="num">64,115</td><td class="num">1,272</td><td class="num">1.98%</td><td class="num">638 vistas</td></tr>
+          <tr><td class="wide">Sesión posgrados 8-ago · base de datos <span class="note-nueva">nueva</span></td><td class="num">430</td><td class="num">5,436</td><td class="num">87</td><td class="num">1.60%</td><td class="num">46 vistas</td></tr>
+        </tbody>
+        <caption>Meta Ads, nivel campaña, 1 – 31 de julio de 2026. Las cuatro campañas Click-to-WhatsApp del ciclo ejercieron $101,453 MXN y generaron 2,183 conversaciones, a $46.47 por conversación. Las tres campañas de agosto arrancaron el 30 de julio, por lo que su entrega de julio es parcial.</caption>
+      </table>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Calidad de conversaciones · Patagon</th><th>1★</th><th>2★</th><th>3★</th><th>4★</th><th>5★</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Conversaciones</td><td class="num">808</td><td class="num">74</td><td class="num">1,044</td><td class="num">213</td><td class="num">100</td><td class="num">2,239</td></tr>
+        </tbody>
+        <caption>Agente “Asesor de Admisiones de Licenciaturas”. 1,478 conversaciones con engagement (66%), 313 calificadas en 4 y 5 estrellas, 100 conversiones. Calidad promedio 2.4 estrellas.</caption>
+      </table>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Coffee Break informativo · 18 de julio</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>Asistencia total</td><td class="num">11 prospectos</td></tr>
+          <tr><td>Provenientes de campaña pagada</td><td class="num">6 · 54.5%</td></tr>
+          <tr><td>Inscripciones concretadas</td><td class="num">3 · 27.3% de cierre</td></tr>
+          <tr><td>Inscripciones atribuidas a campaña pagada</td><td class="num">2 · 66.7%</td></tr>
+          <tr><td>Conversión de la campaña pagada</td><td class="num">33.3%</td></tr>
+        </tbody>
+        <caption>Cifras del resumen ejecutivo compartido por UDF el 23 de julio. Derecho fue la licenciatura con mayor interés (27.3% de participación), seguida de Psicología y Contaduría con 18.2% cada una.</caption>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 2. ACCIONES ============ -->
+  <section>
+    <div class="sec-head"><span class="tag">02</span><h2>Acciones ejecutadas</h2></div>
+    <p class="lede">Lo trabajado durante el mes, agrupado por frente, con la evidencia que respalda cada entrega.</p>
+
+    <h3>A · Pauta Meta</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="date">6-jul</td>
+            <td class="wide">Activación del <strong>boost de Maestría en Comunicación Organizacional</strong> con campaña propia Click-to-WhatsApp, e integración de los 3 videos entregados por UDF, los tres aprobados por Meta y en entrega el 7 de julio.</td>
+            <td class="wide">Informe de activación y lectura de mercado enviado el 6 de julio</td>
+          </tr>
+          <tr>
+            <td class="date">8-jul</td>
+            <td class="wide">Montaje y activación de la <strong>campaña del Coffee Break del 18 de julio</strong>: 21 anuncios, radio de 10 km desde Cedro 16, presupuesto de $15,000 MXN para todo el periodo. Ese mismo día se ajustaron las ubicaciones excluyendo Audience Network, que consumía cerca del 66% del gasto en clics de baja calidad.</td>
+            <td class="wide">Confirmación de activación enviada el 8 de julio · galería de los 21 anuncios</td>
+          </tr>
+          <tr>
+            <td class="date">9-jul</td>
+            <td class="wide"><strong>Pivote de formulario web a formulario instantáneo.</strong> La primera campaña llevaba tráfico a un formulario externo de 12 preguntas y convertía al 0.05%: cerca de 1,966 clics de calidad produjeron un solo registro. Se pausó con $2,742 ejercidos y el remanente de $12,258 se reasignó a una campaña nueva con formulario nativo de 9 preguntas dentro de Meta.</td>
+            <td class="wide">Comparativo de conversión antes y después · formulario instantáneo con 58 registros</td>
+          </tr>
+          <tr>
+            <td class="date">13 y 14-jul</td>
+            <td class="wide">Entrega del <strong>informe de pauta del periodo 25 de junio al 14 de julio</strong> y del histórico de campañas de la cuenta.</td>
+            <td class="wide">Deck de pauta del periodo · deck histórico de campañas</td>
+          </tr>
+          <tr>
+            <td class="date">23-jul</td>
+            <td class="wide">Solicitud de UDF para reactivar la campaña de difusión, post y video, para promover las nuevas sesiones informativas de posgrado y licenciatura.</td>
+            <td class="wide">Solicitud del 23 de julio</td>
+          </tr>
+          <tr>
+            <td class="date">30-jul</td>
+            <td class="wide">Montaje y activación de la campaña de la <strong>sesión informativa del 15 de agosto</strong>: 7 anuncios, un video y seis estáticos con personalización de formato por ubicación, radio de 12 km, presupuesto de $15,000 MXN y <strong>12 audiencias propias excluidas</strong> para no volver a impactar a quien ya está en base.</td>
+            <td class="wide">Campaña activa en Meta · galería de anuncios y control de calidad</td>
+          </tr>
+          <tr>
+            <td class="date">30-jul</td>
+            <td class="wide">Montaje y activación de las <strong>dos campañas de la sesión informativa de Posgrados del 8 de agosto</strong>, con $8,000 MXN divididos entre base de datos propia y público frío. Para la primera se consolidó y cargó una audiencia de <strong>1,713 contactos</strong> a partir de las bases existentes.</td>
+            <td class="wide">Campañas activas en Meta · audiencia consolidada verificada antes de activar</td>
+          </tr>
+          <tr>
+            <td class="date">6 y 14-jul</td>
+            <td class="wide">Solicitud de alta de la campaña especial de EXACER por inicio de clases y recepción de la información histórica del programa por parte de UDF.</td>
+            <td class="wide">Solicitud del 6 de julio · archivo de información general de EXACER</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>B · Patagon — operación y afinación del agente</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">3 y 17-jul</td><td class="wide">Sesiones de trabajo con el equipo de Patagon para revisar desempeño del agente y siguientes pasos de la integración.</td><td class="wide">Notas de las sesiones del 3 y 17 de julio</td></tr>
+          <tr><td class="date">17–22-jul</td><td class="wide"><strong>Ciclo completo de feedback sobre las conversaciones.</strong> Se detectó que sólo 3 observaciones estaban registradas en la plataforma; se orientó al equipo de admisiones sobre dónde capturarlas, el equipo las rectificó y amplió, y el 22 de julio <strong>todos los feedbacks quedaron trabajados y corregidos</strong> con evidencia compartida.</td><td class="wide">Correspondencia del 17, 20 y 22 de julio con capturas de la plataforma</td></tr>
+          <tr><td class="date">21-jul</td><td class="wide">Ajustes acordados al agente: <strong>eliminar preguntas dobles</strong> y usar el correo como vía alterna cuando el teléfono falla. Para EXACER se definió un cuestionario de 6 preguntas que filtra más, aceptando menor flujo a cambio de leads mejor calificados.</td><td class="wide">Notas de la sesión de seguimiento del 21 de julio</td></tr>
+          <tr><td class="date">22-jul</td><td class="wide">Corrección de contenido con el soporte de Patagon: el agente informaba un turno sabatino inexistente en Licenciatura en Derecho.</td><td class="wide">Caso documentado con el soporte de Patagon</td></tr>
+          <tr><td class="date">22-jul</td><td class="wide">Habilitación de <strong>plantillas autorizadas por Meta</strong> para poder reactivar conversaciones una vez vencida la ventana de 24 horas, a solicitud del equipo de admisiones.</td><td class="wide">Correspondencia del 22 de julio</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>C · CRM Pipedrive y habilitación comercial</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="date">22-jul</td>
+            <td class="wide"><strong>Auditoría integral de la etapa Perdido.</strong> Se pasó de <strong>8,505 tratos estancados a 0 abiertos</strong>: 4,376 cerrados, el 100% con motivo documentado. Estado final: 2,916 no contactables, 4,049 congelados para nutrición, 637 en revisión manual, 235 a reactivar en septiembre y 143 en otro ciclo.</td>
+            <td class="wide">Bitácora de 43 ajustes, cada movimiento marcado con nota de auditoría en el trato</td>
+          </tr>
+          <tr>
+            <td class="date">22-jul</td>
+            <td class="wide">Recuperación de <strong>26 leads de 5 estrellas que no tenían trato</strong> en el pipeline de Patagon, reponiendo el campo de calificación para disparar la automatización. 26 de 26 creados, sin fallos.</td>
+            <td class="wide">Ajuste 1 de la bitácora, con rango de tratos creados</td>
+          </tr>
+          <tr>
+            <td class="date">22-jul</td>
+            <td class="wide">Revisión y corrección de una <strong>creación masiva de actividades de primer contacto</strong> que alcanzó etapas fuera de las previstas, con comunicación al equipo sobre el alcance y la corrección aplicada.</td>
+            <td class="wide">Correspondencia del 22 de julio con el equipo de admisiones</td>
+          </tr>
+          <tr>
+            <td class="date">15 y 16-jul</td>
+            <td class="wide">Sesiones de trabajo con el equipo de admisiones para el barrido de bases y la revisión paso a paso del flujo en el CRM.</td>
+            <td class="wide">Sesiones del 15 y 16 de julio</td>
+          </tr>
+          <tr>
+            <td class="date">28-jul</td>
+            <td class="wide">Entrega del <strong>documento de SLAs del equipo de ventas</strong>, construido sobre los hallazgos de la auditoría: primer toque en menos de 1 hora hábil para leads de 5 estrellas y menos de 4 horas para los de 4 estrellas, ningún trato abierto sin próxima actividad, y antigüedad máxima por etapa.</td>
+            <td class="wide">Documento de SLAs, versión 1.0</td>
+          </tr>
+          <tr>
+            <td class="date">13-jul</td>
+            <td class="wide">Alineación del formato de las juntas comerciales semanales a propuesta de UDF.</td>
+            <td class="wide">Correspondencia del 13 de julio</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>D · Eventos y nuevos programas</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Fecha</th><th>Acción</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td class="date">7 y 8-jul</td><td class="wide">Solicitud y puesta en marcha del <strong>formulario de registro y el código QR</strong> del Coffee Break, en coordinación con UDF.</td><td class="wide"><a href="https://forms.office.com/r/cWDEyqQcGr">Formulario de registro</a></td></tr>
+          <tr><td class="date">10-jul</td><td class="wide">Entrega de los <strong>materiales para la invitación por WhatsApp</strong> a través de Connectly: artes, copys y base de la sesión informativa.</td><td class="wide">Carpeta de materiales compartida el 10 de julio</td></tr>
+          <tr><td class="date">15 y 17-jul</td><td class="wide">Entrega y actualización de la <strong>base de datos de registrados</strong> al Coffee Break, con los nuevos registros marcados para el equipo de admisiones.</td><td class="wide">Base de datos compartida el 15 y actualizada el 17 de julio</td></tr>
+          <tr><td class="date">18-jul</td><td class="wide"><strong>Ejecución del Coffee Break informativo:</strong> 11 asistentes y 3 inscripciones. La campaña pagada aportó el 54.5% de la asistencia y el 66.7% de las inscripciones.</td><td class="wide">Resumen ejecutivo de resultados compartido por UDF el 23 de julio</td></tr>
+          <tr><td class="date">24-jul</td><td class="wide">Definición de la ruta y el guion de la <strong>sesión informativa de Posgrados del 8 de agosto</strong>, con la Coordinadora de Posgrado abriendo la sesión.</td><td class="wide">Propuesta de ruta del 24 de julio</td></tr>
+          <tr><td class="date">21 y 29-jul</td><td class="wide">Arranque del trabajo sobre los <strong>dos programas nuevos</strong>: solicitud de propuesta de lanzamiento para la Especialidad en Innovación Educativa, y levantamiento de las fichas de información que alimentan la atención del agente para ese programa y para el Curso EXACER.</td><td class="wide">Resumen ejecutivo del programa · cuestionario de fichas enviado el 29 de julio</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <footer>
+    <span class="f-title">Reporte mensual · Julio 2026</span>
+    <span>Universidad UDF Santa María · Black n Orange. Datos de pauta tomados de Meta Ads a nivel campaña para el periodo del 1 al 31 de julio de 2026, y de la plataforma de Patagon para el agente de admisiones de licenciaturas. Los resultados del Coffee Break provienen del resumen ejecutivo elaborado por UDF.</span>
+  </footer>
+
+</div>
+</body>
+</html>
