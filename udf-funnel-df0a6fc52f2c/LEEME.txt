@@ -1,0 +1,33 @@
+Funnel real de la pauta · UDF Santa María
+Ciclo septiembre 2026 · ventana 1-jun a 9-sep-2026
+Corte: 2026-09-11 00:37
+
+QUÉ CUBRE
+  Funnel real semana por semana y mes por mes, contra el funnel comprometido en la
+  propuesta (3,355 leads → 2,349 conversaciones → 822 MQL → 493 SQL → 247 inscritos de pauta).
+  Ocho pestañas: consolidado, los cuatro meses, reconciliación de conteos, detalle por trato
+  y proyección de cierre al 30 de septiembre.
+
+DE DÓNDE SALEN LOS DATOS
+  Meta Ads API v25 (cuenta act_838230470286008): inversión, impresiones, clics y leads.
+  Patagon: conversaciones de WhatsApp y calificación 4★/5★ (MQL).
+  Pipedrive: SQL e inscritos, por historial de cambio de etapa, no por etapa actual.
+  Alcance: pipelines Patagon y P. Refresh. Fuera: Orgánico, Exacer y el ciclo 2025,
+  que se reportan por separado en la pestaña de reconciliación.
+
+CÓMO SE CUENTA EL INSCRITO
+  La cifra final suma inscritos y preinscritos, igual que los cuenta UDF. La composición
+  entre ambos se muestra entre paréntesis en cada tabla.
+
+DATOS PERSONALES
+  El detalle por trato incluye el nombre del prospecto con apellidos abreviados, su programa
+  de interés y las fechas de cambio de etapa. El número de trato enlaza a Pipedrive y sólo
+  funciona para quien tenga acceso a la cuenta.
+  Esta página no está listada en el índice y lleva noindex/nofollow, pero el repositorio es
+  público: cualquiera con la liga completa puede abrirla. No compartir fuera del equipo y de UDF.
+
+CIFRAS DEL PERIODO
+  Inversión $489,470 · 7,224,405 impresiones · 7,891 leads
+  4,156 conversaciones · 409 MQL · 172 SQL · 77 inscritos
+
+Black & Orange
