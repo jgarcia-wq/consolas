@@ -2,11 +2,21 @@ Auditoria de la pauta de Meta Ads de UDF Santa Maria - version para el cliente.
 Cubre del 1 de enero al 8 de septiembre de 2026 en dos ciclos:
   Ciclo 1: 1 ene - 21 jun  (21 campanas, $596,721.60 MXN)
   Ciclo 2: 22 jun - 8 sep  (40 campanas, $419,221.44 MXN)
-Filtros arriba de la pagina: mes/corte, nivel (licenciatura / posgrado / otros),
-plataforma (Facebook / Instagram / WhatsApp) y campana. Todo se recalcula al filtrar.
-Incluye el desglose de en que plataforma se genero cada lead y cada conexion de WhatsApp.
-Datos de la Graph API v25.0 de la cuenta act_838230470286008 con breakdown
-publisher_platform, extraidos el 9 de septiembre de 2026.
-No contiene datos personales de prospectos: solo agregados por campana, mes y plataforma.
+
+Filtros arriba de la pagina, combinables: mes/corte, nivel (licenciatura /
+posgrado / otros), plataforma (Facebook / Instagram / WhatsApp), programa
+educativo y campana. Todo se recalcula al filtrar.
+
+Incluye el desglose de en que plataforma se genero cada lead y cada conexion
+de WhatsApp, y cuantos leads trajo cada programa educativo. El programa se
+reconstruye anuncio por anuncio (mensaje pre-llenado de WhatsApp, codigo del
+arte, nombre del ad set); cubre el 76.6% de la inversion, el resto son pools
+y clusters que por montaje no hablan de un programa y se reportan aparte.
+El programa es el que la persona pregunto, no en el que se inscribio.
+
+Datos de la Graph API v25.0 de la cuenta act_838230470286008, insights a nivel
+anuncio con breakdown publisher_platform. Gasto extraido el 9 de septiembre de
+2026; el desglose por programa el 14 de septiembre de 2026.
+No contiene datos personales de prospectos: solo agregados.
 No listada en el indice y con ruta aleatoria: el repositorio es publico,
 asi que cualquiera con la liga completa puede abrirla.
