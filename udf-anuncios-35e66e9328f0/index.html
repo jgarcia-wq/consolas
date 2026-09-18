@@ -1,0 +1,129 @@
+<title>Estado de anuncios · UDF</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ink:#151a21;--ink2:#46515f;--ink3:#6f7b89;--paper:#f6f7f9;--card:#fff;--rule:#dbe0e6;
+--brand:#1f3864;--brandsoft:#eaeff7;--ok:#1a6b4d;--oksoft:#e5f2ec;--warn:#8d5c07;--warnsoft:#fbf0da;
+--crit:#9d2b21;--critsoft:#fbe9e7;--sans:"IBM Plex Sans",system-ui,sans-serif;
+--serif:"Source Serif 4",Georgia,serif;--mono:"IBM Plex Mono",monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#e8ecf1;--ink2:#aeb9c6;--ink3:#8592a1;
+--paper:#10151b;--card:#171e26;--rule:#2c3541;--brand:#8fb3e0;--brandsoft:#1a2534;--ok:#6cc39c;
+--oksoft:#14261f;--warn:#dfae5c;--warnsoft:#2a2113;--crit:#e08a80;--critsoft:#2c1917}}
+:root[data-theme=dark]{--ink:#e8ecf1;--ink2:#aeb9c6;--ink3:#8592a1;--paper:#10151b;--card:#171e26;
+--rule:#2c3541;--brand:#8fb3e0;--brandsoft:#1a2534;--ok:#6cc39c;--oksoft:#14261f;--warn:#dfae5c;
+--warnsoft:#2a2113;--crit:#e08a80;--critsoft:#2c1917}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.58;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding:38px 22px 70px;display:flex;flex-direction:column;gap:38px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);margin:0}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(27px,4.6vw,36px);line-height:1.13;
+margin:8px 0 0;letter-spacing:-.015em;text-wrap:balance}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;margin:0;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0;max-width:68ch;color:var(--ink2)} p strong{color:var(--ink);font-weight:600}
+section{display:flex;flex-direction:column;gap:16px}
+.sechead{border-bottom:2px solid var(--brand);padding-bottom:9px;display:flex;flex-direction:column;gap:5px}
+.banner{border-radius:4px;padding:20px 22px;display:flex;flex-direction:column;gap:11px;
+background:var(--oksoft);border:1px solid var(--ok);border-left-width:4px}
+.banner h2{color:var(--ok)}
+.alert{background:var(--warnsoft);border:1px solid var(--warn);border-left-width:4px;
+border-radius:4px;padding:20px 22px;display:flex;flex-direction:column;gap:11px}
+.alert h2{color:var(--warn)}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--rule);border-radius:4px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);
+font-weight:400;text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--rule-soft,#e8ecf1);color:var(--ink2)}
+tbody tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.mono{font-family:var(--mono);font-size:12px} td.sm{font-size:11.5px;color:var(--ink3)}
+td.prog{color:var(--ink);font-weight:500}
+tr.now td{background:var(--brandsoft);font-weight:600;color:var(--ink)}
+.pill{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
+padding:3px 8px;border-radius:2px;white-space:nowrap}
+.pill.crit{background:var(--critsoft);color:var(--crit)}
+.pill.warn{background:var(--warnsoft);color:var(--warn)}
+.pill.ok{background:var(--oksoft);color:var(--ok)}
+ol{margin:0;padding-left:0;list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:15px}
+ol li{position:relative;padding-left:38px;color:var(--ink2);max-width:68ch;counter-increment:p}
+ol li::before{content:counter(p);position:absolute;left:0;top:1px;width:25px;height:25px;border-radius:50%;
+background:var(--brand);color:var(--card);font-family:var(--mono);font-size:12px;font-weight:500;
+display:flex;align-items:center;justify-content:center}
+.quote{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--crit);
+border-radius:3px;padding:14px 18px;font-family:var(--mono);font-size:12.5px;color:var(--ink2);max-width:none}
+footer{border-top:1px solid var(--rule);padding-top:18px;color:var(--ink3);font-size:12.5px;
+display:flex;flex-direction:column;gap:6px}
+</style>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Universidad UDF Santa María · Meta Ads · Black &amp; Orange</p>
+  <h1>Anuncios rechazados por la restricción de WhatsApp</h1>
+  <p style="margin-top:13px">Corte al 18 de septiembre de 2026, 09:07 h. Meta está rechazando anuncios de forma
+  progresiva. <strong>La causa es una sola y no es publicitaria: la cuenta de WhatsApp de la
+  universidad está restringida.</strong></p>
+</header>
+
+<div class="banner">
+  <p class="eyebrow">Situación al día de hoy</p>
+  <h2>La entrega no se ha visto afectada</h2>
+  <p>Pese a los 12 anuncios rechazados, las campañas siguen entregando con
+  normalidad y el costo por conversación <strong>mejoró</strong>. Meta redistribuye el
+  presupuesto hacia los anuncios que permanecen aprobados.</p>
+  <p><strong>La mensajería también funciona:</strong> quien escribe por WhatsApp sí recibe
+  respuesta. La restricción está afectando la publicidad, no la atención.</p>
+</div>
+
+<section>
+  <div class="sechead"><p class="eyebrow">Entrega diaria</p><h2>La evidencia</h2></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Día</th><th class="n">Inversión</th><th class="n">Impresiones</th>
+    <th class="n">Conversaciones</th><th class="n">Costo</th></tr></thead>
+    <tbody><tr><td class='mono'>sáb 12</td><td class='n'>$5,123</td><td class='n'>61,971</td><td class='n'>45</td><td class='n'>$114</td></tr><tr><td class='mono'>dom 13</td><td class='n'>$9,822</td><td class='n'>150,408</td><td class='n'>85</td><td class='n'>$116</td></tr><tr><td class='mono'>lun 14</td><td class='n'>$9,542</td><td class='n'>120,368</td><td class='n'>90</td><td class='n'>$106</td></tr><tr><td class='mono'>mar 15</td><td class='n'>$6,569</td><td class='n'>111,206</td><td class='n'>63</td><td class='n'>$104</td></tr><tr><td class='mono'>mié 16</td><td class='n'>$6,441</td><td class='n'>123,372</td><td class='n'>70</td><td class='n'>$92</td></tr><tr><td class='mono'>jue 17</td><td class='n'>$7,853</td><td class='n'>180,306</td><td class='n'>93</td><td class='n'>$84</td></tr><tr class="now"><td class='mono'>vie 18</td><td class='n'>$1,817</td><td class='n'>33,341</td><td class='n'>22</td><td class='n'>$83</td></tr></tbody></table></div>
+  <p>El <strong>17 de septiembre, con siete rechazos ese mismo día</strong>, fue el mejor del
+  mes: la mayor inversión entregada, 93 conversaciones y el costo más bajo en semanas.</p>
+</section>
+
+<section>
+  <div class="sechead"><p class="eyebrow">Detalle</p><h2>Los 12 anuncios rechazados</h2></div>
+  <div class="quote">Motivo devuelto por Meta, idéntico en los 12:<br><br>
+  «This ad can't run because the WhatsApp Account is restricted. You can request a review
+  from your WhatsApp Account.»</div>
+  <p>Ninguno fue rechazado por creativo, texto, imagen o política de contenido.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th class="n">Fecha</th><th>Programa</th><th>Anuncio</th></tr></thead>
+    <tbody><tr><td class='n mono'>09-16 17:23</td><td class='prog'>Administración</td><td class='mono sm'>ADMINISTRACION_ADULTO_MUJER_1_AS2_C2</td></tr><tr><td class='n mono'>09-17 01:41</td><td class='prog'>Administración</td><td class='mono sm'>ADMINISTRACION_ADULTO_HOMBRE_1_AS2_C2</td></tr><tr><td class='n mono'>09-17 10:24</td><td class='prog'>Administración</td><td class='mono sm'>ADMINISTRACION_ADULTO_HOMBRE_2_AS1_C2</td></tr><tr><td class='n mono'>09-17 15:03</td><td class='prog'>Esp. Valuación</td><td class='mono sm'>VAL_INMOBILIARIA_HOMBRE_1</td></tr><tr><td class='n mono'>09-17 17:53</td><td class='prog'>Contaduría</td><td class='mono sm'>CONTADURIA_ADULTO_HOMBRE_1_AS2_C2</td></tr><tr><td class='n mono'>09-17 19:03</td><td class='prog'>Mtría. Com. Organizacional</td><td class='mono sm'>POS_MTR-COMORG_R3_1X1_H2_V3</td></tr><tr><td class='n mono'>09-17 19:18</td><td class='prog'>Derecho</td><td class='mono sm'>DERECHO_JOVEN_MUJER_1_AS2_C2</td></tr><tr><td class='n mono'>09-17 22:42</td><td class='prog'>Mercadotecnia</td><td class='mono sm'>MERCADOTECNIA_MUJER_1</td></tr><tr><td class='n mono'>09-17 22:42</td><td class='prog'>Derecho</td><td class='mono sm'>DERECHO_JOVEN_HOMBRE_1_AS2_C2</td></tr><tr><td class='n mono'>09-18 00:04</td><td class='prog'>Contaduría</td><td class='mono sm'>CONTADURIA_ADULTO_MUJER_1_AS2_C2</td></tr><tr><td class='n mono'>09-18 06:00</td><td class='prog'>Comunicación</td><td class='mono sm'>COMUNICACION_MUJER_2</td></tr><tr><td class='n mono'>09-18 08:31</td><td class='prog'>Administración</td><td class='mono sm'>ADMINISTRACION_ADULTO_MUJER_2_AS2_C2</td></tr></tbody></table></div>
+</section>
+
+<div class="alert">
+  <p class="eyebrow">Riesgo</p>
+  <h2>Si continúa, algunas campañas se quedarán sin anuncios</h2>
+  <p>El ritmo va en siete u ocho rechazos diarios y va en aumento. Cuando una campaña se
+  queda sin anuncios aprobados deja de entregar por completo, y crear anuncios nuevos no
+  resuelve: nacerían rechazados por la misma causa.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Programa</th><th class="n">Rechazados</th><th class="n">Activos</th><th>Estado</th></tr></thead>
+    <tbody><tr><td class='prog'>Mtría. Com. Organizacional</td><td class='n'>1</td><td class='n'>3</td><td><span class='pill crit'>frágil</span></td></tr><tr><td class='prog'>Mercadotecnia</td><td class='n'>1</td><td class='n'>3</td><td><span class='pill crit'>frágil</span></td></tr><tr><td class='prog'>Comunicación</td><td class='n'>1</td><td class='n'>3</td><td><span class='pill crit'>frágil</span></td></tr><tr><td class='prog'>Administración</td><td class='n'>4</td><td class='n'>4</td><td><span class='pill warn'>atención</span></td></tr><tr><td class='prog'>Contaduría</td><td class='n'>2</td><td class='n'>6</td><td><span class='pill ok'>con margen</span></td></tr><tr><td class='prog'>Derecho</td><td class='n'>2</td><td class='n'>6</td><td><span class='pill ok'>con margen</span></td></tr><tr><td class='prog'>Esp. Valuación</td><td class='n'>1</td><td class='n'>7</td><td><span class='pill ok'>con margen</span></td></tr></tbody></table></div>
+</div>
+
+<section>
+  <div class="sechead"><p class="eyebrow">Acción requerida</p><h2>Qué necesitamos de la universidad</h2></div>
+  <ol>
+    <li><strong>Solicitar la revisión de la cuenta de WhatsApp.</strong> Es lo único que
+    detiene los rechazos. Se pide desde la aplicación de WhatsApp Business en el teléfono
+    móvil, y debe hacerlo quien administra la línea. En la restricción anterior, Meta revisó
+    y confirmó que no había incumplimiento.</li>
+    <li><strong>Revisar los mensajes automáticos de seguimiento.</strong> Las campañas de
+    licenciatura envían un mensaje automático a quien no responde, con texto de un programa
+    distinto y una fecha vencida. Recomendamos desactivarlo: si Meta evalúa señales de
+    mensajes no deseados, es el primer elemento a corregir.</li>
+    <li><strong>No solicitar revisión anuncio por anuncio.</strong> El rechazo no corresponde
+    al anuncio y volvería a producirse mientras la cuenta siga restringida.</li>
+  </ol>
+</section>
+
+<footer>
+  <div>Corte al 18 de septiembre de 2026, 09:07 h, hora de la Ciudad de México · cuenta publicitaria activa,
+  con $159,782 disponibles bajo el límite de gasto.</div>
+  <div>Fuente: Meta Marketing API. La revisión de estado de los anuncios se realiza en tiempo
+  real sobre las campañas del ciclo septiembre 2026.</div>
+</footer>
+</div>
