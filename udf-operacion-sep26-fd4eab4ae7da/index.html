@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>UDF · Estado de la operación digital · Septiembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#FBFAF7; --paper-2:#FFFFFF; --ink:#16130F; --ink-2:#55504A; --ink-3:#8A837A;
+  --form:#E4DFD6; --line:#D9D3C8;
+  --alert:#C0392B; --alert-bg:#FBEDEB; --ok:#2E7D5B; --ok-bg:#EAF4EF;
+  --warn:#B0741B; --warn-bg:#FBF2E3; --accent:#16130F;
+}
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --paper:#131211; --paper-2:#1B1A18; --ink:#F2EEE8; --ink-2:#B5AEA4; --ink-3:#847C72;
+    --form:#2A2825; --line:#332F2B;
+    --alert:#E8705F; --alert-bg:#2B1A17; --ok:#5FBF92; --ok-bg:#15241D;
+    --warn:#D99B3F; --warn-bg:#2A2013; --accent:#F2EEE8;
+  }
+}
+:root[data-theme="dark"] {
+  --paper:#131211; --paper-2:#1B1A18; --ink:#F2EEE8; --ink-2:#B5AEA4; --ink-3:#847C72;
+  --form:#2A2825; --line:#332F2B;
+  --alert:#E8705F; --alert-bg:#2B1A17; --ok:#5FBF92; --ok-bg:#15241D;
+  --warn:#D99B3F; --warn-bg:#2A2013; --accent:#F2EEE8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px 96px}
+h1,h2,h3,h4{font-family:Archivo,system-ui,sans-serif;margin:0;line-height:1.2}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+
+header.top{border-bottom:1px solid var(--line);background:var(--paper-2);margin-bottom:8px}
+.top-in{max-width:1120px;margin:0 auto;padding:36px 16px 28px}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+h1{font-size:clamp(26px,4.4vw,40px);font-weight:700;letter-spacing:-.02em;max-width:19ch}
+.sub-h{color:var(--ink-2);margin-top:12px;max-width:66ch;font-size:15px}
+
+nav.idx{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 0}
+nav.idx a{font-size:12px;color:var(--ink-2);text-decoration:none;padding:5px 11px;
+  border:1px solid var(--line);border-radius:999px;background:var(--paper)}
+nav.idx a:hover{color:var(--ink);border-color:var(--ink-3)}
+
+section{margin-top:56px;scroll-margin-top:16px}
+.s-h{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.s-n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-3)}
+h2{font-size:clamp(19px,2.6vw,25px);font-weight:600;letter-spacing:-.01em}
+.s-d{color:var(--ink-2);font-size:14px;margin:0 0 22px;max-width:74ch}
+
+.cards{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.card{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px}
+.card.warn{border-color:var(--warn);background:var(--warn-bg)}
+.card-v{font-family:Archivo,sans-serif;font-size:29px;font-weight:700;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.card-l{font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.35}
+.card-n{font-size:11.5px;color:var(--ink-3);margin-top:7px;font-family:'IBM Plex Mono',monospace}
+
+ul.tl{list-style:none;padding:0;margin:0;border-left:2px solid var(--line);margin-left:6px}
+ul.tl li{position:relative;padding:0 0 24px 26px}
+ul.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;
+  border-radius:50%;background:var(--ink-3);border:2px solid var(--paper)}
+li.tl-alert::before{background:var(--alert)}
+li.tl-ok::before{background:var(--ok)}
+li.tl-warn::before{background:var(--warn)}
+.tl-f{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.08em}
+.tl-b h4{font-size:15.5px;font-weight:600;margin:3px 0 4px}
+.tl-b p{margin:0;color:var(--ink-2);font-size:14px;max-width:72ch}
+
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--paper-2)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px}
+th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  padding:13px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--form);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.n{text-align:right;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;
+  white-space:nowrap}
+td.big{font-weight:600;font-size:15px}
+td.nom{font-weight:500;max-width:320px}
+.sub{display:block;font-size:11px;color:var(--ink-3);font-weight:400;margin-top:2px}
+td.est{color:var(--ink-2);font-size:12.5px}
+tr.row-dead td{background:var(--alert-bg)}
+tr.row-dead td.est{color:var(--alert);font-weight:500}
+tr.row-warn td{background:var(--warn-bg)}
+tr.row-warn td.est{color:var(--warn);font-weight:500}
+tr.hi td{background:var(--form)}
+
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:5px;white-space:nowrap}
+.tag-alert{background:var(--alert-bg);color:var(--alert)}
+.tag-ok{background:var(--ok-bg);color:var(--ok)}
+.tag-warn{background:var(--warn-bg);color:var(--warn)}
+
+.ins{border:1px solid var(--line);border-left:3px solid var(--ink-3);border-radius:10px;
+  padding:17px 19px;margin-bottom:10px;background:var(--paper-2)}
+.ins-alert{border-left-color:var(--alert)}
+.ins-ok{border-left-color:var(--ok)}
+.ins-warn{border-left-color:var(--warn)}
+.ins-h{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}
+.ins-h h4{font-size:15.5px;font-weight:600}
+.ins p{margin:0;color:var(--ink-2);font-size:14px;max-width:80ch}
+
+.note{background:var(--form);border-radius:10px;padding:16px 18px;font-size:13px;
+  color:var(--ink-2);margin-top:14px}
+.note b{color:var(--ink);font-weight:600}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--ink-3)}
+@media(max-width:640px){.top-in{padding:28px 16px 22px}section{margin-top:44px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="kicker">Universidad UDF Santa María · corte 22-sep-2026</div>
+  <h1>Estado de la operación digital</h1>
+  <p class="sub-h">Del <b>8 al 20 de septiembre</b> revisamos de punta a punta qué pasó entre la pauta,
+  la atención por WhatsApp y el CRM. Este documento explica el periodo, cuantifica lo que se perdió
+  y lo que se recupera, y muestra el arranque de las campañas nuevas que ya están corriendo.</p>
+  <nav class="idx">
+    <a href="#resumen">Resumen</a><a href="#linea">Qué pasó</a><a href="#diario">Corte diario</a>
+    <a href="#calidad">Calidad de prospectos</a><a href="#nuevas">Campañas nuevas</a>
+    <a href="#rescate">Rescate</a><a href="#decisiones">Decisiones</a><a href="#config">Configuración</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+
+<section id="resumen">
+  <div class="s-h"><span class="s-n">01</span><h2>Resumen del periodo</h2></div>
+  <p class="s-d">Cifras del 8 al 20 de septiembre sobre la cuenta publicitaria histórica.
+  «Conversaciones iniciadas» es gente que dio clic al anuncio y abrió WhatsApp;
+  «llegaron a atención» es la que efectivamente entró a la plataforma donde se le responde y califica.</p>
+  <div class="cards"><div class="card ">
+      <div class="card-v">$82,577</div>
+      <div class="card-l">Inversión 8 al 20 de septiembre</div>
+      <div class="card-n">cuenta histórica</div>
+    </div><div class="card ">
+      <div class="card-v">765</div>
+      <div class="card-l">Conversaciones iniciadas en Meta</div>
+      <div class="card-n">costo por conversación $107.94</div>
+    </div><div class="card warn">
+      <div class="card-v">334</div>
+      <div class="card-l">Llegaron a la plataforma de atención</div>
+      <div class="card-n">44% de las iniciadas</div>
+    </div><div class="card ">
+      <div class="card-v">156</div>
+      <div class="card-l">Calificados 3★ o más · Meta</div>
+      <div class="card-n">47% de los atendidos</div>
+    </div><div class="card ">
+      <div class="card-v">231</div>
+      <div class="card-l">Calificados 3★ o más · todas las fuentes</div>
+      <div class="card-n">incluye orgánico y sitio web</div>
+    </div><div class="card ">
+      <div class="card-v">90</div>
+      <div class="card-l">Tratos creados en el CRM</div>
+      <div class="card-n">78 de 3★ · 10 de 4★</div>
+    </div></div>
+  <div class="note"><b>La diferencia entre esas dos cifras es el punto central del periodo.</b>
+  De 765 personas que iniciaron conversación, 334 llegaron a atención.
+  Del 8 al 16 esa proporción fue normal; del 17 al 20 fue cero.</div>
+</section>
+
+<section id="linea">
+  <div class="s-h"><span class="s-n">02</span><h2>Qué pasó, día por día</h2></div>
+  <p class="s-d">Dos incidencias distintas ocurrieron en la misma quincena. No están relacionadas entre sí
+  y tienen responsables técnicos diferentes.</p>
+  <ul class="tl"><li class="tl-alert">
+    <div class="tl-f">8 y 9 sep</div>
+    <div class="tl-b"><h4>Los leads calificados no se registraron en el CRM</h4><p>Patagon calificó 23 prospectos de 3★ o más, pero no escribió ninguno en Pipedrive. La pauta y la línea funcionaban con normalidad.</p></div>
+  </li><li class="tl-ok">
+    <div class="tl-f">10 al 16 sep</div>
+    <div class="tl-b"><h4>Operación normal</h4><p>311 conversaciones de Meta llegaron a Patagon, 145 calificaron a 3★ o más y se crearon 88 tratos.</p></div>
+  </li><li class="tl-alert">
+    <div class="tl-f">17 sep</div>
+    <div class="tl-b"><h4>La línea de WhatsApp deja de recibir</h4><p>93 personas iniciaron conversación desde los anuncios. Ninguna llegó a Patagon. Sólo 1 de 93 avanzó más allá del primer mensaje.</p></div>
+  </li><li class="tl-warn">
+    <div class="tl-f">18 sep · 13:35</div>
+    <div class="tl-b"><h4>Se pausan las 22 campañas de la cuenta histórica</h4><p>Apagado completo para detener la inversión sin destino.</p></div>
+  </li><li class="tl-warn">
+    <div class="tl-f">20 y 21 sep</div>
+    <div class="tl-b"><h4>Alta de 5 campañas nuevas en cuenta distinta</h4><p>Versión V4 en la cuenta GRUPO BECAS, bajo otro Business Manager, con destino de WhatsApp enrutado por la página en lugar de número fijo.</p></div>
+  </li><li class="tl-ok">
+    <div class="tl-f">21 y 22 sep</div>
+    <div class="tl-b"><h4>El flujo se restablece</h4><p>20 conversaciones de Meta llegan a Patagon, 12 califican a 3★ y 1 a 4★. La conversación vuelve a avanzar en ambos sentidos.</p></div>
+  </li></ul>
+</section>
+
+<section id="diario">
+  <div class="s-h"><span class="s-n">03</span><h2>Corte diario</h2></div>
+  <p class="s-d">Conversaciones de Meta que llegaron a atención, cómo calificaron y cuántos tratos
+  se abrieron en el CRM ese día. Los tratos incluyen todas las fuentes, no sólo pauta.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Día</th><th style="text-align:right">Conversaciones</th>
+      <th style="text-align:right">3★</th><th style="text-align:right">4★</th>
+      <th style="text-align:right">Tratos CRM</th><th>Estado</th></tr></thead>
+    <tbody><tr class="row-warn">
+      <td class="mono">08/09</td>
+      <td class="n">27</td>
+      <td class="n">9</td>
+      <td class="n">—</td>
+      <td class="n">2</td>
+      <td class="est">falla de escritura al CRM</td>
+    </tr><tr class="row-warn">
+      <td class="mono">09/09</td>
+      <td class="n">18</td>
+      <td class="n">6</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="est">falla de escritura al CRM</td>
+    </tr><tr class="">
+      <td class="mono">10/09</td>
+      <td class="n">36</td>
+      <td class="n">18</td>
+      <td class="n">1</td>
+      <td class="n">8</td>
+      <td class="est">normal</td>
+    </tr><tr class="">
+      <td class="mono">11/09</td>
+      <td class="n">45</td>
+      <td class="n">26</td>
+      <td class="n">—</td>
+      <td class="n">17</td>
+      <td class="est">normal</td>
+    </tr><tr class="">
+      <td class="mono">12/09</td>
+      <td class="n">35</td>
+      <td class="n">20</td>
+      <td class="n">—</td>
+      <td class="n">11</td>
+      <td class="est">normal</td>
+    </tr><tr class="">
+      <td class="mono">13/09</td>
+      <td class="n">36</td>
+      <td class="n">16</td>
+      <td class="n">—</td>
+      <td class="n">12</td>
+      <td class="est">normal</td>
+    </tr><tr class="">
+      <td class="mono">14/09</td>
+      <td class="n">60</td>
+      <td class="n">25</td>
+      <td class="n">1</td>
+      <td class="n">17</td>
+      <td class="est">normal</td>
+    </tr><tr class="">
+      <td class="mono">15/09</td>
+      <td class="n">35</td>
+      <td class="n">18</td>
+      <td class="n">—</td>
+      <td class="n">14</td>
+      <td class="est">normal</td>
+    </tr><tr class="">
+      <td class="mono">16/09</td>
+      <td class="n">42</td>
+      <td class="n">16</td>
+      <td class="n">—</td>
+      <td class="n">9</td>
+      <td class="est">normal</td>
+    </tr><tr class="row-dead">
+      <td class="mono">17/09</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="est">línea sin recepción</td>
+    </tr><tr class="row-dead">
+      <td class="mono">18/09</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="est">línea sin recepción · pausa de campañas</td>
+    </tr><tr class="row-dead">
+      <td class="mono">19/09</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="est">sin pauta activa</td>
+    </tr><tr class="row-dead">
+      <td class="mono">20/09</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="n">—</td>
+      <td class="est">sin pauta activa · alta de campañas nuevas</td>
+    </tr></tbody>
+  </table></div>
+</section>
+
+<section id="calidad">
+  <div class="s-h"><span class="s-n">04</span><h2>Calidad de los prospectos</h2></div>
+  <p class="s-d">Un prospecto llega a 3★ cuando identifica el programa que le interesa.
+  Para 4★ y 5★ hace falta ida y vuelta: confirmar bachillerato o licenciatura previa, horario,
+  presupuesto y aceptación de seguimiento.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Periodo</th><th style="text-align:right">Conversaciones</th>
+      <th style="text-align:right">1★</th><th style="text-align:right">3★</th>
+      <th style="text-align:right">4★ y 5★</th></tr></thead>
+    <tbody><tr>
+      <td>26-ago a 7-sep<span class="sub">13 días</span></td>
+      <td class="n">823</td>
+      <td class="n">49%</td>
+      <td class="n">45%</td>
+      <td class="n big">3.6%</td>
+    </tr><tr class="hi">
+      <td>8 a 20-sep<span class="sub">13 días</span></td>
+      <td class="n">334</td>
+      <td class="n">51%</td>
+      <td class="n">46%</td>
+      <td class="n big">0.6%</td>
+    </tr><tr>
+      <td>21 a 22-sep<span class="sub">2 días</span></td>
+      <td class="n">20</td>
+      <td class="n">30%</td>
+      <td class="n">60%</td>
+      <td class="n big">5.0%</td>
+    </tr></tbody>
+  </table></div>
+  <div class="note">La proporción de 1★ se mantuvo igual que en la quincena previa, lo que confirma que
+  <b>la atención funcionó con normalidad del 8 al 16</b>. Lo que sí cayó fue la calificación alta,
+  y eso todavía no tiene una explicación medida.</div>
+</section>
+
+<section id="nuevas">
+  <div class="s-h"><span class="s-n">05</span><h2>Campañas nuevas activas</h2>
+    <span class="tag tag-ok">Corriendo</span></div>
+  <p class="s-d">Cinco campañas dadas de alta el 20 y 21 de septiembre en una cuenta publicitaria distinta,
+  con $3,040 de presupuesto diario en conjunto y vuelo hasta el 30 de septiembre.
+  Cifras acumuladas al 22-sep-2026.</p>
+  <div class="cards" style="margin-bottom:14px">
+    <div class="card ">
+      <div class="card-v">$5,068</div>
+      <div class="card-l">Invertido</div>
+      <div class="card-n">desde el 20 de septiembre</div>
+    </div>
+    <div class="card ">
+      <div class="card-v">43,418</div>
+      <div class="card-l">Impresiones</div>
+      
+    </div>
+    <div class="card ">
+      <div class="card-v">47</div>
+      <div class="card-l">Conversaciones iniciadas</div>
+      <div class="card-n">a $108 cada una</div>
+    </div>
+    <div class="card ">
+      <div class="card-v">13</div>
+      <div class="card-l">Ya calificados 3★ o más</div>
+      <div class="card-n">de los primeros atendidos</div>
+    </div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Campaña</th><th style="text-align:right">Invertido</th>
+      <th style="text-align:right">Impresiones</th><th style="text-align:right">CTR</th>
+      <th style="text-align:right">CPM</th><th style="text-align:right">Conversaciones</th>
+      <th style="text-align:right">Costo / conv.</th></tr></thead>
+    <tbody><tr>
+      <td class="nom">Lic Psicologia
+        <span class="sub">alta 20/09 · $700/día</span></td>
+      <td class="n">$1,597.13</td>
+      <td class="n">11,266</td>
+      <td class="n">1.53%</td>
+      <td class="n">$142</td>
+      <td class="n big">26</td>
+      <td class="n">$61</td>
+    </tr><tr>
+      <td class="nom">Lic Derecho
+        <span class="sub">alta 20/09 · $800/día</span></td>
+      <td class="n">$1,630.15</td>
+      <td class="n">11,722</td>
+      <td class="n">1.31%</td>
+      <td class="n">$139</td>
+      <td class="n big">13</td>
+      <td class="n">$125</td>
+    </tr><tr>
+      <td class="nom">Lic Administracion
+        <span class="sub">alta 21/09 · $850/día</span></td>
+      <td class="n">$1,145.41</td>
+      <td class="n">10,104</td>
+      <td class="n">1.02%</td>
+      <td class="n">$113</td>
+      <td class="n big">4</td>
+      <td class="n">$286</td>
+    </tr><tr>
+      <td class="nom">Lic Comercio
+        <span class="sub">alta 20/09 · $350/día</span></td>
+      <td class="n">$565.25</td>
+      <td class="n">9,328</td>
+      <td class="n">0.61%</td>
+      <td class="n">$61</td>
+      <td class="n big">2</td>
+      <td class="n">$283</td>
+    </tr><tr>
+      <td class="nom">Esp Valuacion
+        <span class="sub">alta 21/09 · $340/día</span></td>
+      <td class="n">$130.18</td>
+      <td class="n">998</td>
+      <td class="n">1.90%</td>
+      <td class="n">$130</td>
+      <td class="n big">2</td>
+      <td class="n">$65</td>
+    </tr></tbody>
+  </table></div>
+  <div class="note"><b>El destino de WhatsApp cambió.</b> Los anuncios anteriores enviaban a un número fijo;
+  los nuevos enrutan la conversación por el WhatsApp ligado a la página. Es el cambio que permite que
+  el flujo vuelva a operar sin depender de la línea que quedó restringida.</div>
+</section>
+
+<section id="rescate">
+  <div class="s-h"><span class="s-n">06</span><h2>Prospectos por recuperar</h2></div>
+  <p class="s-d">Revisamos uno por uno los 151 prospectos que calificaron a 3★ o más
+  y no llegaron al CRM, para separar lo que es criterio funcionando de lo que es pérdida real.</p>
+  <div class="cards" style="margin-bottom:14px">
+    <div class="card warn">
+      <div class="card-v">60</div>
+      <div class="card-l">Se recuperan</div>
+      <div class="card-n">cumplían criterio y no se registraron</div>
+    </div>
+    <div class="card ">
+      <div class="card-v">4</div>
+      <div class="card-l">Por revisar</div>
+      <div class="card-n">caso por caso</div>
+    </div>
+    <div class="card ">
+      <div class="card-v">87</div>
+      <div class="card-l">Descarte correcto</div>
+      <div class="card-n">no compartieron nombre completo</div>
+    </div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Motivo</th><th style="text-align:right">Prospectos</th><th>Clasificación</th></tr></thead>
+    <tbody><tr><td>No declararon nombre completo · criterio de diseño</td><td class="n">78</td>
+      <td><span class="tag tag-ok">Correcto</span></td></tr><tr><td>Ambiguos revisados y descartados</td><td class="n">9</td>
+      <td><span class="tag tag-ok">Correcto</span></td></tr><tr><td>Declararon nombre y no se registraron</td><td class="n">32</td>
+      <td><span class="tag tag-alert">Recuperable</span></td></tr><tr><td>Los dos días sin escritura al CRM</td><td class="n">23</td>
+      <td><span class="tag tag-alert">Recuperable</span></td></tr><tr><td>Ambiguos que sí califican</td><td class="n">5</td>
+      <td><span class="tag tag-alert">Recuperable</span></td></tr><tr><td>Pendientes de revisión manual</td><td class="n">4</td>
+      <td><span class="tag tag-warn">Por revisar</span></td></tr></tbody>
+  </table></div>
+  <div class="note">Cada prospecto recuperable está identificado con teléfono, programa de interés,
+  fecha y campaña de origen, listo para cargarse al CRM y asignarse a un asesor.</div>
+</section>
+
+<section id="decisiones">
+  <div class="s-h"><span class="s-n">07</span><h2>Decisiones sugeridas</h2></div>
+  <p class="s-d">Ordenadas por urgencia.</p>
+  <article class="ins ins-alert">
+    <div class="ins-h"><span class="tag tag-alert">Crítico</span><h4>Cuatro días de inversión sin destino</h4></div>
+    <p>Del 17 al 20 de septiembre se invirtieron $11,227 que generaron 171 conversaciones iniciadas, y ninguna llegó al equipo comercial. Sólo 12 de 171 avanzaron más allá del primer mensaje, contra 42% en los nueve días previos. La recomendación es fijar una alerta que detenga la pauta automáticamente cuando la recepción caiga a cero durante más de dos horas.</p></article><article class="ins ins-alert">
+    <div class="ins-h"><span class="tag tag-alert">Crítico</span><h4>60 prospectos calificados se pueden recuperar hoy</h4></div>
+    <p>De los 151 calificados que no llegaron al CRM, 87 quedaron fuera correctamente porque no compartieron su nombre completo. Los otros 60 sí cumplían y se pueden cargar de inmediato, más 4 que requieren revisión caso por caso. Ya están identificados con teléfono, programa de interés y campaña de origen.</p></article><article class="ins ins-warn">
+    <div class="ins-h"><span class="tag tag-warn">Atención</span><h4>La calificación alta cayó y conviene entender por qué</h4></div>
+    <p>Los prospectos de 4★ y 5★ pasaron de 3.6% en la quincena previa a 0.6% en la ventana analizada. No se explica por la línea: la conversación avanzaba con normalidad del 8 al 16. La hipótesis más probable es el calendario — al iniciar clases el 7 y el 12 de septiembre se vuelve más difícil confirmar intención de ingreso y agendar visita, que son los requisitos de 4★. Está pendiente de medir.</p></article><article class="ins ins-ok">
+    <div class="ins-h"><span class="tag tag-ok">Bien</span><h4>El arranque de las campañas nuevas es sano</h4></div>
+    <p>En sus primeros días las cinco campañas llevan $5,068 y 47 conversaciones iniciadas, a $108 por conversación — prácticamente el mismo costo que la operación histórica ($108). De las que ya llegaron a atención, 65% calificó a 3★ o más, incluida una de 4★. El flujo completo vuelve a funcionar de punta a punta.</p></article><article class="ins ins-warn">
+    <div class="ins-h"><span class="tag tag-warn">Atención</span><h4>Psicología y Derecho concentran el resultado</h4></div>
+    <p>Entre las dos suman 39 de las 47 conversaciones. Administración y Comercio traen volumen de impresiones pero muy poca conversación: Comercio lleva 9,328 impresiones y sólo 2 conversaciones. Conviene revisar el mensaje y el creativo de esas dos antes de sostenerles presupuesto.</p></article><article class="ins ins-warn">
+    <div class="ins-h"><span class="tag tag-warn">Atención</span><h4>El cierre de inscripción manda</h4></div>
+    <p>Las cinco campañas terminan el 30 de septiembre, con $3,040 diarios asignados. Con la pauta reanudada apenas el 20, la ventana efectiva es de diez días. Vale la pena decidir ya si se sostiene ese ritmo o se concentra el presupuesto en los dos programas que están respondiendo.</p></article>
+</section>
+
+<section id="config">
+  <div class="s-h"><span class="s-n">08</span><h2>Configuración y método</h2></div>
+  <p class="s-d">Cuentas publicitarias involucradas en el periodo.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Cuenta</th><th>Business Manager</th><th>Estado</th></tr></thead>
+    <tbody><tr><td class="nom">UDF Santa María<span class="sub mono">act_838230470286008</span></td>
+    <td>Universidad UDF Santa María Ads</td><td>histórica · pausada el 18-sep</td></tr><tr><td class="nom">GRUPO BECAS PARA LA SUPERACIÓN EDUCATIVA DE MÉXICO<span class="sub mono">act_662523023102066</span></td>
+    <td>Universidad UDF Santa María</td><td>activa desde el 20-sep</td></tr></tbody>
+  </table></div>
+  <div class="note">
+    <b>De dónde salen los datos.</b> Inversión, impresiones, clics y conversaciones iniciadas vienen
+    directo de la API de Meta. Conversaciones atendidas y calificación por estrellas, de la plataforma
+    de atención. Tratos y etapas, del CRM. Los tres se cruzaron por teléfono y por fecha.<br><br>
+    <b>Qué no incluye.</b> No se muestran datos personales de prospectos. Las conversaciones de
+    Meta y las atendidas no son comparables uno a uno: Meta cuenta por ventana de siete días y la
+    plataforma de atención agrupa a quien vuelve a escribir, así que la diferencia entre ambas no es
+    toda pérdida. La caída de calificación alta está descrita como hipótesis y señalada como pendiente
+    de medir, no como conclusión.
+  </div>
+</section>
+
+<footer>
+  Universidad UDF Santa María · Estado de la operación digital · ventana 8 al 20 de septiembre de 2026,
+  campañas nuevas al 22-sep · corte 22-sep-2026<br>
+  Documento privado. No indexado.
+</footer>
+</div>
+</body>
+</html>

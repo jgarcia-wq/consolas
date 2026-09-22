@@ -1,0 +1,20 @@
+Consola: UDF Santa María · Estado de la operación digital
+Ventana: 8 al 20 de septiembre de 2026, más campañas nuevas al 22 de septiembre.
+Corte: 22-sep-2026.
+
+Fuentes de datos
+- Meta Marketing API: inversión, impresiones, clics, CTR, CPM y conversaciones iniciadas.
+  Cuentas act_838230470286008 (histórica) y act_662523023102066 (activa desde el 20-sep).
+- Plataforma de atención (Patagon): conversaciones atendidas y calificación por estrellas.
+- CRM (Pipedrive): tratos creados, etapa y calificación de entrada, pipeline P. Refresh.
+Los tres se cruzaron por número telefónico y por fecha.
+
+Qué se omitió deliberadamente
+- Ningún dato personal de prospectos: sin nombres, teléfonos ni correos.
+- Las conversaciones que reporta Meta y las atendidas no son comparables una a una:
+  Meta cuenta por ventana de 7 días y la plataforma de atención agrupa a quien vuelve
+  a escribir. La diferencia entre ambas cifras no es toda pérdida.
+- La caída en calificación alta (4★ y 5★) se presenta como hipótesis pendiente de medir,
+  no como conclusión.
+
+Página no listada y con noindex. Cualquiera con la liga completa puede abrirla.
