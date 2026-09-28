@@ -330,7 +330,7 @@
     <div class="fix-note">
       <span class="hd">Corrección · el historial de etapas sí existe</span>
       El tablero anterior reporta 54 citas en cuatro ciclos y explica que el Excel exportado no trae el historial de cambios de etapa. <strong>El historial sí existe: vive en el <em>flow</em> de cada trato y se lee por API.</strong> Con él, el ciclo Sep 26 tiene solo <strong>4 tratos parados hoy</strong> en una etapa de cita — por eso la tabla original daba 44.
-      <div class="swap"><span class="old">44 citas</span><span class="arrow">→</span><span class="new">244 citas</span><span style="color:var(--ink-soft); font-size:.85rem">en el ciclo Sep 26 · 5.5 veces lo reportado</span></div>
+      <div class="swap"><span class="old">54 citas en 4 ciclos</span><span class="arrow">→</span><span class="new">≈ 1,371 citas</span><span style="color:var(--ink-soft); font-size:.85rem">· 244 medidas en el ciclo Sep 26, el resto estimadas por muestreo</span></div>
       <div class="srcline">Fuente · Pipedrive <span class="mono">/v1/deals/&#123;id&#125;/flow</span> · historial completo de cambios de <span class="mono">stage_id</span> de los 2,458 tratos del ciclo.</div>
     </div>
 
@@ -347,7 +347,24 @@
         <tr class="prev"><td>Lo que decía el tablero anterior</td><td class="num">—</td><td class="num">44</td></tr>
       </table>
       </div>
-      <p class="capt">Los ciclos Sep 25, Ene 26 y May 26 no tienen esta medición: reconstruir su historial exige leer el <em>flow</em> de 12,600 tratos. Queda como pendiente declarado, no como cero.</p>
+      <p class="capt">El pipeline de los ciclos anteriores no tiene etapa de «Asesoría realizada»: su equivalente de cita es <em>Citado (Virtual/Presencial)</em>. Por eso esa fila solo existe para el ciclo Sep 26.</p>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="font-size:1rem; margin-bottom:12px;">Citas de los cuatro ciclos — censo y estimación</h3>
+      <div class="tblwrap">
+      <table>
+        <tr><th>Ciclo</th><th class="num">Base</th><th class="num">Citas</th><th class="num">IC 95%</th><th>Método</th></tr>
+        <tr><td>Ciclo Sep 25</td><td class="num">5,385</td><td class="num">≈ 215</td><td class="num">142 – 288</td><td>muestra aleatoria de 700 tratos</td></tr>
+        <tr><td>Ciclo Ene 26</td><td class="num">2,657</td><td class="num">≈ 201</td><td class="num">156 – 246</td><td>muestra aleatoria de 700 tratos</td></tr>
+        <tr><td>Ciclo May 26</td><td class="num">4,566</td><td class="num">≈ 711</td><td class="num">598 – 824</td><td>muestra aleatoria de 700 tratos</td></tr>
+        <tr><td>Ciclo Sep 26</td><td class="num">2,359</td><td class="num">244</td><td class="num">—</td><td>censo, historial completo</td></tr>
+        <tr class="total"><td>Total</td><td class="num">14,967</td><td class="num">≈ 1,371</td><td class="num">1,140 – 1,602</td><td></td></tr>
+        <tr class="prev"><td>Lo que decía el tablero anterior</td><td class="num">14,916</td><td class="num">54</td><td class="num">—</td><td>etapa actual del trato</td></tr>
+      </table>
+      </div>
+      <div class="obs-note"><strong>El ciclo May 26 es el que más citas produjo y el que menos inscritos cerró</strong> — unas 711 citas contra 80 inscritos registrados en el CRM. El ciclo Sep 26, con 244 citas, cerró 95. Esa inversión no se podía ver mientras las citas se contaran por etapa actual, y es la pregunta comercial más grande que abre esta verificación.</div>
+      <div class="srcline">Método · muestreo aleatorio simple sin reemplazo, 700 tratos por ciclo, semilla fija. Intervalo de Wald al 95% con corrección por población finita. Se cuenta un trato como «con cita» si su historial pasó por <em>Citado (Virtual/Presencial)</em>, <em>Visita agendada</em> o <em>Asistió</em>.</div>
     </div>
 
     <div class="card" style="margin-top:20px;">
@@ -410,7 +427,7 @@
     <div class="card">
       <ul class="tight" style="font-size:.9rem">
         <li><strong>Los 839 inscritos de las matrices Est_Medios.</strong> Hay que pedir los cuatro archivos y cruzarlos por teléfono contra el CRM. Mientras tanto, el único número defendible es el del CRM.</li>
-        <li><strong>Las citas de los ciclos Sep 25, Ene 26 y May 26.</strong> Requiere leer el historial de etapas de 12,600 tratos. Es un pendiente de cómputo, no una imposibilidad.</li>
+        <li><strong>El censo de citas de los ciclos Sep 25, Ene 26 y May 26.</strong> Están estimadas por muestreo (700 tratos cada uno) con intervalos de ±15 a ±33%. El conteo exacto exige leer el historial de los 12,600 tratos restantes: es un pendiente de cómputo, no una imposibilidad.</li>
         <li><strong>Por qué se pierde la gente.</strong> El motivo de pérdida vive en la persona, no en el trato, y tiene 45% de cobertura. La mitad de lo capturado dice «no le interesa, contactado por teléfono», que es una bitácora de canal, no una objeción.</li>
         <li><strong>La atribución de Patagon es de último toque y sobrescribe.</strong> El origen real solo vive en <span class="mono">attributionHistory</span>. Cualquier reporte de fuentes que lea el campo plano —incluido el tablero anterior— arrastra ese sesgo.</li>
         <li><strong>Dos sistemas de verdad.</strong> Patagon y Pipedrive cuentan distinto y nada los obliga a coincidir. Es la causa de fondo de las tres correcciones de esta hoja, no un problema de quien armó el tablero.</li>
@@ -424,7 +441,7 @@
       <li><strong>Pipedrive</strong> · <code>/api/v2/deals</code> — 15,163 tratos creados entre 1-jul-2025 y 28-sep-2026 (14,967 excluyendo el pipeline Exacer, que es la base comparable con el tablero anterior).</li>
       <li><strong>Pipedrive</strong> · <code>/api/v2/persons</code> — 15,082 personas con Origen, Fuente, Campaña, Contenido, interés declarado y motivo de pérdida.</li>
       <li><strong>Pipedrive</strong> · <code>/api/v2/activities</code> — 44,847 actividades desde 1-jul-2025.</li>
-      <li><strong>Pipedrive</strong> · <code>/api/v1/deals/&#123;id&#125;/flow</code> — historial completo de etapas de los 2,458 tratos del ciclo Sep 26.</li>
+      <li><strong>Pipedrive</strong> · <code>/api/v1/deals/&#123;id&#125;/flow</code> — historial completo de etapas de los 2,458 tratos del ciclo Sep 26, más una muestra aleatoria de 700 tratos en cada uno de los tres ciclos anteriores (2,100 en total).</li>
       <li><strong>Meta Marketing API</strong> · insights adset-día de las dos cuentas activas, 1-jun → 24-sep-2026: $574,309 de gasto y 7,284 conversaciones de mensajería iniciadas.</li>
       <li>Matrices de inscritos Est_Medios de los cuatro ciclos — <strong>no disponibles para esta verificación</strong>.</li>
     </ul>

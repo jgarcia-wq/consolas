@@ -16,7 +16,10 @@ Se corrigen tres metricas que estaban construidas sobre el campo equivocado:
 
   2. Citas. El tablero original cuenta la etapa actual del trato, no el
      historial. Reconstruido por API: 244 tratos pasaron por una cita en el
-     ciclo septiembre 2026, contra los 44 reportados.
+     ciclo septiembre 2026 (censo completo) y unas 1,371 en los cuatro
+     ciclos, contra las 54 reportadas. Los tres ciclos anteriores estan
+     estimados por muestreo aleatorio de 700 tratos cada uno, con intervalo
+     al 95% declarado en la pagina.
 
   3. Esfuerzo y velocidad de contacto. 5.7 actividades por trato (no 12),
      mediana de 5.8 horas al primer contacto (no "inmediato") y 17.7 dias de
