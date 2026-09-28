@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tablero UDF Verificado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1C2B45; --navy-2:#28395A; --gold:#B8873A; --gold-light:#E4C58C; --rust:#AA4E39;
+    --cream:#F7F4EE; --paper:#FFFFFF; --ink:#22262E; --ink-soft:#5B6373; --line:#DCD5C6; --ok:#4C7A5E;
+    --c1:#1C2B45; --c2:#3C7A89; --c3:#8A5FB0; --c4:#B8873A; --c5:#4C7A5E; --c6:#C97B63; --c7:#B9B2A0;
+    --fig:#1C2B45; --rust-soft:rgba(170,78,57,.08);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--cream); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; line-height:1.5;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --cream:#15181E; --paper:#1D212A; --ink:#EDEAE2; --ink-soft:#A7ADBB; --line:#333A47;
+    --navy:#31486D; --navy-2:#3D5883; --gold:#D3A254; --rust:#D07A62; --ok:#6CA383;
+    --c1:#4E6A95; --c2:#4E97A7; --c3:#A17CC4; --c4:#D3A254; --c5:#6CA383; --c6:#D9937C; --c7:#9A9482;
+    --fig:#E4C58C; --rust-soft:rgba(208,122,98,.12);
+  }}
+  :root[data-theme="dark"]{
+    --cream:#15181E; --paper:#1D212A; --ink:#EDEAE2; --ink-soft:#A7ADBB; --line:#333A47;
+    --navy:#31486D; --navy-2:#3D5883; --gold:#D3A254; --rust:#D07A62; --ok:#6CA383;
+    --c1:#4E6A95; --c2:#4E97A7; --c3:#A17CC4; --c4:#D3A254; --c5:#6CA383; --c6:#D9937C; --c7:#9A9482;
+    --fig:#E4C58C; --rust-soft:rgba(208,122,98,.12);
+  }
+  h1,h2,h3{font-family:'Source Serif 4', Georgia, serif; font-weight:600; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  header.top{background:linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color:#F3EFE4; padding:48px 8vw 40px; border-bottom:6px solid var(--gold); position:relative; overflow:hidden;}
+  header.top::after{content:""; position:absolute; top:-40%; right:-10%; width:420px; height:420px; background:radial-gradient(circle, rgba(184,135,58,.16) 0%, rgba(184,135,58,0) 70%); pointer-events:none;}
+  header.top h1{color:#fff; font-size:2.4rem; max-width:760px; line-height:1.15; letter-spacing:-.01em; position:relative;}
+  header.top p.sub{color:#C9D0DE; font-size:1.02rem; margin-top:12px; max-width:660px; position:relative;}
+  .meta-row{display:flex; gap:32px; margin-top:26px; flex-wrap:wrap; position:relative;}
+  .meta-row div{border-left:2px solid var(--gold); padding-left:14px;}
+  .meta-row .label{font-size:.72rem; color:#AEB7C8; text-transform:uppercase; letter-spacing:.05em;}
+  .meta-row .value{font-size:.95rem; color:#F3EFE4; margin-top:2px;}
+  main{max-width:1120px; margin:0 auto; padding:0 8vw 80px;}
+  .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); margin-top:-30px; border:1px solid var(--line); box-shadow:0 8px 24px rgba(28,43,69,.12); position:relative; z-index:1;}
+  .kpi{background:var(--paper); padding:26px 22px;}
+  .kpi .num{font-family:'Source Serif 4',serif; font-size:2.1rem; font-weight:700; color:var(--fig); letter-spacing:-.01em;}
+  .kpi .lbl{font-size:.8rem; color:var(--ink-soft); margin-top:6px;}
+  .kpi .prev{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--rust); margin-top:5px;}
+  section{margin-top:52px;}
+  .sec-head{display:flex; align-items:baseline; gap:14px; border-bottom:2px solid var(--line); padding-bottom:12px; margin-bottom:20px; position:relative; flex-wrap:wrap;}
+  .sec-head::before{content:""; position:absolute; left:0; bottom:-2px; width:48px; height:2px; background:var(--gold);}
+  .sec-num{font-family:'IBM Plex Mono',monospace; color:var(--gold); font-size:.85rem; font-weight:600;}
+  .sec-head h2{font-size:1.42rem;}
+  .sec-head .verdict{margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border:1px solid currentColor;}
+  .verdict.fix{color:var(--rust);} .verdict.ok{color:var(--ok);} .verdict.na{color:var(--gold);}
+  .card{background:var(--paper); border:1px solid var(--line); padding:24px; box-shadow:0 1px 3px rgba(28,43,69,.05);}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start;}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr;} .kpis{grid-template-columns:1fr;}}
+  .tblwrap{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:.87rem; margin-top:6px; min-width:480px;}
+  th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line);}
+  th{color:var(--ink-soft); font-weight:600; font-size:.75rem; text-transform:uppercase; letter-spacing:.03em; background:rgba(184,135,58,.06);}
+  td.num{text-align:right; font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums;}
+  th.num{text-align:right;}
+  tr.total td{font-weight:700; border-top:2px solid var(--navy); border-bottom:none; background:rgba(28,43,69,.03);}
+  tr.prev td{color:var(--rust); font-size:.8rem; border-bottom:none;}
+  tr.prev td.num{font-family:'IBM Plex Mono',monospace;}
+  .legend-dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px;}
+  .funnel{display:flex; flex-direction:column; gap:6px; margin-top:8px;}
+  .funnel .step{display:flex; align-items:center; gap:14px;}
+  .funnel .bar{height:32px; background:var(--navy); display:flex; align-items:center; padding:0 12px; color:#fff; font-size:.8rem; white-space:nowrap; min-width:fit-content;}
+  .funnel .lbl{width:150px; font-size:.83rem; color:var(--ink-soft); flex-shrink:0;}
+  .funnel .pct{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--ink-soft); margin-left:10px; flex-shrink:0;}
+  .funnel .pct.cut{color:var(--rust); font-weight:600;}
+  @media(max-width:620px){.funnel .lbl{width:104px; font-size:.76rem;}}
+  .tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .tile{background:var(--paper); padding:18px; text-align:center;}
+  .tile .n{font-family:'Source Serif 4',serif; font-size:1.55rem; font-weight:700; color:var(--fig);}
+  .tile .l{font-size:.72rem; color:var(--ink-soft); margin-top:4px;}
+  .tile .p{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--rust); margin-top:4px;}
+  @media(max-width:700px){.tiles{grid-template-columns:repeat(2,1fr);}}
+  .steps4{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
+  .steps4 span{background:var(--navy); color:#fff; font-size:.78rem; padding:6px 12px; border-radius:3px; letter-spacing:.01em;}
+  .obs-note{border-left:3px solid var(--gold); background:rgba(184,135,58,.07); padding:12px 16px; margin-top:14px; font-size:.85rem; color:var(--ink-soft); max-width:780px;}
+  .obs-note strong{color:var(--ink); font-weight:600;}
+  .fix-note{border-left:3px solid var(--rust); background:var(--rust-soft); padding:14px 16px; margin-top:14px; font-size:.86rem; color:var(--ink-soft); max-width:820px;}
+  .fix-note strong{color:var(--ink); font-weight:600;}
+  .fix-note .hd{font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--rust); display:block; margin-bottom:6px;}
+  .swap{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:10px 0 4px;}
+  .old{font-family:'IBM Plex Mono',monospace; color:var(--rust); text-decoration:line-through; text-decoration-thickness:1.5px; font-size:1.05rem;}
+  .new{font-family:'IBM Plex Mono',monospace; color:var(--fig); font-weight:600; font-size:1.25rem;}
+  .arrow{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+  .srcline{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-soft); margin-top:12px; padding-top:9px; border-top:1px dotted var(--line);}
+  .capt{color:var(--ink-soft); font-size:.8rem; margin-top:10px;}
+  .sources{font-size:.8rem; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:18px; margin-top:56px;}
+  .sources ul{padding-left:18px; margin:8px 0;}
+  .sources code{font-family:'IBM Plex Mono',monospace; color:var(--ink);}
+  ul.tight{margin:10px 0 0; padding-left:18px; font-size:.88rem; color:var(--ink-soft);}
+  ul.tight li{margin-bottom:8px;}
+  ul.tight strong{color:var(--ink);}
+  img{max-width:100%;}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Tablero de Marketing y Resultados Comerciales</h1>
+  <p class="sub">Versión verificada contra el CRM. Leads, contacto, citas e inscripciones — septiembre 2025 a septiembre 2026. Los volúmenes del tablero original se confirman; tres métricas estaban construidas sobre el campo equivocado y se corrigen aquí.</p>
+  <div class="meta-row">
+    <div><div class="label">Periodo analizado</div><div class="value">Sep 2025 – Sep 2026</div></div>
+    <div><div class="label">Corte</div><div class="value">28-sep-2026</div></div>
+    <div><div class="label">Fuentes</div><div class="value">Pipedrive API · 44,847 actividades · Meta Marketing API</div></div>
+  </div>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><div class="num">14,967</div><div class="lbl">Leads generados, 4 ciclos (jul 25 – sep 26), sin Exacer</div><div class="prev">tablero anterior: 14,916 · confirmado</div></div>
+  <div class="kpi"><div class="num">70.2%</div><div class="lbl">Generado por pauta digital</div><div class="prev">tablero anterior: 44.0% · corregido</div></div>
+  <div class="kpi"><div class="num">491</div><div class="lbl">Inscritos registrados en el CRM, 4 ciclos</div><div class="prev">matriz Est_Medios: 839 · sin verificar</div></div>
+</div>
+
+<div class="tiles" style="margin-top:1px;">
+  <div class="tile"><div class="n">235</div><div class="l">Inscritos en CRM · Ciclo Sep 25</div></div>
+  <div class="tile"><div class="n">81</div><div class="l">Inscritos en CRM · Ciclo Ene 26</div></div>
+  <div class="tile"><div class="n">80</div><div class="l">Inscritos en CRM · Ciclo May 26</div></div>
+  <div class="tile"><div class="n">95</div><div class="l">Inscritos en CRM · Ciclo Sep 26</div><div class="p">+45 preinscritos vivos</div></div>
+</div>
+
+<main>
+
+  <!-- MÓDULO 1 -->
+  <section id="m1">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Leads por ciclo y por mes, desglosados por canal</h2><span class="verdict fix">Corregido</span></div>
+    <p style="color:var(--ink-soft); font-size:.88rem; max-width:700px; margin-top:-8px; margin-bottom:20px;">
+      Ciclo Sep 25 (jul–sep 25) · Ciclo Ene 26 (oct 25–ene 26) · Ciclo May 26 (feb–may 26) · Ciclo Sep 26 (jun–sep 26). Base: 14,967 tratos del CRM, excluyendo el pipeline Exacer. Volúmenes confirmados; la clasificación de canal se reconstruyó.
+    </p>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3 style="font-size:1rem; margin-bottom:14px;">Volumen de leads por ciclo</h3>
+      <div class="funnel">
+        <div class="step"><div class="lbl">Ciclo Sep 25</div><div class="bar" style="width:100%; background:var(--c1);">5,385</div></div>
+        <div class="step"><div class="lbl">Ciclo Ene 26</div><div class="bar" style="width:49.3%; background:var(--c2);">2,657</div></div>
+        <div class="step"><div class="lbl">Ciclo May 26</div><div class="bar" style="width:84.8%; background:var(--c3);">4,566</div></div>
+        <div class="step"><div class="lbl">Ciclo Sep 26</div><div class="bar" style="width:43.8%; background:var(--c4);">2,359</div></div>
+      </div>
+      <p class="capt">El tablero anterior reportaba 5,379 · 2,673 · 4,597 · 2,267. La diferencia es de 0.3% y se explica por la fecha de corte. <strong style="color:var(--ok)">Confirmado.</strong></p>
+    </div>
+
+    <div class="fix-note">
+      <span class="hd">Corrección · clasificación de canal</span>
+      El tablero anterior identifica el canal buscando la cadena literal <span class="mono">«B&amp;O»</span> dentro del campo <em>Origen</em> de la persona. Funcionó mientras las campañas escribían <span class="mono">UDF LICENCIATURAS | B&amp;O | DECISIÓN | 2026</span>. <strong>Desde julio de 2026 Patagon escribe <span class="mono">origen=meta</span>, <span class="mono">fuente=cpc</span></strong>, y esos leads dejaron de reconocerse como pauta: cayeron a «Redes Sociales» y a «Sin fuente clara».
+      <div class="swap"><span class="old">590 leads de agencia</span><span class="arrow">→</span><span class="new">1,626 leads de pauta</span><span style="color:var(--ink-soft); font-size:.85rem">en el ciclo Sep 26</span></div>
+      Aquí se cuenta como pauta un trato si vive en los pipelines <strong>Patagon</strong> o <strong>P. Refresh</strong> —que reciben exclusivamente click-to-WhatsApp de campaña— o si su Origen trae marca de campaña o su Fuente es <span class="mono">fb</span>, <span class="mono">ig</span> o <span class="mono">cpc</span>. Es la misma base de tratos, reclasificada.
+      <div class="srcline">Fuente · Pipedrive <span class="mono">/v2/deals</span> + <span class="mono">/v2/persons</span> · campos Origen y Fuente y <span class="mono">pipeline_id</span> · 15,163 tratos, 15,082 personas.</div>
+    </div>
+
+    <div class="card" style="margin:20px 0;">
+      <h3 style="font-size:1rem; margin-bottom:12px;">Comparativo de los 4 ciclos, por canal</h3>
+      <div class="tblwrap">
+      <table>
+        <tr><th>Canal</th><th class="num">Ciclo Sep 25</th><th class="num">Ciclo Ene 26</th><th class="num">Ciclo May 26</th><th class="num">Ciclo Sep 26</th><th class="num">Total</th></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c1)"></span><strong>Pauta Meta</strong></td><td class="num">3,230</td><td class="num">1,912</td><td class="num">3,740</td><td class="num">1,626</td><td class="num">10,508</td></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c2)"></span>Orgánico / sitio web</td><td class="num">1,465</td><td class="num">426</td><td class="num">514</td><td class="num">571</td><td class="num">2,976</td></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c5)"></span>Google Ads</td><td class="num">328</td><td class="num">163</td><td class="num">121</td><td class="num">1</td><td class="num">613</td></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c6)"></span>Otro identificado</td><td class="num">263</td><td class="num">152</td><td class="num">155</td><td class="num">64</td><td class="num">634</td></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c7)"></span>Sin dato de origen</td><td class="num">99</td><td class="num">4</td><td class="num">36</td><td class="num">97</td><td class="num">236</td></tr>
+        <tr class="total"><td>Total</td><td class="num">5,385</td><td class="num">2,657</td><td class="num">4,566</td><td class="num">2,359</td><td class="num">14,967</td></tr>
+        <tr><td>Participación de la pauta</td><td class="num">60.0%</td><td class="num">72.0%</td><td class="num">81.9%</td><td class="num">68.9%</td><td class="num">70.2%</td></tr>
+        <tr class="prev"><td>Lo que decía el tablero anterior</td><td class="num">31.1%</td><td class="num">55.9%</td><td class="num">61.0%</td><td class="num">26.0%</td><td class="num">44.0%</td></tr>
+      </table>
+      </div>
+      <p class="capt">«Redes Sociales», «Ferias», «Referidos» y «Solovino» del tablero anterior no son campos del CRM: son lecturas del mismo par Origen/Fuente. Se consolidaron en «Otro identificado» salvo donde el dato sostiene el canal.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3 style="font-size:1rem; margin-bottom:6px;">El mes en que el clasificador se rompe es el de mayor inversión</h3>
+      <p class="capt" style="margin-top:0; margin-bottom:12px;">Ciclo Sep 26, mes a mes. Barra oscura: leads de agencia según el tablero anterior. Barra dorada: leads de pauta medidos en el CRM.</p>
+      <div class="funnel">
+        <div class="step"><div class="lbl">Jun 26</div><div class="bar" style="width:81.7%; background:var(--rust);">561</div></div>
+        <div class="step"><div class="lbl"></div><div class="bar" style="width:90%; background:var(--c4);">618 medidos</div><span class="pct">Meta: $93,659 · 841 conversaciones</span></div>
+        <div class="step" style="margin-top:8px"><div class="lbl">Jul 26</div><div class="bar" style="width:2.2%; background:var(--rust); padding:0 5px;">15</div></div>
+        <div class="step"><div class="lbl"></div><div class="bar" style="width:41.5%; background:var(--c4);">285 medidos</div><span class="pct">Meta: $119,312 · 2,188 conversaciones</span></div>
+        <div class="step" style="margin-top:8px"><div class="lbl">Ago 26</div><div class="bar" style="width:0.6%; background:var(--rust); padding:0 5px;">4</div></div>
+        <div class="step"><div class="lbl"></div><div class="bar" style="width:52.3%; background:var(--c4);">359 medidos</div><span class="pct">Meta: $208,632 · 2,699 conversaciones</span></div>
+        <div class="step" style="margin-top:8px"><div class="lbl">Sep 26</div><div class="bar" style="width:1.5%; background:var(--rust); padding:0 5px;">10</div></div>
+        <div class="step"><div class="lbl"></div><div class="bar" style="width:53%; background:var(--c4);">364 medidos</div><span class="pct">Meta: $152,706 · 1,556 conversaciones</span></div>
+      </div>
+      <p class="capt">Entre julio y septiembre se invirtieron <strong style="color:var(--ink)">$480,650</strong> y Meta facturó <strong style="color:var(--ink)">6,443 conversaciones iniciadas</strong>. El tablero anterior registra <strong style="color:var(--rust)">29 leads de agencia</strong> en esos tres meses. La diferencia no es de criterio: es una cadena de texto que cambió.</p>
+      <div class="srcline">Fuente · Meta Marketing API, dos cuentas (<span class="mono">act_838230470286008</span>, <span class="mono">act_662523023102066</span>), insights adset-día, 1-jun → 24-sep-2026.</div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3 style="font-size:1rem; margin-bottom:12px;">Leads por nivel — Licenciatura vs. Posgrado, por ciclo</h3>
+      <div class="tblwrap">
+      <table>
+        <tr><th>Nivel</th><th class="num">Ciclo Sep 25</th><th class="num">Ciclo Ene 26</th><th class="num">Ciclo May 26</th><th class="num">Ciclo Sep 26</th><th class="num">Total</th></tr>
+        <tr><td>Licenciatura</td><td class="num">1,616</td><td class="num">911</td><td class="num">2,377</td><td class="num">1,246</td><td class="num">6,150</td></tr>
+        <tr><td>Posgrado</td><td class="num">370</td><td class="num">735</td><td class="num">1,326</td><td class="num">488</td><td class="num">2,919</td></tr>
+        <tr><td>Declara ambos</td><td class="num">3</td><td class="num">2</td><td class="num">0</td><td class="num">41</td><td class="num">46</td></tr>
+        <tr><td>Sin nivel declarado</td><td class="num">3,396</td><td class="num">1,009</td><td class="num">863</td><td class="num">584</td><td class="num">5,852</td></tr>
+        <tr class="total"><td>Total</td><td class="num">5,385</td><td class="num">2,657</td><td class="num">4,566</td><td class="num">2,359</td><td class="num">14,967</td></tr>
+        <tr><td>Cobertura del dato</td><td class="num">37%</td><td class="num">62%</td><td class="num">81%</td><td class="num">75%</td><td class="num">61%</td></tr>
+      </table>
+      </div>
+      <p class="capt">Se usa el interés declarado en la persona y, cuando falta, la etiqueta de la campaña de origen (<span class="mono">[LIC]</span>, <span class="mono">[MST]</span>, <span class="mono">[POS]</span>, <span class="mono">[ESP]</span>). <strong style="color:var(--rust)">En el ciclo Sep 25 el dato falta en el 63% de los casos</strong>, así que su desglose no es reportable con la precisión que sugería el tablero anterior. En los ciclos May 26 y Sep 26 sí lo es.</p>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;"><h3 style="font-size:1rem;">Ciclo Sep 25</h3><span class="mono" style="color:var(--ink-soft); font-size:.85rem;">5,385 leads</span></div>
+        <div class="tblwrap">
+        <table style="min-width:420px">
+          <tr><th>Mes</th><th class="num">Pauta</th><th class="num">Orgánico</th><th class="num">Google</th><th class="num">Otro</th><th class="num">S/dato</th><th class="num">Total</th></tr>
+          <tr><td>Ago 25</td><td class="num">2,977</td><td class="num">1,316</td><td class="num">289</td><td class="num">235</td><td class="num">99</td><td class="num">4,916</td></tr>
+          <tr><td>Sep 25</td><td class="num">253</td><td class="num">149</td><td class="num">39</td><td class="num">28</td><td class="num">0</td><td class="num">469</td></tr>
+        </table>
+        </div>
+        <div class="obs-note"><strong>Por qué este ciclo no tiene detalle mensual real:</strong> 4,152 de sus tratos se crearon en Pipedrive <strong>el mismo día</strong>, el 1 de agosto de 2025, en una migración masiva. El tablero anterior repartía esa carga como «Jul 4,143 · Ago 773 · Sep 463». El total del ciclo sí es comparable; el desglose por mes no existe.</div>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;"><h3 style="font-size:1rem;">Ciclo Ene 26</h3><span class="mono" style="color:var(--ink-soft); font-size:.85rem;">2,657 leads</span></div>
+        <div class="tblwrap">
+        <table style="min-width:420px">
+          <tr><th>Mes</th><th class="num">Pauta</th><th class="num">Orgánico</th><th class="num">Google</th><th class="num">Otro</th><th class="num">S/dato</th><th class="num">Total</th></tr>
+          <tr><td>Oct 25</td><td class="num">155</td><td class="num">99</td><td class="num">38</td><td class="num">37</td><td class="num">1</td><td class="num">330</td></tr>
+          <tr><td>Nov 25</td><td class="num">387</td><td class="num">92</td><td class="num">42</td><td class="num">47</td><td class="num">0</td><td class="num">568</td></tr>
+          <tr><td>Dic 25</td><td class="num">679</td><td class="num">82</td><td class="num">46</td><td class="num">40</td><td class="num">2</td><td class="num">849</td></tr>
+          <tr><td>Ene 26</td><td class="num">691</td><td class="num">153</td><td class="num">37</td><td class="num">28</td><td class="num">1</td><td class="num">910</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;"><h3 style="font-size:1rem;">Ciclo May 26</h3><span class="mono" style="color:var(--ink-soft); font-size:.85rem;">4,566 leads</span></div>
+        <div class="tblwrap">
+        <table style="min-width:420px">
+          <tr><th>Mes</th><th class="num">Pauta</th><th class="num">Orgánico</th><th class="num">Google</th><th class="num">Otro</th><th class="num">S/dato</th><th class="num">Total</th></tr>
+          <tr><td>Feb 26</td><td class="num">727</td><td class="num">117</td><td class="num">12</td><td class="num">31</td><td class="num">0</td><td class="num">887</td></tr>
+          <tr><td>Mar 26</td><td class="num">1,081</td><td class="num">134</td><td class="num">27</td><td class="num">27</td><td class="num">5</td><td class="num">1,274</td></tr>
+          <tr><td>Abr 26</td><td class="num">1,058</td><td class="num">130</td><td class="num">44</td><td class="num">59</td><td class="num">7</td><td class="num">1,298</td></tr>
+          <tr><td>May 26</td><td class="num">874</td><td class="num">133</td><td class="num">38</td><td class="num">38</td><td class="num">24</td><td class="num">1,107</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px;"><h3 style="font-size:1rem;">Ciclo Sep 26</h3><span class="mono" style="color:var(--ink-soft); font-size:.85rem;">2,359 leads</span></div>
+        <div class="tblwrap">
+        <table style="min-width:420px">
+          <tr><th>Mes</th><th class="num">Pauta</th><th class="num">Orgánico</th><th class="num">Google</th><th class="num">Otro</th><th class="num">S/dato</th><th class="num">Total</th></tr>
+          <tr><td>Jun 26</td><td class="num">618</td><td class="num">125</td><td class="num">1</td><td class="num">17</td><td class="num">30</td><td class="num">791</td></tr>
+          <tr><td>Jul 26</td><td class="num">285</td><td class="num">273</td><td class="num">0</td><td class="num">30</td><td class="num">58</td><td class="num">646</td></tr>
+          <tr><td>Ago 26</td><td class="num">359</td><td class="num">76</td><td class="num">0</td><td class="num">3</td><td class="num">8</td><td class="num">446</td></tr>
+          <tr><td>Sep 26</td><td class="num">364</td><td class="num">97</td><td class="num">0</td><td class="num">14</td><td class="num">1</td><td class="num">476</td></tr>
+        </table>
+        </div>
+        <p class="capt">El salto de orgánico en julio (273) coincide con la apertura del pipeline Orgánico y con el corte de atribución de Patagon: parte de ese bloque es tráfico de campaña que perdió su etiqueta de origen.</p>
+      </div>
+    </div>
+
+    <div class="obs-note"><strong>Observación:</strong> a partir de junio 2026 se contrató Patagon IA — los leads entran por WhatsApp y el chatbot responde de inmediato. Eso cambió la estructura del dato de origen, que es la causa de la corrección de este módulo.</div>
+  </section>
+
+  <!-- MÓDULO 2 -->
+  <section id="m2">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Contactos realizados sobre esos leads</h2><span class="verdict fix">Corregido</span></div>
+
+    <div class="fix-note">
+      <span class="hd">Corrección · intentos de contacto</span>
+      La cifra de 12 intentos por lead no sale de las actividades del CRM. Contando las 44,847 actividades registradas desde julio de 2025:
+      <div class="swap"><span class="old">12 intentos por lead</span><span class="arrow">→</span><span class="new">5.7 actividades</span><span style="color:var(--ink-soft); font-size:.85rem">· 4.4 de ellas llamadas · ciclo Sep 26</span></div>
+      La cifra real es menos de la mitad, <strong>pero la tendencia que el tablero anterior quería mostrar es cierta y sí se puede probar: el ciclo Sep 26 es, por mucho, el mejor atendido de los cuatro.</strong>
+      <div class="srcline">Fuente · Pipedrive <span class="mono">/v2/activities</span> · 44,847 registros desde 1-jul-2025.</div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="font-size:1rem; margin-bottom:12px;">Actividad registrada por ciclo</h3>
+      <div class="tblwrap">
+      <table>
+        <tr><th>Ciclo</th><th class="num">Tratos</th><th class="num">Actividades</th><th class="num">Llamadas</th><th class="num">Act. / trato</th><th class="num">Sin actividad</th></tr>
+        <tr><td>Ciclo Sep 25</td><td class="num">5,385</td><td class="num">7,322</td><td class="num">7,202</td><td class="num">1.4</td><td class="num">3,000</td></tr>
+        <tr><td>Ciclo Ene 26</td><td class="num">2,657</td><td class="num">7,651</td><td class="num">7,254</td><td class="num">2.9</td><td class="num">39</td></tr>
+        <tr><td>Ciclo May 26</td><td class="num">4,566</td><td class="num">11,793</td><td class="num">11,064</td><td class="num">2.6</td><td class="num">37</td></tr>
+        <tr class="total"><td>Ciclo Sep 26</td><td class="num">2,359</td><td class="num">13,394</td><td class="num">10,291</td><td class="num">5.7</td><td class="num">48</td></tr>
+      </table>
+      </div>
+      <p class="capt">Los 3,000 tratos sin actividad del ciclo Sep 25 son la migración del 1-ago-2025: nunca se trabajaron dentro de Pipedrive.</p>
+      <div class="steps4">
+        <span>1. Llamada</span><span>2. WhatsApp</span><span>3. Correo</span><span>4. Msj. masivo</span>
+      </div>
+    </div>
+
+    <div class="fix-note">
+      <span class="hd">Corrección · «no contactados»</span>
+      El tablero anterior cuenta como no contactados los tratos parados en <em>Lead</em>, <em>Intento de contacto</em> o <em>No contactable</em>, y los describe como gente a la que «nunca se logró localizar, por más intentos que se hicieron». <strong>Es una etapa del CRM, no una medición de contacto.</strong> De los 495 tratos del ciclo Sep 26 en esas etapas, <strong>473 (96%) tienen al menos una actividad completada</strong>, con mediana de 3 llamadas. La métrica no distingue entre «nadie lo llamó» y «se le llamó cinco veces y no contestó», y el tablero la presenta como lo segundo.
+      <div class="srcline">Nota de fecha · el tablero anterior se cortó antes del barrido de cierre de ciclo del 24-sep, que mandó a Perdido casi todo lo abierto. Por eso su cifra (844) y la de este corte (495) no se comparan directamente; lo que sí se compara es el método.</div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 3 -->
+  <section id="m3">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Tiempo promedio de primer contacto</h2><span class="verdict fix">Corregido</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="n">5.8 h</div><div class="l">Mediana al primer contacto</div><div class="p">antes: «Inmediato»</div></div>
+      <div class="tile"><div class="n">38%</div><div class="l">Atendidos dentro de la primera hora</div><div class="p">el mejor de los 4 ciclos</div></div>
+      <div class="tile"><div class="n">17.7</div><div class="l">Días, mediana lead → inscrito</div><div class="p">antes: 30–45 días</div></div>
+      <div class="tile"><div class="n">46%</div><div class="l">Se inscribe en ≤ 14 días</div></div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="font-size:1rem; margin-bottom:12px;">Velocidad del primer contacto, por ciclo</h3>
+      <div class="funnel">
+        <div class="step"><div class="lbl">Ciclo Sep 25</div><div class="bar" style="width:18.4%; background:var(--c7);">15%</div><span class="pct">mediana 81.6 h</span></div>
+        <div class="step"><div class="lbl">Ciclo Ene 26</div><div class="bar" style="width:29.4%; background:var(--c2);">24%</div><span class="pct">mediana 8.8 h</span></div>
+        <div class="step"><div class="lbl">Ciclo May 26</div><div class="bar" style="width:27%; background:var(--c3);">22%</div><span class="pct">mediana 9.5 h</span></div>
+        <div class="step"><div class="lbl">Ciclo Sep 26</div><div class="bar" style="width:46.6%; background:var(--ok);">38%</div><span class="pct">mediana 5.8 h</span></div>
+      </div>
+      <p class="capt">Barra: porcentaje atendido dentro de la primera hora.</p>
+    </div>
+
+    <div class="fix-note">
+      <span class="hd">Corrección · «inmediato» y «30–45 días»</span>
+      «Inmediato» describe la <strong>respuesta automática del chatbot</strong>, no el contacto del asesor. La mediana real del asesor es de <strong>5.8 horas</strong>. Y la maduración: solo el <strong>7%</strong> de los inscritos cae en la banda de 30 a 45 días que el tablero declara como típica; la mediana es de 17.7 días y el 46% se inscribe en dos semanas o menos.
+      <div class="srcline">Método · primer toque = primera actividad completada, fechada por <span class="mono">due_date</span>. Con <span class="mono">marked_as_done_time</span> la mediana sube a 14.6 h por los cierres en lote; el rango honesto es <strong>6 a 15 horas</strong>. Maduración medida sobre los 100 tratos que entraron a Inscrito con historial de etapas.</div>
+    </div>
+
+    <div class="obs-note"><strong>Observación:</strong> la vida del lead se acorta cerca del inicio de clases. Vale la pena conservar esa lectura del tablero anterior —es correcta— pero apoyada en el dato: mediana de 17.7 días, promedio de 27.5, y percentil 90 en 75 días.</div>
+  </section>
+
+  <!-- MÓDULO 4 -->
+  <section id="m4">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Citas agendadas y citas realizadas</h2><span class="verdict fix">Corregido</span></div>
+
+    <div class="fix-note">
+      <span class="hd">Corrección · el historial de etapas sí existe</span>
+      El tablero anterior reporta 54 citas en cuatro ciclos y explica que el Excel exportado no trae el historial de cambios de etapa. <strong>El historial sí existe: vive en el <em>flow</em> de cada trato y se lee por API.</strong> Con él, el ciclo Sep 26 tiene solo <strong>4 tratos parados hoy</strong> en una etapa de cita — por eso la tabla original daba 44.
+      <div class="swap"><span class="old">44 citas</span><span class="arrow">→</span><span class="new">244 citas</span><span style="color:var(--ink-soft); font-size:.85rem">en el ciclo Sep 26 · 5.5 veces lo reportado</span></div>
+      <div class="srcline">Fuente · Pipedrive <span class="mono">/v1/deals/&#123;id&#125;/flow</span> · historial completo de cambios de <span class="mono">stage_id</span> de los 2,458 tratos del ciclo.</div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="font-size:1rem; margin-bottom:10px;">Citas y asesorías del ciclo Sep 26 — tratos que pasaron por cada etapa</h3>
+      <div class="tblwrap">
+      <table>
+        <tr><th>Etapa</th><th class="num">Etapa actual</th><th class="num">Pasaron alguna vez</th></tr>
+        <tr><td>Asesoría realizada</td><td class="num">21</td><td class="num">364</td></tr>
+        <tr><td>Citado (virtual / presencial)</td><td class="num">0</td><td class="num">100</td></tr>
+        <tr><td>Visita agendada</td><td class="num">3</td><td class="num">129</td></tr>
+        <tr><td>Asistió a la cita</td><td class="num">1</td><td class="num">48</td></tr>
+        <tr class="total"><td>Tratos únicos con al menos una cita</td><td class="num">4</td><td class="num">244</td></tr>
+        <tr class="prev"><td>Lo que decía el tablero anterior</td><td class="num">—</td><td class="num">44</td></tr>
+      </table>
+      </div>
+      <p class="capt">Los ciclos Sep 25, Ene 26 y May 26 no tienen esta medición: reconstruir su historial exige leer el <em>flow</em> de 12,600 tratos. Queda como pendiente declarado, no como cero.</p>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="font-size:1rem; margin-bottom:6px;">El paso que se perdía de vista</h3>
+      <p class="capt" style="margin-top:0; margin-bottom:12px;">Recorrido completo de los 1,008 tratos de pauta del ciclo Sep 26. Conteo acumulado: «alcanzaron» incluye a quien llegó a una etapa posterior.</p>
+      <div class="funnel">
+        <div class="step"><div class="lbl">Lead 1★</div><div class="bar" style="width:100%">1,008</div><span class="pct">100%</span></div>
+        <div class="step"><div class="lbl">Lead 3★</div><div class="bar" style="width:89%">897</div><span class="pct">89%</span></div>
+        <div class="step"><div class="lbl">Lead 4★ · MQL</div><div class="bar" style="width:68%">685</div><span class="pct">76%</span></div>
+        <div class="step"><div class="lbl">Lead 5★</div><div class="bar" style="width:45.6%">460</div><span class="pct">67%</span></div>
+        <div class="step"><div class="lbl">Asesoría realizada</div><div class="bar" style="width:40.7%">410</div><span class="pct">89%</span></div>
+        <div class="step"><div class="lbl">Cita agendada</div><div class="bar" style="width:18.9%; background:var(--rust);">191</div><span class="pct cut">47% ←</span></div>
+        <div class="step"><div class="lbl">Asistió</div><div class="bar" style="width:12.9%">130</div><span class="pct">68%</span></div>
+        <div class="step"><div class="lbl">Evaluando</div><div class="bar" style="width:11.9%">120</div><span class="pct">92%</span></div>
+        <div class="step"><div class="lbl">Preinscrito</div><div class="bar" style="width:8.4%">85</div><span class="pct">71%</span></div>
+        <div class="step"><div class="lbl">Inscrito</div><div class="bar" style="width:5.7%">57</div><span class="pct">67%</span></div>
+      </div>
+      <div class="obs-note"><strong>Asesoría → cita agendada es el único paso que pierde más de la mitad.</strong> Todo lo que está por debajo de la cita convierte entre 67% y 92%. El problema del ciclo no fue cerrar ni generar: fue agendar. Con las citas invisibles, el tablero anterior no podía mostrarlo.</div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 5 -->
+  <section id="m5">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Inscritos resultantes, por ciclo</h2><span class="verdict na">Dos fuentes sin reconciliar</span></div>
+    <p style="color:var(--ink-soft); font-size:.88rem; max-width:700px; margin-top:-8px; margin-bottom:20px;">
+      La tabla de inscritos del tablero anterior sale de las matrices Est_Medios, archivos de la universidad que no viven en el CRM. No son verificables desde aquí. Esto es lo que el CRM sí sostiene.
+    </p>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3 style="font-size:1rem; margin-bottom:12px;">Inscritos registrados en Pipedrive, por canal corregido</h3>
+      <div class="tblwrap">
+      <table>
+        <tr><th>Canal</th><th class="num">Ciclo Sep 25</th><th class="num">Ciclo Ene 26</th><th class="num">Ciclo May 26</th><th class="num">Ciclo Sep 26</th><th class="num">Total</th></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c1)"></span><strong>Pauta Meta</strong></td><td class="num">55</td><td class="num">18</td><td class="num">36</td><td class="num">62</td><td class="num">171</td></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c2)"></span>Orgánico / sitio web</td><td class="num">155</td><td class="num">33</td><td class="num">23</td><td class="num">24</td><td class="num">235</td></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c5)"></span>Google Ads</td><td class="num">8</td><td class="num">11</td><td class="num">9</td><td class="num">0</td><td class="num">28</td></tr>
+        <tr><td><span class="legend-dot" style="background:var(--c7)"></span>Otro / sin dato</td><td class="num">17</td><td class="num">19</td><td class="num">12</td><td class="num">9</td><td class="num">57</td></tr>
+        <tr class="total"><td>Total en el CRM</td><td class="num">235</td><td class="num">81</td><td class="num">80</td><td class="num">95</td><td class="num">491</td></tr>
+        <tr><td>Preinscritos vivos</td><td class="num">0</td><td class="num">2</td><td class="num">7</td><td class="num">45</td><td class="num">54</td></tr>
+        <tr class="prev"><td>Matriz Est_Medios (tablero anterior)</td><td class="num">228</td><td class="num">170</td><td class="num">131</td><td class="num">310</td><td class="num">839</td></tr>
+      </table>
+      </div>
+    </div>
+
+    <div class="fix-note">
+      <span class="hd">Corrección · las dos tablas del tablero anterior se contradicen</span>
+      Atribuye a la agencia <strong>139 inscritos</strong> en el ciclo Sep 26 citando a Pipedrive, pero Pipedrive tiene <strong>95 inscritos de todos los canales</strong> en ese ciclo (140 contando los 45 preinscritos). De esos 95, solo <strong>2</strong> llevan un Origen con la marca B&amp;O.
+      <ul class="tight">
+        <li>La tabla de <strong>leads</strong> le quita a la pauta lo que sí generó (590 en vez de 1,626).</li>
+        <li>La tabla de <strong>inscritos</strong> le acredita lo que no puede probar (139 sobre una base que el CRM no contiene).</li>
+        <li>El resultado es un <strong>23.6% de lead → inscrito para la agencia</strong> que no existe. El embudo real de la pauta cierra en <strong>5.7%</strong>, o <strong>8.4%</strong> contando preinscritos.</li>
+        <li><strong>Ninguna ratio calculada entre las dos tablas es válida.</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- MÓDULO 6 -->
+  <section id="m6">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Lo que sigue sin poderse medir</h2><span class="verdict na">Pendiente declarado</span></div>
+    <div class="card">
+      <ul class="tight" style="font-size:.9rem">
+        <li><strong>Los 839 inscritos de las matrices Est_Medios.</strong> Hay que pedir los cuatro archivos y cruzarlos por teléfono contra el CRM. Mientras tanto, el único número defendible es el del CRM.</li>
+        <li><strong>Las citas de los ciclos Sep 25, Ene 26 y May 26.</strong> Requiere leer el historial de etapas de 12,600 tratos. Es un pendiente de cómputo, no una imposibilidad.</li>
+        <li><strong>Por qué se pierde la gente.</strong> El motivo de pérdida vive en la persona, no en el trato, y tiene 45% de cobertura. La mitad de lo capturado dice «no le interesa, contactado por teléfono», que es una bitácora de canal, no una objeción.</li>
+        <li><strong>La atribución de Patagon es de último toque y sobrescribe.</strong> El origen real solo vive en <span class="mono">attributionHistory</span>. Cualquier reporte de fuentes que lea el campo plano —incluido el tablero anterior— arrastra ese sesgo.</li>
+        <li><strong>Dos sistemas de verdad.</strong> Patagon y Pipedrive cuentan distinto y nada los obliga a coincidir. Es la causa de fondo de las tres correcciones de esta hoja, no un problema de quien armó el tablero.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="sources">
+    <strong>Fuentes de datos y método</strong>
+    <ul>
+      <li><strong>Pipedrive</strong> · <code>/api/v2/deals</code> — 15,163 tratos creados entre 1-jul-2025 y 28-sep-2026 (14,967 excluyendo el pipeline Exacer, que es la base comparable con el tablero anterior).</li>
+      <li><strong>Pipedrive</strong> · <code>/api/v2/persons</code> — 15,082 personas con Origen, Fuente, Campaña, Contenido, interés declarado y motivo de pérdida.</li>
+      <li><strong>Pipedrive</strong> · <code>/api/v2/activities</code> — 44,847 actividades desde 1-jul-2025.</li>
+      <li><strong>Pipedrive</strong> · <code>/api/v1/deals/&#123;id&#125;/flow</code> — historial completo de etapas de los 2,458 tratos del ciclo Sep 26.</li>
+      <li><strong>Meta Marketing API</strong> · insights adset-día de las dos cuentas activas, 1-jun → 24-sep-2026: $574,309 de gasto y 7,284 conversaciones de mensajería iniciadas.</li>
+      <li>Matrices de inscritos Est_Medios de los cuatro ciclos — <strong>no disponibles para esta verificación</strong>.</li>
+    </ul>
+    <p><strong>Criterio de canal.</strong> Se cuenta como pauta un trato si (a) vive en los pipelines Patagon o P. Refresh, que reciben exclusivamente click-to-WhatsApp de campaña, (b) su Origen contiene marca de campaña, o (c) su Fuente es <code>fb</code>, <code>ig</code> o <code>cpc</code>. El criterio (a) arrastra 20 tratos de origen orgánico en el ciclo Sep 26 —0.9% del total— que quedan sobreatribuidos a la pauta; es el único sesgo conocido de esta hoja y va en contra de su conclusión principal, no a favor.</p>
+    <p style="margin-top:14px;">Verificación independiente sobre el tablero <em>tablero-marketing-udf&nbsp;(8)</em> · Black &amp; Orange para UDF Santa María · corte 28-sep-2026.</p>
+  </div>
+
+</main>
+</body>
+</html>

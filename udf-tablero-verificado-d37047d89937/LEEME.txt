@@ -1,0 +1,40 @@
+Tablero de Marketing y Resultados Comerciales de UDF Santa Maria - version
+verificada contra el CRM. Cubre los cuatro ciclos de julio 2025 a septiembre
+2026. Corte del 28 de septiembre de 2026.
+
+Es una reconstruccion del tablero "tablero-marketing-udf (8)" en su mismo
+formato, con cada cifra recalculada desde su fuente. Se confirman los
+volumenes de leads (14,967 tratos, 0.3% de diferencia contra los 14,916
+reportados), los totales por ciclo y la aritmetica de todas las tablas.
+Se corrigen tres metricas que estaban construidas sobre el campo equivocado:
+
+  1. Clasificacion de canal. El tablero original identifica la pauta buscando
+     la cadena "B&O" en el campo Origen de la persona. Desde julio de 2026
+     Patagon escribe origen=meta / fuente=cpc y esos leads dejaron de
+     reconocerse. La pauta pasa de 44.0% a 70.2% en los cuatro ciclos y de
+     26.0% a 68.9% en el ciclo septiembre 2026.
+
+  2. Citas. El tablero original cuenta la etapa actual del trato, no el
+     historial. Reconstruido por API: 244 tratos pasaron por una cita en el
+     ciclo septiembre 2026, contra los 44 reportados.
+
+  3. Esfuerzo y velocidad de contacto. 5.7 actividades por trato (no 12),
+     mediana de 5.8 horas al primer contacto (no "inmediato") y 17.7 dias de
+     mediana lead a inscrito (no 30 a 45).
+
+Se declara como no verificable la tabla de inscritos: sale de las matrices
+Est_Medios de la universidad, que no viven en el CRM. La pagina presenta al
+lado lo que Pipedrive si sostiene (491 inscritos en los cuatro ciclos) y lo
+que reporta la matriz (839), sin mezclarlas.
+
+Fuentes:
+  Pipedrive /api/v2/deals      - 15,163 tratos creados 1-jul-2025 a 28-sep-2026
+  Pipedrive /api/v2/persons    - 15,082 personas con campos de atribucion
+  Pipedrive /api/v2/activities - 44,847 actividades
+  Pipedrive /api/v1/deals/{id}/flow - historial de etapas del ciclo sep-2026
+  Meta Marketing API           - dos cuentas, 1-jun a 24-sep-2026
+
+No contiene datos personales de prospectos: solo agregados. No incluye nombres
+de asesores ni de contactos.
+No listada en el indice y con ruta aleatoria: el repositorio es publico, asi
+que cualquiera con la liga completa puede abrirla.
