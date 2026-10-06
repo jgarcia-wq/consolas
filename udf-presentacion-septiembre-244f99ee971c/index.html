@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Reporte Septiembre UDF</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#fff; --surface:#f1f4f7; --surface-2:#e6ebf0; --ink:#14181d; --ink-soft:#55616e;
+  --ink-faint:#7d8894; --rule:#d7dde4; --accent:#b23c07; --accent-soft:#f5e7de;
+  --on-dark:#e6ebf0; --on-dark-2:#9aa6b2;
+  --f-display:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0f1317; --surface:#171d23; --surface-2:#1f272f; --ink:#e6ebf0; --ink-soft:#9aa6b2;
+  --ink-faint:#79848f; --rule:#28313a; --accent:#f79055; --accent-soft:#2b1d14;}}
+:root[data-theme="dark"]{
+  --paper:#0f1317; --surface:#171d23; --surface-2:#1f272f; --ink:#e6ebf0; --ink-soft:#9aa6b2;
+  --ink-faint:#79848f; --rule:#28313a; --accent:#f79055; --accent-soft:#2b1d14;}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
+
+.deck{position:relative;height:100vh;width:100%}
+.slide{position:absolute;inset:0;padding:4.2vh 5vw 7vh;display:none;
+  flex-direction:column;overflow-y:auto;background:var(--paper)}
+.slide.on{display:flex}
+.slide.dark{background:var(--ink);color:var(--on-dark)}
+
+.eyebrow{font-family:var(--f-mono);font-size:clamp(9px,1.05vw,11.5px);font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.8vh}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(2rem,5.6vw,4.4rem);
+  line-height:1.03;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.35rem,2.9vw,2.2rem);
+  line-height:1.12;letter-spacing:-.01em;margin:0 0 1.6vh;text-wrap:balance;
+  border-bottom:2px solid var(--ink);padding-bottom:1.1vh}
+h3{font-family:var(--f-body);font-weight:700;font-size:clamp(.72rem,1.15vw,.85rem);
+  letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 1.4vh}
+p{margin:0;max-width:72ch}
+.lede{color:var(--ink-soft);font-family:var(--f-display);font-size:clamp(1rem,1.7vw,1.35rem);
+  line-height:1.45;max-width:64ch}
+.dark .lede{color:var(--on-dark-2)}
+.note{font-size:clamp(11px,1.15vw,13.5px);color:var(--ink-faint);max-width:92ch;margin-top:1.5vh}
+
+/* portada */
+.cover{justify-content:center;gap:2.2vh}
+.cover .bar{width:clamp(70px,9vw,130px);height:4px;background:var(--accent)}
+.cover .mes{font-size:clamp(2.6rem,8.5vw,6.4rem);font-weight:600;letter-spacing:-.025em;line-height:1}
+.cover .rep{font-family:var(--f-display);font-size:clamp(1.3rem,3.4vw,2.6rem);color:var(--on-dark-2);line-height:1}
+
+/* cifras grandes */
+.big{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--accent);
+  border:1px solid var(--accent);margin:1vh 0 0}
+.big .c{background:var(--accent-soft);padding:3.2vh 2vw;display:flex;flex-direction:column;gap:.9vh}
+.big .n{font-family:var(--f-display);font-size:clamp(1.9rem,4.6vw,3.6rem);font-weight:600;
+  line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.big .k{font-family:var(--f-mono);font-size:clamp(9px,1vw,11px);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-soft)}
+
+/* rejilla de indicadores */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule)}
+.tiles .t{background:var(--surface);padding:2.4vh 1.6vw;display:flex;flex-direction:column;gap:.5vh}
+.tiles .n{font-family:var(--f-display);font-size:clamp(1.3rem,3vw,2.3rem);font-weight:600;
+  line-height:1;font-variant-numeric:tabular-nums}
+.tiles .k{font-family:var(--f-mono);font-size:clamp(8.5px,.95vw,10.5px);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-faint)}
+
+/* tablas */
+.scroll{overflow-x:auto;border:1px solid var(--rule)}
+table{width:100%;border-collapse:collapse;font-size:clamp(11px,1.25vw,15px)}
+thead th{background:var(--surface-2);font-family:var(--f-mono);
+  font-size:clamp(8px,.9vw,10.5px);font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-soft);text-align:left;padding:1.1vh .9vw;white-space:nowrap;
+  border-bottom:1px solid var(--rule)}
+tbody td{padding:1.15vh .9vw;border-bottom:1px solid var(--rule);vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even) td{background:var(--surface)}
+td.r{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.b,td.b *{font-weight:700}
+
+/* acciones */
+.acts{display:flex;flex-direction:column;gap:1.5vh;margin-top:.4vh}
+.act{display:grid;grid-template-columns:clamp(74px,8vw,104px) 1fr;gap:0 1.5vw;align-items:start}
+.act .d{font-family:var(--f-mono);font-size:clamp(9px,1vw,11px);font-weight:600;color:var(--accent);
+  background:var(--accent-soft);padding:.5vh .4vw;text-align:center;white-space:nowrap}
+.act .x{font-size:clamp(11.5px,1.35vw,16px);line-height:1.45}
+
+/* cromo */
+.chrome{position:fixed;left:0;right:0;bottom:0;height:3px;background:var(--rule);z-index:5}
+.chrome .fill{height:100%;background:var(--accent);transition:width .25s ease}
+.hud{position:fixed;right:2.2vw;bottom:2.4vh;display:flex;align-items:center;gap:.9vw;z-index:6}
+.hud button{font-family:var(--f-mono);font-size:13px;border:1px solid var(--rule);background:var(--paper);
+  color:var(--ink);width:32px;height:32px;cursor:pointer;line-height:1;padding:0}
+.hud button:hover{border-color:var(--accent);color:var(--accent)}
+.hud button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hud .num{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.foot{position:fixed;left:5vw;bottom:2.4vh;font-family:var(--f-mono);font-size:10.5px;
+  color:var(--ink-faint);z-index:6}
+.slide.dark ~ .hud button{background:transparent}
+
+@media (max-width:760px){
+  .big,.tiles{grid-template-columns:1fr 1fr}
+  .slide{padding:3.4vh 6vw 9vh}
+  .act{grid-template-columns:1fr;gap:.5vh}
+  .act .d{justify-self:start;padding:.4vh 2.2vw}
+}
+@media print{
+  body{overflow:visible}
+  .slide{display:flex!important;position:relative;height:auto;page-break-after:always;min-height:92vh}
+  .chrome,.hud,.foot{display:none}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide dark cover">
+  <div class="eyebrow">UDF Santa María · Black n Orange</div>
+  <div class="bar"></div>
+  <div class="rep">Reporte</div>
+  <h1 class="mes">Septiembre 2026</h1>
+  <p class="lede">Cierre del ciclo y transición · 1 al 30 de septiembre</p>
+</section>
+<section class="slide">
+  <div class="eyebrow">Cifras del periodo</div>
+  <h2>Inversión, leads y CPA</h2>
+  <p class="lede">Septiembre operó con la línea de WhatsApp suspendida desde el día uno. Se entregó la auditoría completa de resultados que pidió la dirección, se lanzó la generación V4 de campañas y el día 30 cerró el servicio de Patagon.</p>
+  <div class="big">
+    <div class="c"><span class="n">$172,925</span><span class="k">Inversión · MXN</span></div>
+    <div class="c"><span class="n">2,036</span><span class="k">Leads generados por la pauta</span></div>
+    <div class="c"><span class="n">$84.93</span><span class="k">CPA · costo por conversación</span></div>
+  </div>
+  <p class="note">1,902 conexiones de WhatsApp más 134 registros de formulario. Primer mes con la inversión repartida en dos cuentas publicitarias: UDF Santa María $142,173 y GRUPO BECAS $30,752.</p>
+</section>
+<section class="slide">
+  <div class="eyebrow">Cifras del periodo</div>
+  <h2>Desglose de la entrega</h2>
+  <div class="tiles"><div class="t"><span class="n">2.28 M</span><span class="k">Impresiones</span></div><div class="t"><span class="n">28,334</span><span class="k">Clics</span></div><div class="t"><span class="n">1,902</span><span class="k">Conexiones de WhatsApp</span></div><div class="t"><span class="n">134</span><span class="k">Registros de formulario</span></div><div class="t"><span class="n">1,506</span><span class="k">Conversaciones Patagon</span></div><div class="t"><span class="n">24</span><span class="k">Leads 4–5★</span></div></div>
+</section>
+<section class="slide"><div class="eyebrow">Resultados</div><h2>Inversión y entrega por frente</h2>
+<div class="scroll"><table><thead><tr><th>Frente</th><th>Campañas</th><th>Inversión</th><th>Impresiones</th><th>Leads</th><th>Costo por lead</th></tr></thead><tbody><tr><td>Licenciaturas V3</td><td class="r">8</td><td class="r">104,670</td><td class="r">1,533,143</td><td class="r">1,070</td><td class="r">$98</td></tr><tr><td>Licenciaturas V4 · cuenta GRUPO BECAS</td><td class="r">4</td><td class="r">27,977</td><td class="r">287,448</td><td class="r">251</td><td class="r">$111</td></tr><tr><td>Posgrados · campañas por programa</td><td class="r">12</td><td class="r">19,985</td><td class="r">217,766</td><td class="r">294</td><td class="r">$68</td></tr><tr><td>Especialidades de Valuación</td><td class="r">2</td><td class="r">12,627</td><td class="r">116,656</td><td class="r">299</td><td class="r">$42</td></tr><tr><td>EXACER · formulario instantáneo</td><td class="r">1</td><td class="r">7,665</td><td class="r">125,416</td><td class="r">118</td><td class="r">$65</td></tr><tr><td class="b">Total</td><td class="r b">28</td><td class="r b">172,925</td><td class="r b">2,280,429</td><td class="r b">2,036</td><td class="r b">$84.93</td></tr></tbody></table></div><p class="note">La generación V4 se lanzó el 21 de septiembre desde una segunda cuenta publicitaria. Las especialidades de Valuación entregaron el lead más barato del mes.</p></section>
+<section class="slide"><div class="eyebrow">Resultados</div><h2>Calidad de conversaciones · Patagon</h2>
+<div class="scroll"><table><thead><tr><th>Nivel</th><th>Septiembre</th><th>Agosto</th><th>Variación</th></tr></thead><tbody><tr><td>1 estrella</td><td class="r">793</td><td class="r">1,124</td><td class="r">−331</td></tr><tr><td>2 estrellas</td><td class="r">49</td><td class="r">85</td><td class="r">−36</td></tr><tr><td>3 estrellas</td><td class="r">629</td><td class="r">1,208</td><td class="r">−579</td></tr><tr><td>4 estrellas</td><td class="r">19</td><td class="r">174</td><td class="r">−155</td></tr><tr><td>5 estrellas</td><td class="r">5</td><td class="r">51</td><td class="r">−46</td></tr><tr><td class="b">Total</td><td class="r b">1,506</td><td class="r b">2,642</td><td class="r b">−1,136</td></tr></tbody></table></div><p class="note">Calidad promedio 1.9 contra 2.2 en agosto. La caída tiene una causa conocida: la línea de WhatsApp estuvo suspendida, el agente no podía responder y las conversaciones se quedaban sin calificar.</p></section>
+<section class="slide"><div class="eyebrow">Resultados</div><h2>El ciclo completo · auditoría al 9 de septiembre</h2>
+<div class="scroll"><table><thead><tr><th>Etapa del embudo</th><th>Resultado</th><th>Contra el plan</th></tr></thead><tbody><tr><td>Inversión</td><td class="r">$489,470</td><td class="r">—</td></tr><tr><td>Impresiones</td><td class="r">7,224,405</td><td class="r">—</td></tr><tr><td>Leads</td><td class="r">7,891</td><td class="r">235%</td></tr><tr><td>Conversaciones</td><td class="r">4,156</td><td class="r">177%</td></tr><tr><td>MQL</td><td class="r">409</td><td class="r">50%</td></tr><tr><td>SQL</td><td class="r">172</td><td class="r">35%</td></tr><tr><td class="b">Inscritos finales</td><td class="r b">77</td><td class="r b">31% de 247</td></tr></tbody></table></div><p class="note">Medición del 1 de junio al 9 de septiembre sobre campañas del ciclo. El embudo se invirtió: arriba sobra y abajo falta. Con los leads logrados, cumplir todas las tasas del plan habría dado 580 inscritos; el 59% de la brecha se concentra en el paso de conversación a MQL.</p></section>
+<section class="slide">
+  <div class="eyebrow">Acciones ejecutadas</div>
+  <h2>Pauta Meta</h2>
+  <div class="acts"><div class="act"><span class="d">1-sep</span><span class="x">Suspensión de la línea de WhatsApp por parte de Meta, detectada el 31 de agosto. Por acuerdo con dirección las campañas se dejaron corriendo: los leads seguían entrando aunque el agente no pudiera responder.</span></div><div class="act"><span class="d">10-sep</span><span class="x">Actualización del RVOE de Maestría en Comunicación Organizacional en los tres frentes el mismo día: sitio web, artes en Meta Ads y base de conocimientos de Patagon.</span></div><div class="act"><span class="d">21-sep</span><span class="x">Lanzamiento de la generación V4 de campañas de licenciatura y valuación desde una segunda cuenta publicitaria, con $27,977 MXN ejercidos en el mes.</span></div><div class="act"><span class="d">30-sep</span><span class="x">Pausa de las campañas Click-to-WhatsApp y montaje de la estructura nueva a formulario de Meta, tras el cierre del servicio de Patagon.</span></div></div>
+</section>
+<section class="slide">
+  <div class="eyebrow">Acciones ejecutadas</div>
+  <h2>Patagon · rescate y cierre</h2>
+  <div class="acts"><div class="act"><span class="d">1 y 2-sep</span><span class="x">Operación de rescate de los leads de 1 estrella que quedaron sin atender por la suspensión: base de datos entregada al equipo de admisiones para contacto manual.</span></div><div class="act"><span class="d">2-sep</span><span class="x">Montaje de mitigaciones: asignación automática de conversaciones entre los tres asesores y creación de la etapa Lead 1 Estrella en el pipeline P. Refresh.</span></div><div class="act"><span class="d">22-sep</span><span class="x">Investigación de la brecha de 3 estrellas del 8 al 20 de septiembre: de 231 leads calificados sólo 72 llegaron a trato. Dos fallos identificados: el 8 y 9 de septiembre la integración escribió cero registros, y el filtro de nombre tiene una fuga del 15%. Lista de 55 recuperables entregada.</span></div><div class="act"><span class="d">29-sep</span><span class="x">Análisis de la etapa Perdido del pipeline P. Refresh, semana por semana y con los toques efectivamente realizados.</span></div></div>
+</section>
+<section class="slide">
+  <div class="eyebrow">Acciones ejecutadas</div>
+  <h2>Patagon · rescate y cierre (cont.)</h2>
+  <div class="acts"><div class="act"><span class="d">30-sep</span><span class="x">Cierre del servicio de Patagon, acordado con dirección a principios de mes.</span></div></div>
+</section>
+<section class="slide">
+  <div class="eyebrow">Acciones ejecutadas</div>
+  <h2>Auditoría y medición</h2>
+  <div class="acts"><div class="act"><span class="d">9-sep</span><span class="x">Solicitud formal de dirección: auditoría de resultados contra los 336 inscritos comprometidos en la propuesta, con seis entregables y fecha límite del 14 de septiembre.</span></div><div class="act"><span class="d">9–14-sep</span><span class="x">Auditoría completa de la inversión en Meta de enero a septiembre, desglosada por plataforma, programa y campaña, con el estado de UTMs de cada una.</span></div><div class="act"><span class="d">11-sep</span><span class="x">Medición del embudo real del ciclo y decisión metodológica de contar como cifra final la suma de inscritos y preinscritos, que es como los cuenta UDF.</span></div><div class="act"><span class="d">11-sep</span><span class="x">Atribución de la brecha por el método de Shapley sobre las 24 permutaciones del embudo: conversación a MQL explica el 59% de los inscritos perdidos.</span></div></div>
+</section>
+<section class="slide">
+  <div class="eyebrow">Acciones ejecutadas</div>
+  <h2>Auditoría y medición (cont.)</h2>
+  <div class="acts"><div class="act"><span class="d">25-sep</span><span class="x">Diagnóstico del ciclo septiembre como insumo para la campaña de enero 2027.</span></div></div>
+</section>
+<section class="slide">
+  <div class="eyebrow">Acciones ejecutadas</div>
+  <h2>Comercial y relación con el cliente</h2>
+  <div class="acts"><div class="act"><span class="d">16-sep</span><span class="x">Metas de septiembre y plan de recuperación del avance pendiente, a solicitud de admisiones.</span></div><div class="act"><span class="d">22-sep</span><span class="x">Entrega de los reportes mensuales de ejecución de junio, julio y agosto con sus facturas correspondientes.</span></div><div class="act"><span class="d">23-sep</span><span class="x">Trabajo sobre el tablero del equipo de admisiones en sesión conjunta.</span></div><div class="act"><span class="d">24-sep</span><span class="x">Push de reactivación por Connectly para la última semana del mes.</span></div></div>
+</section>
+<section class="slide">
+  <div class="eyebrow">Acciones ejecutadas</div>
+  <h2>Comercial y relación con el cliente (cont.)</h2>
+  <div class="acts"><div class="act"><span class="d">28-sep</span><span class="x">Visita a UDF y sesión con dirección corporativa; solicitud de propuesta y presupuesto para la campaña de enero 2027.</span></div></div>
+</section>
+<section class="slide dark cover">
+  <div class="eyebrow">Fuentes</div>
+  <div class="bar"></div>
+  <p class="lede">Inversión y entrega tomadas de Meta Ads a nivel campaña. Calidad de conversaciones, de la plataforma de Patagon. El CPA es la inversión del periodo dividida entre los leads que generó la pauta. La auditoría del ciclo cubre del 1 de junio al 9 de septiembre e incluye las dos cuentas publicitarias.</p>
+  <p class="note" style="color:var(--on-dark-2)">Universidad UDF Santa María · Black n Orange</p>
+</section>
+</div>
+<div class="chrome"><div class="fill"></div></div>
+<div class="foot">Reporte Septiembre 2026 · usa ← →</div>
+<div class="hud">
+  <button class="prev" aria-label="Anterior">‹</button>
+  <button class="next" aria-label="Siguiente">›</button>
+  <span class="num"></span>
+</div>
+<script>
+(function(){
+  var s=[].slice.call(document.querySelectorAll('.slide')), i=0;
+  var fill=document.querySelector('.chrome .fill'), num=document.querySelector('.hud .num');
+  function go(n){
+    i=Math.max(0,Math.min(s.length-1,n));
+    s.forEach(function(el,k){el.classList.toggle('on',k===i); if(k===i) el.scrollTop=0;});
+    fill.style.width=((i+1)/s.length*100)+'%';
+    num.textContent=(i+1)+' / '+s.length;
+    if(history.replaceState) history.replaceState(null,'','#'+(i+1));
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') {e.preventDefault();go(i+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp') {e.preventDefault();go(i-1);}
+    if(e.key==='Home') go(0); if(e.key==='End') go(s.length-1);
+  });
+  document.querySelector('.hud .prev').onclick=function(){go(i-1);};
+  document.querySelector('.hud .next').onclick=function(){go(i+1);};
+  var x0=null;
+  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(x0===null) return; var dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>60) go(dx<0?i+1:i-1); x0=null;},{passive:true});
+  var h=parseInt((location.hash||'').replace('#',''),10);
+  go(isFinite(h)&&h>0?h-1:0);
+})();
+</script>
+</body>
+</html>
