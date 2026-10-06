@@ -1,0 +1,12 @@
+Reporte semanal de las campanas V5 de licenciaturas (enero 2027) de UDF Santa Maria,
+vuelo del 3 al 6 de octubre de 2026 (corte ~15:00 CDMX del 6-oct). Formato presentacion:
+flechas del teclado o botones de abajo.
+
+Fuentes: Meta Ads (cuenta GRUPO BECAS, nivel campana y anuncio) y Pipedrive de UDF
+(pipeline "Ene 2027": tratos, personas, notas, actividades e historial de etapas).
+
+Datos personales: nombres de prospectos abreviados a nombre + inicial del apellido.
+Sin telefonos ni correos. Las ligas a Pipedrive requieren sesion en la cuenta de UDF.
+
+No listada en el indice y con ruta aleatoria: el repositorio es publico,
+asi que cualquiera con la liga completa puede abrirla.

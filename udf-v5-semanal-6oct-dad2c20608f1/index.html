@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>UDF V5 · Semana 1</title>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+/* Deck de diapositivas a pantalla completa; misma casa visual que los reportes mensuales de UDF */
+:root{
+  --paper:#fff; --surface:#f1f4f7; --surface-2:#e6ebf0; --ink:#14181d; --ink-soft:#55616e;
+  --ink-faint:#7d8894; --rule:#d7dde4; --accent:#b23c07; --accent-soft:#f5e7de;
+  --on-dark:#e6ebf0; --on-dark-2:#9aa6b2;
+  --ok:#2c6a4e; --ok-soft:#dceadf; --info:#3c5a73; --info-soft:#e1e9f0; --bad:#8a5a12; --bad-soft:#f4ead6;
+  --crit:#b3261e; --crit-soft:#f8e1df; --wait:#6b7682; --wait-soft:#eceff2;
+  --c1:#2f6f8f; --c2:#8a5a12; --c3:#7b3fa0; --sla:rgba(44,106,78,.10);
+  --f-display:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0f1317; --surface:#171d23; --surface-2:#1f272f; --ink:#e6ebf0; --ink-soft:#9aa6b2;
+  --ink-faint:#79848f; --rule:#28313a; --accent:#f79055; --accent-soft:#2b1d14;
+  --ok:#6fbb92; --ok-soft:#1d2f26; --info:#8fb2cb; --info-soft:#1b2832; --bad:#d9a85a; --bad-soft:#2d2415;
+  --crit:#f08a80; --crit-soft:#3a1d1b; --wait:#9aa6b2; --wait-soft:#1f272f;
+  --c1:#6fb3d6; --c2:#d9a85a; --c3:#c299e0; --sla:rgba(111,187,146,.12); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f1317; --surface:#171d23; --surface-2:#1f272f; --ink:#e6ebf0; --ink-soft:#9aa6b2;
+  --ink-faint:#79848f; --rule:#28313a; --accent:#f79055; --accent-soft:#2b1d14;
+  --ok:#6fbb92; --ok-soft:#1d2f26; --info:#8fb2cb; --info-soft:#1b2832; --bad:#d9a85a; --bad-soft:#2d2415;
+  --crit:#f08a80; --crit-soft:#3a1d1b; --wait:#9aa6b2; --wait-soft:#1f272f;
+  --c1:#6fb3d6; --c2:#d9a85a; --c3:#c299e0; --sla:rgba(111,187,146,.12); color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:inherit;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+.deck{position:relative;height:100%;width:100%}
+.slide{position:absolute;inset:0;padding:4vh max(16px,5vw) calc(9vh + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;overflow-y:auto;background:var(--paper)}
+.slide.on{display:flex}
+.slide.dark{background:var(--ink);color:var(--paper)}
+.eyebrow{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.8vh}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(2rem,5.6vw,4.4rem);line-height:1.03;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.35rem,2.8vw,2.1rem);line-height:1.12;letter-spacing:-.01em;margin:0 0 1.6vh;text-wrap:balance;border-bottom:2px solid var(--ink);padding-bottom:1.1vh}
+h3{font-weight:700;font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 1vh}
+p{margin:0;max-width:72ch}
+.lede{color:var(--ink-soft);font-family:var(--f-display);font-size:clamp(1rem,1.6vw,1.3rem);line-height:1.45;max-width:66ch}
+.note{font-size:13px;color:var(--ink-faint);max-width:96ch;margin-top:1.4vh}
+.cover{justify-content:center;gap:2.2vh}
+.cover .bar{width:110px;height:4px;background:var(--accent)}
+.cover .rep{font-family:var(--f-display);font-size:clamp(1.2rem,3vw,2.3rem);opacity:.75;line-height:1.15}
+.cover .meta{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;opacity:.7;max-width:70ch;line-height:1.7}
+.slide.dark .eyebrow{color:var(--accent)}
+.big{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--accent);border:1px solid var(--accent)}
+.big .c{background:var(--accent-soft);padding:2.6vh 1.6vw;display:flex;flex-direction:column;gap:.7vh;min-width:0}
+.big .n{font-family:var(--f-display);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:600;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.big .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.big .d{font-size:13.5px;color:var(--ink-soft)}
+.keys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.4vh 3vw;margin-top:3vh}
+.keys div{border-top:1px solid var(--rule);padding-top:1.2vh;min-width:0}
+.keys b{display:block;font-family:var(--f-display);font-size:1.12rem;margin-bottom:.4vh}
+.keys p{color:var(--ink-soft);font-size:15px}
+.tw{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:.85vh .7vw;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1.5px solid var(--ink);white-space:nowrap}
+tbody th{font-weight:600}
+tr.tot th,tr.tot td{border-top:1.5px solid var(--ink);border-bottom:none;background:var(--surface)}
+.barcell{position:relative;min-width:150px}
+.barcell .bar{position:absolute;left:.7vw;top:25%;height:50%;background:var(--surface-2);border-radius:1px;max-width:calc(100% - 1.4vw)}
+.barcell .bar.hot{background:var(--crit-soft)}
+.barcell b{position:relative}
+.crit-t{color:var(--crit);font-weight:600}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:4vw;align-items:start}
+.flow{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.flow div{background:var(--paper);display:grid;grid-template-columns:4.2rem 1fr;gap:1rem;align-items:baseline;padding:1.3vh 1vw}
+.flow b{font-family:var(--f-display);font-size:2rem;line-height:1;text-align:right;font-variant-numeric:tabular-nums}
+.flow .crit{background:var(--crit-soft)} .flow .crit b{color:var(--crit)}
+.flow span{font-size:14.5px;color:var(--ink-soft)} .flow span strong{color:var(--ink)}
+.st{display:grid;grid-template-columns:10.5rem 1fr 2rem;gap:.8rem;align-items:center;padding:.55vh 0;font-size:14px}
+.st .sb{height:14px;background:var(--surface)} .st .sb i{display:block;height:100%;background:var(--info)}
+.st b{text-align:right;font-variant-numeric:tabular-nums}
+.qs{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
+.q{padding:1.6vh .9vw;border-top:4px solid;display:flex;flex-direction:column;gap:.6vh;min-width:0}
+.q b{font-family:var(--f-display);font-size:2.4rem;line-height:1}
+.q span{font-size:13px;line-height:1.3}
+.q.ok{border-color:var(--ok);background:var(--ok-soft)} .q.ok b{color:var(--ok)}
+.q.info{border-color:var(--info);background:var(--info-soft)} .q.info b{color:var(--info)}
+.q.bad{border-color:var(--bad);background:var(--bad-soft)} .q.bad b{color:var(--bad)}
+.q.wait{border-color:var(--wait);background:var(--wait-soft)} .q.wait b{color:var(--wait)}
+.q.crit{border-color:var(--crit);background:var(--crit-soft)} .q.crit b{color:var(--crit)}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:2px;white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.info{background:var(--info-soft);color:var(--info)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.wait{background:var(--wait-soft);color:var(--wait)}
+.pill.crit{background:var(--crit-soft);color:var(--crit)}
+.chart svg{width:100%;height:auto;display:block;max-width:900px}
+.chart .grid{stroke:var(--rule);stroke-width:1}
+.chart .tick{fill:var(--ink-faint);font:11px var(--f-mono)}
+.chart .lab{fill:var(--ink);font:600 13px var(--f-body)}
+.chart .sla{fill:var(--sla)}
+.legend{display:flex;flex-wrap:wrap;gap:1.4rem;font-size:13px;color:var(--ink-soft);margin:.6vh 0 1vh}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.det td{font-size:13px}
+.det .sub{font-size:11.5px;color:var(--ink-faint);margin-top:2px}
+.det .ctx{min-width:260px;max-width:380px;color:var(--ink-soft)}
+.det .mot{font-size:11.5px;color:var(--bad);margin-top:3px}
+.det .num{white-space:nowrap}
+.det tr.orph td{background:var(--crit-soft)}
+.det tr.fixed td{background:var(--wait-soft)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2vh}
+.filters button{font:600 12.5px var(--f-body);padding:6px 12px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:2px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.filters button:focus-visible,.nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2vh 3vw}
+.list div{border-left:3px solid var(--rule);padding:.4vh 0 .4vh 1rem;min-width:0}
+.list div.c{border-color:var(--crit)} .list div.b{border-color:var(--bad)} .list div.i{border-color:var(--info)} .list div.o{border-color:var(--ok)}
+.list b{display:block;font-size:15.5px;margin-bottom:.3vh}
+.list p{font-size:14px;color:var(--ink-soft)}
+.steps{display:flex;flex-direction:column;gap:0;counter-reset:s}
+.steps div{display:grid;grid-template-columns:2.4rem 1fr 9rem;gap:1rem;padding:1.5vh 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.steps div::before{counter-increment:s;content:counter(s);font-family:var(--f-display);font-size:1.6rem;color:var(--accent);line-height:1}
+.steps b{display:block;font-size:15.5px}
+.steps p{font-size:14px;color:var(--ink-soft)}
+.steps em{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);text-align:right}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px max(16px,5vw) calc(10px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--rule);z-index:5}
+.nav button{font:600 13px var(--f-body);border:1px solid var(--rule);background:var(--surface);color:var(--ink);padding:6px 14px;border-radius:2px;cursor:pointer}
+.nav .pos{font-family:var(--f-mono);font-size:11px;color:var(--ink-faint);letter-spacing:.06em;text-align:center;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prog{position:fixed;left:0;top:0;height:3px;background:var(--accent);transition:width .25s;z-index:6}
+@media (max-width:820px){
+  .big{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .keys,.list,.two{grid-template-columns:1fr}
+  .qs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps div{grid-template-columns:2rem 1fr}
+  .steps em{grid-column:2;text-align:left}
+  .st{grid-template-columns:8.5rem 1fr 2rem}
+}
+@media (prefers-reduced-motion:reduce){.prog{transition:none}}
+</style>
+
+<div class="prog" id="prog"></div>
+<div class="deck" id="deck">
+
+<section class="slide dark cover on" data-t="Portada">
+  <div class="bar"></div>
+  <div class="eyebrow">UDF Santa María · Reporte semanal</div>
+  <h1>Campañas V5 de licenciaturas: primera semana</h1>
+  <div class="rep">Del anuncio al asesor: qué compró la pauta y qué pasó con cada lead en Pipedrive</div>
+  <div class="meta">Vuelo del sábado 3 de octubre, 12:31, al martes 6 de octubre de 2026, ~15:00 hora CDMX · 4 campañas de formulario nativo en la cuenta GRUPO BECAS · pipeline “Ene 2027” de Pipedrive · Ciclo enero 2027</div>
+</section>
+
+<section class="slide" data-t="Resumen">
+  <div class="eyebrow">Resumen</div>
+  <h2>La pauta trae leads a $306; el cuello está en el primer fin de semana y en los que nunca llegaron al embudo</h2>
+  <div class="big">
+    <div class="c"><span class="k">Inversión V5</span><span class="n">$10,100</span><span class="d">3.5 días, 4 campañas, $3,150/día configurado</span></div>
+    <div class="c"><span class="k">Leads de formulario</span><span class="n">33</span><span class="d">Costo por lead $306</span></div>
+    <div class="c"><span class="k">Tratos en “Ene 2027”</span><span class="n">31</span><span class="d">26 por Zapier, 1 capturado a mano y 4 creados por API el 6-oct</span></div>
+    <div class="c"><span class="k">Asesorías reales</span><span class="n">2</span><span class="d">1 con visita agendada el viernes 9-oct</span></div>
+  </div>
+  <div class="keys">
+    <div><b>5 leads se quedaron sin trato; 4 ya están corregidos</b><p>La automatización titula el trato con el nombre propio, y en estos 5 llegó vacío. Pasaron entre 24 y 55 horas sin un toque. El 6-oct se crearon por API los 4 de licenciatura y se asignaron al azar. El quinto busca preparatoria y va a EXACER.</p></div>
+    <div><b>Comercio Internacional no convierte</b><p>$2,433 por un solo lead. Abren el formulario 496 veces y lo envían 1 vez (0.2%). Las otras tres campañas están entre $173 y $353.</p></div>
+    <div><b>El primer contacto se va al lunes</b><p>15 de 27 leads entraron entre el sábado en la tarde y el lunes temprano. Nadie atendió el domingo, así que la mediana es de 13 horas reloj aunque en horas hábiles quede en 1.</p></div>
+    <div><b>“Asesoría realizada” está inflada</b><p>4 tratos están en esa etapa, pero en 3 solo se mandó información. Las asesorías con beca y siguiente paso son 2, ambas de Marino.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-t="Pauta por campaña">
+  <div class="eyebrow">Meta Ads · por campaña</div>
+  <h2>Psicología es la más eficiente; Comercio gasta lo mismo y casi no deja leads</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Programa</th><th>Presupuesto/día</th><th>Gasto</th><th>Impresiones</th><th>Aperturas de form</th><th>Leads</th><th>Apertura→lead</th><th>Costo por lead</th></tr></thead>
+    <tbody><tr><th>Psicología</th><td>$700</td><td>$2,428</td><td>16,011</td><td>128</td><td><b>14</b></td><td>10.9%</td><td class="barcell"><span class="bar" style="width:7%"></span><b>$173</b></td></tr><tr><th>Derecho</th><td>$800</td><td>$2,472</td><td>25,190</td><td>176</td><td><b>7</b></td><td>4.0%</td><td class="barcell"><span class="bar" style="width:15%"></span><b>$353</b></td></tr><tr><th>Comercio Int.</th><td>$800</td><td>$2,433</td><td>51,231</td><td>496</td><td><b>1</b></td><td>0.2%</td><td class="barcell"><span class="bar hot" style="width:100%"></span><b>$2,433</b></td></tr><tr><th>Administración</th><td>$850</td><td>$2,768</td><td>37,886</td><td>228</td><td><b>11</b></td><td>4.8%</td><td class="barcell"><span class="bar" style="width:10%"></span><b>$252</b></td></tr><tr class="tot"><th>Total V5</th><td>$3,150</td><td>$10,100</td><td>130,318</td><td>1,028</td><td><b>33</b></td><td>3.2%</td><td><b>$306</b></td></tr></tbody>
+  </table></div>
+  <p class="note">Gasto e impresiones del 3 al 6 de octubre (el 6 va parcial). “Aperturas de form” son los clics en el anuncio que abren el formulario instantáneo. El formulario registra 35 envíos: 33 de anuncios más 2 pruebas internas. Tope de la cuenta $50,000 desde el 3-oct: al ritmo actual se agota alrededor del 18-oct.</p>
+</section>
+
+<section class="slide" data-t="Pauta por anuncio">
+  <div class="eyebrow">Meta Ads · por anuncio</div>
+  <h2>Tres anuncios traen 25 de los 33 leads; todos son la versión sin precio dirigida a mujeres</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Programa</th><th>Anuncio (avatar · gancho)</th><th>Gasto</th><th>Aperturas</th><th>Leads</th><th>Costo por lead</th></tr></thead>
+    <tbody><tr><th>Psicología</th><td>Adulto Mujer · Sin precio</td><td>$1,029</td><td>52</td><td>8</td><td>$129</td></tr><tr><th>Psicología</th><td>Joven Mujer · Sin precio</td><td>$632</td><td>37</td><td>3</td><td>$211</td></tr><tr><th>Psicología</th><td>Adulto Hombre · Precio $2,242</td><td>$526</td><td>29</td><td>1</td><td>$526</td></tr><tr><th>Psicología</th><td>Joven Hombre · Precio $2,242</td><td>$241</td><td>10</td><td>2</td><td>$120</td></tr><tr><th>Derecho</th><td>Joven Mujer · Sin precio</td><td>$1,983</td><td>142</td><td>6</td><td>$330</td></tr><tr><th>Derecho</th><td>Joven Mujer · Precio $2,242</td><td>$328</td><td>18</td><td>1</td><td>$328</td></tr><tr><th>Derecho</th><td>Joven Hombre · Sin precio</td><td>$140</td><td>14</td><td>0</td><td><span class=crit-t>sin leads</span></td></tr><tr><th>Derecho</th><td>Joven Hombre · Precio $2,242</td><td>$22</td><td>2</td><td>0</td><td><span class=crit-t>sin leads</span></td></tr><tr><th>Comercio Int.</th><td>Joven Hombre · Sin precio</td><td>$1,099</td><td>233</td><td>0</td><td><span class=crit-t>sin leads</span></td></tr><tr><th>Comercio Int.</th><td>Joven Mujer · Sin precio</td><td>$796</td><td>152</td><td>0</td><td><span class=crit-t>sin leads</span></td></tr><tr><th>Comercio Int.</th><td>Joven Mujer · Precio $2,242</td><td>$333</td><td>71</td><td>1</td><td>$333</td></tr><tr><th>Comercio Int.</th><td>Joven Hombre · Precio $2,242</td><td>$205</td><td>40</td><td>0</td><td><span class=crit-t>sin leads</span></td></tr><tr><th>Administración</th><td>Adulto Mujer · Sin precio</td><td>$2,551</td><td>212</td><td>11</td><td>$232</td></tr><tr><th>Administración</th><td>Adulto Hombre · Sin precio</td><td>$217</td><td>16</td><td>0</td><td><span class=crit-t>sin leads</span></td></tr></tbody>
+  </table></div>
+  <p class="note">Administración Adulto Mujer se lleva el 92% del presupuesto de su campaña y Adulto Hombre casi no entrega. Los dos anuncios de Administración con precio ejecutivo $1,480 siguen pausados por decisión del 3-oct. En Comercio, el público de 18 a 30 años abre mucho el formulario y no lo envía.</p>
+</section>
+
+<section class="slide" data-t="De Meta a Pipedrive">
+  <div class="eyebrow">Cruce Meta ↔ Pipedrive</div>
+  <h2>De 33 leads pagados, 26 llegaron con trato; 5 se quedaron como persona suelta y 4 ya se corrigieron</h2>
+  <div class="two">
+    <div>
+      <h3>Dónde quedó cada lead</h3>
+      <div class="flow">
+        <div><b>33</b><span><strong>Leads de anuncios</strong> según Meta (más 2 envíos de prueba)</span></div>
+        <div><b>26</b><span><strong>Persona + trato</strong> en “Ene 2027” por Zapier, con asesor asignado por rotativa</span></div>
+        <div class="crit"><b>5</b><span><strong>Persona sin trato.</strong> El nombre propio llegó vacío, y la automatización usa ese campo como título del trato. Pipedrive no crea un trato sin título.</span></div>
+        <div><b>4</b><span><strong>Tratos creados por API el 6-oct</strong> en Lead, asignados al azar: Armando G. a Marino, Sandy P. a Adán, y María E. y Diana A. a Ingrid. El de preparatoria queda pendiente para EXACER.</span></div>
+        <div><b>1</b><span><strong>Sin localizar</strong>: Meta marca 1 lead de Derecho con precio que no aparece en Pipedrive. Puede ser Arlet A., capturada a mano con Origen V5 y Oferta genérica.</span></div>
+      </div>
+      <p class="note">Se excluyen del análisis los tratos de prueba 22795 y 22797 y el trato 20016 (Liliana O., prospecto de 2025 que Ingrid movió hoy a este pipeline).</p>
+    </div>
+    <div>
+      <h3>Etapa de los 27 tratos originales</h3>
+      <div class="st"><span class="sl">Lead</span><span class="sb"><i style="width:0%"></i></span><b>0</b></div><div class="st"><span class="sl">Intento de contacto</span><span class="sb"><i style="width:100%"></i></span><b>16</b></div><div class="st"><span class="sl">Contacto exitoso</span><span class="sb"><i style="width:6%"></i></span><b>1</b></div><div class="st"><span class="sl">Asesoría realizada</span><span class="sb"><i style="width:25%"></i></span><b>4</b></div><div class="st"><span class="sl">Visita agendada</span><span class="sb"><i style="width:6%"></i></span><b>1</b></div><div class="st"><span class="sl">Evaluando</span><span class="sb"><i style="width:0%"></i></span><b>0</b></div><div class="st"><span class="sl">Preinscrito</span><span class="sb"><i style="width:0%"></i></span><b>0</b></div><div class="st"><span class="sl">Inscrito</span><span class="sb"><i style="width:0%"></i></span><b>0</b></div><div class="st"><span class="sl">Perdido</span><span class="sb"><i style="width:31%"></i></span><b>5</b></div>
+      <p class="note">“Perdido” es una etapa del pipeline, no el estado Perdido de Pipedrive: los 5 tratos siguen abiertos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-t="Asesoría o información">
+  <div class="eyebrow">Calidad del contacto</div>
+  <h2>Se asesoró a 2 de 32 leads. A 4 más solo se les mandó información o se les contactó sin asesorar</h2>
+  <div class="qs"><div class="q ok"><b>2</b><span>Asesoría real</span></div><div class="q info"><b>3</b><span>Solo información</span></div><div class="q info"><b>1</b><span>Contactado, sin asesoría</span></div><div class="q bad"><b>4</b><span>Contactado y descartado</span></div><div class="q bad"><b>1</b><span>Perdido sin contacto</span></div><div class="q wait"><b>16</b><span>Sin contacto aún</span></div><div class="q wait"><b>4</b><span>Trato creado el 6-oct, sin toque</span></div><div class="q crit"><b>1</b><span>Sin trato · se canaliza a EXACER</span></div></div>
+  <div class="list" style="margin-top:3vh">
+    <div class="o"><b>Asesoría real (2)</b><p>Se habló de beca y hubo siguiente paso. Martha D.: beca Vecinos Cuauhtémoc, lo revisa con su esposo. Arlet A.: beca de inicio, pago de inscripción diferido, visita el 9-oct. Las dos son de Marino.</p></div>
+    <div class="i"><b>Solo información (3) y contacto sin asesoría (1)</b><p>Carla A. (Adán) pidió el plan por escrito. Mauro H. e Irma B. (Ingrid) recibieron la información por WhatsApp y no volvieron a contestar. Leonardo C. (Adán) contestó en el trabajo y pidió WhatsApp.</p></div>
+    <div class="b"><b>Contactados y descartados (4)</b><p>Dos por costo o presupuesto, una por horario (sale a las 9 pm) y una que se registró por error. Precio y turno son las objeciones que aparecen desde el primer contacto.</p></div>
+    <div class="c"><b>Sin contacto (16), perdido sin contacto (1) y los 5 que se quedaron sin trato</b><p>Buzón, no contesta o número inválido: 4 teléfonos no sirven (fuera de servicio, no enlaza, un dígito de más). Irnel J. pasó a Perdido después de una sola llamada.</p></div>
+  </div>
+  <p class="note">La clasificación sale de leer las notas y actividades de cada trato, no de la etapa. Turno elegido en el formulario: 8 matutino, 10 sabatino, 9 ejecutivo. Dos de cada tres buscan horario para quien trabaja.</p>
+</section>
+
+<section class="slide" data-t="Primer contacto">
+  <div class="eyebrow">Tiempo de primer contacto por asesor</div>
+  <h2>En horas hábiles los tres responden en cerca de una hora; el fin de semana se lleva el resto</h2>
+  <div class="legend"><span><i style="background:var(--c1)"></i>Ingrid</span><span><i style="background:var(--c2)"></i>Marino</span><span><i style="background:var(--c3)"></i>Adán</span><span><i style="background:var(--ink-faint);opacity:.4"></i>Punto claro: entró entre sábado 14:00 y lunes 9:00</span></div>
+  <div class="chart"><svg viewBox="0 0 760 190" role="img" aria-label="Horas del registro al primer toque, por asesor"><line x1="70.0" x2="70.0" y1="12" y2="160" class="grid"/><text x="70.0" y="178" class="tick" text-anchor="middle">0 h</text><line x1="165.71428571428572" x2="165.71428571428572" y1="12" y2="160" class="grid"/><text x="165.71428571428572" y="178" class="tick" text-anchor="middle">6 h</text><line x1="261.42857142857144" x2="261.42857142857144" y1="12" y2="160" class="grid"/><text x="261.42857142857144" y="178" class="tick" text-anchor="middle">12 h</text><line x1="357.14285714285717" x2="357.14285714285717" y1="12" y2="160" class="grid"/><text x="357.14285714285717" y="178" class="tick" text-anchor="middle">18 h</text><line x1="452.85714285714283" x2="452.85714285714283" y1="12" y2="160" class="grid"/><text x="452.85714285714283" y="178" class="tick" text-anchor="middle">24 h</text><line x1="548.5714285714286" x2="548.5714285714286" y1="12" y2="160" class="grid"/><text x="548.5714285714286" y="178" class="tick" text-anchor="middle">30 h</text><line x1="644.2857142857143" x2="644.2857142857143" y1="12" y2="160" class="grid"/><text x="644.2857142857143" y="178" class="tick" text-anchor="middle">36 h</text><line x1="740.0" x2="740.0" y1="12" y2="160" class="grid"/><text x="740.0" y="178" class="tick" text-anchor="middle">42 h</text><rect x="70.0" y="12" width="63.809523809523796" height="148" class="sla"/><text x="137.8095238095238" y="24" class="tick">SLA 4 h</text><text x="60" y="44" class="lab" text-anchor="end">Ingrid</text><circle cx="73.2" cy="40" r="5.5" fill="var(--c1)" fill-opacity="0.35" stroke="var(--c1)"><title>Vanessa T.: 0.2 h</title></circle><circle cx="720.9" cy="40" r="5.5" fill="var(--c1)" fill-opacity="0.35" stroke="var(--c1)"><title>Alfonso D.: 40.8 h</title></circle><circle cx="653.9" cy="40" r="5.5" fill="var(--c1)" fill-opacity="0.35" stroke="var(--c1)"><title>Adrian M.: 36.6 h</title></circle><circle cx="454.5" cy="40" r="5.5" fill="var(--c1)" fill-opacity="0.35" stroke="var(--c1)"><title>Mauro H.: 24.1 h</title></circle><circle cx="275.8" cy="40" r="5.5" fill="var(--c1)" fill-opacity="0.35" stroke="var(--c1)"><title>Irma P.: 12.9 h</title></circle><circle cx="74.8" cy="33" r="5.5" fill="var(--c1)" fill-opacity="0.95" stroke="var(--c1)"><title>Beatriz G.: 0.3 h</title></circle><circle cx="283.8" cy="33" r="5.5" fill="var(--c1)" fill-opacity="0.95" stroke="var(--c1)"><title>Irma G.: 13.4 h</title></circle><circle cx="210.4" cy="40" r="5.5" fill="var(--c1)" fill-opacity="0.95" stroke="var(--c1)"><title>Jacqueline C.: 8.8 h</title></circle><circle cx="74.8" cy="54" r="5.5" fill="var(--c1)" fill-opacity="0.95" stroke="var(--c1)"><title>Martha M.: 0.3 h</title></circle><text x="60" y="89" class="lab" text-anchor="end">Marino</text><circle cx="669.8" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.35" stroke="var(--c2)"><title>Jennifer F.: 37.6 h</title></circle><circle cx="484.8" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.35" stroke="var(--c2)"><title>Irnel J.: 26.0 h</title></circle><circle cx="430.5" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.35" stroke="var(--c2)"><title>Miguel H.: 22.6 h</title></circle><circle cx="271.0" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.35" stroke="var(--c2)"><title>Martha D.: 12.6 h</title></circle><circle cx="240.7" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.35" stroke="var(--c2)"><title>Lorena P.: 10.7 h</title></circle><circle cx="314.1" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.95" stroke="var(--c2)"><title>Arlet A.: 15.3 h</title></circle><circle cx="277.4" cy="78" r="5.5" fill="var(--c2)" fill-opacity="0.95" stroke="var(--c2)"><title>Cristina H.: 13.0 h</title></circle><circle cx="92.3" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.95" stroke="var(--c2)"><title>José L.: 1.4 h</title></circle><circle cx="70.0" cy="85" r="5.5" fill="var(--c2)" fill-opacity="0.95" stroke="var(--c2)"><title>Andre C.: 0.0 h</title></circle><text x="60" y="134" class="lab" text-anchor="end">Adán</text><circle cx="701.7" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.35" stroke="var(--c3)"><title>Vanessa S.: 39.6 h</title></circle><circle cx="591.6" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.35" stroke="var(--c3)"><title>Carla A.: 32.7 h</title></circle><circle cx="341.2" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.35" stroke="var(--c3)"><title>Shatzy M.: 17.0 h</title></circle><circle cx="250.3" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.35" stroke="var(--c3)"><title>Mari C.: 11.3 h</title></circle><circle cx="196.0" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.35" stroke="var(--c3)"><title>Castilla M.: 7.9 h</title></circle><circle cx="312.5" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.95" stroke="var(--c3)"><title>Veronica M.: 15.2 h</title></circle><circle cx="274.2" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.95" stroke="var(--c3)"><title>Diana Á.: 12.8 h</title></circle><circle cx="119.5" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.95" stroke="var(--c3)"><title>Sebastian G.: 3.1 h</title></circle><circle cx="106.7" cy="130" r="5.5" fill="var(--c3)" fill-opacity="0.95" stroke="var(--c3)"><title>Alejandro Z.: 2.3 h</title></circle></svg></div>
+  <div class="tw" style="margin-top:1.5vh"><table>
+    <thead><tr><th>Asesor</th><th>Tratos</th><th>Mediana reloj</th><th>Mediana hábil</th><th>≤ 1 h hábil</th><th>Toques</th><th>Asesoría real</th><th>Info / contacto</th><th>Descartados</th><th>Sin contacto</th><th>Sin próx. actividad</th></tr></thead>
+    <tbody><tr><th>Ingrid</th><td>9</td><td>12.9 h</td><td><b>0.8 h</b></td><td>7 de 9</td><td>29 <small>(3.2 por lead)</small></td><td>0</td><td>2</td><td>1</td><td>6</td><td>0</td></tr><tr><th>Marino</th><td>9</td><td>13.0 h</td><td><b>1.0 h</b></td><td>6 de 9</td><td>15 <small>(1.7 por lead)</small></td><td>2</td><td>0</td><td>2</td><td>5</td><td>0</td></tr><tr><th>Adán</th><td>9</td><td>12.8 h</td><td><b>1.3 h</b></td><td>3 de 9</td><td>21 <small>(2.3 por lead)</small></td><td>0</td><td>2</td><td>2</td><td>5</td><td>2</td></tr></tbody>
+  </table></div>
+  <p class="note">Primer toque = la primera llamada, correo o nota hecha por el asesor, o el primer cambio de etapa desde Lead. Horario hábil supuesto: lunes a viernes de 9 a 19 h y sábado de 9 a 14 h. Toques = actividades hechas más mensajes de WhatsApp anotados. Marino no anota los WhatsApp por separado, así que sus toques salen más bajos de lo real. El sábado solo trabajó Ingrid: contactó a Vanessa T. en 14 minutos. Los demás leads del fin de semana se tocaron el lunes entre 9:35 y 10:20.</p>
+</section>
+
+<section class="slide" data-t="Detalle por lead">
+  <div class="eyebrow">Detalle por persona y trato</div>
+  <h2>Los 32 leads, quién los tiene y qué ha pasado</h2>
+  <div class="filters" role="group" aria-label="Filtrar por asesor">
+    <button type="button" id="f-all" data-f="all" aria-pressed="true">Todos</button>
+    <button type="button" id="f-ingrid" data-f="Ingrid" aria-pressed="false">Ingrid</button>
+    <button type="button" id="f-marino" data-f="Marino" aria-pressed="false">Marino</button>
+    <button type="button" id="f-adan" data-f="Adán" aria-pressed="false">Adán</button>
+    <button type="button" id="f-nadie" data-f="Nadie" aria-pressed="false">Sin trato (EXACER)</button>
+  </div>
+  <div class="tw"><table class="det" id="det">
+    <thead><tr><th>Persona</th><th>Programa · anuncio · turno</th><th>Asesor</th><th>Entró (CDMX)</th><th>1er toque</th><th>Toques</th><th>Etapa</th><th>Lectura</th><th>Contexto de notas y actividades</th><th>Próx. paso</th></tr></thead>
+    <tbody><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22804" target="_blank" rel="noopener">Vanessa S.</a><div class="sub">trato 22804 · <a href="https://udf.pipedrive.com/person/18144" target="_blank" rel="noopener">persona 18144</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Matutino</div></td><td>Adán</td><td>03-oct 17:58</td><td class="num">39.6 h<div class="sub">0.5 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Perdido</td><td><span class="pill bad">Contactado y descartado</span></td><td class="ctx">Contestó WhatsApp: sale a las 9 pm y ningún turno le queda. También llenó el popup del sitio (persona duplicada, de Marino).<div class="mot">Motivo: No le acomodan los horarios</div></td><td>—</td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22810" target="_blank" rel="noopener">Carla A.</a><div class="sub">trato 22810 · <a href="https://udf.pipedrive.com/person/18151" target="_blank" rel="noopener">persona 18151</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio · Sabatino</div></td><td>Adán</td><td>04-oct 01:03</td><td class="num">32.7 h<div class="sub">0.7 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Asesoría realizada</td><td><span class="pill info">Solo información</span></td><td class="ctx">Contestó la llamada; vive en la Cuauhtémoc y pidió la información y el plan de estudios por escrito. La etapa dice asesoría, pero fue envío de información.</td><td>08-oct</td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22816" target="_blank" rel="noopener">Shatzy M.</a><div class="sub">trato 22816 · <a href="https://udf.pipedrive.com/person/18159" target="_blank" rel="noopener">persona 18159</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Ejecutivo</div></td><td>Adán</td><td>04-oct 17:03</td><td class="num">17.0 h<div class="sub">1.0 h hábiles</div></td><td class="num">4<div class="sub">3 llam · 1 WA · 0 correo</div></td><td>Perdido</td><td><span class="pill bad">Contactado y descartado</span></td><td class="ctx">Contestó al tercer intento: está fuera de su presupuesto.<div class="mot">Motivo: Recursos insuficientes</div></td><td>—</td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22819" target="_blank" rel="noopener">Mari C.</a><div class="sub">trato 22819 · <a href="https://udf.pipedrive.com/person/18162" target="_blank" rel="noopener">persona 18162</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio · Matutino</div></td><td>Adán</td><td>04-oct 22:53</td><td class="num">11.3 h<div class="sub">1.1 h hábiles</div></td><td class="num">4<div class="sub">3 llam · 1 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Tres llamadas a buzón con los dos chips y un WhatsApp. Sin próxima actividad. Llenó también el popup como &quot;Maru C.&quot; (asignada a Luis Ángel).</td><td><span class=crit-t>sin actividad</span></td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22822" target="_blank" rel="noopener">Castilla M.</a><div class="sub">trato 22822 · <a href="https://udf.pipedrive.com/person/18165" target="_blank" rel="noopener">persona 18165</a></div></td><td>Comercio Int.<div class="sub">Joven Mujer · Precio $2,242 · Sabatino</div></td><td>Adán</td><td>05-oct 02:25</td><td class="num">7.9 h<div class="sub">1.3 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Contacto exitoso</td><td><span class="pill info">Contactado, sin asesoría</span></td><td class="ctx">Contestó: estaba trabajando y pidió que le escribieran por WhatsApp, pero la nota dice que no tiene WhatsApp. Actividad del 6-oct pendiente.</td><td>06-oct</td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22825" target="_blank" rel="noopener">Veronica M.</a><div class="sub">trato 22825 · <a href="https://udf.pipedrive.com/person/18177" target="_blank" rel="noopener">persona 18177</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio · Sabatino</div></td><td>Adán</td><td>05-oct 21:19</td><td class="num">15.2 h<div class="sub">3.4 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Suena y no contesta; WhatsApp enviado.</td><td>07-oct</td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22828" target="_blank" rel="noopener">Diana Á.</a><div class="sub">trato 22828 · <a href="https://udf.pipedrive.com/person/18180" target="_blank" rel="noopener">persona 18180</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Sabatino</div></td><td>Adán</td><td>05-oct 21:41</td><td class="num">12.8 h<div class="sub">1.5 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Sonó una vez y luego buzón; WhatsApp enviado.</td><td>06-oct</td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22831" target="_blank" rel="noopener">Sebastian G.</a><div class="sub">trato 22831 · <a href="https://udf.pipedrive.com/person/18183" target="_blank" rel="noopener">persona 18183</a></div></td><td>Derecho<div class="sub">Joven Mujer · Sin precio · Matutino</div></td><td>Adán</td><td>06-oct 10:19</td><td class="num">3.1 h<div class="sub">3.1 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Buzón; WhatsApp enviado. No dejó correo. Sin próxima actividad.</td><td><span class=crit-t>sin actividad</span></td></tr><tr data-o="Adán"><td><a href="https://udf.pipedrive.com/deal/22835" target="_blank" rel="noopener">Alejandro Z.</a><div class="sub">trato 22835 · <a href="https://udf.pipedrive.com/person/18187" target="_blank" rel="noopener">persona 18187</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Sabatino</div></td><td>Adán</td><td>06-oct 11:47</td><td class="num">2.3 h<div class="sub">2.3 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Sonó una vez y luego buzón; WhatsApp enviado.</td><td>07-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22799" target="_blank" rel="noopener">Vanessa T.</a><div class="sub">trato 22799 · <a href="https://udf.pipedrive.com/person/18139" target="_blank" rel="noopener">persona 18139</a></div></td><td>Psicología<div class="sub">Joven Mujer · Sin precio · Ejecutivo</div></td><td>Ingrid</td><td>03-oct 14:39</td><td class="num">0.2 h<div class="sub">0.0 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Perdido</td><td><span class="pill bad">Contactado y descartado</span></td><td class="ctx">Contestó el WhatsApp el mismo sábado; descartó por costo.<div class="mot">Motivo: Recursos insuficientes</div></td><td>—</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22802" target="_blank" rel="noopener">Alfonso D.</a><div class="sub">trato 22802 · <a href="https://udf.pipedrive.com/person/18142" target="_blank" rel="noopener">persona 18142</a></div></td><td>Psicología<div class="sub">Joven Hombre · Precio $2,242 · Ejecutivo</div></td><td>Ingrid</td><td>03-oct 17:04</td><td class="num">40.8 h<div class="sub">0.8 h hábiles</div></td><td class="num">5<div class="sub">2 llam · 2 WA · 1 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Dos llamadas sin respuesta, dos WhatsApp y correo.</td><td>07-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22808" target="_blank" rel="noopener">Adrian M.</a><div class="sub">trato 22808 · <a href="https://udf.pipedrive.com/person/18149" target="_blank" rel="noopener">persona 18149</a></div></td><td>Psicología<div class="sub">Joven Mujer · Sin precio · Ejecutivo</div></td><td>Ingrid</td><td>03-oct 21:16</td><td class="num">36.6 h<div class="sub">0.8 h hábiles</div></td><td class="num">5<div class="sub">2 llam · 2 WA · 1 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Dos llamadas sin respuesta, dos WhatsApp y correo.</td><td>07-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22814" target="_blank" rel="noopener">Mauro H.</a><div class="sub">trato 22814 · <a href="https://udf.pipedrive.com/person/18156" target="_blank" rel="noopener">persona 18156</a></div></td><td>Psicología<div class="sub">Adulto Hombre · Precio $2,242 · Matutino</div></td><td>Ingrid</td><td>04-oct 09:56</td><td class="num">24.1 h<div class="sub">1.0 h hábiles</div></td><td class="num">6<div class="sub">2 llam · 3 WA · 1 correo</div></td><td>Asesoría realizada</td><td><span class="pill info">Solo información</span></td><td class="ctx">Contestó el WhatsApp y recibió la información completa. El 6-oct ya no contestó la llamada.</td><td>08-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22817" target="_blank" rel="noopener">Irma P.</a><div class="sub">trato 22817 · <a href="https://udf.pipedrive.com/person/18160" target="_blank" rel="noopener">persona 18160</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Sabatino</div></td><td>Ingrid</td><td>04-oct 20:55</td><td class="num">12.9 h<div class="sub">0.8 h hábiles</div></td><td class="num">4<div class="sub">1 llam · 2 WA · 1 correo</div></td><td>Asesoría realizada</td><td><span class="pill info">Solo información</span></td><td class="ctx">Contestó el WhatsApp: ningún turno le ajusta, pedirá permiso en su trabajo. Recibió toda la información.</td><td>07-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22823" target="_blank" rel="noopener">Beatriz G.</a><div class="sub">trato 22823 · <a href="https://udf.pipedrive.com/person/18169" target="_blank" rel="noopener">persona 18169</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio · Ejecutivo</div></td><td>Ingrid</td><td>05-oct 17:15</td><td class="num">0.3 h<div class="sub">0.3 h hábiles</div></td><td class="num">3<div class="sub">2 llam · 1 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Adán marcó a los 20 minutos con los dos chips: el número no enlaza. Esa noche se reasignó a Ingrid.</td><td>06-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22826" target="_blank" rel="noopener">Irma G.</a><div class="sub">trato 22826 · <a href="https://udf.pipedrive.com/person/18178" target="_blank" rel="noopener">persona 18178</a></div></td><td>Derecho<div class="sub">Joven Mujer · Sin precio · Sabatino</div></td><td>Ingrid</td><td>05-oct 21:20</td><td class="num">13.4 h<div class="sub">1.7 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">No contesta. Lada 777 (Morelos).</td><td>06-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22829" target="_blank" rel="noopener">Jacqueline C.</a><div class="sub">trato 22829 · <a href="https://udf.pipedrive.com/person/18181" target="_blank" rel="noopener">persona 18181</a></div></td><td>Derecho<div class="sub">Joven Mujer · Sin precio · Matutino</div></td><td>Ingrid</td><td>06-oct 01:41</td><td class="num">8.8 h<div class="sub">1.4 h hábiles</div></td><td class="num">2<div class="sub">1 llam · 1 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">No contestó; WhatsApp enviado.</td><td>06-oct</td></tr><tr data-o="Ingrid"><td><a href="https://udf.pipedrive.com/deal/22839" target="_blank" rel="noopener">Martha M.</a><div class="sub">trato 22839 · <a href="https://udf.pipedrive.com/person/18191" target="_blank" rel="noopener">persona 18191</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio · Matutino</div></td><td>Ingrid</td><td>06-oct 14:25</td><td class="num">0.3 h<div class="sub">0.3 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">El número tiene un dígito de más.</td><td>07-oct</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22806" target="_blank" rel="noopener">Jennifer F.</a><div class="sub">trato 22806 · <a href="https://udf.pipedrive.com/person/18147" target="_blank" rel="noopener">persona 18147</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Matutino</div></td><td>Marino</td><td>03-oct 20:10</td><td class="num">37.6 h<div class="sub">0.7 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Perdido</td><td><span class="pill bad">Contactado y descartado</span></td><td class="ctx">Dijo que fue un error de dedo; no le interesa.<div class="mot">Motivo: No le interesa. Contactado por teléfono</div></td><td>—</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22812" target="_blank" rel="noopener">Irnel J.</a><div class="sub">trato 22812 · <a href="https://udf.pipedrive.com/person/18153" target="_blank" rel="noopener">persona 18153</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Sabatino</div></td><td>Marino</td><td>04-oct 07:50</td><td class="num">26.0 h<div class="sub">0.9 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Perdido</td><td><span class="pill bad">Perdido sin contacto</span></td><td class="ctx">Una llamada sin respuesta y pasó a Perdido el mismo día. Tiene otro trato en Orgánico con Adán porque también llenó el popup del sitio.</td><td>—</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22815" target="_blank" rel="noopener">Miguel H.</a><div class="sub">trato 22815 · <a href="https://udf.pipedrive.com/person/18157" target="_blank" rel="noopener">persona 18157</a></div></td><td>Derecho<div class="sub">Joven Mujer · Sin precio · Sabatino</div></td><td>Marino</td><td>04-oct 11:19</td><td class="num">22.6 h<div class="sub">0.8 h hábiles</div></td><td class="num">3<div class="sub">3 llam · 0 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Tres llamadas: se queda en silencio, después buzón.</td><td>08-oct</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22818" target="_blank" rel="noopener">Martha D.</a><div class="sub">trato 22818 · <a href="https://udf.pipedrive.com/person/18161" target="_blank" rel="noopener">persona 18161</a></div></td><td>Psicología<div class="sub">Joven Hombre · Precio $2,242 · Ejecutivo</div></td><td>Marino</td><td>04-oct 21:21</td><td class="num">12.6 h<div class="sub">1.0 h hábiles</div></td><td class="num">3<div class="sub">3 llam · 0 WA · 0 correo</div></td><td>Asesoría realizada</td><td><span class="pill ok">Asesoría real</span></td><td class="ctx">Asesoría por teléfono: se le ofreció beca Vecinos Cuauhtémoc o UDF. Lo revisa con su esposo.</td><td>08-oct</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22821" target="_blank" rel="noopener">Lorena P.</a><div class="sub">trato 22821 · <a href="https://udf.pipedrive.com/person/18164" target="_blank" rel="noopener">persona 18164</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Sabatino</div></td><td>Marino</td><td>04-oct 23:20</td><td class="num">10.7 h<div class="sub">1.0 h hábiles</div></td><td class="num">3<div class="sub">3 llam · 0 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Número fuera de servicio.</td><td>08-oct</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22824" target="_blank" rel="noopener">Arlet A.</a><div class="sub">trato 22824 · <a href="https://udf.pipedrive.com/person/18176" target="_blank" rel="noopener">persona 18176</a></div></td><td>Administración<div class="sub">Captura manual · Matutino</div></td><td>Marino</td><td>05-oct 19:34</td><td class="num">15.3 h<div class="sub">1.8 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Visita agendada</td><td><span class="pill ok">Asesoría real</span></td><td class="ctx">Asesoría: beca de inicio y facilidad de pagar la inscripción después. Visita agendada el 9-oct. Capturada a mano (Oferta genérica, sin anuncio).</td><td>07-oct</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22827" target="_blank" rel="noopener">Cristina H.</a><div class="sub">trato 22827 · <a href="https://udf.pipedrive.com/person/18179" target="_blank" rel="noopener">persona 18179</a></div></td><td>Derecho<div class="sub">Joven Mujer · Sin precio · Ejecutivo</div></td><td>Marino</td><td>05-oct 21:41</td><td class="num">13.0 h<div class="sub">1.7 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Buzón de voz.</td><td>07-oct</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22830" target="_blank" rel="noopener">José L.</a><div class="sub">trato 22830 · <a href="https://udf.pipedrive.com/person/18182" target="_blank" rel="noopener">persona 18182</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio · Ejecutivo</div></td><td>Marino</td><td>06-oct 09:15</td><td class="num">1.4 h<div class="sub">1.4 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Número fuera de servicio.</td><td>07-oct</td></tr><tr data-o="Marino"><td><a href="https://udf.pipedrive.com/deal/22833" target="_blank" rel="noopener">Andre C.</a><div class="sub">trato 22833 · <a href="https://udf.pipedrive.com/person/18185" target="_blank" rel="noopener">persona 18185</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio · Ejecutivo</div></td><td>Marino</td><td>06-oct 11:04</td><td class="num">0.0 h<div class="sub">0.0 h hábiles</div></td><td class="num">1<div class="sub">1 llam · 0 WA · 0 correo</div></td><td>Intento de contacto</td><td><span class="pill wait">Sin contacto aún</span></td><td class="ctx">Marino marcó a los 2 minutos: buzón.</td><td>07-oct</td></tr><tr data-o="Marino" class="fixed"><td><a href="https://udf.pipedrive.com/deal/22841" target="_blank" rel="noopener">Armando G.</a><div class="sub">trato 22841 · <a href="https://udf.pipedrive.com/person/18155" target="_blank" rel="noopener">persona 18155</a></div></td><td>Derecho<div class="sub">Joven Mujer · Sin precio</div></td><td>Marino</td><td>04-oct 08:13</td><td class="num"><span class=crit-t>55 h</span><div class="sub">sin toque</div></td><td class="num">0</td><td>Lead</td><td><span class="pill wait">Trato creado 6-oct</span></td><td class="ctx">Se quedó sin trato porque su nombre propio llegó vacío y la automatización titula el trato con ese campo. El trato se creó por API el 6-oct, ~15:30, y se asignó al azar.</td><td><span class=crit-t>primer toque hoy</span></td></tr><tr data-o="Nadie" class="orph"><td><a href="https://udf.pipedrive.com/person/18158" target="_blank" rel="noopener">V. M. (escribió en el nombre que le interesa la preparatoria)</a><div class="sub">persona 18158 · sin trato</div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio</div></td><td>Nadie</td><td>04-oct 14:41</td><td class="num"><span class=crit-t>48 h</span><div class="sub">sin toque</div></td><td class="num">0</td><td>—</td><td><span class="pill crit">Sin trato</span></td><td class="ctx">Se quedó sin trato por la misma falla del nombre propio vacío. Busca preparatoria, no licenciatura: se dejó fuera de la creación de tratos para canalizarla a EXACER.</td><td><span class=crit-t>decidir EXACER</span></td></tr><tr data-o="Adán" class="fixed"><td><a href="https://udf.pipedrive.com/deal/22842" target="_blank" rel="noopener">Sandy P.</a><div class="sub">trato 22842 · <a href="https://udf.pipedrive.com/person/18166" target="_blank" rel="noopener">persona 18166</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio</div></td><td>Adán</td><td>05-oct 10:59</td><td class="num"><span class=crit-t>28 h</span><div class="sub">sin toque</div></td><td class="num">0</td><td>Lead</td><td><span class="pill wait">Trato creado 6-oct</span></td><td class="ctx">Se quedó sin trato porque su nombre propio llegó vacío y la automatización titula el trato con ese campo. El trato se creó por API el 6-oct, ~15:30, y se asignó al azar.</td><td><span class=crit-t>primer toque hoy</span></td></tr><tr data-o="Ingrid" class="fixed"><td><a href="https://udf.pipedrive.com/deal/22843" target="_blank" rel="noopener">María E.</a><div class="sub">trato 22843 · <a href="https://udf.pipedrive.com/person/18167" target="_blank" rel="noopener">persona 18167</a></div></td><td>Psicología<div class="sub">Adulto Mujer · Sin precio</div></td><td>Ingrid</td><td>05-oct 13:44</td><td class="num"><span class=crit-t>25 h</span><div class="sub">sin toque</div></td><td class="num">0</td><td>Lead</td><td><span class="pill wait">Trato creado 6-oct</span></td><td class="ctx">Se quedó sin trato porque su nombre propio llegó vacío y la automatización titula el trato con ese campo. El trato se creó por API el 6-oct, ~15:30, y se asignó al azar.</td><td><span class=crit-t>primer toque hoy</span></td></tr><tr data-o="Ingrid" class="fixed"><td><a href="https://udf.pipedrive.com/deal/22844" target="_blank" rel="noopener">Diana A.</a><div class="sub">trato 22844 · <a href="https://udf.pipedrive.com/person/18168" target="_blank" rel="noopener">persona 18168</a></div></td><td>Administración<div class="sub">Adulto Mujer · Sin precio</div></td><td>Ingrid</td><td>05-oct 14:47</td><td class="num"><span class=crit-t>24 h</span><div class="sub">sin toque</div></td><td class="num">0</td><td>Lead</td><td><span class="pill wait">Trato creado 6-oct</span></td><td class="ctx">Se quedó sin trato porque su nombre propio llegó vacío y la automatización titula el trato con ese campo. El trato se creó por API el 6-oct, ~15:30, y se asignó al azar.</td><td><span class=crit-t>primer toque hoy</span></td></tr></tbody>
+  </table></div>
+  <p class="note">Nombres tal como están en Pipedrive; cada nombre abre el trato o la persona. Las 4 filas en gris son los tratos creados el 6-oct. La tabla del primer contacto por asesor no las cuenta. Sin teléfonos ni correos en este reporte.</p>
+</section>
+
+<section class="slide" data-t="Higiene del CRM">
+  <div class="eyebrow">Higiene del CRM</div>
+  <h2>Lo que hay que corregir en Pipedrive para que el reporte de la próxima semana sea confiable</h2>
+  <div class="list">
+    <div class="c"><b>Automatización “Creación de trato ene 2027”: título vacío</b><p>El título del trato es el nombre propio de la persona. Cuando el nombre llega vacío, el trato no se crea y no hay aviso. Así se perdieron 5 de 31 envíos. Hay que cambiar el título al nombre completo, por ejemplo “V5 · {Nombre}”. Los 4 de licenciatura ya tienen trato (22841 a 22844). Falta decidir el de V. M., que pide preparatoria.</p></div>
+    <div class="c"><b>Una actividad no garantiza el siguiente paso</b><p>Mari C. y Sebastian G. (Adán) están en Intento de contacto sin próxima actividad. Leonardo C. tiene una llamada vencida.</p></div>
+    <div class="b"><b>Etapa “Asesoría realizada” usada para envío de información</b><p>Carla A., Mauro H. e Irma B.. Si no hubo plática de beca y siguiente paso, deben quedar en Contacto exitoso.</p></div>
+    <div class="b"><b>Perdido después de una sola llamada</b><p>Irnel J. (Marino): una llamada sin respuesta y pasó a Perdido. Además tiene un trato abierto en Orgánico con Adán.</p></div>
+    <div class="i"><b>Duplicados por el popup del sitio</b><p>Vanessa S., Mari C. e Irnel J. llenaron también el popup de la web segundos después del formulario. Hay dos personas por lead y, en algún caso, dos asesores.</p></div>
+    <div class="i"><b>Pruebas y registros fuera de lugar</b><p>Tratos de prueba 22795 y 22797 y la persona 18134 siguen vivos. Liliana O. (trato 20016, inscrita en EXACER en 2025) se movió hoy a “Ene 2027” en Asesoría realizada tras un buzón de voz.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-t="Siguientes pasos">
+  <div class="eyebrow">Siguientes pasos</div>
+  <h2>Qué hacer esta semana</h2>
+  <div class="steps">
+    <div><span><b>Corregir el título del trato en la automatización</b><p>Hecho el 6-oct: se crearon por API los 4 tratos de licenciatura y se asignaron al azar a Marino, Adán e Ingrid. Pendiente: cambiar el título de “nombre propio” a nombre completo en “Creación de trato ene 2027”, canalizar a EXACER el lead de preparatoria y dar hoy el primer toque a los 4.</p></span><em>CRM · hoy</em></div>
+    <div><span><b>Bajar Comercio Internacional</b><p>Pausar los dos anuncios sin precio de Comercio ($1,896 sin leads) y pasar ese presupuesto a Psicología, que trae leads a $173. Si se quiere mantener Comercio, abrir la edad a 18–45.</p></span><em>Meta · decide Jorge</em></div>
+    <div><span><b>Cubrir el fin de semana</b><p>Un mensaje de WhatsApp o correo automático al registrarse, y una guardia el sábado en la tarde y el domingo. La mitad de los leads de la semana entró en ese hueco.</p></span><em>Operación UDF</em></div>
+    <div><span><b>Separar asesoría de información en la etapa</b><p>Asesoría realizada solo con beca, costo y siguiente paso acordado. Mínimo 4 intentos en 3 días antes de pasar a Perdido.</p></span><em>Asesores</em></div>
+    <div><span><b>Validar teléfono en el formulario</b><p>4 de 27 números no sirven. Cambiar la pregunta de teléfono, hoy de texto libre, por el campo de teléfono de Meta, que valida el formato.</p></span><em>Meta · formulario</em></div>
+  </div>
+</section>
+
+</div>
+<nav class="nav" aria-label="Diapositivas">
+  <button type="button" id="prev" aria-label="Anterior">← Anterior</button>
+  <span class="pos" id="pos"></span>
+  <button type="button" id="next" aria-label="Siguiente">Siguiente →</button>
+</nav>
+<script>
+(function(){
+  var S=[].slice.call(document.querySelectorAll('.slide')),i=0;
+  var tok=(location.hash||'').replace('#','');
+  if(/^s\d+$/.test(tok)){var n=parseInt(tok.slice(1),10)-1;if(n>=0&&n<S.length)i=n;}
+  function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,k){s.classList.toggle('on',k===i)});
+    document.getElementById('pos').textContent=(i+1)+' / '+S.length+' · '+S[i].getAttribute('data-t');
+    document.getElementById('prog').style.width=((i+1)/S.length*100)+'%';
+    try{history.replaceState(null,'','#s'+(i+1))}catch(e){}}
+  document.getElementById('prev').onclick=function(){go(i-1)};
+  document.getElementById('next').onclick=function(){go(i+1)};
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='BUTTON'&&(e.key===' '||e.key==='Enter'))return;
+    if(e.key==='ArrowRight'||e.key==='PageDown')go(i+1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);});
+  var fb=[].slice.call(document.querySelectorAll('.filters button'));
+  fb.forEach(function(b){b.onclick=function(){var f=b.getAttribute('data-f');
+    fb.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    [].forEach.call(document.querySelectorAll('#det tbody tr'),function(r){r.hidden=!(f==='all'||r.getAttribute('data-o')===f)});};});
+  go(i);
+})();
+</script>
+
+</html>
