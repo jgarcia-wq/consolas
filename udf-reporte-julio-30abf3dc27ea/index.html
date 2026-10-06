@@ -236,6 +236,32 @@
   }
 
 
+  /* ---------- cifras de carátula ---------- */
+  .headline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .hl { background: var(--accent-soft); padding: 18px 20px; display: flex; flex-direction: column; gap: 5px; }
+  .hl-n {
+    font-family: var(--f-display);
+    font-size: 2.15rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .hl-k {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .hl-note { font-size: 13px; color: var(--ink-faint); max-width: 74ch; }
+
   footer {
     border-top: 1px solid var(--rule);
     padding-top: 18px;
@@ -268,6 +294,13 @@
     <div class="eyebrow">UDF Santa María · Black n Orange</div>
     <h1>Reporte Julio&nbsp;2026</h1>
     <p class="standfirst">Julio fue el primer mes completo de operación del ciclo Septiembre 2026. La estructura montada en junio alcanzó su ritmo, se ejecutó el Coffee Break del 18 de julio, se saneó por completo el CRM y se dejaron montadas las campañas de las sesiones informativas de agosto.</p>
+
+    <div class="headline">
+      <div class="hl"><span class="hl-n">$119,312</span><span class="hl-k">Inversión del periodo · MXN</span></div>
+      <div class="hl"><span class="hl-n">2,334</span><span class="hl-k">Leads generados por la pauta</span></div>
+      <div class="hl"><span class="hl-n">$51.12</span><span class="hl-k">CPA · costo por conversación</span></div>
+    </div>
+    <p class="hl-note">Leads de pauta = 2,264 conexiones de WhatsApp más 70 registros de formulario instantáneo. El CPA es la inversión del periodo dividida entre esos leads.</p>
     <div class="meta-line">
       <span>Periodo: 1 – 31 de julio de 2026</span>
       <span>Cuenta Meta: act_838230470286008</span>
@@ -280,12 +313,12 @@
     <p class="lede">Contra junio, la inversión subió 27% y las conversaciones atendidas por el agente se multiplicaron por cinco: de 443 a 2,239. Los leads calificados de 4 y 5 estrellas pasaron de 93 a 313.</p>
 
     <div class="stats">
-      <div class="stat"><span class="n">$119,312</span><span class="k">Inversión Meta MXN</span></div>
       <div class="stat"><span class="n">1.88 M</span><span class="k">Impresiones</span></div>
       <div class="stat"><span class="n">31,815</span><span class="k">Clics</span></div>
+      <div class="stat"><span class="n">2,264</span><span class="k">Conexiones de WhatsApp</span></div>
+      <div class="stat"><span class="n">70</span><span class="k">Registros de formulario</span></div>
       <div class="stat"><span class="n">2,239</span><span class="k">Conversaciones Patagon</span></div>
       <div class="stat"><span class="n">313</span><span class="k">Leads calificados 4–5★</span></div>
-      <div class="stat"><span class="n">$46</span><span class="k">Costo por conversación</span></div>
     </div>
 
     <div class="scroll">
