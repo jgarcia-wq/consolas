@@ -1,0 +1,8 @@
+Consola de avance del BOOMS Growth Blueprint de AOC Gases (sesiones 1 a 3, actualizada al 16-oct-2026).
+Formato presentacion: flechas del teclado o botones de abajo. Tecla N muestra u oculta las notas internas (B0-B9); ocultas por defecto.
+
+Fuentes: base de transacciones de AOC (ene-2024 a jun-2026), casos reales y cuestionarios del cliente,
+transcripciones de sesiones, investigacion web de competencia y Semrush (MX).
+
+No listada en el indice y con ruta aleatoria: el repositorio es publico,
+asi que cualquiera con la liga completa puede abrirla.

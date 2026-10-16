@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Growth Blueprint AOC</title>
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: consola de presentación — riel lateral con las 6 pantallas + panel principal tipo lámina; en móvil el riel pasa a pestañas horizontales.
+   Paleta inspirada en la planta criogénica: tinta azul pizarra, escarcha, azul criogénico (nitrógeno) y verde oxígeno. */
+:root{
+  --bg:#eef2f4; --panel:#ffffff; --ink:#14212b; --muted:#56656f; --line:#d3dce1;
+  --cryo:#1f5f8b; --cryo-soft:#e1ecf3; --o2:#2f7d4f; --o2-soft:#e3f1e8;
+  --warn:#9a6500; --warn-soft:#fbf0d9; --rail:#14212b; --rail-fg:#c9d6de; --rail-active:#ffffff;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d151b; --panel:#15212a; --ink:#e6edf1; --muted:#9aaab4; --line:#2a3944;
+  --cryo:#6fb3e0; --cryo-soft:#16303f; --o2:#6cc795; --o2-soft:#173326;
+  --warn:#e8b45a; --warn-soft:#3a2d12; --rail:#0a1015; --rail-fg:#8fa2ae; --rail-active:#ffffff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d151b; --panel:#15212a; --ink:#e6edf1; --muted:#9aaab4; --line:#2a3944;
+  --cryo:#6fb3e0; --cryo-soft:#16303f; --o2:#6cc795; --o2-soft:#173326;
+  --warn:#e8b45a; --warn-soft:#3a2d12; --rail:#0a1015; --rail-fg:#8fa2ae; --rail-active:#ffffff; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100%}
+.rail{background:var(--rail);color:var(--rail-fg);padding-block:28px;padding-inline:22px;display:flex;flex-direction:column;gap:28px;position:sticky;top:0;height:100vh}
+.brand{display:flex;flex-direction:column;gap:4px}
+.brand .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--rail-fg)}
+.brand .name{font-family:var(--display);font-weight:700;font-size:30px;line-height:1;color:var(--rail-active);letter-spacing:.01em}
+.brand .date{font-family:var(--mono);font-size:12px;color:var(--rail-fg)}
+nav ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav button{all:unset;cursor:pointer;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:baseline;width:100%;padding:10px 10px;border-radius:6px;color:var(--rail-fg);font-size:15px}
+nav button .n{font-family:var(--mono);font-size:12px;opacity:.7}
+nav button:hover{background:rgba(255,255,255,.06);color:var(--rail-active)}
+nav button:focus-visible{outline:2px solid var(--cryo);outline-offset:2px}
+nav button[aria-selected="true"]{background:rgba(255,255,255,.1);color:var(--rail-active)}
+nav button[aria-selected="true"] .n{color:var(--o2);opacity:1}
+.bnote{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:none;padding:3px 8px;border-radius:4px;background:var(--warn-soft);color:var(--warn);border:1px dashed var(--warn);white-space:nowrap;vertical-align:middle}
+.kicker .bnote{margin-left:10px}
+nav .bnote{margin-left:6px;font-size:10px;padding:1px 6px;background:transparent}
+.asks .bnote{align-self:flex-start}
+.btoggle{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--rail-fg);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:6px 10px;text-align:center}
+.btoggle:hover{color:var(--rail-active)}
+.btoggle:focus-visible{outline:2px solid var(--cryo);outline-offset:2px}
+body.hide-b .bnote{display:none}
+.hint{margin-top:auto;font-family:var(--mono);font-size:11px;color:var(--rail-fg);opacity:.7}
+
+main{padding-block:40px 64px;padding-inline:clamp(16px,4vw,56px);min-width:0}
+section{max-width:1180px;display:flex;flex-direction:column;gap:28px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cryo)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,4.6vw,56px);line-height:1.02;margin:6px 0 0;text-wrap:balance;letter-spacing:.005em}
+h2{font-family:var(--display);font-weight:600;font-size:26px;line-height:1.1;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.15;margin:0}
+.lede{font-size:19px;color:var(--muted);max-width:68ch;margin:10px 0 0}
+p{margin:0}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
+.stat .v{font-family:var(--display);font-weight:700;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.stat .l{font-size:14px;color:var(--muted)}
+
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+
+/* barra de capacidad a escala */
+.cap{display:flex;flex-direction:column;gap:10px}
+.cap .row{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center}
+.cap .track{height:26px;background:var(--cryo-soft);border-radius:4px;position:relative;overflow:hidden}
+.cap .fill{height:100%;border-radius:4px}
+.cap .lbl{font-size:14px;color:var(--muted)}
+.cap .val{font-family:var(--mono);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.chip.p1{background:var(--o2-soft);color:var(--o2)}
+.chip.p2{background:var(--cryo-soft);color:var(--cryo)}
+.chip.p3{background:var(--warn-soft);color:var(--warn)}
+.chip.mod{background:transparent;border:1px solid var(--line);color:var(--muted)}
+
+.persona{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.persona header{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.persona dl{display:grid;grid-template-columns:130px 1fr;gap:6px 14px;margin:0;font-size:15px}
+.persona dt{color:var(--muted);font-size:13px;padding-top:2px}
+.persona dd{margin:0}
+blockquote{margin:0;padding:12px 16px;border-left:3px solid var(--o2);background:var(--o2-soft);font-size:16px;border-radius:0 6px 6px 0}
+blockquote cite{display:block;margin-top:4px;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.insight{background:var(--ink);color:var(--bg);border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:6px}
+.insight .kicker{color:var(--o2)}
+.insight p{font-family:var(--display);font-size:28px;font-weight:600;line-height:1.15;text-wrap:balance}
+
+.pains{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.pains li{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+.pains li:last-child{border-bottom:0;padding-bottom:0}
+.pains .q{font-size:16px}
+.tag{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap}
+
+/* journey */
+.journey{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(170px,1fr);gap:0;overflow-x:auto;padding-bottom:4px}
+.stage{border-top:4px solid var(--cryo);padding:14px 14px 4px 0;display:flex;flex-direction:column;gap:8px;position:relative}
+.stage::before{content:"";position:absolute;top:-9px;left:0;width:14px;height:14px;border-radius:50%;background:var(--panel);border:3px solid var(--cryo)}
+.stage .t{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.1}
+.stage .d{font-family:var(--mono);font-size:12px;color:var(--cryo)}
+.stage p{font-size:14px;color:var(--muted)}
+.journey.env .stage{border-top-color:var(--o2)}
+.journey.env .stage::before{border-color:var(--o2)}
+.journey.env .stage .d{color:var(--o2)}
+.who{display:flex;flex-wrap:wrap;gap:8px}
+.who span{font-size:14px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.who b{font-weight:600}
+
+.angles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.angle{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.angle .line{font-family:var(--display);font-size:24px;font-weight:600;line-height:1.15;text-wrap:balance}
+.angle .vs{font-size:14px;color:var(--muted)}
+.angle .vs b{color:var(--ink);font-weight:600}
+
+.comp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.comp div{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--panel);display:flex;flex-direction:column;gap:6px;font-size:14px;min-width:0}
+.comp b{font-family:var(--display);font-size:19px;font-weight:600}
+
+.asks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.asks li{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.asks li.key{border-color:var(--warn);background:var(--warn-soft)}
+.asks .h{font-weight:600;font-size:17px}
+.asks .w{font-size:15px;color:var(--ink);max-width:80ch}
+.asks .lb{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.asks li.wide{grid-column:1/-1}
+.vsgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.opt{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.opt.rec{border-color:var(--o2);box-shadow:inset 0 0 0 1px var(--o2)}
+.opt .ot{font-family:var(--display);font-weight:600;font-size:20px}
+.opt.rec .ot::after{content:" · recomendado";font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--o2);text-transform:uppercase}
+.opt ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+@media (max-width:820px){.vsgrid{grid-template-columns:1fr}}
+
+.foot{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pager{display:flex;gap:8px}
+.pager button{font:inherit;font-family:var(--body);font-size:14px;padding:8px 14px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.pager button:hover{border-color:var(--cryo)}
+.pager button:focus-visible{outline:2px solid var(--cryo);outline-offset:2px}
+.pager button:disabled{opacity:.4;cursor:default}
+
+@media (max-width:1000px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .comp{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:820px){
+  .app{grid-template-columns:1fr}
+  .rail{position:sticky;top:env(safe-area-inset-top,0px);height:auto;z-index:5;padding-block:14px;padding-inline:16px;gap:12px}
+  .brand .name{font-size:22px}
+  .brand .date,.hint{display:none}
+  nav ol{flex-direction:row;overflow-x:auto;gap:4px}
+  nav button{grid-template-columns:auto auto;white-space:nowrap;padding:8px 10px;font-size:14px}
+  .grid2,.angles,.asks{grid-template-columns:1fr}
+  .cap .row{grid-template-columns:110px 1fr 70px}
+  .persona dl{grid-template-columns:1fr}
+  .persona dt{padding-top:6px}
+}
+@media (max-width:480px){.stats,.comp{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){section:not([hidden]){animation:in .35s ease-out}@keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <span class="eyebrow">Growth Blueprint</span>
+      <span class="name">AOC Gases × Black n Orange</span>
+      <span class="date">Avance · 14 de octubre de 2026</span>
+    </div>
+    <nav aria-label="Pantallas">
+      <ol role="tablist">
+        <li><button role="tab" id="t-negocio" aria-controls="negocio" aria-selected="true"><span class="n">01</span><span>El negocio<span class="bnote">B0</span></span></button></li>
+        <li><button role="tab" id="t-perfiles" aria-controls="perfiles" aria-selected="false"><span class="n">02</span><span>A quién le hablamos<span class="bnote">B1</span></span></button></li>
+        <li><button role="tab" id="t-problemas" aria-controls="problemas" aria-selected="false"><span class="n">03</span><span>Qué resolvemos<span class="bnote">B2</span></span></button></li>
+        <li><button role="tab" id="t-compra" aria-controls="compra" aria-selected="false"><span class="n">04</span><span>Cómo compran<span class="bnote">B3</span></span></button></li>
+        <li><button role="tab" id="t-porque" aria-controls="porque" aria-selected="false"><span class="n">05</span><span>Por qué AOC<span class="bnote">B4</span></span></button></li>
+        <li><button role="tab" id="t-siguiente" aria-controls="siguiente" aria-selected="false"><span class="n">06</span><span>Para avanzar<span class="bnote">B5–B9</span></span></button></li>
+      </ol>
+    </nav>
+    <button type="button" class="btoggle" id="btoggle" aria-pressed="false">Ocultar notas B (tecla N)</button>
+    <p class="hint">← → para cambiar de pantalla</p>
+  </aside>
+
+  <main>
+    <!-- 01 NEGOCIO -->
+    <section id="negocio" role="tabpanel" aria-labelledby="t-negocio">
+      <div>
+        <p class="kicker">01 · El negocio<span class="bnote">B0 · Ficha de negocio</span></p>
+        <h1>La planta nueva tiene más de tres veces lo que hoy se vende</h1>
+        <p class="lede">El reto no es conseguir clientes: AOC suma más de cien al mes. El reto es conseguir cuentas que consuman volumen, sobre todo nitrógeno y oxígeno en bulk.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="v">44.8 M</span><span class="l">m³ al año de capacidad de la planta nueva (O₂, N₂, Ar)</span></div>
+        <div class="stat"><span class="v">12.7 M</span><span class="l">m³ vendidos en 2025 de O₂, N₂ y Ar</span></div>
+        <div class="stat"><span class="v">2,088</span><span class="l">clientes nuevos en 2025</span></div>
+        <div class="stat"><span class="v">24</span><span class="l">clientes nuevos de bulk desde enero de 2025</span></div>
+      </div>
+      <div class="grid2">
+        <div class="box">
+          <h2>Capacidad contra venta, m³ por año</h2>
+          <div class="cap" role="img" aria-label="Capacidad 44.8 millones de m³ contra venta 2025 de 12.7 millones de m³">
+            <div class="row"><span class="lbl">Capacidad planta</span><div class="track"><div class="fill" style="width:100%;background:var(--cryo)"></div></div><span class="val">44.8 M</span></div>
+            <div class="row"><span class="lbl">Venta 2025</span><div class="track"><div class="fill" style="width:28.3%;background:var(--o2)"></div></div><span class="val">12.7 M</span></div>
+            <div class="row"><span class="lbl">De eso, bulk</span><div class="track"><div class="fill" style="width:18.7%;background:var(--o2)"></div></div><span class="val">8.4 M</span></div>
+          </div>
+          <p class="muted">Capacidad: 89 t/día de nitrógeno, 60 t/día de oxígeno y 2 t/día de argón, convertidas a m³. Venta: base de transacciones de AOC.</p>
+        </div>
+        <div class="box">
+          <h2>Cómo se reparte la venta</h2>
+          <div class="tablewrap">
+          <table>
+            <thead><tr><th>Canal</th><th class="r">Venta 30 meses</th><th class="r">Clientes</th></tr></thead>
+            <tbody>
+              <tr><td>Distribuidor</td><td class="r">$499 M</td><td class="r">412</td></tr>
+              <tr><td>Cuenta clave · envasado</td><td class="r">$390 M</td><td class="r">832</td></tr>
+              <tr><td>Cuenta clave · bulk</td><td class="r">$304 M</td><td class="r">90</td></tr>
+              <tr><td>Atención local</td><td class="r">$133 M</td><td class="r">6,591</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="muted">Enero 2024 a junio 2026. Envasado es el 72% de la venta; bulk el 27%, pero mueve dos terceras partes del volumen de gas.</p>
+        </div>
+      </div>
+      <div class="box">
+        <h2>Cómo vamos a organizar la estrategia</h2>
+        <div class="who">
+          <span><b>Producto:</b> oxígeno y nitrógeno industriales</span>
+          <span><b>Dos negocios:</b> bulk y envasado, cada uno con su mensaje</span>
+          <span><b>Plazas prioritarias:</b> Nuevo León y Coahuila</span>
+          <span><b>Medición:</b> 6 meses de prueba, luego metas</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 PERFILES -->
+    <section id="perfiles" role="tabpanel" aria-labelledby="t-perfiles" hidden>
+      <div>
+        <p class="kicker">02 · A quién le hablamos<span class="bnote">B1 · Avatares</span></p>
+        <h1>Cinco perfiles de cliente, dos al frente</h1>
+        <p class="lede">Cada perfil es una persona, no una empresa. Salen de cruzar su base de ventas con los casos reales que nos compartieron. Los de bulk ya los validó el área de Bulk; los de envasado y canal están en validación con Ventas.</p>
+      </div>
+      <div class="grid2">
+        <article class="persona">
+          <header><span class="chip p1">Prioridad 1</span><span class="chip mod">Bulk</span></header>
+          <h2>El comprador de planta al que ya no le alcanzan los dewars</h2>
+          <dl>
+            <dt>Quién es</dt><dd>Jefe o jefa de Compras de planta manufacturera, alrededor de 35 años</dd>
+            <dt>Giro</dt><dd>Automotriz y metalmecánica con corte láser y soldadura</dd>
+            <dt>Lo distingue</dt><dd>Su consumo de nitrógeno crece con la producción hasta que necesita un tanque</dd>
+            <dt>Datos</dt><dd class="num">50 clientes · $226 M · mediana de ~$1 M al año por cuenta</dd>
+          </dl>
+          <blockquote>AOC respondió a sus necesidades conforme fue creciendo su consumo.<cite>Hussmann American y Specialty International</cite></blockquote>
+        </article>
+        <article class="persona">
+          <header><span class="chip p1">Prioridad 1</span><span class="chip mod">Envasado</span><span class="chip p3">En validación con Ventas</span></header>
+          <h2>La compradora a la que su proveedor dejó de atender</h2>
+          <dl>
+            <dt>Quién es</dt><dd>Jefa o jefe de Compras, 30 a 45 años; el gerente da el visto bueno</dd>
+            <dt>Giro</dt><dd>Manufactura, metalmecánica, remolques y estructuras</dd>
+            <dt>Lo distingue</dt><dd>Compra mezclas, argón y oxígeno con crédito y cilindros prestados; viene de un proveedor que le falló</dd>
+            <dt>Datos</dt><dd class="num">351 clientes · $237 M · mediana de ~$68 mil al año</dd>
+          </dl>
+          <blockquote>INFRA no los visitaba y AOC los visita con frecuencia y se adelanta a sus necesidades.<cite>Remolque Bustos</cite></blockquote>
+        </article>
+        <article class="persona">
+          <header><span class="chip p2">Secundario</span><span class="chip mod">Canal</span></header>
+          <h2>El dueño de distribuidora que necesita abasto y crédito para no perder clientes</h2>
+          <dl>
+            <dt>Quién es</dt><dd>Dueño o familiar a cargo de una distribuidora, 45 a 55 años</dd>
+            <dt>Lo distingue</dt><dd>Revende: necesita crédito, abasto constante y margen</dd>
+            <dt>Datos</dt><dd class="num">396 distribuidores · $499 M · 38% de la venta</dd>
+          </dl>
+          <blockquote>Infra le bajó el monto de crédito y le cortaba el servicio.<cite>Gases y Suministros Ashe</cite></blockquote>
+        </article>
+        <article class="persona">
+          <header><span class="chip p2">Secundario</span><span class="chip mod">Envasado</span></header>
+          <h2>El soldador o dueño de taller que no puede quedarse sin gas a media chamba</h2>
+          <dl>
+            <dt>Quién es</dt><dd>Dueño de taller, soldador o compras de pyme</dd>
+            <dt>Lo distingue</dt><dd>Repone 1 o 2 veces por semana, pide por WhatsApp y depende de tener la sucursal cerca</dd>
+            <dt>Datos</dt><dd class="num">6,591 clientes · $133 M</dd>
+          </dl>
+          <blockquote>La competencia no les prestaba cilindros.<cite>Lourdes Antonieta</cite></blockquote>
+        </article>
+        <article class="persona">
+          <header><span class="chip p2">Secundario</span><span class="chip mod">Bulk</span></header>
+          <h2>El comprador de planta de proceso que usa nitrógeno para tratamiento térmico</h2>
+          <dl>
+            <dt>Quién es</dt><dd>Jefe o jefa de Compras en planta con hornos de tratamiento térmico; Mantenimiento influye</dd>
+            <dt>Lo distingue</dt><dd>Su proceso requiere tanque desde el inicio: el nitrógeno evita que las piezas se oxiden en el horno</dd>
+            <dt>Datos</dt><dd class="num">24 clientes · $54 M · caso real: BGT, Torreón</dd>
+          </dl>
+          <p class="muted">Validado por el área de Bulk. Falta el detalle del caso BGT.</p>
+        </article>
+        <div class="box">
+          <h3>Fuera de foco por ahora</h3>
+          <div class="tablewrap">
+          <table>
+            <tbody>
+              <tr><td>Salud</td><td class="r">$61 M</td><td class="muted">Fuera del enfoque industrial</td></tr>
+              <tr><td>Laboratorio y alta pureza</td><td class="r">$23 M</td><td class="muted">Sin caso de cliente</td></tr>
+              <tr><td>Construcción</td><td class="r">$18 M</td><td class="muted">Se atiende como taller</td></tr>
+              <tr><td>Alimentos</td><td class="r">$15 M</td><td class="muted">Volumen bajo</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="muted">Su segmentación de 17 perfiles la usamos para retener y crecer a los clientes actuales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEMAS -->
+    <section id="problemas" role="tabpanel" aria-labelledby="t-problemas" hidden>
+      <div>
+        <p class="kicker">03 · Qué resolvemos<span class="bnote">B2 · Mapa de dolores</span></p>
+        <h1>Los clientes llegan cuando su proveedor les falla</h1>
+        <p class="lede">Siete de diez casos llegaron huyendo de un proveedor que no surtió, cinco de ellos de INFRA. Los dos casos perdidos se fueron por precio.</p>
+      </div>
+      <div class="insight">
+        <span class="kicker">Lo que mueve la compra</span>
+        <p>El cliente cambia de proveedor por la falla. Se va por precio cuando no siente la diferencia.</p>
+      </div>
+      <div class="grid2">
+        <div class="box">
+          <header style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p1">Prioridad 1</span><span class="chip mod">Bulk</span></header>
+          <h2>Comprador de planta</h2>
+          <ul class="pains">
+            <li><span class="q">“Mi consumo creció y los dewars ya no me alcanzan.”</span><span class="tag">Funcional</span></li>
+            <li><span class="q">“Si me quedo sin nitrógeno, se para la línea y el responsable soy yo.”</span><span class="tag">Emocional</span></li>
+            <li><span class="q">“Migrar a tanque me da miedo: obra, contrato y transición.”</span><span class="tag">Emocional</span></li>
+            <li><span class="q">“Quiero cambiarme, pero mi contrato tiene penalizaciones millonarias.”</span><span class="tag">Emocional</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <header style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p1">Prioridad 1</span><span class="chip mod">Envasado</span></header>
+          <h2>Compradora desatendida</h2>
+          <ul class="pains">
+            <li><span class="q">“Mis pedidos llegan tarde o incompletos.”</span><span class="tag">Funcional</span></li>
+            <li><span class="q">“Mi proveedor ya no me visita ni me contesta.”</span><span class="tag">Emocional</span></li>
+            <li><span class="q">“Me suben el precio sin explicación y tengo que justificarlo.”</span><span class="tag">Funcional</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <header style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p2">Secundario</span><span class="chip mod">Bulk</span></header>
+          <h2>Comprador de planta de tratamiento térmico</h2>
+          <ul class="pains">
+            <li><span class="q">“Si falla el nitrógeno en el horno, se oxidan las piezas y perdemos el lote.”</span><span class="tag">Funcional</span></li>
+            <li><span class="q">“Mantenimiento me presiona: el proceso no puede parar.”</span><span class="tag">Emocional</span></li>
+            <li><span class="q">“Generar nitrógeno en sitio parece más barato, pero si falla se para el horno.”</span><span class="tag">Funcional</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <header style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p2">Secundario</span><span class="chip mod">Canal</span></header>
+          <h2>Dueño de distribuidora</h2>
+          <ul class="pains">
+            <li><span class="q">“Me recortaron el crédito y no puedo surtir a mis clientes.”</span><span class="tag">Funcional</span></li>
+            <li><span class="q">“Si no tengo abasto, mis clientes se van con otro.”</span><span class="tag">Funcional</span></li>
+          </ul>
+        </div>
+        <div class="box">
+          <header style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p2">Secundario</span><span class="chip mod">Envasado</span></header>
+          <h2>Soldador o dueño de taller</h2>
+          <ul class="pains">
+            <li><span class="q">“No me prestan cilindros y sin equipo no trabajo.”</span><span class="tag">Funcional</span></li>
+            <li><span class="q">“Quedarme sin gas a media chamba es perder el día.”</span><span class="tag">Funcional</span></li>
+            <li><span class="q">“Quiero que mi trabajo se vea bien.”</span><span class="tag">Emocional</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="muted">Bulk validó estos dolores en la sesión 3 y enviará casos con números. Los de envasado y canal están en validación con Ventas.</p>
+    </section>
+
+    <!-- 04 COMPRA -->
+    <section id="compra" role="tabpanel" aria-labelledby="t-compra" hidden>
+      <div>
+        <p class="kicker">04 · Cómo compran<span class="bnote">B3 · Journey de compra</span></p>
+        <h1>Bulk se decide en meses y depende del contrato actual; envasado en días</h1>
+        <p class="lede">Cada etapa nos dice qué contenido necesita el cliente para avanzar.</p>
+      </div>
+      <div class="box">
+        <header style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="chip mod">Bulk</span><h2>Normalmente de 2 a 6 meses</h2></header>
+        <div class="journey">
+          <div class="stage"><span class="t">Busca opciones</span><span class="d">3-4 meses antes de que venza su contrato</span><p>O su consumo crece, o su proveedor le falla.</p></div>
+          <div class="stage"><span class="t">Levantamiento y cotización</span><span class="d">2 semanas o menos</span><p>Visita técnica, dimensionamiento, fichas y certificados.</p></div>
+          <div class="stage"><span class="t">Aprobación interna</span><span class="d">Variable</span><p>Compras lo valida con Mantenimiento y lo sube a Finanzas y Dirección.</p></div>
+          <div class="stage"><span class="t">Transición</span><span class="d">Aviso de 30 días</span><p>El proveedor anterior retira sus equipos; AOC no puede hacerlo.</p></div>
+          <div class="stage"><span class="t">Instalación</span><span class="d">Hasta 1 mes</span><p>Cimentación, tubería y primera carga. En 3 semanas si el cliente está listo.</p></div>
+        </div>
+        <div class="who">
+          <span><b>Detectan e influyen:</b> Producción y Mantenimiento</span>
+          <span><b>Se queda con el problema:</b> Compras</span>
+          <span><b>Aprueban:</b> Finanzas y Dirección</span>
+        </div>
+        <p class="muted">Validado con el área de Bulk. Los casos de hasta 15 meses son clientes con contrato vigente y penalizaciones por salir antes.</p>
+      </div>
+      <div class="box">
+        <header style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="chip mod">Envasado</span><h2>Menos de 15 días</h2><span class="chip p3">En validación con Ventas</span></header>
+        <div class="journey env">
+          <div class="stage"><span class="t">El proveedor falla</span><span class="d">Inmediato</span><p>Busca en Google, pregunta o escribe por WhatsApp.</p></div>
+          <div class="stage"><span class="t">Compara</span><span class="d">3-7 días</span><p>Tiempos, certificados, crédito, cilindros prestados, precio.</p></div>
+          <div class="stage"><span class="t">Decide</span><span class="d">3-7 días</span><p>Alta de proveedor y orden de compra.</p></div>
+          <div class="stage"><span class="t">Primer pedido</span><span class="d">1-2 semanas</span><p>Si cumple, se vuelve recurrente.</p></div>
+        </div>
+        <div class="who">
+          <span><b>Decide:</b> Compras</span>
+          <span><b>Visto bueno:</b> gerente</span>
+          <span><b>3 a 6</b> contactos</span>
+          <span><b>2 a 4</b> cotizaciones</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 POR QUE AOC -->
+    <section id="porque" role="tabpanel" aria-labelledby="t-porque" hidden>
+      <div>
+        <p class="kicker">05 · Por qué AOC<span class="bnote">B4 · Diferenciación / ángulos</span></p>
+        <h1>AOC es el productor regional independiente del noreste</h1>
+        <p class="lede">Los grandes hablan de escala. El espacio de servicio y cercanía en NL y Coahuila está libre, y conviene ocuparlo antes de que el mercado se vuelva solo de precio. Cada mensaje resuelve un problema del cliente y tiene un lugar donde se usa.</p>
+      </div>
+      <div class="comp">
+        <div><b>Linde</b><span class="muted">“La compañía de gases más grande del mundo.” Planta en Nuevo León.</span></div>
+        <div><b>INFRA</b><span class="muted">“Más de 100 años.” Construye una planta de 2,500 t/día en Pesquería, NL.</span></div>
+        <div><b>Air Liquide</b><span class="muted">Mensaje corporativo global. Plantas en Monclova y Apodaca.</span></div>
+        <div><b>Criogas</b><span class="muted">Habla de evitar paros y flexibilidad, pero no opera en NL ni Coahuila.</span></div>
+      </div>
+      <div class="angles">
+        <article class="angle" style="grid-column:1/-1">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p1">Mensaje principal</span><span class="chip mod">Todos los perfiles</span></div>
+          <p class="line">“Gas producido en Coahuila, cerca de tu operación.”</p>
+          <p class="vs"><b>Resuelve:</b> “Si me quedo sin gas, se para la línea.” 7 de 10 casos llegaron porque su proveedor no surtió.</p>
+          <p class="vs"><b>Por qué esta frase:</b> Dice el dato más fuerte de AOC, producción propia y cercana, sin atacar a nadie. Otra opción: “Abasto que nace en el noreste”.</p>
+          <p class="vs"><b>Cómo se usará:</b> Encabezado del sitio, redes y firma de todas las campañas.</p>
+        </article>
+        <article class="angle">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p2">Bulk</span><span class="chip mod">Comprador de planta</span></div>
+          <p class="line">“Del dewar al tanque, sin parar tu línea.”</p>
+          <p class="vs"><b>Resuelve:</b> “Mi consumo creció y los dewars ya no me alcanzan” y el miedo a migrar.</p>
+          <p class="vs"><b>Por qué esta frase:</b> Nombra el momento exacto del cliente y lo respalda con tiempos reales: cotización en 2 semanas, instalación en un mes.</p>
+          <p class="vs"><b>Cómo se usará:</b> Página de bulk, Google, LinkedIn a Compras de manufactura y una calculadora “¿Ya te conviene un tanque?”.</p>
+        </article>
+        <article class="angle">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p2">Bulk</span><span class="chip mod">Comprador de planta y de tratamiento térmico</span></div>
+          <p class="line">“¿Se vence tu contrato? Planea tu transición con nosotros.”</p>
+          <p class="vs"><b>Resuelve:</b> “Quiero cambiarme, pero mi contrato tiene penalizaciones” y “mi proveedor no retira sus equipos”.</p>
+          <p class="vs"><b>Por qué esta frase:</b> El cliente de bulk busca opciones cuando le quedan 3 o 4 meses de contrato. Le hablamos justo en ese momento.</p>
+          <p class="vs"><b>Cómo se usará:</b> Correos y anuncios a cuentas candidatas, guía “Cómo cambiar de proveedor sin parar tu planta” y argumento del vendedor.</p>
+        </article>
+        <article class="angle">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p2">Envasado</span><span class="chip mod">Compradora y taller</span></div>
+          <p class="line">“Siempre a tu alcance: entrega en ruta, cilindros en préstamo y respuesta rápida.”</p>
+          <p class="vs"><b>Resuelve:</b> “Mis pedidos llegan tarde”, “ya no me visitan” y “no me prestan cilindros”.</p>
+          <p class="vs"><b>Por qué esta frase:</b> Usa el lema que AOC ya tiene y lo prueba con lo que a los clientes les faltaba. La visita del representante queda como argumento de venta.</p>
+          <p class="vs"><b>Cómo se usará:</b> Páginas de sucursal y anuncios locales por plaza. En la visita: “tu representante conoce tu consumo y se adelanta a tu pedido”.</p>
+        </article>
+        <article class="angle">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip mod">Respaldo</span><span class="chip mod">Bulk y envasado</span></div>
+          <p class="line">“Pureza certificada por nuestro propio laboratorio acreditado.”</p>
+          <p class="vs"><b>Resuelve:</b> “Si el gas no tiene la pureza correcta, pierdo piezas o calidad.”</p>
+          <p class="vs"><b>Por qué esta frase:</b> AOC tiene laboratorio acreditado con ISO/IEC 17025 y ningún competidor lo destaca. Hoy en el sitio no tiene peso.</p>
+          <p class="vs"><b>Cómo se usará:</b> Fichas técnicas, páginas de producto, propuestas de bulk y contenido técnico.</p>
+        </article>
+        <article class="angle">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p3">Por confirmar · solo vendedores</span><span class="chip mod">Bulk</span></div>
+          <p class="line">“Contratos claros, sin ataduras.”</p>
+          <p class="vs"><b>Resuelve:</b> “Me da miedo amarrarme a un contrato largo.”</p>
+          <p class="vs"><b>Por qué esta frase:</b> La competencia cobra penalizaciones fuertes por salir antes. Falta confirmar las condiciones de los contratos de AOC.</p>
+          <p class="vs"><b>Cómo se usará:</b> Solo en la conversación del vendedor y en la propuesta comercial.</p>
+        </article>
+        <article class="angle">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p3">Por confirmar · canal</span><span class="chip mod">Dueño de distribuidora</span></div>
+          <p class="line">“Abasto y crédito para que no pierdas clientes.”</p>
+          <p class="vs"><b>Resuelve:</b> “Me recortaron el crédito y no puedo surtir a mis clientes.”</p>
+          <p class="vs"><b>Por qué esta frase:</b> Es lo que vivieron distribuidores que llegaron a AOC.</p>
+          <p class="vs"><b>Cómo se usará:</b> Solo si AOC decide atraer distribuidores nuevos.</p>
+        </article>
+      </div>
+      <div class="box">
+        <h2>Qué mensaje va a dónde</h2>
+        <div class="tablewrap">
+        <table>
+          <thead><tr><th>Dónde</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td>Sitio, redes y firma de campañas</td><td>Gas producido en Coahuila, cerca de tu operación</td></tr>
+            <tr><td>Página y anuncios de bulk</td><td>Del dewar al tanque, sin parar tu línea · Cotización en 2 semanas, instalación en un mes</td></tr>
+            <tr><td>Cuentas con contrato vigente</td><td>¿Se vence tu contrato? Planea tu transición con nosotros</td></tr>
+            <tr><td>Páginas de sucursal y anuncios locales</td><td>Siempre a tu alcance: entrega en ruta, cilindros en préstamo y respuesta rápida</td></tr>
+            <tr><td>Fichas técnicas y propuestas</td><td>Pureza certificada por nuestro propio laboratorio acreditado</td></tr>
+            <tr><td>Solo vendedores</td><td>Tu representante conoce tu consumo y se adelanta a tu pedido · Contratos claros, sin ataduras</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p class="muted">Todos los mensajes asumen comunicar servicio y certeza de abasto, no precio. Hoy el sitio de AOC no menciona la planta propia, el laboratorio acreditado ni el crédito.</p>
+    </section>
+
+    <!-- 06 SIGUIENTE -->
+    <section id="siguiente" role="tabpanel" aria-labelledby="t-siguiente" hidden>
+      <div>
+        <p class="kicker">06 · Para avanzar<span class="bnote">Insumos que faltan para B5–B9</span></p>
+        <h1>Lo que necesitamos para armar la oferta, el contenido y la pauta</h1>
+        <p class="lede">Para cada punto, qué necesitamos y por qué importa. Lo resaltado es lo que más nos detiene.</p>
+      </div>
+      <ul class="asks">
+        <li class="key wide">
+          <span class="bnote">B4 diferenciación + B5 oferta</span>
+          <span class="h">¿Comunicamos precio o servicio?</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>Que Dirección y Comercial elijan cuál de los dos es el mensaje principal de AOC.</p>
+          <div class="vsgrid">
+            <div class="opt">
+              <span class="ot">Si el mensaje es precio</span>
+              <ul>
+                <li>Dice “te sale más barato”. Atrae al cliente que compara cotizaciones y se va con quien baje más.</li>
+                <li>Obliga a Ventas a descontar para cumplir lo que promete el anuncio.</li>
+                <li>Compite donde Linde e INFRA tienen escala. INFRA arranca una planta de 2,500 t/día en Pesquería y puede bajar más el precio.</li>
+                <li>Los dos casos perdidos (EXA Industrial y Atmogas) se fueron por precio: ahí AOC no gana.</li>
+              </ul>
+            </div>
+            <div class="opt rec">
+              <span class="ot">Si el mensaje es servicio y certeza de abasto</span>
+              <ul>
+                <li>Dice “no te vas a quedar sin gas y te atendemos”. Atrae al cliente al que su proveedor le falló: 7 de cada 10 casos ganados.</li>
+                <li>Protege el margen: el cliente paga por tener certeza.</li>
+                <li>Es el espacio que los grandes no ocupan en el noreste.</li>
+                <li>Exige cumplir la promesa con tiempos de respuesta y entrega concretos.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="w"><span class="lb">Por qué importa</span>El mensaje define los anuncios, la página de aterrizaje, el argumento de los vendedores y la negociación. No se pueden comunicar los dos: “el mejor servicio y el mejor precio” no se lo cree nadie y termina en descuentos. Nuestra recomendación es servicio; el precio se negocia en la cotización, no se anuncia.</p>
+        </li>
+        <li class="key">
+          <span class="bnote">B7 presupuesto</span>
+          <span class="h">Presupuesto y meta comercial</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>Si el plan de $30k, $45k y $105k está aprobado, si es mensual y qué representan los $26,400 anuales. Si no, la meta de cuentas nuevas o de m³ para los próximos 6 a 12 meses.</p>
+          <p class="w"><span class="lb">Por qué importa</span>Con el monto decidimos en qué canales salir y con qué frecuencia. Con la meta calculamos cuántas oportunidades hay que generar al mes. Sin ninguno de los dos no sabemos si planear para 10 o para 100 prospectos. Además, una venta de bulk tarda de 4 a 15 meses: necesita inversión sostenida, no una campaña de un mes.</p>
+        </li>
+        <li class="key">
+          <span class="bnote">B5 oferta</span>
+          <span class="h">Condiciones para un cliente nuevo</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>Qué se le puede ofrecer a un prospecto para que dé el primer paso: visita técnica y estudio de consumo sin costo, instalación financiada o diferida, prueba con dewars, crédito desde el primer pedido.</p>
+          <p class="w"><span class="lb">Por qué importa</span>Un anuncio necesita una razón para que el prospecto levante la mano hoy. Las ofertas Autoservicio, Estándar y Premium son para clientes actuales. En bulk el freno es la inversión en obra y el miedo a cambiar, y la competencia financia instalaciones. Sin una condición de entrada, la pauta solo trae curiosos.</p>
+        </li>
+        <li>
+          <span class="bnote">B5 oferta</span>
+          <span class="h">Compromisos de servicio</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>Tiempos que AOC pueda cumplir siempre: respuesta por WhatsApp, entrega por plaza, visita técnica.</p>
+          <p class="w"><span class="lb">Por qué importa</span>“Buen servicio” lo dicen todos. Para que el mensaje convenza tiene que ser concreto y comprobable, por ejemplo “respuesta en menos de 2 horas”. Si se promete y no se cumple, AOC pierde justo la ventaja que hoy tiene.</p>
+        </li>
+        <li>
+          <span class="bnote">B3 journey + B7 presupuesto</span>
+          <span class="h">Origen de los clientes nuevos</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>De cada 10 clientes nuevos, cuántos llegan solos y cuántos los consigue el vendedor. Un estimado basta.</p>
+          <p class="w"><span class="lb">Por qué importa</span>Define cómo repartir el esfuerzo: atraer prospectos con anuncios y contenido, o darle a Ventas material para prospectar. Si casi todo viene del vendedor, conviene invertir más en herramientas para Ventas que en pauta.</p>
+        </li>
+        <li>
+          <span class="bnote">B1 avatares + B6 rutas</span>
+          <span class="h">Cuentas candidatas a bulk</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>Que Ventas revise unas 70 cuentas clave que compran más de $1 M y aún no tienen tanque, y marque las que no aplican.</p>
+          <p class="w"><span class="lb">Por qué importa</span>Es el camino más rápido a resultados: ya son clientes, ya pagan y ya tienen representante. Una campaña dirigida a ellas puede abrir oportunidades de bulk en semanas. Si alguna no aplica (no tiene espacio o tiene contrato vigente), la quitamos antes de invertir en ella.</p>
+        </li>
+        <li>
+          <span class="bnote">B1 avatares + B2 dolores</span>
+          <span class="h">Dos casos que nos faltan</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>Un cliente de procesos industriales o energía, y un caso con números de lo que costó quedarse sin gas (horas paradas, un pedido perdido).</p>
+          <p class="w"><span class="lb">Por qué importa</span>El primero confirma si vale la pena hablarle a ese perfil. El segundo convierte “no te quedes sin gas” en algo medible, como “un paro de 8 horas cuesta X”, que es lo que más convence a quien aprueba la compra.</p>
+        </li>
+        <li>
+          <span class="bnote">B6 rutas + B8 canales</span>
+          <span class="h">Accesos y contenido</span>
+          <p class="w"><span class="lb">Qué necesitamos</span>La carpeta de material, acceso a Analytics, Tag Manager y el pixel del sitio, y saber quién diseña y aprueba las piezas.</p>
+          <p class="w"><span class="lb">Por qué importa</span>Sin medición en el sitio no sabremos qué anuncio trae prospectos. Y el ritmo de publicación depende de cuánto tarda una aprobación: es mejor un plan que se pueda sostener que uno que se quede a la mitad.</p>
+        </li>
+      </ul>
+    </section>
+
+    <div class="foot" style="max-width:1180px;margin-top:32px">
+      <span id="pos">01 / 06</span>
+      <div class="pager">
+        <button id="prev" type="button">Anterior</button>
+        <button id="next" type="button">Siguiente</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('[role="tab"]'));
+  var panels=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'))});
+  var cur=0;
+  function show(i){
+    if(i<0||i>=tabs.length)return;
+    cur=i;
+    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false');t.tabIndex=k===i?0:-1});
+    panels.forEach(function(p,k){p.hidden=k!==i});
+    document.getElementById('pos').textContent=String(i+1).padStart(2,'0')+' / '+String(tabs.length).padStart(2,'0');
+    document.getElementById('prev').disabled=i===0;
+    document.getElementById('next').disabled=i===tabs.length-1;
+    try{history.replaceState(null,'','#'+panels[i].id)}catch(e){}
+    window.scrollTo({top:0});
+  }
+  tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k)})});
+  document.getElementById('prev').addEventListener('click',function(){show(cur-1)});
+  document.getElementById('next').addEventListener('click',function(){show(cur+1)});
+  document.addEventListener('keydown',function(e){
+    if(e.target.closest&&e.target.closest('input,textarea'))return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'){show(cur+1);e.preventDefault()}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1);e.preventDefault()}
+  });
+  var bt=document.getElementById('btoggle');
+  function setB(hide){document.body.classList.toggle('hide-b',hide);bt.setAttribute('aria-pressed',hide?'true':'false');bt.textContent=(hide?'Mostrar':'Ocultar')+' notas B (tecla N)';try{localStorage.setItem('hideB',hide?'1':'0')}catch(e){}}
+  bt.addEventListener('click',function(){setB(!document.body.classList.contains('hide-b'))});
+  document.addEventListener('keydown',function(e){if((e.key==='n'||e.key==='N')&&!e.metaKey&&!e.ctrlKey){setB(!document.body.classList.contains('hide-b'))}});
+  try{var v=localStorage.getItem('hideB');setB(v===null?true:v==='1')}catch(e){setB(true)}
+  var h=(location.hash||'').slice(1);
+  var start=panels.findIndex(function(p){return p.id===h});
+  show(start>=0?start:0);
+})();
+</script>
+
+</body>
+</html>
