@@ -1,0 +1,13 @@
+Reporte semanal de las campanas V5 de licenciaturas (enero 2027) de UDF Santa Maria.
+Edicion 2: semana del 7 al 14 de octubre de 2026 mas el acumulado desde el 3-oct.
+Meta Ads hasta el 14-oct; Pipedrive con corte al 15-oct 09:00 CDMX, actualizado a las
+12:00 con los ajustes de Zapier y Pipedrive. Formato presentacion: flechas del teclado
+o botones de abajo.
+
+Fuentes: Meta Ads (cuenta GRUPO BECAS) y Pipedrive de UDF (pipeline "Ene 2027").
+
+Datos personales: nombres de prospectos abreviados a nombre + inicial del apellido.
+Sin telefonos ni correos. Las ligas a Pipedrive requieren sesion en la cuenta de UDF.
+
+No listada en el indice y con ruta aleatoria: el repositorio es publico,
+asi que cualquiera con la liga completa puede abrirla.
